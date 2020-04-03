@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <SPI.h>
-
-#define SPI_SETTINGS SPISettings(1, MSBFIRST, SPI_MODE0)
+#include <FT81x.h>
 
 void waitForKeyPress();
 void dumpChipID();
@@ -19,26 +18,45 @@ void setup() {
   waitForKeyPress();
 
   // RESET
-  digitalWrite(SS, LOW);
-  SPI.beginTransaction(SPI_SETTINGS);
-  SPI.transfer(0x68);
-  SPI.transfer(0x00);
-  SPI.transfer(0x00);
-  SPI.endTransaction();
-  digitalWrite(SS, HIGH);
+  FT81x::sendCommand(CMD_RST_PULSE);
   delay(500);
 
   // ACTIVE
-  digitalWrite(SS, LOW);
-  SPI.beginTransaction(SPI_SETTINGS);
-  SPI.transfer(0x00);
-  SPI.transfer(0x00);
-  SPI.transfer(0x00);
-  SPI.endTransaction();
-  digitalWrite(SS, HIGH);
+  FT81x::sendCommand(CMD_ACTIVE);
   delay(500);
 
   dumpChipID();
+
+  delay(100);
+
+  Serial.println("REG_ID");
+  Serial.printf("%x\n", FT81x::read8(REG_ID));
+
+  delay(100);
+
+  Serial.printf("REG_HCYCLE %i\n", FT81x::read16(REG_HCYCLE));
+
+  delay(100);
+
+  FT81x::write16(REG_HCYCLE, 548);
+  FT81x::write16(REG_HOFFSET, 43);
+  FT81x::write16(REG_HSYNC0, 0);
+  FT81x::write16(REG_HSYNC1, 41);
+  FT81x::write16(REG_VCYCLE, 292);
+  FT81x::write16(REG_VOFFSET, 12);
+  FT81x::write16(REG_VSYNC0, 0);
+  FT81x::write16(REG_VSYNC1, 10);
+  FT81x::write8(REG_SWIZZLE, 0);
+  FT81x::write8(REG_PCLK_POL, 1);
+  FT81x::write8(REG_CSPREAD, 0);
+  FT81x::write8(REG_CSPREAD, 0);
+  FT81x::write16(REG_HSIZE, 480);
+  FT81x::write16(REG_VSIZE, 272);
+
+  delay(100);
+
+  Serial.printf("REG_HCYCLE %i\n", FT81x::read16(REG_HCYCLE));
+  Serial.printf("REG_HSIZE %i\n", FT81x::read16(REG_HSIZE));
 }
 
 void loop() {
