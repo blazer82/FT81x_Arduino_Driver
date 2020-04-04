@@ -38,8 +38,8 @@ uint16_t FT81x::read16(uint32_t address)
     SPI.transfer((cmd >> 8) & 0xFF);
     SPI.transfer(cmd & 0xFF);
     SPI.transfer(0x00); // dummy byte
-    uint16_t result = SPI.transfer(0x00) << 8;
-    result |= SPI.transfer(0x00);
+    uint16_t result = SPI.transfer(0x00);
+    result |= (SPI.transfer(0x00) << 8);
     SPI.endTransaction();
     digitalWrite(SS, HIGH);
     return result;
@@ -66,8 +66,8 @@ void FT81x::write16(uint32_t address, uint16_t data)
     SPI.transfer((cmd >> 16) & 0xFF);
     SPI.transfer((cmd >> 8) & 0xFF);
     SPI.transfer(cmd & 0xFF);
-    SPI.transfer((data >> 8) & 0xFF);
     SPI.transfer(data & 0xFF);
+    SPI.transfer((data >> 8) & 0xFF);
     SPI.endTransaction();
     digitalWrite(SS, HIGH);
 }

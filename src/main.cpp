@@ -57,6 +57,9 @@ void setup() {
 
   Serial.printf("REG_HCYCLE %i\n", FT81x::read16(REG_HCYCLE));
   Serial.printf("REG_HSIZE %i\n", FT81x::read16(REG_HSIZE));
+
+  Serial.println("Enable display");
+  FT81x::write8(REG_PCLK, 5);
 }
 
 void loop() {
