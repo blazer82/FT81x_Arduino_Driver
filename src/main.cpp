@@ -9,57 +9,24 @@ void setup() {
   Serial.begin(9600);
 
   SPI.begin();
-  //SPI.setCS(SS);
-
-  pinMode(SS, OUTPUT); 
-  digitalWrite(SS, HIGH);
-  delay(500);
 
   waitForKeyPress();
 
-  // RESET
-  FT81x::sendCommand(CMD_RST_PULSE);
-  delay(500);
-
-  // ACTIVE
-  FT81x::sendCommand(CMD_ACTIVE);
-  delay(500);
+  Serial.println("Enable display");
+  FT81x::init();
 
   dumpChipID();
 
   delay(100);
 
   Serial.println("REG_ID");
-  Serial.printf("%x\n", FT81x::read8(REG_ID));
+  Serial.printf("%x\n", FT81x::read8(FT81x_REG_ID));
 
-  delay(100);
+  Serial.printf("REG_HCYCLE %i\n", FT81x::read16(FT81x_REG_HCYCLE));
+  Serial.printf("REG_HSIZE %i\n", FT81x::read16(FT81x_REG_HSIZE));
 
-  Serial.printf("REG_HCYCLE %i\n", FT81x::read16(REG_HCYCLE));
-
-  delay(100);
-
-  FT81x::write16(REG_HCYCLE, 548);
-  FT81x::write16(REG_HOFFSET, 43);
-  FT81x::write16(REG_HSYNC0, 0);
-  FT81x::write16(REG_HSYNC1, 41);
-  FT81x::write16(REG_VCYCLE, 292);
-  FT81x::write16(REG_VOFFSET, 12);
-  FT81x::write16(REG_VSYNC0, 0);
-  FT81x::write16(REG_VSYNC1, 10);
-  FT81x::write8(REG_SWIZZLE, 0);
-  FT81x::write8(REG_PCLK_POL, 1);
-  FT81x::write8(REG_CSPREAD, 0);
-  FT81x::write8(REG_CSPREAD, 0);
-  FT81x::write16(REG_HSIZE, 480);
-  FT81x::write16(REG_VSIZE, 272);
-
-  delay(100);
-
-  Serial.printf("REG_HCYCLE %i\n", FT81x::read16(REG_HCYCLE));
-  Serial.printf("REG_HSIZE %i\n", FT81x::read16(REG_HSIZE));
-
-  Serial.println("Enable display");
-  FT81x::write8(REG_PCLK, 5);
+  Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
+  Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
 }
 
 void loop() {
@@ -77,7 +44,7 @@ void waitForKeyPress()
 
 void dumpChipID() {
   digitalWrite(SS, LOW);
-  SPI.beginTransaction(SPI_SETTINGS);
+  SPI.beginTransaction(FT81x_SPI_SETTINGS);
   SPI.transfer(0x0C);
   SPI.transfer(0x00);
   SPI.transfer(0x00);
