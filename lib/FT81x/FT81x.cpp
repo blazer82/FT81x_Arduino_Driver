@@ -6,6 +6,21 @@
 #define READ  0x000000
 #define WRITE 0x800000
 
+#define CLEAR(c, s, t)         ((0x26 << 24) | ((c) << 2) | ((s) << 1) | (t))
+#define BEGIN(p)               ((0x1F << 24) | (p))
+#define END()                  (0x21 << 24)
+#define END_DL()               0x00
+#define COLOR_RGB(r, g, b)     ((0x04 << 24) | ((r) << 16) | ((g) << 8) | (b))
+#define COLOR(rgb)             ((0x04 << 24) | ((rgb) & 0xFFFFFF))
+#define POINT_SIZE(s)          ((0x0D << 24) | ((s) & 0xFFFF))
+#define VERTEX2II(x, y, h, c)  ((1 << 31) | ((x) << 21) | ((y) << 12) | ((h) << 7) | (c))
+#define VERTEX2F(x, y)         ((1 << 30) | ((x) << 15) | (y))
+
+#define POINTS 2
+#define RECTS  9
+
+static uint32_t dli = 0;
+
 void FT81x::init() {
     pinMode(FT81x_CS1, OUTPUT); 
     digitalWrite(FT81x_CS1, HIGH);
@@ -73,7 +88,31 @@ void FT81x::initDisplay()
     // normal mode on
     sendCommandToDisplay(ST7701_NORON);
 
-    sendCommandToDisplay(0x23); // all pixels on
+    //sendCommandToDisplay(0x23); // all pixels on
+}
+
+void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color)
+{
+    dl(CLEAR(1, 1, 1));
+    dl(COLOR(color));
+    dl(POINT_SIZE(size * 16));
+    dl(BEGIN(POINTS));
+    dl(VERTEX2F(x * 16, y * 16));
+    dl(END());
+}
+
+void FT81x::dl(uint32_t cmd)
+{
+    Serial.printf("write32 %x, %x\n", FT81x_RAM_DL + dli, cmd);
+    write32(FT81x_RAM_DL + dli, cmd);
+    dli += 4;
+}
+
+void FT81x::swap()
+{
+    dl(END_DL());
+    write8(FT81x_REG_DLSWAP, 0x02);
+    dli = 0;
 }
 
 void FT81x::sendCommand(uint32_t cmd)
@@ -141,6 +180,22 @@ void FT81x::write16(uint32_t address, uint16_t data)
     SPI.transfer(cmd & 0xFF);
     SPI.transfer(data & 0xFF);
     SPI.transfer((data >> 8) & 0xFF);
+    SPI.endTransaction();
+    digitalWrite(FT81x_CS1, HIGH);
+}
+
+void FT81x::write32(uint32_t address, uint32_t data)
+{
+    uint32_t cmd = address | WRITE;
+    digitalWrite(FT81x_CS1, LOW);
+    SPI.beginTransaction(FT81x_SPI_SETTINGS);
+    SPI.transfer((cmd >> 16) & 0xFF);
+    SPI.transfer((cmd >> 8) & 0xFF);
+    SPI.transfer(cmd & 0xFF);
+    SPI.transfer(data & 0xFF);
+    SPI.transfer((data >> 8) & 0xFF);
+    SPI.transfer((data >> 16) & 0xFF);
+    SPI.transfer((data >> 24) & 0xFF);
     SPI.endTransaction();
     digitalWrite(FT81x_CS1, HIGH);
 }

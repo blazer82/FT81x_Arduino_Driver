@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include <SPI.h>
 
+#define FT81x_COLOR_RGB(r, g, b)       (((r) << 16) | ((g) << 8) | (b))
+
 #ifndef FT81x_SPI_SETTINGS
 #define FT81x_SPI_SETTINGS             SPISettings(1, MSBFIRST, SPI_MODE0)
 #endif
@@ -93,6 +95,13 @@
 #define FT81x_REG_CMDB_SPACE           0x302574
 #define FT81x_REG_CMDB_WRITE           0x302578
 
+#define FT81x_RAM_G                    0x000000
+#define FT81x_ROM_FONT                 0x1E0000
+#define FT81x_ROM_FONT_ADDR            0x2FFFFC
+#define FT81x_RAM_DL                   0x300000
+#define FT81x_RAM_REG                  0x302000
+#define FT81x_RAM_CMD                  0x308000
+
 #define ST7701_SWRESET                 0x01
 #define ST7701_SLPIN                   0x10
 #define ST7701_SLPOUT                  0x11
@@ -112,6 +121,11 @@ class FT81x {
 
         static void write8(uint32_t address, uint8_t data);
         static void write16(uint32_t address, uint16_t data);
+        static void write32(uint32_t address, uint32_t data);
+
+        static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
+        
+        static void swap();
 
     protected:
         static void initFT81x();
@@ -119,6 +133,8 @@ class FT81x {
 
         static void sendCommandToDisplay(uint8_t cmd);
         static void sendCommandWithParamToDisplay(uint8_t cmd, uint8_t param);
+
+        static void dl(uint32_t cmd);
 
     private:
 };

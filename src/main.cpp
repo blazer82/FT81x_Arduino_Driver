@@ -27,6 +27,9 @@ void setup() {
 
   Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
   Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
+
+  FT81x::drawCircle(240, 240, 160, FT81x_COLOR_RGB(0, 150, 255));
+  FT81x::swap();
 }
 
 void loop() {
