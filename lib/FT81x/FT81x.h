@@ -102,6 +102,9 @@
 #define FT81x_RAM_REG                  0x302000
 #define FT81x_RAM_CMD                  0x308000
 
+#define FT81x_DLSWAP_LINE              0x1
+#define FT81x_DLSWAP_FRAME             0x2
+
 #define ST7701_SWRESET                 0x01
 #define ST7701_SLPIN                   0x10
 #define ST7701_SLPOUT                  0x11

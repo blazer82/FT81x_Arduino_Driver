@@ -19,8 +19,7 @@ void setup() {
 
   delay(100);
 
-  Serial.println("REG_ID");
-  Serial.printf("%x\n", FT81x::read8(FT81x_REG_ID));
+  Serial.printf("REG_ID %x\n", FT81x::read8(FT81x_REG_ID));
 
   Serial.printf("REG_HCYCLE %i\n", FT81x::read16(FT81x_REG_HCYCLE));
   Serial.printf("REG_HSIZE %i\n", FT81x::read16(FT81x_REG_HSIZE));
@@ -28,8 +27,8 @@ void setup() {
   Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
   Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
 
-  FT81x::drawCircle(240, 240, 160, FT81x_COLOR_RGB(0, 150, 255));
-  FT81x::swap();
+  //FT81x::drawCircle(240, 240, 160, FT81x_COLOR_RGB(0, 150, 255));
+  //FT81x::swap();
 }
 
 void loop() {

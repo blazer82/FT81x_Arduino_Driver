@@ -6,15 +6,16 @@
 #define READ  0x000000
 #define WRITE 0x800000
 
-#define CLEAR(c, s, t)         ((0x26 << 24) | ((c) << 2) | ((s) << 1) | (t))
-#define BEGIN(p)               ((0x1F << 24) | (p))
-#define END()                  (0x21 << 24)
-#define END_DL()               0x00
-#define COLOR_RGB(r, g, b)     ((0x04 << 24) | ((r) << 16) | ((g) << 8) | (b))
-#define COLOR(rgb)             ((0x04 << 24) | ((rgb) & 0xFFFFFF))
-#define POINT_SIZE(s)          ((0x0D << 24) | ((s) & 0xFFFF))
-#define VERTEX2II(x, y, h, c)  ((1 << 31) | ((x) << 21) | ((y) << 12) | ((h) << 7) | (c))
-#define VERTEX2F(x, y)         ((1 << 30) | ((x) << 15) | (y))
+#define CLEAR(c, s, t)               ((0x26 << 24) | ((c) << 2) | ((s) << 1) | (t))
+#define BEGIN(p)                     ((0x1F << 24) | (p))
+#define END()                        (0x21 << 24)
+#define END_DL()                     0x00
+#define CLEAR_COLOR_RGB(r, g, b)     ((0x02 << 24) | ((r) << 16) | ((g) << 8) | (b))
+#define COLOR_RGB(r, g, b)           ((0x04 << 24) | ((r) << 16) | ((g) << 8) | (b))
+#define COLOR(rgb)                   ((0x04 << 24) | ((rgb) & 0xFFFFFF))
+#define POINT_SIZE(s)                ((0x0D << 24) | ((s) & 0xFFFF))
+#define VERTEX2II(x, y, h, c)        ((1 << 31) | ((x) << 21) | ((y) << 12) | ((h) << 7) | (c))
+#define VERTEX2F(x, y)               ((1 << 30) | ((x) << 15) | (y))
 
 #define POINTS 2
 #define RECTS  9
@@ -46,22 +47,28 @@ void FT81x::initFT81x()
     delay(300);
 
     // configure rgb interface
-    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 24);
-    FT81x::write16(FT81x_REG_HOFFSET, 24);
-    FT81x::write16(FT81x_REG_HSYNC0, 4);
-    FT81x::write16(FT81x_REG_HSYNC1, 16);
+    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 8);
+    FT81x::write16(FT81x_REG_HOFFSET, 8);
+    FT81x::write16(FT81x_REG_HSYNC0, 3);
+    FT81x::write16(FT81x_REG_HSYNC1, 5);
     FT81x::write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
 
-    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 12);
-    FT81x::write16(FT81x_REG_VOFFSET, 12);
-    FT81x::write16(FT81x_REG_VSYNC0, 2);
-    FT81x::write16(FT81x_REG_VSYNC1, 8);
+    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 8);
+    FT81x::write16(FT81x_REG_VOFFSET, 8);
+    FT81x::write16(FT81x_REG_VSYNC0, 3);
+    FT81x::write16(FT81x_REG_VSYNC1, 5);
     FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
 
     FT81x::write8(FT81x_REG_SWIZZLE, 0);
-    FT81x::write8(FT81x_REG_PCLK_POL, 1);
+    FT81x::write8(FT81x_REG_PCLK_POL, 0);
     FT81x::write8(FT81x_REG_CSPREAD, 0);
     FT81x::write8(FT81x_REG_CSPREAD, 0);
+
+    // write first display list
+    dl(CLEAR_COLOR_RGB(0, 255, 0));
+    dl(CLEAR(1, 1, 1));
+    dl(END_DL());
+    write8(FT81x_REG_DLSWAP, FT81x_DLSWAP_FRAME);
 
     // enable display
     FT81x::write8(FT81x_REG_GPIO_DIR, 0x80);
@@ -111,7 +118,7 @@ void FT81x::dl(uint32_t cmd)
 void FT81x::swap()
 {
     dl(END_DL());
-    write8(FT81x_REG_DLSWAP, 0x02);
+    write8(FT81x_REG_DLSWAP, FT81x_DLSWAP_FRAME);
     dli = 0;
 }
 
