@@ -23,6 +23,7 @@
 
 #define FT81x_CMD_ACTIVE               0x000000
 #define FT81x_CMD_RST_PULSE            0x680000
+#define FT81x_CMD_PINDRIVE             0x700000
 #define FT81x_CMD_STANDBY              0x410000
 #define FT81x_CMD_SLEEP                0x420000
 #define FT81x_CMD_PWRDOWN              0x430000
@@ -126,6 +127,7 @@ class FT81x {
         static void write16(uint32_t address, uint16_t data);
         static void write32(uint32_t address, uint32_t data);
 
+        static void clear(uint32_t color);
         static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
         
         static void swap();
