@@ -80,6 +80,7 @@ void FT81x::initFT81x()
     FT81x::write8(FT81x_REG_SWIZZLE, 0);
     FT81x::write8(FT81x_REG_PCLK_POL, 0);
     FT81x::write8(FT81x_REG_CSPREAD, 1);
+    FT81x::write8(FT81x_REG_DITHER, 0);
     FT81x::write8(FT81x_REG_ROTATE, 0);
 
     // write first display list
