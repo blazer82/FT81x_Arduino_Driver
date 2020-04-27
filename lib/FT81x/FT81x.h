@@ -107,12 +107,17 @@
 #define FT81x_DLSWAP_FRAME             0x2
 
 #define ST7701_SWRESET                 0x01
+#define ST7701_RDDPM                   0x0A
+#define ST7701_RDDSDR                  0x0F
 #define ST7701_SLPIN                   0x10
 #define ST7701_SLPOUT                  0x11
 #define ST7701_NORON                   0x13
 #define ST7701_DISPOFF                 0x28
 #define ST7701_DISPON                  0x29
 #define ST7701_COLMOD                  0x3A
+#define ST7701_RDID1                   0xDA
+#define ST7701_RDID2                   0xDB
+#define ST7701_RDID3                   0xDC
 
 
 class FT81x {
@@ -130,6 +135,7 @@ class FT81x {
 
         static void clear(uint32_t color);
         static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
+        static void drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color);
         
         static void swap();
 
@@ -139,6 +145,7 @@ class FT81x {
 
         static void sendCommandToDisplay(uint8_t cmd);
         static void sendCommandWithParamToDisplay(uint8_t cmd, uint8_t param);
+        static uint8_t queryDisplay(uint8_t cmd);
 
         static void dl(uint32_t cmd);
         static void cmd(uint32_t cmd);

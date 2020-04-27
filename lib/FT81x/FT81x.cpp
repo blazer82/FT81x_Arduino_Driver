@@ -16,9 +16,10 @@
 #define CLEAR_COLOR(rgb)             ((0x02 << 24) | ((rgb) & 0xFFFFFF))
 #define COLOR_RGB(r, g, b)           ((0x04 << 24) | ((r) << 16) | ((g) << 8) | (b))
 #define COLOR(rgb)                   ((0x04 << 24) | ((rgb) & 0xFFFFFF))
-#define POINT_SIZE(s)                ((0x0D << 24) | ((s) & 0xFFFF))
-#define VERTEX2II(x, y, h, c)        ((1 << 31) | ((x) << 21) | ((y) << 12) | ((h) << 7) | (c))
-#define VERTEX2F(x, y)               ((1 << 30) | ((x) << 15) | (y))
+#define POINT_SIZE(s)                ((0x0D << 24) | ((s) & 0xFFF))
+#define LINE_WIDTH(w)                ((0x0E << 24) | ((w) & 0xFFF))
+#define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x) & 0xFF) << 21) | (((y) & 0xFF) << 12) | ((h) << 7) | (c))
+#define VERTEX2F(x, y)               ((1 << 30) | (((x) & 0xFFFF) << 15) | ((y) & 0xFFFF))
 
 #define POINTS 2
 #define RECTS  9
@@ -66,15 +67,15 @@ void FT81x::initFT81x()
 
     // configure rgb interface
     FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 68);
-    FT81x::write16(FT81x_REG_HOFFSET, 43);
-    FT81x::write16(FT81x_REG_HSYNC0, 0);
-    FT81x::write16(FT81x_REG_HSYNC1, 41);
+    FT81x::write16(FT81x_REG_HOFFSET, 42);
+    FT81x::write16(FT81x_REG_HSYNC0, 4);
+    FT81x::write16(FT81x_REG_HSYNC1, 8);
     FT81x::write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
 
     FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 20);
     FT81x::write16(FT81x_REG_VOFFSET, 12);
-    FT81x::write16(FT81x_REG_VSYNC0, 0);
-    FT81x::write16(FT81x_REG_VSYNC1, 10);
+    FT81x::write16(FT81x_REG_VSYNC0, 4);
+    FT81x::write16(FT81x_REG_VSYNC1, 8);
     FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
 
     FT81x::write8(FT81x_REG_SWIZZLE, 0);
@@ -87,10 +88,12 @@ void FT81x::initFT81x()
     FT81x::clear(0x00FFF8);
     FT81x::swap();
 
-    // enable display
-    FT81x::write8(FT81x_REG_GPIO_DIR, 0x80 | FT81x::read8(FT81x_REG_GPIO_DIR));
-    FT81x::write8(FT81x_REG_GPIO, 0x80 | FT81x::read8(FT81x_REG_GPIO));
+    // enable pixel clock
     FT81x::write8(FT81x_REG_PCLK, 10);
+
+    // reset display (somehow this generates a low pulse)
+    FT81x::write16(FT81x_REG_GPIOX, 0x8000 | FT81x::read16(FT81x_REG_GPIOX));
+    delay(300);
 }
 
 void FT81x::initDisplay()
@@ -108,6 +111,12 @@ void FT81x::initDisplay()
     sendCommandToDisplay(ST7701_NORON);
 
     //sendCommandToDisplay(0x23); // all pixels on
+
+    /*Serial.printf("RDID1: %x\n", queryDisplay(ST7701_RDID1));
+    Serial.printf("RDID2: %x\n", queryDisplay(ST7701_RDID2));
+    Serial.printf("RDID3: %x\n", queryDisplay(ST7701_RDID3));
+    Serial.printf("RDDSDR: %x\n", queryDisplay(ST7701_RDDSDR));
+    Serial.printf("RDDPM: %x (must be > 8)\n", queryDisplay(ST7701_RDDPM));*/
 }
 
 void FT81x::clear(uint32_t color)
@@ -120,19 +129,23 @@ void FT81x::clear(uint32_t color)
 
 void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color)
 {
-    /*dl(CLEAR_COLOR(0));
-    dl(CLEAR(1, 1, 1));
-    dl(COLOR(color));
-    dl(POINT_SIZE(size * 16));
-    dl(BEGIN(POINTS));
-    dl(VERTEX2F(x * 16, y * 16));
-    dl(END());*/
-
     cmd(DLSTART());
     cmd(COLOR(color));
     cmd(POINT_SIZE(size * 16));
     cmd(BEGIN(POINTS));
     cmd(VERTEX2F(x * 16, y * 16));
+    cmd(END());
+    cmd(END_DL());
+}
+
+void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color)
+{
+    cmd(DLSTART());
+    cmd(COLOR(color));
+    cmd(LINE_WIDTH(cornerRadius * 16));
+    cmd(BEGIN(RECTS));
+    cmd(VERTEX2II(x, y, 0, 0));
+    cmd(VERTEX2II((x + width), (y + height), 0, 0));
     cmd(END());
     cmd(END_DL());
 }
@@ -156,10 +169,6 @@ void FT81x::cmd(uint32_t cmd)
 
 void FT81x::swap()
 {
-    /*dl(END_DL());
-    write8(FT81x_REG_DLSWAP, FT81x_DLSWAP_FRAME);
-    dli = 0;*/
-
     cmd(SWAP());
 }
 
@@ -287,4 +296,15 @@ void FT81x::sendCommandWithParamToDisplay(uint8_t cmd, uint8_t param)
     SPI.endTransaction();
     digitalWrite(FT81x_CS2, HIGH);
     digitalWrite(FT81x_DC, LOW);
+}
+
+uint8_t FT81x::queryDisplay(uint8_t cmd)
+{
+    digitalWrite(FT81x_DC, LOW);
+    digitalWrite(FT81x_CS2, LOW);
+    SPI.beginTransaction(FT81x_SPI_SETTINGS);
+    uint8_t result = SPI.transfer16(cmd << 8) & 0xFF;
+    SPI.endTransaction();
+    digitalWrite(FT81x_CS2, HIGH);
+    return result;
 }
