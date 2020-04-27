@@ -122,6 +122,7 @@ class FT81x {
         
         static uint8_t read8(uint32_t address);
         static uint16_t read16(uint32_t address);
+        static uint32_t read32(uint32_t address);
 
         static void write8(uint32_t address, uint8_t data);
         static void write16(uint32_t address, uint16_t data);
@@ -140,6 +141,7 @@ class FT81x {
         static void sendCommandWithParamToDisplay(uint8_t cmd, uint8_t param);
 
         static void dl(uint32_t cmd);
+        static void cmd(uint32_t cmd);
 
     private:
 };

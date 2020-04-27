@@ -26,46 +26,52 @@ void setup() {
 
   Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
   Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
-
-  /*while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
-    __asm__("nop");
-  }
-  FT81x::drawCircle(240, 240, 10, FT81x_COLOR_RGB(0, 150, 255));
-  FT81x::swap();*/
 }
 
 void loop() {
-  delay(2000);
+  Serial.printf("\nREG_FRAMES %d\n", FT81x::read32(FT81x_REG_FRAMES));
+
+  delay(200);
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
     __asm__("nop");
   }
   Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
-  FT81x::drawCircle(80, 400, 80, FT81x_COLOR_RGB(255, 255, 255));
+  FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));
+  FT81x::swap();
+  delay(200);
+
+  while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
+    __asm__("nop");
+  }
+  Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
+  FT81x::drawCircle(80, 400, 20, FT81x_COLOR_RGB(255, 255, 255));
   FT81x::swap();
 
-  delay(2000);
+  delay(200);
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
     __asm__("nop");
   }
   Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
-  FT81x::drawCircle(160, 240, 80, FT81x_COLOR_RGB(150, 0, 255));
+  FT81x::drawCircle(160, 240, 20, FT81x_COLOR_RGB(150, 0, 255));
   FT81x::swap();
 
-  delay(2000);
+  delay(200);
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
     __asm__("nop");
   }
   Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
-  FT81x::drawCircle(240, 160, 80, FT81x_COLOR_RGB(255, 150, 0));
+  FT81x::drawCircle(240, 160, 20, FT81x_COLOR_RGB(255, 150, 0));
   FT81x::swap();
 
-  delay(2000);
+  delay(200);
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
     __asm__("nop");
   }
   Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
-  FT81x::drawCircle(400, 80, 80, FT81x_COLOR_RGB(0, 255, 150));
+  FT81x::drawCircle(400, 80, 20, FT81x_COLOR_RGB(0, 255, 150));
   FT81x::swap();
+
+  waitForKeyPress();
 }
 
 void waitForKeyPress()

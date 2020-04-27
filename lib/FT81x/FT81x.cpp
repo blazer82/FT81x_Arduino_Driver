@@ -7,6 +7,7 @@
 #define WRITE 0x800000
 
 #define DLSTART()                    0xFFFFFF00
+#define SWAP()                       0xFFFFFF01
 #define CLEAR(c, s, t)               ((0x26 << 24) | ((c) << 2) | ((s) << 1) | (t))
 #define BEGIN(p)                     ((0x1F << 24) | (p))
 #define END()                        (0x21 << 24)
@@ -48,7 +49,11 @@ void FT81x::initFT81x()
     FT81x::sendCommand(FT81x_CMD_ACTIVE);
     
     // wait for boot-up to complete
+    delay(100);
     while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
+        __asm__("nop");
+    }
+    while (FT81x::read8(FT81x_REG_CPURESET) != 0x00) {
         __asm__("nop");
     }
 
@@ -61,15 +66,15 @@ void FT81x::initFT81x()
 
     // configure rgb interface
     FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 68);
-    FT81x::write16(FT81x_REG_HOFFSET, 68);
-    FT81x::write16(FT81x_REG_HSYNC0, 4);
-    FT81x::write16(FT81x_REG_HSYNC1, 62);
+    FT81x::write16(FT81x_REG_HOFFSET, 43);
+    FT81x::write16(FT81x_REG_HSYNC0, 0);
+    FT81x::write16(FT81x_REG_HSYNC1, 41);
     FT81x::write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
 
-    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 24);
-    FT81x::write16(FT81x_REG_VOFFSET, 24);
-    FT81x::write16(FT81x_REG_VSYNC0, 2);
-    FT81x::write16(FT81x_REG_VSYNC1, 20);
+    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 20);
+    FT81x::write16(FT81x_REG_VOFFSET, 12);
+    FT81x::write16(FT81x_REG_VSYNC0, 0);
+    FT81x::write16(FT81x_REG_VSYNC1, 10);
     FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
 
     FT81x::write8(FT81x_REG_SWIZZLE, 0);
@@ -82,13 +87,8 @@ void FT81x::initFT81x()
     FT81x::swap();
 
     // enable display
-    FT81x::write8(FT81x_REG_GPIO_DIR, 0x80);
-    FT81x::write8(FT81x_REG_GPIO, 0x80);
-    delay(10);
-    FT81x::write8(FT81x_REG_GPIO, 0x00);
-    delay(10);
-    FT81x::write8(FT81x_REG_GPIO, 0x80);
-    delay(10);
+    FT81x::write8(FT81x_REG_GPIO_DIR, 0x80 | FT81x::read8(FT81x_REG_GPIO_DIR));
+    FT81x::write8(FT81x_REG_GPIO, 0x80 | FT81x::read8(FT81x_REG_GPIO));
     FT81x::write8(FT81x_REG_PCLK, 10);
 }
 
@@ -111,33 +111,55 @@ void FT81x::initDisplay()
 
 void FT81x::clear(uint32_t color)
 {
-    dl(CLEAR_COLOR(color));
-    dl(CLEAR(1, 1, 1));
+    cmd(DLSTART());
+    cmd(CLEAR_COLOR(color));
+    cmd(CLEAR(1, 1, 1));
+    cmd(END_DL());
 }
 
 void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color)
 {
-    dl(CLEAR_COLOR(0));
+    /*dl(CLEAR_COLOR(0));
     dl(CLEAR(1, 1, 1));
     dl(COLOR(color));
     dl(POINT_SIZE(size * 16));
     dl(BEGIN(POINTS));
     dl(VERTEX2F(x * 16, y * 16));
-    dl(END());
+    dl(END());*/
+
+    cmd(DLSTART());
+    cmd(COLOR(color));
+    cmd(POINT_SIZE(size * 16));
+    cmd(BEGIN(POINTS));
+    cmd(VERTEX2F(x * 16, y * 16));
+    cmd(END());
+    cmd(END_DL());
 }
 
 void FT81x::dl(uint32_t cmd)
 {
-    Serial.printf("write32 %x, %x\n", FT81x_RAM_DL + dli, cmd);
-    write32(FT81x_RAM_DL + dli, cmd);
+    uint32_t addr = FT81x_RAM_DL + dli;
+    //Serial.printf("write32 %x, %x\n", addr, cmd);
+    write32(addr, cmd);
     dli += 4;
+}
+
+void FT81x::cmd(uint32_t cmd)
+{
+    uint16_t cmdWrite = FT81x::read16(FT81x_REG_CMD_WRITE);
+    uint32_t addr = FT81x_RAM_CMD + cmdWrite;
+    //Serial.printf("write32 %x, %x\n", addr, cmd);
+    write32(addr, cmd);
+    write16(FT81x_REG_CMD_WRITE, (cmdWrite + 4) % 4096);
 }
 
 void FT81x::swap()
 {
-    dl(END_DL());
-    write8(FT81x_REG_DLSWAP, FT81x_DLSWAP_LINE);
-    dli = 0;
+    /*dl(END_DL());
+    write8(FT81x_REG_DLSWAP, FT81x_DLSWAP_FRAME);
+    dli = 0;*/
+
+    cmd(SWAP());
 }
 
 void FT81x::sendCommand(uint32_t cmd)
@@ -177,6 +199,24 @@ uint16_t FT81x::read16(uint32_t address)
     SPI.transfer(0x00); // dummy byte
     uint16_t result = SPI.transfer(0x00);
     result |= (SPI.transfer(0x00) << 8);
+    SPI.endTransaction();
+    digitalWrite(FT81x_CS1, HIGH);
+    return result;
+}
+
+uint32_t FT81x::read32(uint32_t address)
+{
+    uint32_t cmd = address | READ;
+    digitalWrite(FT81x_CS1, LOW);
+    SPI.beginTransaction(FT81x_SPI_SETTINGS);
+    SPI.transfer((cmd >> 16) & 0xFF);
+    SPI.transfer((cmd >> 8) & 0xFF);
+    SPI.transfer(cmd & 0xFF);
+    SPI.transfer(0x00); // dummy byte
+    uint16_t result = SPI.transfer(0x00);
+    result |= (SPI.transfer(0x00) << 8);
+    result |= (SPI.transfer(0x00) << 16);
+    result |= (SPI.transfer(0x00) << 24);
     SPI.endTransaction();
     digitalWrite(FT81x_CS1, HIGH);
     return result;
