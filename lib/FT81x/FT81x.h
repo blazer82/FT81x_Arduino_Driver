@@ -136,7 +136,9 @@ class FT81x {
         static void clear(uint32_t color);
         static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
         static void drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color);
+        static void drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter);
         
+        static void begin();
         static void swap();
 
     protected:

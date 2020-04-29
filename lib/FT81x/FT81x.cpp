@@ -18,11 +18,18 @@
 #define COLOR(rgb)                   ((0x04 << 24) | ((rgb) & 0xFFFFFF))
 #define POINT_SIZE(s)                ((0x0D << 24) | ((s) & 0xFFF))
 #define LINE_WIDTH(w)                ((0x0E << 24) | ((w) & 0xFFF))
-#define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x) & 0xFF) << 21) | (((y) & 0xFF) << 12) | ((h) << 7) | (c))
+#define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x) & 0xFFF) << 21) | (((y) & 0xFFF) << 12) | ((h) << 7) | (c))
 #define VERTEX2F(x, y)               ((1 << 30) | (((x) & 0xFFFF) << 15) | ((y) & 0xFFFF))
 
-#define POINTS 2
-#define RECTS  9
+#define BITMAPS      1
+#define POINTS       2
+#define LINES        3
+#define LINE_STRIP   4
+#define EDGE_STRIP_R 5
+#define EDGE_STRIP_L 6
+#define EDGE_STRIP_A 7
+#define EDGE_STRIP_B 8
+#define RECTS        9
 
 static uint32_t dli = 0;
 
@@ -38,12 +45,20 @@ void FT81x::init() {
 
     FT81x::initFT81x();
     FT81x::initDisplay();
+
+    //while(true) {}
 }
 
 void FT81x::initFT81x()
 {
     // reset
     FT81x::sendCommand(FT81x_CMD_RST_PULSE);
+    delay(300);
+
+    // select clock
+    FT81x::sendCommand(FT81x_CMD_CLKINT);
+    delay(300);
+    FT81x::sendCommand(FT81x_CMD_CLKSEL | 0x0200); // set clock speed to 24 mhz (lowest)
     delay(300);
 
     // activate
@@ -85,6 +100,7 @@ void FT81x::initFT81x()
     FT81x::write8(FT81x_REG_ROTATE, 0);
 
     // write first display list
+    FT81x::begin();
     FT81x::clear(0x00FFF8);
     FT81x::swap();
 
@@ -121,33 +137,35 @@ void FT81x::initDisplay()
 
 void FT81x::clear(uint32_t color)
 {
-    cmd(DLSTART());
     cmd(CLEAR_COLOR(color));
     cmd(CLEAR(1, 1, 1));
-    cmd(END_DL());
 }
 
 void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color)
 {
-    cmd(DLSTART());
     cmd(COLOR(color));
     cmd(POINT_SIZE(size * 16));
     cmd(BEGIN(POINTS));
     cmd(VERTEX2F(x * 16, y * 16));
     cmd(END());
-    cmd(END_DL());
 }
 
 void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color)
 {
-    cmd(DLSTART());
     cmd(COLOR(color));
     cmd(LINE_WIDTH(cornerRadius * 16));
     cmd(BEGIN(RECTS));
-    cmd(VERTEX2II(x, y, 0, 0));
-    cmd(VERTEX2II((x + width), (y + height), 0, 0));
+    cmd(VERTEX2F(x * 16, y * 16));
+    cmd(VERTEX2F((x + width) * 16, (y + height) * 16));
     cmd(END());
-    cmd(END_DL());
+}
+
+void FT81x::drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter)
+{
+    cmd(COLOR(color));
+    cmd(BEGIN(BITMAPS));
+    cmd(VERTEX2II(x, y, size, letter));
+    cmd(END());
 }
 
 void FT81x::dl(uint32_t cmd)
@@ -167,8 +185,15 @@ void FT81x::cmd(uint32_t cmd)
     write16(FT81x_REG_CMD_WRITE, (cmdWrite + 4) % 4096);
 }
 
+void FT81x::begin()
+{
+    cmd(DLSTART());
+    cmd(CLEAR(1, 1, 1));
+}
+
 void FT81x::swap()
 {
+    cmd(END_DL());
     cmd(SWAP());
 }
 
