@@ -150,8 +150,7 @@ class FT81x {
         static void initFT81x();
         static void initDisplay();
 
-        static void sendCommandToDisplay(uint8_t cmd);
-        static void sendCommandWithParamToDisplay(uint8_t cmd, uint8_t param);
+        static void sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params);
         static uint8_t queryDisplay(uint8_t cmd);
 
         static void dl(uint32_t cmd);

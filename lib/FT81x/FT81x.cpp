@@ -31,6 +31,12 @@
 #define EDGE_STRIP_B 8
 #define RECTS        9
 
+#define DISPLAY_CMD(cmd, params...)                                     \
+    {                                                                   \
+        uint8_t d[] = { params };                                       \
+        sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d);      \
+    }
+
 static uint32_t dli = 0;
 
 void FT81x::init() {
@@ -113,19 +119,19 @@ void FT81x::initFT81x()
 void FT81x::initDisplay()
 {
     // sleep mode off
-    sendCommandToDisplay(ST7701_SLPOUT);
+    DISPLAY_CMD(ST7701_SLPOUT);
     delay(300);
 
     // set pixel format
-    sendCommandWithParamToDisplay(ST7701_COLMOD, 0x70);
+    DISPLAY_CMD(ST7701_COLMOD, 0x70);
 
     // set rgb control
-    sendCommandWithParamToDisplay(ST7701_RGBCTRL, 0x00);
+    DISPLAY_CMD(ST7701_RGBCTRL, 0x00);
 
     // display on
-    sendCommandToDisplay(ST7701_DISPON);
+    DISPLAY_CMD(ST7701_DISPON);
 
-    //sendCommandToDisplay(0x23); // all pixels on
+    //DISPLAY_CMD(0x23); // all pixels on
 
     /*Serial.printf("RDID1: %x\n", queryDisplay(ST7701_RDID1));
     Serial.printf("RDID2: %x\n", queryDisplay(ST7701_RDID2));
@@ -299,24 +305,16 @@ void FT81x::write32(uint32_t address, uint32_t data)
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::sendCommandToDisplay(uint8_t cmd)
-{
-    digitalWrite(FT81x_DC, LOW);
-    digitalWrite(FT81x_CS2, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer(cmd);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS2, HIGH);
-}
-
-void FT81x::sendCommandWithParamToDisplay(uint8_t cmd, uint8_t param)
+void FT81x::sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params)
 {
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     SPI.transfer(cmd);
     digitalWrite(FT81x_DC, HIGH);
-    SPI.transfer(param);
+    for (unsigned int i = 0; i < numParams; i++) {
+        SPI.transfer(params[i]);
+    }
     SPI.endTransaction();
     digitalWrite(FT81x_CS2, HIGH);
     digitalWrite(FT81x_DC, LOW);
