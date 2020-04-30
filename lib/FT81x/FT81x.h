@@ -118,11 +118,33 @@
 #define ST7701_DISPON                  0x29
 #define ST7701_COLMOD                  0x3A
 #define ST7701_WRDISBV                 0x51
-#define ST7701_RGBCTRL                 0xC3
 #define ST7701_SDIR                    0xC7
 #define ST7701_RDID1                   0xDA
 #define ST7701_RDID2                   0xDB
 #define ST7701_RDID3                   0xDC
+
+#define ST7701_CND2BKxSEL              0xFF
+
+#define ST7701_BK0_PVGAMCTRL           0xB0
+#define ST7701_BK0_NVGAMCTRL           0xB1
+#define ST7701_BK0_LNESET              0xC0
+#define ST7701_BK0_PORCTRL             0xC1
+#define ST7701_BK0_INVSEL              0xC2
+#define ST7701_BK0_RGBCTRL             0xC3
+
+#define ST7701_BK1_VRHS                0xB0
+#define ST7701_BK1_VCOM                0xB1
+#define ST7701_BK1_VGHSS               0xB2
+#define ST7701_BK1_TESTCMD             0xB3
+#define ST7701_BK1_VGLS                0xB5
+#define ST7701_BK1_PWCTLR1             0xB7
+#define ST7701_BK1_PWCTLR2             0xB8
+#define ST7701_BK1_SPD1                0xC1
+#define ST7701_BK1_SPD2                0xC2
+
+#define ST7701_CMD2BK1SEL              0x11
+#define ST7701_CMD2BK0SEL              0x10
+#define ST7701_CMD2BKxSEL_NONE         0x00
 
 
 class FT81x {
