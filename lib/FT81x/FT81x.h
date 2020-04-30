@@ -112,9 +112,14 @@
 #define ST7701_SLPIN                   0x10
 #define ST7701_SLPOUT                  0x11
 #define ST7701_NORON                   0x13
+#define ST7701_INVOFF                  0x20
+#define ST7701_INVON                   0x21
 #define ST7701_DISPOFF                 0x28
 #define ST7701_DISPON                  0x29
 #define ST7701_COLMOD                  0x3A
+#define ST7701_WRDISBV                 0x51
+#define ST7701_RGBCTRL                 0xC3
+#define ST7701_SDIR                    0xC7
 #define ST7701_RDID1                   0xDA
 #define ST7701_RDID2                   0xDB
 #define ST7701_RDID3                   0xDC

@@ -58,8 +58,6 @@ void FT81x::initFT81x()
     // select clock
     FT81x::sendCommand(FT81x_CMD_CLKINT);
     delay(300);
-    FT81x::sendCommand(FT81x_CMD_CLKSEL | 0x0200); // set clock speed to 24 mhz (lowest)
-    delay(300);
 
     // activate
     FT81x::sendCommand(FT81x_CMD_ACTIVE);
@@ -114,17 +112,18 @@ void FT81x::initFT81x()
 
 void FT81x::initDisplay()
 {
-    // display on
-    sendCommandToDisplay(ST7701_DISPON);
-    delay(100);
+    // sleep mode off
     sendCommandToDisplay(ST7701_SLPOUT);
-    delay(100);
+    delay(300);
 
     // set pixel format
     sendCommandWithParamToDisplay(ST7701_COLMOD, 0x70);
 
-    // normal mode on
-    sendCommandToDisplay(ST7701_NORON);
+    // set rgb control
+    sendCommandWithParamToDisplay(ST7701_RGBCTRL, 0x00);
+
+    // display on
+    sendCommandToDisplay(ST7701_DISPON);
 
     //sendCommandToDisplay(0x23); // all pixels on
 
