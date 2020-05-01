@@ -5,6 +5,8 @@
 void waitForKeyPress();
 void dumpChipID();
 
+static unsigned int x = 0;
+
 void setup() {
   Serial.begin(9600);
 
@@ -26,26 +28,31 @@ void setup() {
 
   Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
   Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
+
+  waitForKeyPress();
 }
 
 void loop() {
-  Serial.printf("\nREG_FRAMES %d\n", FT81x::read32(FT81x_REG_FRAMES));
+  
 
-  delay(200);
+  //Serial.printf("\nREG_FRAMES %d\n", FT81x::read32(FT81x_REG_FRAMES));
+
+  //delay(200);
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
-    __asm__("nop");
+    __asm__ volatile ("nop");
   }
-  Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
+  //Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
+
   FT81x::begin();
   FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));  
-  FT81x::drawLetter(220, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
-  FT81x::drawLetter(244, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
-  FT81x::drawLetter(270, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
-  FT81x::drawLetter(299, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
-  FT81x::drawCircle(192, 133, 20, FT81x_COLOR_RGB(255, 0, 0));
+  FT81x::drawLetter((x + 28) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
+  FT81x::drawLetter((x + 52) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
+  FT81x::drawLetter((x + 78) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
+  FT81x::drawLetter((x + 107) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
+  FT81x::drawCircle(x, 133, 20, FT81x_COLOR_RGB(255, 0, 0));
   FT81x::swap();
 
-  waitForKeyPress();
+  x = (x + 1) % 480;
 }
 
 void waitForKeyPress()

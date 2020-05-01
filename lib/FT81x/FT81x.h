@@ -116,6 +116,8 @@
 #define ST7701_INVON                   0x21
 #define ST7701_DISPOFF                 0x28
 #define ST7701_DISPON                  0x29
+#define ST7701_TEON                    0x35
+#define ST7701_MADCTL                  0x36
 #define ST7701_COLMOD                  0x3A
 #define ST7701_WRDISBV                 0x51
 #define ST7701_SDIR                    0xC7
@@ -131,6 +133,7 @@
 #define ST7701_BK0_PORCTRL             0xC1
 #define ST7701_BK0_INVSEL              0xC2
 #define ST7701_BK0_RGBCTRL             0xC3
+#define ST7701_BK0_SDIR                0xC7
 
 #define ST7701_BK1_VRHS                0xB0
 #define ST7701_BK1_VCOM                0xB1

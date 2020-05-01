@@ -71,10 +71,10 @@ void FT81x::initFT81x()
     // wait for boot-up to complete
     delay(100);
     while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
-        __asm__("nop");
+        __asm__ volatile ("nop");
     }
     while (FT81x::read8(FT81x_REG_CPURESET) != 0x00) {
-        __asm__("nop");
+        __asm__ volatile ("nop");
     }
 
     // pindrive
@@ -85,16 +85,16 @@ void FT81x::initFT81x()
     delay(300);*/
 
     // configure rgb interface
-    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 68);
-    FT81x::write16(FT81x_REG_HOFFSET, 42);
-    FT81x::write16(FT81x_REG_HSYNC0, 4);
-    FT81x::write16(FT81x_REG_HSYNC1, 8);
+    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 22 + 6 + 18 + 2);
+    FT81x::write16(FT81x_REG_HOFFSET, 22 + 6 + 18);
+    FT81x::write16(FT81x_REG_HSYNC0, 22);
+    FT81x::write16(FT81x_REG_HSYNC1, 22 + 6);
     FT81x::write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
 
-    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 20);
-    FT81x::write16(FT81x_REG_VOFFSET, 12);
-    FT81x::write16(FT81x_REG_VSYNC0, 4);
-    FT81x::write16(FT81x_REG_VSYNC1, 8);
+    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 2 + 2 + 2 + 2);
+    FT81x::write16(FT81x_REG_VOFFSET, 2 + 2 + 2);
+    FT81x::write16(FT81x_REG_VSYNC0, 2);
+    FT81x::write16(FT81x_REG_VSYNC1, 2 + 2);
     FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
 
     FT81x::write8(FT81x_REG_SWIZZLE, 0);
@@ -105,7 +105,8 @@ void FT81x::initFT81x()
 
     // write first display list
     FT81x::begin();
-    FT81x::clear(0xF0FFF8);
+    FT81x::clear(0xFF99FF);
+    FT81x::drawCircle(50, 45, 40, FT81x_COLOR_RGB(255, 255, 255));
     FT81x::swap();
 
     // enable pixel clock
@@ -126,10 +127,10 @@ void FT81x::initDisplay()
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK0SEL);
     DISPLAY_CMD(ST7701_BK0_PVGAMCTRL, 0x00, 0x0E, 0x15, 0x0F, 0x11, 0x08, 0x08, 0x08, 0x08, 0x23, 0x04, 0x13, 0x12, 0x2B, 0x34, 0x1F);
     DISPLAY_CMD(ST7701_BK0_NVGAMCTRL, 0x00, 0x0E, 0x95, 0x0F, 0x13, 0x07, 0x09, 0x08, 0x08, 0x22, 0x04, 0x10, 0x0E, 0x2C, 0x34, 0x1F);
-    DISPLAY_CMD(ST7701_BK0_LNESET, 0x80, 0x69);
-    DISPLAY_CMD(ST7701_BK0_PORCTRL, 20 - 8, 4);
-    DISPLAY_CMD(ST7701_BK0_INVSEL, 0x07, 0xFF);
-    DISPLAY_CMD(ST7701_BK0_RGBCTRL, 0x00, 68 - 8, 4);
+    DISPLAY_CMD(ST7701_BK0_LNESET, 0x3B, 0x00);
+    DISPLAY_CMD(ST7701_BK0_PORCTRL, 2, 4);
+    DISPLAY_CMD(ST7701_BK0_INVSEL, 0x37, 0x03);
+    DISPLAY_CMD(ST7701_BK0_RGBCTRL, 0x00, 18, 2);
     
     // Command2, BK1
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK1SEL);
@@ -144,7 +145,7 @@ void FT81x::initDisplay()
     DISPLAY_CMD(ST7701_BK1_SPD2, 0x58);
 
     // Copied from Linux driver: https://github.com/torvalds/linux/blob/master/drivers/gpu/drm/panel/panel-sitronix-st7701.c
-    DISPLAY_CMD(0xE0, 0x00, 0x00, 0x02);
+    /*DISPLAY_CMD(0xE0, 0x00, 0x00, 0x02);
     DISPLAY_CMD(0xE1, 0x0B, 0x00, 0x0D, 0x00, 0x0C, 0x00, 0x0E,0x00, 0x00, 0x44, 0x44);
     DISPLAY_CMD(0xE2, 0x33, 0x33, 0x44, 0x44, 0x64, 0x00, 0x66, 0x00, 0x65, 0x00, 0x67, 0x00, 0x00);
     DISPLAY_CMD(0xE3, 0x00, 0x00, 0x33, 0x33);
@@ -155,12 +156,18 @@ void FT81x::initDisplay()
     DISPLAY_CMD(0xE8, 0x0D, 0x78, 0x3C, 0xA0, 0x0F, 0x78, 0x3C, 0xA0, 0x11, 0x78, 0x3C, 0xA0, 0x13, 0x78, 0x3C, 0xA0);
     DISPLAY_CMD(0xEB, 0x02, 0x02, 0x39, 0x39, 0xEE, 0x44, 0x00);
     DISPLAY_CMD(0xEC, 0x00, 0x00);
-    DISPLAY_CMD(0xED, 0xFF, 0xF1, 0x04, 0x56, 0x72, 0x3F, 0xFF, 0xFF, 0xFF, 0xFF, 0xF3, 0x27, 0x65, 0x40, 0x1F, 0xFF);
+    DISPLAY_CMD(0xED, 0xFF, 0xF1, 0x04, 0x56, 0x72, 0x3F, 0xFF, 0xFF, 0xFF, 0xFF, 0xF3, 0x27, 0x65, 0x40, 0x1F, 0xFF);*/
 
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BKxSEL_NONE);
 
     // set pixel format
     DISPLAY_CMD(ST7701_COLMOD, 0x70);
+
+    // set data control
+    DISPLAY_CMD(ST7701_MADCTL, 0x00);
+
+    // set tearing effect on
+    DISPLAY_CMD(ST7701_TEON, 0x00);
 
     // display on
     DISPLAY_CMD(ST7701_DISPON);
