@@ -111,6 +111,7 @@
 #define ST7701_RDDSDR                  0x0F
 #define ST7701_SLPIN                   0x10
 #define ST7701_SLPOUT                  0x11
+#define ST7701_PTLON                   0x12
 #define ST7701_NORON                   0x13
 #define ST7701_INVOFF                  0x20
 #define ST7701_INVON                   0x21
@@ -133,6 +134,7 @@
 #define ST7701_BK0_PORCTRL             0xC1
 #define ST7701_BK0_INVSEL              0xC2
 #define ST7701_BK0_RGBCTRL             0xC3
+#define ST7701_BK0_PARCTRL             0xC5
 #define ST7701_BK0_SDIR                0xC7
 
 #define ST7701_BK1_VRHS                0xB0
