@@ -7,7 +7,8 @@ void dumpChipID();
 
 static unsigned int x = 0;
 
-void setup() {
+void setup()
+{
   Serial.begin(9600);
 
   SPI.begin();
@@ -29,27 +30,23 @@ void setup() {
   Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
   Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
 
-  waitForKeyPress();
+  //waitForKeyPress();
 }
 
-void loop() {
-  
-
-  //Serial.printf("\nREG_FRAMES %d\n", FT81x::read32(FT81x_REG_FRAMES));
-
-  //delay(200);
+void loop()
+{
+  // TODO: internalize and adapt to ring buffer
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
     __asm__ volatile ("nop");
   }
-  //Serial.printf("REG_DLSWAP %x\n", FT81x::read8(FT81x_REG_DLSWAP));
 
   FT81x::begin();
   FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));  
-  FT81x::drawLetter((x + 28) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
-  FT81x::drawLetter((x + 52) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
-  FT81x::drawLetter((x + 78) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
-  FT81x::drawLetter((x + 107) % 480, 110, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
-  FT81x::drawCircle(x, 133, 20, FT81x_COLOR_RGB(255, 0, 0));
+  FT81x::drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
+  FT81x::drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
+  FT81x::drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
+  FT81x::drawLetter((x + 107) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
+  FT81x::drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
   FT81x::swap();
 
   x = (x + 1) % 480;
@@ -65,7 +62,8 @@ void waitForKeyPress()
   }
 }
 
-void dumpChipID() {
+void dumpChipID()
+{
   digitalWrite(SS, LOW);
   SPI.beginTransaction(FT81x_SPI_SETTINGS);
   SPI.transfer(0x0C);

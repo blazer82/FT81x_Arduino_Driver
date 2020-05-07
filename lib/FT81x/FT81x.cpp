@@ -107,8 +107,7 @@ void FT81x::initFT81x()
 
     // write first display list
     FT81x::begin();
-    FT81x::clear(0xFF99FF);
-    FT81x::drawCircle(50, 45, 40, FT81x_COLOR_RGB(255, 255, 255));
+    FT81x::clear(0);
     FT81x::swap();
 
     // enable pixel clock
@@ -124,9 +123,6 @@ void FT81x::initDisplay()
     // sleep mode off
     DISPLAY_CMD(ST7701_SLPOUT);
     delay(300);
-
-    // partial mode on
-    //DISPLAY_CMD(ST7701_NORON);
 
     // Command2, BK0
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK0SEL);
@@ -163,25 +159,11 @@ void FT81x::initDisplay()
 
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BKxSEL_NONE);
 
-
-
-    // TEST PICTURE
-    //DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, 0x12);
-    //DISPLAY_CMD(0xD1, 0x81, 0x08, 0x03, 0x20, 0x08, 0x01, 0xA0, 0x01, 0xE0, 0xA0, 0x01, 0xE0, 0x03, 0x20);
-    //DISPLAY_CMD(0xD2, 0x08);
-    // END TEST PICTURE
-
     // display on
     DISPLAY_CMD(ST7701_DISPON);
 
-    // set data control
-    //DISPLAY_CMD(ST7701_MADCTL, 0x00);
-
     // set pixel format
-    //DISPLAY_CMD(ST7701_COLMOD, 0x70);
-
-    // set tearing effect on
-    //DISPLAY_CMD(ST7701_TEON, 0x00);
+    DISPLAY_CMD(ST7701_COLMOD, 0x70);
 
     //DISPLAY_CMD(0x23); // all pixels on
 
