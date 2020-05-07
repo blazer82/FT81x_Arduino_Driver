@@ -40,23 +40,20 @@
 static uint32_t dli = 0;
 
 void FT81x::init() {
-    pinMode(FT81x_CS1, OUTPUT); 
+    pinMode(FT81x_CS1, OUTPUT);
     digitalWrite(FT81x_CS1, HIGH);
 
-    pinMode(FT81x_CS2, OUTPUT); 
+    pinMode(FT81x_CS2, OUTPUT);
     digitalWrite(FT81x_CS2, HIGH);
 
-    pinMode(FT81x_DC, OUTPUT); 
+    pinMode(FT81x_DC, OUTPUT);
     digitalWrite(FT81x_DC, LOW);
 
     FT81x::initFT81x();
     FT81x::initDisplay();
-
-    //while(true) {}
 }
 
-void FT81x::initFT81x()
-{
+void FT81x::initFT81x() {
     // reset
     FT81x::sendCommand(FT81x_CMD_RST_PULSE);
     delay(300);
@@ -65,11 +62,9 @@ void FT81x::initFT81x()
     FT81x::sendCommand(FT81x_CMD_CLKINT);
     delay(300);
 
-    //FT81x::write8(FT81x_CMD_CLKSEL, 0x02);
-
     // activate
     FT81x::sendCommand(FT81x_CMD_ACTIVE);
-    
+
     // wait for boot-up to complete
     delay(100);
     while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
@@ -118,8 +113,7 @@ void FT81x::initFT81x()
     delay(300);
 }
 
-void FT81x::initDisplay()
-{
+void FT81x::initDisplay() {
     // sleep mode off
     DISPLAY_CMD(ST7701_SLPOUT);
     delay(300);
@@ -127,11 +121,11 @@ void FT81x::initDisplay()
     // Command2, BK0
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK0SEL);
     DISPLAY_CMD(ST7701_BK0_LNESET, 0x3B, 0x00);
-    DISPLAY_CMD(ST7701_BK0_PORCTRL, 0x14, 0x0A); // vbp, vfp
+    DISPLAY_CMD(ST7701_BK0_PORCTRL, 0x14, 0x0A);  // vbp, vfp
     DISPLAY_CMD(ST7701_BK0_INVSEL, 0x21, 0x08);
     DISPLAY_CMD(ST7701_BK0_PVGAMCTRL, 0x00, 0x11, 0x18, 0x0E, 0x11, 0x06, 0x07, 0x08, 0x07, 0x22, 0x04, 0x12, 0x0F, 0xAA, 0x31, 0x18);
     DISPLAY_CMD(ST7701_BK0_NVGAMCTRL, 0x00, 0x11, 0x19, 0x0E, 0x12, 0x07, 0x08, 0x08, 0x08, 0x22, 0x04, 0x11, 0x11, 0xA9, 0x32, 0x18);
-    
+
     // Command2, BK1
     DISPLAY_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK1SEL);
     DISPLAY_CMD(ST7701_BK1_VRHS, 0x60);
@@ -165,7 +159,7 @@ void FT81x::initDisplay()
     // set pixel format
     DISPLAY_CMD(ST7701_COLMOD, 0x70);
 
-    //DISPLAY_CMD(0x23); // all pixels on
+    // DISPLAY_CMD(0x23); // all pixels on
 
     /*Serial.printf("RDID1: %x\n", queryDisplay(ST7701_RDID1));
     Serial.printf("RDID2: %x\n", queryDisplay(ST7701_RDID2));
@@ -174,14 +168,12 @@ void FT81x::initDisplay()
     Serial.printf("RDDPM: %x (must be > 8)\n", queryDisplay(ST7701_RDDPM));*/
 }
 
-void FT81x::clear(uint32_t color)
-{
+void FT81x::clear(uint32_t color) {
     cmd(CLEAR_COLOR(color));
     cmd(CLEAR(1, 1, 1));
 }
 
-void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color)
-{
+void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color) {
     cmd(COLOR(color));
     cmd(POINT_SIZE(size * 16));
     cmd(BEGIN(POINTS));
@@ -189,8 +181,7 @@ void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color)
     cmd(END());
 }
 
-void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color)
-{
+void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color) {
     cmd(COLOR(color));
     cmd(LINE_WIDTH(cornerRadius * 16));
     cmd(BEGIN(RECTS));
@@ -199,45 +190,37 @@ void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint
     cmd(END());
 }
 
-void FT81x::drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter)
-{
+void FT81x::drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter) {
     cmd(COLOR(color));
     cmd(BEGIN(BITMAPS));
     cmd(VERTEX2II(x, y, size, letter));
     cmd(END());
 }
 
-void FT81x::dl(uint32_t cmd)
-{
+void FT81x::dl(uint32_t cmd) {
     uint32_t addr = FT81x_RAM_DL + dli;
-    //Serial.printf("write32 %x, %x\n", addr, cmd);
     write32(addr, cmd);
     dli += 4;
 }
 
-void FT81x::cmd(uint32_t cmd)
-{
+void FT81x::cmd(uint32_t cmd) {
     uint16_t cmdWrite = FT81x::read16(FT81x_REG_CMD_WRITE);
     uint32_t addr = FT81x_RAM_CMD + cmdWrite;
-    //Serial.printf("write32 %x, %x\n", addr, cmd);
     write32(addr, cmd);
     write16(FT81x_REG_CMD_WRITE, (cmdWrite + 4) % 4096);
 }
 
-void FT81x::begin()
-{
+void FT81x::begin() {
     cmd(DLSTART());
     cmd(CLEAR(1, 1, 1));
 }
 
-void FT81x::swap()
-{
+void FT81x::swap() {
     cmd(END_DL());
     cmd(SWAP());
 }
 
-void FT81x::sendCommand(uint32_t cmd)
-{
+void FT81x::sendCommand(uint32_t cmd) {
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     SPI.transfer((cmd >> 16) & 0xFF);
@@ -247,30 +230,28 @@ void FT81x::sendCommand(uint32_t cmd)
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-uint8_t FT81x::read8(uint32_t address)
-{
+uint8_t FT81x::read8(uint32_t address) {
     uint32_t cmd = address;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     SPI.transfer((cmd >> 16) & 0xFF);
     SPI.transfer((cmd >> 8) & 0xFF);
     SPI.transfer(cmd & 0xFF);
-    SPI.transfer(0x00); // dummy byte
+    SPI.transfer(0x00);  // dummy byte
     uint8_t result = SPI.transfer(0x00);
     SPI.endTransaction();
     digitalWrite(FT81x_CS1, HIGH);
     return result;
 }
 
-uint16_t FT81x::read16(uint32_t address)
-{
+uint16_t FT81x::read16(uint32_t address) {
     uint32_t cmd = address | READ;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     SPI.transfer((cmd >> 16) & 0xFF);
     SPI.transfer((cmd >> 8) & 0xFF);
     SPI.transfer(cmd & 0xFF);
-    SPI.transfer(0x00); // dummy byte
+    SPI.transfer(0x00);  // dummy byte
     uint16_t result = SPI.transfer(0x00);
     result |= (SPI.transfer(0x00) << 8);
     SPI.endTransaction();
@@ -278,15 +259,14 @@ uint16_t FT81x::read16(uint32_t address)
     return result;
 }
 
-uint32_t FT81x::read32(uint32_t address)
-{
+uint32_t FT81x::read32(uint32_t address) {
     uint32_t cmd = address | READ;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     SPI.transfer((cmd >> 16) & 0xFF);
     SPI.transfer((cmd >> 8) & 0xFF);
     SPI.transfer(cmd & 0xFF);
-    SPI.transfer(0x00); // dummy byte
+    SPI.transfer(0x00);  // dummy byte
     uint16_t result = SPI.transfer(0x00);
     result |= (SPI.transfer(0x00) << 8);
     result |= (SPI.transfer(0x00) << 16);
@@ -296,8 +276,7 @@ uint32_t FT81x::read32(uint32_t address)
     return result;
 }
 
-void FT81x::write8(uint32_t address, uint8_t data)
-{
+void FT81x::write8(uint32_t address, uint8_t data) {
     uint32_t cmd = address | WRITE;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -309,8 +288,7 @@ void FT81x::write8(uint32_t address, uint8_t data)
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::write16(uint32_t address, uint16_t data)
-{
+void FT81x::write16(uint32_t address, uint16_t data) {
     uint32_t cmd = address | WRITE;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -323,8 +301,7 @@ void FT81x::write16(uint32_t address, uint16_t data)
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::write32(uint32_t address, uint32_t data)
-{
+void FT81x::write32(uint32_t address, uint32_t data) {
     uint32_t cmd = address | WRITE;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -339,8 +316,7 @@ void FT81x::write32(uint32_t address, uint32_t data)
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params)
-{
+void FT81x::sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params) {
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -354,8 +330,7 @@ void FT81x::sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *p
     digitalWrite(FT81x_DC, LOW);
 }
 
-uint8_t FT81x::queryDisplay(uint8_t cmd)
-{
+uint8_t FT81x::queryDisplay(uint8_t cmd) {
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);

@@ -153,35 +153,35 @@
 
 
 class FT81x {
-    public:
-        static void init();
-        static void sendCommand(uint32_t cmd);
-        
-        static uint8_t read8(uint32_t address);
-        static uint16_t read16(uint32_t address);
-        static uint32_t read32(uint32_t address);
+ public:
+    static void init();
+    static void sendCommand(uint32_t cmd);
 
-        static void write8(uint32_t address, uint8_t data);
-        static void write16(uint32_t address, uint16_t data);
-        static void write32(uint32_t address, uint32_t data);
+    static uint8_t read8(uint32_t address);
+    static uint16_t read16(uint32_t address);
+    static uint32_t read32(uint32_t address);
 
-        static void clear(uint32_t color);
-        static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
-        static void drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color);
-        static void drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter);
-        
-        static void begin();
-        static void swap();
+    static void write8(uint32_t address, uint8_t data);
+    static void write16(uint32_t address, uint16_t data);
+    static void write32(uint32_t address, uint32_t data);
 
-    protected:
-        static void initFT81x();
-        static void initDisplay();
+    static void clear(uint32_t color);
+    static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
+    static void drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color);
+    static void drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter);
 
-        static void sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params);
-        static uint8_t queryDisplay(uint8_t cmd);
+    static void begin();
+    static void swap();
 
-        static void dl(uint32_t cmd);
-        static void cmd(uint32_t cmd);
+ protected:
+    static void initFT81x();
+    static void initDisplay();
 
-    private:
+    static void sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params);
+    static uint8_t queryDisplay(uint8_t cmd);
+
+    static void dl(uint32_t cmd);
+    static void cmd(uint32_t cmd);
+
+ private:
 };

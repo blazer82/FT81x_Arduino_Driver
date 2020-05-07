@@ -7,8 +7,7 @@ void dumpChipID();
 
 static unsigned int x = 0;
 
-void setup()
-{
+void setup() {
   Serial.begin(9600);
 
   SPI.begin();
@@ -30,18 +29,17 @@ void setup()
   Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
   Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
 
-  //waitForKeyPress();
+  // waitForKeyPress();
 }
 
-void loop()
-{
+void loop() {
   // TODO: internalize and adapt to ring buffer
   while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
     __asm__ volatile ("nop");
   }
 
   FT81x::begin();
-  FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));  
+  FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));
   FT81x::drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
   FT81x::drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
   FT81x::drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
@@ -52,12 +50,10 @@ void loop()
   x = (x + 1) % 480;
 }
 
-void waitForKeyPress()
-{
+void waitForKeyPress() {
   Serial.println("\nPress a key to continue\n");
-  while(!Serial.available());
-  while(Serial.available())
-  {
+  while (!Serial.available()) {}
+  while (Serial.available()) {
     Serial.read();
   }
 }
@@ -69,7 +65,7 @@ void dumpChipID()
   SPI.transfer(0x0C);
   SPI.transfer(0x00);
   SPI.transfer(0x00);
-  SPI.transfer(0x00); // dummy byte
+  SPI.transfer(0x00);  // dummy byte
   Serial.println("Chip ID:");
   Serial.printf("0x0C0000: %x (supposed to be 0x8)\n", SPI.transfer(0x00));
   Serial.printf("0x0C0001: %x (supposed to be 0x12)\n", SPI.transfer(0x00));
