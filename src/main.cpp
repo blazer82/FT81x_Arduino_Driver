@@ -76,8 +76,7 @@ void waitForKeyPress() {
   }
 }
 
-void dumpChipID()
-{
+void dumpChipID() {
   digitalWrite(SS, LOW);
   SPI.beginTransaction(FT81x_SPI_SETTINGS);
   SPI.transfer(0x0C);
