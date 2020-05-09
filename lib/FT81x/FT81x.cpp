@@ -229,6 +229,10 @@ void FT81x::cmd(uint32_t cmd) {
 }
 
 void FT81x::begin() {
+    // Wait for circular buffer to catch up
+    while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
+        __asm__ volatile ("nop");
+    }
     cmd(DLSTART());
     cmd(CLEAR(1, 1, 1));
 }

@@ -51,11 +51,6 @@ void setup() {
 }
 
 void loop() {
-  // TODO: internalize and adapt to ring buffer
-  while (FT81x::read8(FT81x_REG_DLSWAP) != 0) {
-    __asm__ volatile ("nop");
-  }
-
   FT81x::begin();
   FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));
   FT81x::drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
