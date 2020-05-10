@@ -99,13 +99,6 @@ void FT81x::initFT81x() {
         __asm__ volatile ("nop");
     }
 
-    // pindrive
-    /*FT81x::sendCommand(FT81x_CMD_PINDRIVE | 0x01 | (0x09 << 2));
-    FT81x::sendCommand(FT81x_CMD_PINDRIVE | 0x01 | (0x0A << 2));
-    FT81x::sendCommand(FT81x_CMD_PINDRIVE | 0x01 | (0x0B << 2));
-    FT81x::sendCommand(FT81x_CMD_PINDRIVE | 0x01 | (0x0D << 2));
-    delay(300);*/
-
     // configure rgb interface
     FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 8 + 8 + 50 + 2);
     FT81x::write16(FT81x_REG_HOFFSET, 8 + 8 + 50);
@@ -185,12 +178,6 @@ void FT81x::initDisplay() {
     DISPLAY_CMD(ST7701_COLMOD, 0x70);
 
     // DISPLAY_CMD(0x23); // all pixels on
-
-    /*Serial.printf("RDID1: %x\n", queryDisplay(ST7701_RDID1));
-    Serial.printf("RDID2: %x\n", queryDisplay(ST7701_RDID2));
-    Serial.printf("RDID3: %x\n", queryDisplay(ST7701_RDID3));
-    Serial.printf("RDDSDR: %x\n", queryDisplay(ST7701_RDDSDR));
-    Serial.printf("RDDPM: %x (must be > 8)\n", queryDisplay(ST7701_RDDPM));*/
 }
 
 void FT81x::clear(uint32_t color) {
