@@ -26,6 +26,7 @@
 
 #define DLSTART()                    0xFFFFFF00
 #define SWAP()                       0xFFFFFF01
+#define MEMWRITE()                   0xFFFFFF1A
 #define CLEAR(c, s, t)               ((0x26 << 24) | ((c) << 2) | ((s) << 1) | (t))
 #define BEGIN(p)                     ((0x1F << 24) | (p))
 #define END()                        (0x21 << 24)
@@ -38,6 +39,12 @@
 #define LINE_WIDTH(w)                ((0x0E << 24) | ((w) & 0xFFF))
 #define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x) & 0xFFF) << 21) | (((y) & 0xFFF) << 12) | ((h) << 7) | (c))
 #define VERTEX2F(x, y)               ((1 << 30) | (((x) & 0xFFFF) << 15) | ((y) & 0xFFFF))
+#define BITMAP_SOURCE(a)             ((1 << 24) | (a))
+#define BITMAP_LAYOUT(f, s, h)       ((7 << 24) | ((f) << 19) | (((s) & 0x1FF) << 9) | ((h) & 0x1FF))
+#define BITMAP_SIZE(f, wx, wy, w, h) ((8 << 24) | (((f) & 1) << 20) | (((wx) & 1) << 19) | (((wy) & 1) << 18) | (((w) & 0x1FF) << 9)| ((h) & 0x1FF))
+#define LOADIDENTITY()               0xFFFFFF26
+#define SETMATRIX()                  0xFFFFFF2A
+#define SCALE()                      0xFFFFFF28
 
 #define BITMAPS      1
 #define POINTS       2
@@ -215,6 +222,20 @@ void FT81x::drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8
     cmd(END());
 }
 
+void FT81x::drawBitmap(uint32_t offset, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t scale) {
+    cmd(COLOR_RGB(255, 255, 255));
+    cmd(BITMAP_SOURCE(FT81x_RAM_G + offset));
+    cmd(BITMAP_LAYOUT(FT81x_BITMAP_LAYOUT_RGB565, width * 2, height));  // only supporting one format for now
+    cmd(BITMAP_SIZE(FT81x_BITMAP_SIZE_NEAREST, 0, 0, width * scale, height * scale));
+    cmd(BEGIN(BITMAPS));
+    cmd(LOADIDENTITY());
+    cmd(SCALE());
+    cmd(scale * 65536);
+    cmd(scale * 65536);
+    cmd(SETMATRIX());
+    cmd(VERTEX2II(x, y, 0, 0));
+}
+
 void FT81x::dl(uint32_t cmd) {
     uint32_t addr = FT81x_RAM_DL + dli;
     write32(addr, cmd);
@@ -226,6 +247,40 @@ void FT81x::cmd(uint32_t cmd) {
     uint32_t addr = FT81x_RAM_CMD + cmdWrite;
     write32(addr, cmd);
     write16(FT81x_REG_CMD_WRITE, (cmdWrite + 4) % 4096);
+}
+
+void FT81x::writeGRAM(uint32_t offset, uint32_t size, uint8_t *data) {
+    uint32_t sizeRemaining = size;
+    uint32_t currentOffset = offset;
+
+    while (sizeRemaining > 0) {
+        while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
+            __asm__ volatile ("nop");
+        }
+
+        uint16_t bulkSpace = read16(FT81x_REG_CMDB_SPACE);
+        uint32_t currentSize = sizeRemaining > bulkSpace ? bulkSpace : sizeRemaining;
+        uint8_t remainder = currentSize % 4;
+
+        cmd(MEMWRITE());
+        cmd(FT81x_RAM_G + currentOffset);
+        cmd(currentSize);
+
+        for (uint32_t i = currentOffset; i < currentOffset + currentSize - remainder; i += 4) {
+            write32(FT81x_REG_CMDB_WRITE, data[i] | data[i + 1] << 8 | data[i + 2] << 16 | data[i + 3] << 24);
+        }
+
+        if (remainder > 0) {
+            uint32_t lastBytes = 0;
+            for (uint8_t i = currentOffset + currentSize - remainder; i < currentOffset + currentSize; i++) {
+                lastBytes |= data[i] << (8 * i);
+            }
+            write32(FT81x_REG_CMDB_WRITE, lastBytes);
+        }
+
+        sizeRemaining -= currentSize;
+        currentOffset += currentSize;
+    }
 }
 
 void FT81x::begin() {

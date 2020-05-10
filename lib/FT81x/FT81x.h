@@ -124,6 +124,13 @@
 #define FT81x_DLSWAP_LINE              0x1
 #define FT81x_DLSWAP_FRAME             0x2
 
+#define FT81x_BITMAP_LAYOUT_ARGB1555   0x1
+#define FT81x_BITMAP_LAYOUT_ARGB4      0x6
+#define FT81x_BITMAP_LAYOUT_RGB565     0x7
+
+#define FT81x_BITMAP_SIZE_NEAREST      0x0
+#define FT81x_BITMAP_SIZE_BILINEAR     0x1
+
 #define ST7701_SWRESET                 0x01
 #define ST7701_RDDPM                   0x0A
 #define ST7701_RDDSDR                  0x0F
@@ -187,9 +194,12 @@ class FT81x {
     static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
     static void drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color);
     static void drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter);
+    static void drawBitmap(uint32_t offset, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t scale);
 
     static void begin();
     static void swap();
+
+    static void writeGRAM(uint32_t offset, uint32_t size, uint8_t *data);
 
  protected:
     static void initFT81x();
