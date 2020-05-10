@@ -251,7 +251,7 @@ void FT81x::cmd(uint32_t cmd) {
 
 void FT81x::writeGRAM(uint32_t offset, uint32_t size, uint8_t *data) {
     uint32_t sizeRemaining = size;
-    uint32_t currentOffset = offset;
+    uint32_t currentOffset = 0;
 
     while (sizeRemaining > 0) {
         while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
@@ -263,7 +263,7 @@ void FT81x::writeGRAM(uint32_t offset, uint32_t size, uint8_t *data) {
         uint8_t remainder = currentSize % 4;
 
         cmd(MEMWRITE());
-        cmd(FT81x_RAM_G + currentOffset);
+        cmd(FT81x_RAM_G + currentOffset + offset);
         cmd(currentSize);
 
         for (uint32_t i = currentOffset; i < currentOffset + currentSize - remainder; i += 4) {
