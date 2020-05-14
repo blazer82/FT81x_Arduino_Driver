@@ -180,12 +180,12 @@ void FT81x::initDisplay() {
     // DISPLAY_CMD(0x23); // all pixels on
 }
 
-void FT81x::clear(uint32_t color) {
+void FT81x::clear(const uint32_t color) {
     cmd(CLEAR_COLOR(color));
     cmd(CLEAR(1, 1, 1));
 }
 
-void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color) {
+void FT81x::drawCircle(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color) {
     cmd(COLOR(color));
     cmd(POINT_SIZE(size * 16));
     cmd(BEGIN(POINTS));
@@ -193,7 +193,7 @@ void FT81x::drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color) {
     cmd(END());
 }
 
-void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color) {
+void FT81x::drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color) {
     cmd(COLOR(color));
     cmd(LINE_WIDTH(cornerRadius * 16));
     cmd(BEGIN(RECTS));
@@ -202,14 +202,14 @@ void FT81x::drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint
     cmd(END());
 }
 
-void FT81x::drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter) {
+void FT81x::drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter) {
     cmd(COLOR(color));
     cmd(BEGIN(BITMAPS));
     cmd(VERTEX2II(x, y, size, letter));
     cmd(END());
 }
 
-void FT81x::drawBitmap(uint32_t offset, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t scale) {
+void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale) {
     cmd(COLOR_RGB(255, 255, 255));
     cmd(BITMAP_SOURCE(FT81x_RAM_G + offset));
     cmd(BITMAP_LAYOUT(FT81x_BITMAP_LAYOUT_RGB565, width * 2, height));  // only supporting one format for now
@@ -223,20 +223,20 @@ void FT81x::drawBitmap(uint32_t offset, uint16_t x, uint16_t y, uint16_t width, 
     cmd(VERTEX2II(x, y, 0, 0));
 }
 
-void FT81x::dl(uint32_t cmd) {
+void FT81x::dl(const uint32_t cmd) {
     uint32_t addr = FT81x_RAM_DL + dli;
     write32(addr, cmd);
     dli += 4;
 }
 
-void FT81x::cmd(uint32_t cmd) {
+void FT81x::cmd(const uint32_t cmd) {
     uint16_t cmdWrite = FT81x::read16(FT81x_REG_CMD_WRITE);
     uint32_t addr = FT81x_RAM_CMD + cmdWrite;
     write32(addr, cmd);
     write16(FT81x_REG_CMD_WRITE, (cmdWrite + 4) % 4096);
 }
 
-void FT81x::writeGRAM(uint32_t offset, uint32_t size, uint8_t *data) {
+void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, uint8_t *data) {
     uint32_t sizeRemaining = size;
     uint32_t currentOffset = 0;
 
@@ -270,6 +270,40 @@ void FT81x::writeGRAM(uint32_t offset, uint32_t size, uint8_t *data) {
     }
 }
 
+void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, uint16_t *data) {
+    uint32_t sizeRemaining = size;
+    uint32_t currentOffset = 0;
+
+    while (sizeRemaining > 0) {
+        while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
+            __asm__ volatile ("nop");
+        }
+
+        uint16_t bulkSpace = read16(FT81x_REG_CMDB_SPACE);
+        uint32_t currentSize = sizeRemaining > bulkSpace ? bulkSpace : sizeRemaining;
+        uint8_t remainder = currentSize % 2;
+
+        cmd(MEMWRITE());
+        cmd(FT81x_RAM_G + currentOffset + offset);
+        cmd(currentSize * 2);
+
+        for (uint32_t i = currentOffset; i < currentOffset + currentSize - remainder; i += 2) {
+            write32(FT81x_REG_CMDB_WRITE, data[i] | data[i + 1] << 16);
+        }
+
+        if (remainder > 0) {
+            uint32_t lastBytes = 0;
+            for (uint8_t i = currentOffset + currentSize - remainder; i < currentOffset + currentSize; i++) {
+                lastBytes |= data[i] << (8 * i);
+            }
+            write32(FT81x_REG_CMDB_WRITE, lastBytes);
+        }
+
+        sizeRemaining -= currentSize;
+        currentOffset += currentSize;
+    }
+}
+
 void FT81x::begin() {
     // Wait for circular buffer to catch up
     while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
@@ -284,7 +318,7 @@ void FT81x::swap() {
     cmd(SWAP());
 }
 
-void FT81x::sendCommand(uint32_t cmd) {
+void FT81x::sendCommand(const uint32_t cmd) {
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     SPI.transfer((cmd >> 16) & 0xFF);
@@ -294,7 +328,7 @@ void FT81x::sendCommand(uint32_t cmd) {
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-uint8_t FT81x::read8(uint32_t address) {
+uint8_t FT81x::read8(const uint32_t address) {
     uint32_t cmd = address;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -308,7 +342,7 @@ uint8_t FT81x::read8(uint32_t address) {
     return result;
 }
 
-uint16_t FT81x::read16(uint32_t address) {
+uint16_t FT81x::read16(const uint32_t address) {
     uint32_t cmd = address | READ;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -323,7 +357,7 @@ uint16_t FT81x::read16(uint32_t address) {
     return result;
 }
 
-uint32_t FT81x::read32(uint32_t address) {
+uint32_t FT81x::read32(const uint32_t address) {
     uint32_t cmd = address | READ;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -340,7 +374,7 @@ uint32_t FT81x::read32(uint32_t address) {
     return result;
 }
 
-void FT81x::write8(uint32_t address, uint8_t data) {
+void FT81x::write8(const uint32_t address, const uint8_t data) {
     uint32_t cmd = address | WRITE;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -352,7 +386,7 @@ void FT81x::write8(uint32_t address, uint8_t data) {
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::write16(uint32_t address, uint16_t data) {
+void FT81x::write16(const uint32_t address, const uint16_t data) {
     uint32_t cmd = address | WRITE;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -365,7 +399,7 @@ void FT81x::write16(uint32_t address, uint16_t data) {
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::write32(uint32_t address, uint32_t data) {
+void FT81x::write32(const uint32_t address, const uint32_t data) {
     uint32_t cmd = address | WRITE;
     digitalWrite(FT81x_CS1, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -380,7 +414,7 @@ void FT81x::write32(uint32_t address, uint32_t data) {
     digitalWrite(FT81x_CS1, HIGH);
 }
 
-void FT81x::sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params) {
+void FT81x::sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, uint8_t *params) {
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -394,7 +428,7 @@ void FT81x::sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *p
     digitalWrite(FT81x_DC, LOW);
 }
 
-uint8_t FT81x::queryDisplay(uint8_t cmd) {
+uint8_t FT81x::queryDisplay(const uint8_t cmd) {
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);

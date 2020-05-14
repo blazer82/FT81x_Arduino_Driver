@@ -24,7 +24,7 @@
 #define FT81x_COLOR_RGB(r, g, b)       (((r) << 16) | ((g) << 8) | (b))
 
 #ifndef FT81x_SPI_SETTINGS
-#define FT81x_SPI_SETTINGS             SPISettings(1, MSBFIRST, SPI_MODE0)
+#define FT81x_SPI_SETTINGS             SPISettings(4000000, MSBFIRST, SPI_MODE0)
 #endif
 
 #ifndef FT81x_CS1
@@ -180,36 +180,37 @@
 class FT81x {
  public:
     static void init();
-    static void sendCommand(uint32_t cmd);
+    static void sendCommand(const uint32_t cmd);
 
-    static uint8_t read8(uint32_t address);
-    static uint16_t read16(uint32_t address);
-    static uint32_t read32(uint32_t address);
+    static uint8_t read8(const uint32_t address);
+    static uint16_t read16(const uint32_t address);
+    static uint32_t read32(const uint32_t address);
 
-    static void write8(uint32_t address, uint8_t data);
-    static void write16(uint32_t address, uint16_t data);
-    static void write32(uint32_t address, uint32_t data);
+    static void write8(const uint32_t address, const uint8_t data);
+    static void write16(const uint32_t address, const uint16_t data);
+    static void write32(const uint32_t address, const uint32_t data);
 
-    static void clear(uint32_t color);
-    static void drawCircle(int16_t x, int16_t y, uint8_t size, uint32_t color);
-    static void drawRect(int16_t x, int16_t y, uint16_t width, uint16_t height, uint8_t cornerRadius, uint32_t color);
-    static void drawLetter(int16_t x, int16_t y, uint8_t size, uint32_t color, uint8_t letter);
-    static void drawBitmap(uint32_t offset, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t scale);
+    static void clear(const uint32_t color);
+    static void drawCircle(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color);
+    static void drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color);
+    static void drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter);
+    static void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale);
 
     static void begin();
     static void swap();
 
-    static void writeGRAM(uint32_t offset, uint32_t size, uint8_t *data);
+    static void writeGRAM(const uint32_t offset, const uint32_t size, uint8_t *data);
+    static void writeGRAM(const uint32_t offset, const uint32_t size, uint16_t *data);
 
  protected:
     static void initFT81x();
     static void initDisplay();
 
-    static void sendCommandToDisplay(uint8_t cmd, unsigned int numParams, uint8_t *params);
-    static uint8_t queryDisplay(uint8_t cmd);
+    static void sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, uint8_t *params);
+    static uint8_t queryDisplay(const uint8_t cmd);
 
-    static void dl(uint32_t cmd);
-    static void cmd(uint32_t cmd);
+    static void dl(const uint32_t cmd);
+    static void cmd(const uint32_t cmd);
 
  private:
 };
