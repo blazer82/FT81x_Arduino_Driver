@@ -20,6 +20,7 @@
 
 #include <Arduino.h>
 #include <SPI.h>
+#include <DmaSpi.h>
 
 #define FT81x_COLOR_RGB(r, g, b)       (((r) << 16) | ((g) << 8) | (b))
 
@@ -199,18 +200,20 @@ class FT81x {
     static void begin();
     static void swap();
 
-    static void writeGRAM(const uint32_t offset, const uint32_t size, uint8_t *data);
-    static void writeGRAM(const uint32_t offset, const uint32_t size, uint16_t *data);
+    static void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data);
 
  protected:
     static void initFT81x();
     static void initDisplay();
 
-    static void sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, uint8_t *params);
+    static void sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, const uint8_t *params);
     static uint8_t queryDisplay(const uint8_t cmd);
 
     static void dl(const uint32_t cmd);
     static void cmd(const uint32_t cmd);
+
+    static void transferDMABuffer(const uint8_t size);
+    static void transferDMABufferAndWait(const uint8_t size);
 
  private:
 };

@@ -57,17 +57,17 @@ void loop() {
 
     FT81x::begin();
     FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));
-    // FT81x::drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
-    // FT81x::drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
-    // FT81x::drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
-    // FT81x::drawLetter((x + 107) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
-    // FT81x::drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
-    FT81x::drawBitmap(0, 16, 16, 64, 64, 7);
+    FT81x::drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
+    FT81x::drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
+    FT81x::drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
+    FT81x::drawLetter((x + 107) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
+    FT81x::drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
+    FT81x::drawBitmap(0, 16, 16, 64, 64, 2);
     FT81x::swap();
 
     x = (x + 1) % 480;
 
-    waitForKeyPress();
+    // waitForKeyPress();
 }
 
 void waitForKeyPress() {

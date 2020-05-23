@@ -63,6 +63,10 @@
     }
 
 static uint32_t dli = 0;
+static uint8_t dmaBuffer[8] = {0};
+static volatile uint8_t dmaBufferOut[8] = {0};
+
+static DmaSpi::Transfer trx(nullptr, 0, nullptr);
 
 void FT81x::init() {
     pinMode(FT81x_CS1, OUTPUT);
@@ -73,6 +77,14 @@ void FT81x::init() {
 
     pinMode(FT81x_DC, OUTPUT);
     digitalWrite(FT81x_DC, LOW);
+
+    SPI.setCS(FT81x_CS1);
+
+    SPI.beginTransaction(FT81x_SPI_SETTINGS);
+    SPI.endTransaction();
+
+    DMASPI0.begin();
+    DMASPI0.start();
 
     FT81x::initFT81x();
     FT81x::initDisplay();
@@ -93,6 +105,11 @@ void FT81x::initFT81x() {
     // wait for boot-up to complete
     delay(100);
     while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
+        Serial.print("FT81x_REG_ID ");
+        Serial.println(FT81x::read8(FT81x_REG_ID));
+        Serial.printf("dmaBuffer %d %d %d %d %d %d %d %d\n", dmaBuffer[0], dmaBuffer[1], dmaBuffer[2], dmaBuffer[3], dmaBuffer[4], dmaBuffer[5], dmaBuffer[6], dmaBuffer[7]);
+        Serial.printf("dmaBufferOut %d %d %d %d %d %d %d %d\n", dmaBufferOut[0], dmaBufferOut[1], dmaBufferOut[2], dmaBufferOut[3], dmaBufferOut[4], dmaBufferOut[5], dmaBufferOut[6], dmaBufferOut[7]);
+        delay(500);
         __asm__ volatile ("nop");
     }
     while (FT81x::read8(FT81x_REG_CPURESET) != 0x00) {
@@ -236,72 +253,26 @@ void FT81x::cmd(const uint32_t cmd) {
     write16(FT81x_REG_CMD_WRITE, (cmdWrite + 4) % 4096);
 }
 
-void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, uint8_t *data) {
-    uint32_t sizeRemaining = size;
-    uint32_t currentOffset = 0;
+void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data) {
+    static ActiveLowChipSelectStart csStart(FT81x_CS1, FT81x_SPI_SETTINGS);
+    static ActiveLowChipSelectEnd csEnd(FT81x_CS1, FT81x_SPI_SETTINGS);
 
-    while (sizeRemaining > 0) {
-        while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
-            __asm__ volatile ("nop");
-        }
+    uint32_t cmd = (FT81x_RAM_G + offset) | WRITE;
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
 
-        uint16_t bulkSpace = read16(FT81x_REG_CMDB_SPACE);
-        uint32_t currentSize = sizeRemaining > bulkSpace ? bulkSpace : sizeRemaining;
-        uint8_t remainder = currentSize % 4;
+    while (trx.busy()) {}
 
-        cmd(MEMWRITE());
-        cmd(FT81x_RAM_G + currentOffset + offset);
-        cmd(currentSize);
+    trx = DmaSpi::Transfer(dmaBuffer, 3, nullptr, 0, &csStart);
+    DMASPI0.registerTransfer(trx);
 
-        for (uint32_t i = currentOffset; i < currentOffset + currentSize - remainder; i += 4) {
-            write32(FT81x_REG_CMDB_WRITE, data[i] | data[i + 1] << 8 | data[i + 2] << 16 | data[i + 3] << 24);
-        }
+    while (trx.busy()) {}
 
-        if (remainder > 0) {
-            uint32_t lastBytes = 0;
-            for (uint8_t i = currentOffset + currentSize - remainder; i < currentOffset + currentSize; i++) {
-                lastBytes |= data[i] << (8 * i);
-            }
-            write32(FT81x_REG_CMDB_WRITE, lastBytes);
-        }
+    trx = DmaSpi::Transfer(data, size, nullptr, 0, &csEnd);
+    DMASPI0.registerTransfer(trx);
 
-        sizeRemaining -= currentSize;
-        currentOffset += currentSize;
-    }
-}
-
-void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, uint16_t *data) {
-    uint32_t sizeRemaining = size;
-    uint32_t currentOffset = 0;
-
-    while (sizeRemaining > 0) {
-        while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
-            __asm__ volatile ("nop");
-        }
-
-        uint16_t bulkSpace = read16(FT81x_REG_CMDB_SPACE);
-        uint32_t currentSize = sizeRemaining > bulkSpace ? bulkSpace : sizeRemaining;
-        uint8_t remainder = currentSize % 2;
-
-        cmd(MEMWRITE());
-        cmd(FT81x_RAM_G + currentOffset + offset);
-        cmd(currentSize * 2);
-
-        for (uint32_t i = currentOffset; i < currentOffset + currentSize - remainder; i += 2) {
-            write32(FT81x_REG_CMDB_WRITE, data[i] | data[i + 1] << 16);
-        }
-
-        if (remainder > 0) {
-            uint32_t lastBytes = 0;
-            for (uint8_t i = currentOffset + currentSize - remainder; i < currentOffset + currentSize; i++) {
-                lastBytes |= data[i] << (8 * i);
-            }
-            write32(FT81x_REG_CMDB_WRITE, lastBytes);
-        }
-
-        sizeRemaining -= currentSize;
-        currentOffset += currentSize;
-    }
+    while (trx.busy()) {}
 }
 
 void FT81x::begin() {
@@ -319,102 +290,83 @@ void FT81x::swap() {
 }
 
 void FT81x::sendCommand(const uint32_t cmd) {
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    transferDMABuffer(3);
 }
 
 uint8_t FT81x::read8(const uint32_t address) {
-    uint32_t cmd = address;
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.transfer(0x00);  // dummy byte
-    uint8_t result = SPI.transfer(0x00);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
-    return result;
+    uint32_t cmd = address | READ;
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    dmaBuffer[3] = 0x00;  // dummy byte
+    dmaBuffer[4] = 0x00;  // read byte
+    transferDMABuffer(5);
+    return dmaBufferOut[4];
 }
 
 uint16_t FT81x::read16(const uint32_t address) {
     uint32_t cmd = address | READ;
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.transfer(0x00);  // dummy byte
-    uint16_t result = SPI.transfer(0x00);
-    result |= (SPI.transfer(0x00) << 8);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    dmaBuffer[3] = 0x00;  // dummy byte
+    dmaBuffer[4] = 0x00;  // read byte
+    dmaBuffer[5] = 0x00;  // read byte
+    transferDMABuffer(6);
+    uint16_t result = dmaBufferOut[4] | (dmaBufferOut[5] << 8);
     return result;
 }
 
 uint32_t FT81x::read32(const uint32_t address) {
     uint32_t cmd = address | READ;
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.transfer(0x00);  // dummy byte
-    uint16_t result = SPI.transfer(0x00);
-    result |= (SPI.transfer(0x00) << 8);
-    result |= (SPI.transfer(0x00) << 16);
-    result |= (SPI.transfer(0x00) << 24);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    dmaBuffer[3] = 0x00;  // dummy byte
+    dmaBuffer[4] = 0x00;  // read byte
+    dmaBuffer[5] = 0x00;  // read byte
+    dmaBuffer[6] = 0x00;  // read byte
+    dmaBuffer[7] = 0x00;  // read byte
+    transferDMABuffer(8);
+    uint32_t result = dmaBufferOut[4] | (dmaBufferOut[5] << 8) | (dmaBufferOut[6] << 16) | (dmaBufferOut[7] << 24);
     return result;
 }
 
 void FT81x::write8(const uint32_t address, const uint8_t data) {
     uint32_t cmd = address | WRITE;
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.transfer(data);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    dmaBuffer[3] = data;
+    transferDMABuffer(4);
 }
 
 void FT81x::write16(const uint32_t address, const uint16_t data) {
     uint32_t cmd = address | WRITE;
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.transfer(data & 0xFF);
-    SPI.transfer((data >> 8) & 0xFF);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    dmaBuffer[3] = data;
+    dmaBuffer[4] = data >> 8;
+    transferDMABuffer(5);
 }
 
 void FT81x::write32(const uint32_t address, const uint32_t data) {
     uint32_t cmd = address | WRITE;
-    digitalWrite(FT81x_CS1, LOW);
-    SPI.beginTransaction(FT81x_SPI_SETTINGS);
-    SPI.transfer((cmd >> 16) & 0xFF);
-    SPI.transfer((cmd >> 8) & 0xFF);
-    SPI.transfer(cmd & 0xFF);
-    SPI.transfer(data & 0xFF);
-    SPI.transfer((data >> 8) & 0xFF);
-    SPI.transfer((data >> 16) & 0xFF);
-    SPI.transfer((data >> 24) & 0xFF);
-    SPI.endTransaction();
-    digitalWrite(FT81x_CS1, HIGH);
+    dmaBuffer[0] = cmd >> 16;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd;
+    dmaBuffer[3] = data;
+    dmaBuffer[4] = data >> 8;
+    dmaBuffer[5] = data >> 16;
+    dmaBuffer[6] = data >> 24;
+    transferDMABuffer(7);
 }
 
-void FT81x::sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, uint8_t *params) {
+void FT81x::sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, const uint8_t *params) {
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -436,4 +388,12 @@ uint8_t FT81x::queryDisplay(const uint8_t cmd) {
     SPI.endTransaction();
     digitalWrite(FT81x_CS2, HIGH);
     return result;
+}
+
+void FT81x::transferDMABuffer(const uint8_t size) {
+    ActiveLowChipSelect cs(FT81x_CS1, FT81x_SPI_SETTINGS);
+    while (trx.busy()) {}
+    trx = DmaSpi::Transfer((uint8_t *) dmaBuffer, size, dmaBufferOut, 0, &cs);
+    DMASPI0.registerTransfer(trx);
+    while (trx.busy()) {}
 }
