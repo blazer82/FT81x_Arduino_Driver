@@ -62,11 +62,11 @@
         sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d);      \
     }
 
-static uint32_t dli = 0;
-static uint8_t dmaBuffer[8] = {0};
-static volatile uint8_t dmaBufferOut[8] = {0};
+uint32_t FT81x::dli = 0;
+uint8_t FT81x::dmaBuffer[8] = {0};
+volatile uint8_t FT81x::dmaBufferOut[8] = {0};
 
-static DmaSpi::Transfer trx(nullptr, 0, nullptr);
+DmaSpi::Transfer FT81x::trx(nullptr, 0, nullptr);
 
 void FT81x::init() {
     pinMode(FT81x_CS1, OUTPUT);
@@ -271,8 +271,6 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
 
     trx = DmaSpi::Transfer(data, size, nullptr, 0, &csEnd);
     DMASPI0.registerTransfer(trx);
-
-    while (trx.busy()) {}
 }
 
 void FT81x::begin() {
@@ -391,7 +389,7 @@ uint8_t FT81x::queryDisplay(const uint8_t cmd) {
 }
 
 void FT81x::transferDMABuffer(const uint8_t size) {
-    ActiveLowChipSelect cs(FT81x_CS1, FT81x_SPI_SETTINGS);
+    static ActiveLowChipSelect cs(FT81x_CS1, FT81x_SPI_SETTINGS);
     while (trx.busy()) {}
     trx = DmaSpi::Transfer((uint8_t *) dmaBuffer, size, dmaBufferOut, 0, &cs);
     DMASPI0.registerTransfer(trx);

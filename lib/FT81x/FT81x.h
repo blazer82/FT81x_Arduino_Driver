@@ -203,6 +203,12 @@ class FT81x {
     static void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data);
 
  protected:
+    static uint32_t dli;
+    static uint8_t dmaBuffer[8];
+    static volatile uint8_t dmaBufferOut[8];
+
+    static DmaSpi::Transfer trx;
+
     static void initFT81x();
     static void initDisplay();
 
