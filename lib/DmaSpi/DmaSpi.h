@@ -392,11 +392,6 @@ class AbstractDmaSpi {
             // real data sink
             DMASPI_PRINT(("  real sink\n"));
             rxChannel_()->destinationBuffer(m_pCurrentTransfer->m_pDest, m_pCurrentTransfer->m_transferCount);
-
-            // set CITER und BITER as they seem to be set for 8 bit iterations
-            // rxChannel_()->TCD->NBYTES = m_pCurrentTransfer->m_transferCount;
-            // rxChannel_()->TCD->CITER = 1;
-            // rxChannel_()->TCD->BITER = 1;
         } else {
             // dummy data sink
             DMASPI_PRINT(("  dummy sink\n"));

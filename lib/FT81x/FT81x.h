@@ -207,6 +207,7 @@ class FT81x {
     static volatile uint8_t dmaBufferOut[8];
 
     static DmaSpi::Transfer trx;
+    static DmaSpi::Transfer trx2;
 
     static void initFT81x();
     static void initDisplay();
