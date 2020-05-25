@@ -1,24 +1,24 @@
 /**
  * FT81x on ST7701S Arduino Driver
  * Copyright (C) 2020  Raphael Stäbler
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **/
 
 #include "FT81x.h"
 
-#define DISPLAY_WIDTH 480
+#define DISPLAY_WIDTH  480
 #define DISPLAY_HEIGHT 480
 
 #define READ  0x000000
@@ -32,16 +32,16 @@
 #define END()                        (0x21 << 24)
 #define END_DL()                     0x00
 #define CLEAR_COLOR_RGB(r, g, b)     ((0x02 << 24) | ((r) << 16) | ((g) << 8) | (b))
-#define CLEAR_COLOR(rgb)             ((0x02 << 24) | ((rgb) & 0xFFFFFF))
+#define CLEAR_COLOR(rgb)             ((0x02 << 24) | ((rgb)&0xFFFFFF))
 #define COLOR_RGB(r, g, b)           ((0x04 << 24) | ((r) << 16) | ((g) << 8) | (b))
-#define COLOR(rgb)                   ((0x04 << 24) | ((rgb) & 0xFFFFFF))
-#define POINT_SIZE(s)                ((0x0D << 24) | ((s) & 0xFFF))
-#define LINE_WIDTH(w)                ((0x0E << 24) | ((w) & 0xFFF))
-#define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x) & 0xFFF) << 21) | (((y) & 0xFFF) << 12) | ((h) << 7) | (c))
-#define VERTEX2F(x, y)               ((1 << 30) | (((x) & 0xFFFF) << 15) | ((y) & 0xFFFF))
+#define COLOR(rgb)                   ((0x04 << 24) | ((rgb)&0xFFFFFF))
+#define POINT_SIZE(s)                ((0x0D << 24) | ((s)&0xFFF))
+#define LINE_WIDTH(w)                ((0x0E << 24) | ((w)&0xFFF))
+#define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x)&0xFFF) << 21) | (((y)&0xFFF) << 12) | ((h) << 7) | (c))
+#define VERTEX2F(x, y)               ((1 << 30) | (((x)&0xFFFF) << 15) | ((y)&0xFFFF))
 #define BITMAP_SOURCE(a)             ((1 << 24) | (a))
-#define BITMAP_LAYOUT(f, s, h)       ((7 << 24) | ((f) << 19) | (((s) & 0x1FF) << 9) | ((h) & 0x1FF))
-#define BITMAP_SIZE(f, wx, wy, w, h) ((8 << 24) | (((f) & 1) << 20) | (((wx) & 1) << 19) | (((wy) & 1) << 18) | (((w) & 0x1FF) << 9)| ((h) & 0x1FF))
+#define BITMAP_LAYOUT(f, s, h)       ((7 << 24) | ((f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))
+#define BITMAP_SIZE(f, wx, wy, w, h) ((8 << 24) | (((f)&1) << 20) | (((wx)&1) << 19) | (((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))
 #define LOADIDENTITY()               0xFFFFFF26
 #define SETMATRIX()                  0xFFFFFF2A
 #define SCALE()                      0xFFFFFF28
@@ -56,10 +56,10 @@
 #define EDGE_STRIP_B 8
 #define RECTS        9
 
-#define DISPLAY_CMD(cmd, params...)                                     \
-    {                                                                   \
-        uint8_t d[] = { params };                                       \
-        sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d);      \
+#define DISPLAY_CMD(cmd, params...)                                \
+    {                                                              \
+        uint8_t d[] = {params};                                    \
+        sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d); \
     }
 
 uint32_t FT81x::dli = 0;
@@ -107,13 +107,15 @@ void FT81x::initFT81x() {
     while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
         Serial.print("FT81x_REG_ID ");
         Serial.println(FT81x::read8(FT81x_REG_ID));
-        Serial.printf("dmaBuffer %d %d %d %d %d %d %d %d\n", dmaBuffer[0], dmaBuffer[1], dmaBuffer[2], dmaBuffer[3], dmaBuffer[4], dmaBuffer[5], dmaBuffer[6], dmaBuffer[7]);
-        Serial.printf("dmaBufferOut %d %d %d %d %d %d %d %d\n", dmaBufferOut[0], dmaBufferOut[1], dmaBufferOut[2], dmaBufferOut[3], dmaBufferOut[4], dmaBufferOut[5], dmaBufferOut[6], dmaBufferOut[7]);
+        Serial.printf("dmaBuffer %d %d %d %d %d %d %d %d\n", dmaBuffer[0], dmaBuffer[1], dmaBuffer[2], dmaBuffer[3], dmaBuffer[4], dmaBuffer[5], dmaBuffer[6],
+                      dmaBuffer[7]);
+        Serial.printf("dmaBufferOut %d %d %d %d %d %d %d %d\n", dmaBufferOut[0], dmaBufferOut[1], dmaBufferOut[2], dmaBufferOut[3], dmaBufferOut[4],
+                      dmaBufferOut[5], dmaBufferOut[6], dmaBufferOut[7]);
         delay(500);
-        __asm__ volatile ("nop");
+        __asm__ volatile("nop");
     }
     while (FT81x::read8(FT81x_REG_CPURESET) != 0x00) {
-        __asm__ volatile ("nop");
+        __asm__ volatile("nop");
     }
 
     // configure rgb interface
@@ -262,12 +264,14 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
     dmaBuffer[1] = cmd >> 8;
     dmaBuffer[2] = cmd;
 
-    while (trx.busy()) {}
+    while (trx.busy()) {
+    }
 
     trx = DmaSpi::Transfer(dmaBuffer, 3, nullptr, 0, &csStart);
     DMASPI0.registerTransfer(trx);
 
-    while (trx.busy()) {}
+    while (trx.busy()) {
+    }
 
     trx = DmaSpi::Transfer(data, size, nullptr, 0, &csEnd);
     DMASPI0.registerTransfer(trx);
@@ -276,7 +280,7 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
 void FT81x::begin() {
     // Wait for circular buffer to catch up
     while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
-        __asm__ volatile ("nop");
+        __asm__ volatile("nop");
     }
     cmd(DLSTART());
     cmd(CLEAR(1, 1, 1));
@@ -390,8 +394,10 @@ uint8_t FT81x::queryDisplay(const uint8_t cmd) {
 
 void FT81x::transferDMABuffer(const uint8_t size) {
     static ActiveLowChipSelect cs(FT81x_CS1, FT81x_SPI_SETTINGS);
-    while (trx.busy()) {}
-    trx = DmaSpi::Transfer((uint8_t *) dmaBuffer, size, dmaBufferOut, 0, &cs);
+    while (trx.busy()) {
+    }
+    trx = DmaSpi::Transfer((uint8_t *)dmaBuffer, size, dmaBufferOut, 0, &cs);
     DMASPI0.registerTransfer(trx);
-    while (trx.busy()) {}
+    while (trx.busy()) {
+    }
 }
