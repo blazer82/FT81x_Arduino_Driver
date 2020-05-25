@@ -25,7 +25,7 @@
 #define FT81x_COLOR_RGB(r, g, b) (((r) << 16) | ((g) << 8) | (b))
 
 #ifndef FT81x_SPI_SETTINGS
-#define FT81x_SPI_SETTINGS SPISettings(4000000, MSBFIRST, SPI_MODE0)
+#define FT81x_SPI_SETTINGS SPISettings(15000000, MSBFIRST, SPI_MODE0)
 #endif
 
 #ifndef FT81x_CS1

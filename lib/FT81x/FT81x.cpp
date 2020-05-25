@@ -105,13 +105,6 @@ void FT81x::initFT81x() {
     // wait for boot-up to complete
     delay(100);
     while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
-        Serial.print("FT81x_REG_ID ");
-        Serial.println(FT81x::read8(FT81x_REG_ID));
-        Serial.printf("dmaBuffer %d %d %d %d %d %d %d %d\n", dmaBuffer[0], dmaBuffer[1], dmaBuffer[2], dmaBuffer[3], dmaBuffer[4], dmaBuffer[5], dmaBuffer[6],
-                      dmaBuffer[7]);
-        Serial.printf("dmaBufferOut %d %d %d %d %d %d %d %d\n", dmaBufferOut[0], dmaBufferOut[1], dmaBufferOut[2], dmaBufferOut[3], dmaBufferOut[4],
-                      dmaBufferOut[5], dmaBufferOut[6], dmaBufferOut[7]);
-        delay(500);
         __asm__ volatile("nop");
     }
     while (FT81x::read8(FT81x_REG_CPURESET) != 0x00) {
