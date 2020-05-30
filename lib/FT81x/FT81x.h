@@ -179,47 +179,49 @@
 
 class FT81x {
    public:
-    static void init();
-    static void sendCommand(const uint32_t cmd);
+    FT81x();
 
-    static uint8_t read8(const uint32_t address);
-    static uint16_t read16(const uint32_t address);
-    static uint32_t read32(const uint32_t address);
+    void begin();
+    void sendCommand(const uint32_t cmd);
 
-    static void write8(const uint32_t address, const uint8_t data);
-    static void write16(const uint32_t address, const uint16_t data);
-    static void write32(const uint32_t address, const uint32_t data);
+    uint8_t read8(const uint32_t address);
+    uint16_t read16(const uint32_t address);
+    uint32_t read32(const uint32_t address);
 
-    static void clear(const uint32_t color);
-    static void drawCircle(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color);
-    static void drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color);
-    static void drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter);
-    static void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale);
+    void write8(const uint32_t address, const uint8_t data);
+    void write16(const uint32_t address, const uint16_t data);
+    void write32(const uint32_t address, const uint32_t data);
 
-    static void begin();
-    static void swap();
+    void clear(const uint32_t color);
+    void drawCircle(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color);
+    void drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color);
+    void drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter);
+    void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale);
 
-    static void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data);
+    void beginDisplayList();
+    void swapScreen();
+
+    void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data);
 
    protected:
-    static uint32_t dli;
-    static uint8_t dmaBuffer[8];
-    static volatile uint8_t dmaBufferOut[8];
+    uint32_t dli;
+    uint8_t dmaBuffer[8];
+    volatile uint8_t dmaBufferOut[8];
 
-    static DmaSpi::Transfer trx;
-    static DmaSpi::Transfer trx2;
+    DmaSpi::Transfer trx;
+    DmaSpi::Transfer trx2;
 
-    static void initFT81x();
-    static void initDisplay();
+    void initFT81x();
+    void initDisplay();
 
-    static void sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, const uint8_t *params);
-    static uint8_t queryDisplay(const uint8_t cmd);
+    void sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, const uint8_t *params);
+    uint8_t queryDisplay(const uint8_t cmd);
 
-    static void dl(const uint32_t cmd);
-    static void cmd(const uint32_t cmd);
+    void dl(const uint32_t cmd);
+    void cmd(const uint32_t cmd);
 
-    static void transferDMABuffer(const uint8_t size);
-    static void transferDMABufferAndWait(const uint8_t size);
+    void transferDMABuffer(const uint8_t size);
+    void transferDMABufferAndWait(const uint8_t size);
 
    private:
 };

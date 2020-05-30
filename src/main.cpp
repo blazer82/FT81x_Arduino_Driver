@@ -26,6 +26,8 @@ void dumpChipID();
 
 static unsigned int x = 0;
 
+FT81x ft81x;
+
 void setup() {
     Serial.begin(9600);
 
@@ -34,35 +36,35 @@ void setup() {
     waitForKeyPress();
 
     Serial.println("Enable display");
-    FT81x::init();
+    ft81x.begin();
 
     dumpChipID();
 
     delay(100);
 
-    Serial.printf("REG_ID %x\n", FT81x::read8(FT81x_REG_ID));
+    Serial.printf("REG_ID %x\n", ft81x.read8(FT81x_REG_ID));
 
-    Serial.printf("REG_HCYCLE %i\n", FT81x::read16(FT81x_REG_HCYCLE));
-    Serial.printf("REG_HSIZE %i\n", FT81x::read16(FT81x_REG_HSIZE));
+    Serial.printf("REG_HCYCLE %i\n", ft81x.read16(FT81x_REG_HCYCLE));
+    Serial.printf("REG_HSIZE %i\n", ft81x.read16(FT81x_REG_HSIZE));
 
-    Serial.printf("REG_VCYCLE %i\n", FT81x::read16(FT81x_REG_VCYCLE));
-    Serial.printf("REG_VSIZE %i\n", FT81x::read16(FT81x_REG_VSIZE));
+    Serial.printf("REG_VCYCLE %i\n", ft81x.read16(FT81x_REG_VCYCLE));
+    Serial.printf("REG_VSIZE %i\n", ft81x.read16(FT81x_REG_VSIZE));
 
     // waitForKeyPress();
 }
 
 void loop() {
-    FT81x::writeGRAM(0, 8192, candy_map);
+    ft81x.writeGRAM(0, 8192, candy_map);
 
-    FT81x::begin();
-    FT81x::clear(FT81x_COLOR_RGB(0, 0, 0));
-    FT81x::drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
-    FT81x::drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
-    FT81x::drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
-    FT81x::drawLetter((x + 107) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
-    FT81x::drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
-    FT81x::drawBitmap(0, 16, 16, 64, 64, 2);
-    FT81x::swap();
+    ft81x.beginDisplayList();
+    ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
+    ft81x.drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
+    ft81x.drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
+    ft81x.drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
+    ft81x.drawLetter((x + 107) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
+    ft81x.drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
+    ft81x.drawBitmap(0, 16, 16, 64, 64, 2);
+    ft81x.swapScreen();
 
     x = (x + 1) % 480;
 

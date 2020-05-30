@@ -62,14 +62,16 @@
         sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d); \
     }
 
-uint32_t FT81x::dli = 0;
-uint8_t FT81x::dmaBuffer[8] = {0};
-volatile uint8_t FT81x::dmaBufferOut[8] = {0};
+FT81x::FT81x() {}
 
-DmaSpi::Transfer FT81x::trx(nullptr, 0, nullptr);
-DmaSpi::Transfer FT81x::trx2(nullptr, 0, nullptr);
+void FT81x::begin() {
+    dli = 0;
+    dmaBuffer[8] = {0};
+    dmaBufferOut[8] = {0};
 
-void FT81x::init() {
+    DmaSpi::Transfer trx(nullptr, 0, nullptr);
+    DmaSpi::Transfer trx2(nullptr, 0, nullptr);
+
     pinMode(FT81x_CS1, OUTPUT);
     digitalWrite(FT81x_CS1, HIGH);
 
@@ -132,9 +134,9 @@ void FT81x::initFT81x() {
     FT81x::write8(FT81x_REG_ROTATE, 0);
 
     // write first display list
-    FT81x::begin();
+    FT81x::beginDisplayList();
     FT81x::clear(0);
-    FT81x::swap();
+    FT81x::swapScreen();
 
     // enable pixel clock
     FT81x::write8(FT81x_REG_PCLK, 10);
@@ -286,7 +288,7 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
     }
 }
 
-void FT81x::begin() {
+void FT81x::beginDisplayList() {
     // Wait for circular buffer to catch up
     while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
         __asm__ volatile("nop");
@@ -295,7 +297,7 @@ void FT81x::begin() {
     cmd(CLEAR(1, 1, 1));
 }
 
-void FT81x::swap() {
+void FT81x::swapScreen() {
     cmd(END_DL());
     cmd(SWAP());
 }
