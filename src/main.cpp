@@ -72,6 +72,7 @@ void loop() {
 void waitForKeyPress() {
     Serial.println("\nPress a key to continue\n");
     while (!Serial.available()) {
+        __asm__ volatile("nop");
     }
     while (Serial.available()) {
         Serial.read();

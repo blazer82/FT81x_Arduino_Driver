@@ -260,12 +260,14 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
     dmaBuffer[2] = cmd;
 
     while (trx.busy()) {
+        __asm__ volatile("nop");
     }
 
     trx = DmaSpi::Transfer(dmaBuffer, 3, nullptr, 0, &csStart);
     DMASPI0.registerTransfer(trx);
 
     while (trx.busy()) {
+        __asm__ volatile("nop");
     }
 
     if (size < 0x8000) {  // 0x7FFF is the limit for the Teensy platform, this check has to be revisited
@@ -276,6 +278,7 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
         DMASPI0.registerTransfer(trx);
 
         while (trx2.busy()) {
+            __asm__ volatile("nop");
         }
 
         trx2 = DmaSpi::Transfer(data + 0x7FFF, size - 0x7FFF, nullptr, 0, &csEnd);
@@ -401,9 +404,11 @@ uint8_t FT81x::queryDisplay(const uint8_t cmd) {
 void FT81x::transferDMABuffer(const uint8_t size) {
     static ActiveLowChipSelect cs(FT81x_CS1, FT81x_SPI_SETTINGS);
     while (trx.busy()) {
+        __asm__ volatile("nop");
     }
     trx = DmaSpi::Transfer((uint8_t *)dmaBuffer, size, dmaBufferOut, 0, &cs);
     DMASPI0.registerTransfer(trx);
     while (trx.busy()) {
+        __asm__ volatile("nop");
     }
 }
