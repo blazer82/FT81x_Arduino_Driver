@@ -28,6 +28,15 @@
 
 #define FT81x_COLOR_RGB(r, g, b) (((r) << 16) | ((g) << 8) | (b))
 
+#define FT81x_ROTATE_LANDSCAPE                   0
+#define FT81x_ROTATE_LANDSCAPE_INVERTED          1
+#define FT81x_ROTATE_PORTRAIT                    2
+#define FT81x_ROTATE_PORTRAIT_INVERTED           3
+#define FT81x_ROTATE_LANDSCAPE_MIRRORED          4
+#define FT81x_ROTATE_LANDSCAPE_INVERTED_MIRRORED 5
+#define FT81x_ROTATE_PORTRAIT_MIRRORED           6
+#define FT81x_ROTATE_PORTRAIT_INVERTED_MIRRORED  7
+
 #ifndef FT81x_SPI_SETTINGS
 #define FT81x_SPI_SETTINGS SPISettings(15000000, MSBFIRST, SPI_MODE0)
 #endif
@@ -220,6 +229,8 @@ class FT81x {
 
     void beginDisplayList();
     void swapScreen();
+
+    void setRotation(uint8_t rotation);
 
     void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
 

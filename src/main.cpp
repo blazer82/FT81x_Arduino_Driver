@@ -50,6 +50,8 @@ void setup() {
     Serial.printf("REG_VCYCLE %i\n", ft81x.read16(FT81x_REG_VCYCLE));
     Serial.printf("REG_VSIZE %i\n", ft81x.read16(FT81x_REG_VSIZE));
 
+    ft81x.setRotation(FT81x_ROTATE_LANDSCAPE);
+
     // waitForKeyPress();
 }
 

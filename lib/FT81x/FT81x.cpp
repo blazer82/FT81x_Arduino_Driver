@@ -308,6 +308,10 @@ void FT81x::swapScreen() {
     cmd(SWAP());
 }
 
+void FT81x::setRotation(uint8_t rotation) {
+    write8(FT81x_REG_ROTATE, rotation & 0x7);
+}
+
 #ifdef FT81x_USE_DMA
 
 void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data) {
