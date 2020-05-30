@@ -46,6 +46,7 @@
 #define SETMATRIX()                  0xFFFFFF2A
 #define SCALE()                      0xFFFFFF28
 #define TEXT()                       0xFFFFFF0C
+#define SPINNER()                       0xFFFFFF16
 
 #define BITMAPS      1
 #define POINTS       2
@@ -272,6 +273,12 @@ void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t size, const
     if ((data >> 24) != 0) {
         cmd(0);
     }
+}
+
+void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale) {
+    cmd(SPINNER());
+    cmd(x | (y << 16));
+    cmd(style | (scale << 16));
 }
 
 void FT81x::dl(const uint32_t cmd) {

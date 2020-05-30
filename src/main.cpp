@@ -62,6 +62,7 @@ void loop() {
     ft81x.drawText((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 0, "FT81x\0");
     ft81x.drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
     ft81x.drawBitmap(0, 16, 16, 64, 64, 2);
+    ft81x.drawSpinner(240, 240, 0, 0);
     ft81x.swapScreen();
 
     x = (x + 1) % 480;
