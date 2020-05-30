@@ -68,9 +68,6 @@ void FT81x::begin() {
     dli = 0;
 
 #ifdef FT81x_USE_DMA
-    dmaBuffer[8] = {0};
-    dmaBufferOut[8] = {0};
-
     DmaSpi::Transfer trx(nullptr, 0, nullptr);
     DmaSpi::Transfer trx2(nullptr, 0, nullptr);
 #endif

@@ -205,14 +205,14 @@ class FT81x {
     void beginDisplayList();
     void swapScreen();
 
-    void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data);
+    void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
 
    protected:
     uint32_t dli;
 
 #ifdef FT81x_USE_DMA
-    uint8_t dmaBuffer[8];
-    volatile uint8_t dmaBufferOut[8];
+    uint8_t dmaBuffer[8] = {0};
+    volatile uint8_t dmaBufferOut[8] = {0};
 
     DmaSpi::Transfer trx;
     DmaSpi::Transfer trx2;
