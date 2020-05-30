@@ -201,6 +201,7 @@ class FT81x {
     void drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color);
     void drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter);
     void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale);
+    void drawText(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint16_t options, const char text[]);
 
     void beginDisplayList();
     void swapScreen();

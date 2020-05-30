@@ -45,6 +45,7 @@
 #define LOADIDENTITY()               0xFFFFFF26
 #define SETMATRIX()                  0xFFFFFF2A
 #define SCALE()                      0xFFFFFF28
+#define TEXT()                       0xFFFFFF0C
 
 #define BITMAPS      1
 #define POINTS       2
@@ -238,6 +239,39 @@ void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y
     cmd(scale * 65536);
     cmd(SETMATRIX());
     cmd(VERTEX2II(x, y, 0, 0));
+}
+
+void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint16_t options, const char text[]) {
+    cmd(COLOR(color));
+    cmd(TEXT());
+    cmd(x | (y << 16));
+    cmd(size | (options << 16));
+    uint32_t data = 0xFFFFFFFF;
+    for (uint8_t i = 0; (data >> 24) != 0; i += 4) {
+        data = 0;
+
+        if (text[i] != 0) {
+            data |= text[i];
+
+            if (text[i + 1] != 0) {
+                data |= text[i + 1] << 8;
+
+                if (text[i + 2] != 0) {
+                    data |= text[i + 2] << 16;
+
+                    if (text[i + 3] != 0) {
+                        data |= text[i + 3] << 24;
+                    }
+                }
+            }
+        }
+
+        cmd(data);
+    }
+
+    if ((data >> 24) != 0) {
+        cmd(0);
+    }
 }
 
 void FT81x::dl(const uint32_t cmd) {

@@ -58,10 +58,8 @@ void loop() {
 
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
-    ft81x.drawLetter((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'F');
-    ft81x.drawLetter((x + 52) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'T');
-    ft81x.drawLetter((x + 78) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'D');
-    ft81x.drawLetter((x + 107) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 'I');
+    ft81x.drawText(160, (x + 28) % 480, 31, FT81x_COLOR_RGB(255, 255, 255), 0, "Hello World\0");
+    ft81x.drawText((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 0, "FT81x\0");
     ft81x.drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
     ft81x.drawBitmap(0, 16, 16, 64, 64, 2);
     ft81x.swapScreen();
