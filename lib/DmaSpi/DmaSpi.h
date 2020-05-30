@@ -29,7 +29,7 @@
 #include <util/atomic.h>
 
 #if (!defined(__arm__) && defined(TEENSYDUINO))
-#error This library is for teensyduino 1.21 on Teensy 3.0, 3.1 and Teensy LC only.
+#error This library is for teensyduino 1.21 on Teensy 3.0, 3.1, 4.0 and Teensy LC only.
 #endif
 
 #include <SPI.h>

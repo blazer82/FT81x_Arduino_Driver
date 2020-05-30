@@ -19,8 +19,12 @@
 #pragma once
 
 #include <Arduino.h>
-#include <DmaSpi.h>
 #include <SPI.h>
+
+#if (defined(__arm__) && defined(TEENSYDUINO))
+#define FT81x_USE_DMA 1
+#include <DmaSpi.h>
+#endif
 
 #define FT81x_COLOR_RGB(r, g, b) (((r) << 16) | ((g) << 8) | (b))
 
@@ -205,11 +209,14 @@ class FT81x {
 
    protected:
     uint32_t dli;
+
+#ifdef FT81x_USE_DMA
     uint8_t dmaBuffer[8];
     volatile uint8_t dmaBufferOut[8];
 
     DmaSpi::Transfer trx;
     DmaSpi::Transfer trx2;
+#endif
 
     void initFT81x();
     void initDisplay();
@@ -220,8 +227,9 @@ class FT81x {
     void dl(const uint32_t cmd);
     void cmd(const uint32_t cmd);
 
+#ifdef FT81x_USE_DMA
     void transferDMABuffer(const uint8_t size);
-    void transferDMABufferAndWait(const uint8_t size);
+#endif
 
    private:
 };
