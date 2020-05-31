@@ -46,7 +46,7 @@
 #define SETMATRIX()                  0xFFFFFF2A
 #define SCALE()                      0xFFFFFF28
 #define TEXT()                       0xFFFFFF0C
-#define SPINNER()                       0xFFFFFF16
+#define SPINNER()                    0xFFFFFF16
 
 #define BITMAPS      1
 #define POINTS       2
@@ -198,53 +198,53 @@ void FT81x::initDisplay() {
 }
 
 void FT81x::clear(const uint32_t color) {
-    cmd(CLEAR_COLOR(color));
-    cmd(CLEAR(1, 1, 1));
+    startCmd(CLEAR_COLOR(color));
+    endCmd(CLEAR(1, 1, 1));
 }
 
 void FT81x::drawCircle(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color) {
-    cmd(COLOR(color));
-    cmd(POINT_SIZE(size * 16));
-    cmd(BEGIN(POINTS));
-    cmd(VERTEX2F(x * 16, y * 16));
-    cmd(END());
+    startCmd(COLOR(color));
+    intermediateCmd(POINT_SIZE(size * 16));
+    intermediateCmd(BEGIN(POINTS));
+    intermediateCmd(VERTEX2F(x * 16, y * 16));
+    endCmd(END());
 }
 
 void FT81x::drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color) {
-    cmd(COLOR(color));
-    cmd(LINE_WIDTH(cornerRadius * 16));
-    cmd(BEGIN(RECTS));
-    cmd(VERTEX2F(x * 16, y * 16));
-    cmd(VERTEX2F((x + width) * 16, (y + height) * 16));
-    cmd(END());
+    startCmd(COLOR(color));
+    intermediateCmd(LINE_WIDTH(cornerRadius * 16));
+    intermediateCmd(BEGIN(RECTS));
+    intermediateCmd(VERTEX2F(x * 16, y * 16));
+    intermediateCmd(VERTEX2F((x + width) * 16, (y + height) * 16));
+    endCmd(END());
 }
 
 void FT81x::drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter) {
-    cmd(COLOR(color));
-    cmd(BEGIN(BITMAPS));
-    cmd(VERTEX2II(x, y, size, letter));
-    cmd(END());
+    startCmd(COLOR(color));
+    intermediateCmd(BEGIN(BITMAPS));
+    intermediateCmd(VERTEX2II(x, y, size, letter));
+    endCmd(END());
 }
 
 void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale) {
-    cmd(COLOR_RGB(255, 255, 255));
-    cmd(BITMAP_SOURCE(FT81x_RAM_G + offset));
-    cmd(BITMAP_LAYOUT(FT81x_BITMAP_LAYOUT_RGB565, width * 2, height));  // only supporting one format for now
-    cmd(BITMAP_SIZE(FT81x_BITMAP_SIZE_NEAREST, 0, 0, width * scale, height * scale));
-    cmd(BEGIN(BITMAPS));
-    cmd(LOADIDENTITY());
-    cmd(SCALE());
-    cmd(scale * 65536);
-    cmd(scale * 65536);
-    cmd(SETMATRIX());
-    cmd(VERTEX2II(x, y, 0, 0));
+    startCmd(COLOR_RGB(255, 255, 255));
+    intermediateCmd(BITMAP_SOURCE(FT81x_RAM_G + offset));
+    intermediateCmd(BITMAP_LAYOUT(FT81x_BITMAP_LAYOUT_RGB565, width * 2, height));  // only supporting one format for now
+    intermediateCmd(BITMAP_SIZE(FT81x_BITMAP_SIZE_NEAREST, 0, 0, width * scale, height * scale));
+    intermediateCmd(BEGIN(BITMAPS));
+    intermediateCmd(LOADIDENTITY());
+    intermediateCmd(SCALE());
+    intermediateCmd(scale * 65536);
+    intermediateCmd(scale * 65536);
+    intermediateCmd(SETMATRIX());
+    endCmd(VERTEX2II(x, y, 0, 0));
 }
 
 void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint16_t options, const char text[]) {
-    cmd(COLOR(color));
-    cmd(TEXT());
-    cmd(x | (y << 16));
-    cmd(size | (options << 16));
+    startCmd(COLOR(color));
+    intermediateCmd(TEXT());
+    intermediateCmd(x | (y << 16));
+    intermediateCmd(size | (options << 16));
     uint32_t data = 0xFFFFFFFF;
     for (uint8_t i = 0; (data >> 24) != 0; i += 4) {
         data = 0;
@@ -265,18 +265,22 @@ void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t size, const
             }
         }
 
-        cmd(data);
+        if ((data >> 24) != 0) {
+            intermediateCmd(data);
+        } else {
+            endCmd(data);
+        }
     }
 
     if ((data >> 24) != 0) {
-        cmd(0);
+        endCmd(0);
     }
 }
 
 void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale) {
-    cmd(SPINNER());
-    cmd(x | (y << 16));
-    cmd(style | (scale << 16));
+    startCmd(SPINNER());
+    intermediateCmd(x | (y << 16));
+    endCmd(style | (scale << 16));
 }
 
 void FT81x::cmd(const uint32_t cmd) {
@@ -300,9 +304,7 @@ void FT81x::swapScreen() {
     cmd(SWAP());
 }
 
-void FT81x::setRotation(uint8_t rotation) {
-    write8(FT81x_REG_ROTATE, rotation & 0x7);
-}
+void FT81x::setRotation(uint8_t rotation) { write8(FT81x_REG_ROTATE, rotation & 0x7); }
 
 #ifdef FT81x_USE_DMA
 
@@ -311,14 +313,14 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
     static ActiveLowChipSelectEnd csEnd(FT81x_CS1, FT81x_SPI_SETTINGS);
     static DummyChipSelect noCs;
 
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
     uint32_t cmd = (FT81x_RAM_G + offset) | WRITE;
     dmaBuffer[0] = cmd >> 16;
     dmaBuffer[1] = cmd >> 8;
     dmaBuffer[2] = cmd;
-
-    while (trx.busy()) {
-        __asm__ volatile("nop");
-    }
 
     trx = DmaSpi::Transfer(dmaBuffer, 3, nullptr, 0, &csStart);
     DMASPI0.registerTransfer(trx);
@@ -341,6 +343,83 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
         trx2 = DmaSpi::Transfer(data + 0x7FFF, size - 0x7FFF, nullptr, 0, &csEnd);
         DMASPI0.registerTransfer(trx2);
     }
+}
+
+void FT81x::startCmd(const uint32_t cmd) {
+    static ActiveLowChipSelectStart csStart(FT81x_CS1, FT81x_SPI_SETTINGS);
+
+    cmdWriteAddress = FT81x::read16(FT81x_REG_CMD_WRITE);
+    uint32_t addr = (FT81x_RAM_CMD + cmdWriteAddress) | WRITE;
+
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
+    dmaBuffer[0] = addr >> 16;
+    dmaBuffer[1] = addr >> 8;
+    dmaBuffer[2] = addr;
+    dmaBuffer[3] = cmd;
+    dmaBuffer[4] = cmd >> 8;
+    dmaBuffer[5] = cmd >> 16;
+    dmaBuffer[6] = cmd >> 24;
+
+    trx = DmaSpi::Transfer(dmaBuffer, 7, nullptr, 0, &csStart);
+    DMASPI0.registerTransfer(trx);
+
+    // TODO: make this obsolete
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
+    cmdWriteAddress += 4;
+}
+
+void FT81x::intermediateCmd(const uint32_t cmd) {
+    static DummyChipSelect noCs;
+
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
+    dmaBuffer[0] = cmd;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd >> 16;
+    dmaBuffer[3] = cmd >> 24;
+
+    trx = DmaSpi::Transfer(dmaBuffer, 4, nullptr, 0, &noCs);
+    DMASPI0.registerTransfer(trx);
+
+    // TODO: make this obsolete
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
+    cmdWriteAddress += 4;
+}
+
+void FT81x::endCmd(const uint32_t cmd) {
+    static ActiveLowChipSelectEnd csEnd(FT81x_CS1, FT81x_SPI_SETTINGS);
+
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
+    dmaBuffer[0] = cmd;
+    dmaBuffer[1] = cmd >> 8;
+    dmaBuffer[2] = cmd >> 16;
+    dmaBuffer[3] = cmd >> 24;
+
+    trx = DmaSpi::Transfer(dmaBuffer, 4, nullptr, 0, &csEnd);
+    DMASPI0.registerTransfer(trx);
+
+    // TODO: make this obsolete
+    while (trx.busy()) {
+        __asm__ volatile("nop");
+    }
+
+    cmdWriteAddress += 4;
+
+    write16(FT81x_REG_CMD_WRITE, cmdWriteAddress % 4096);
 }
 
 void FT81x::sendCommand(const uint32_t cmd) {
@@ -427,6 +506,8 @@ void FT81x::transferDMABuffer(const uint8_t size) {
     }
     trx = DmaSpi::Transfer((uint8_t *)dmaBuffer, size, dmaBufferOut, 0, &cs);
     DMASPI0.registerTransfer(trx);
+
+    // TODO: make this obsolete
     while (trx.busy()) {
         __asm__ volatile("nop");
     }
@@ -450,6 +531,47 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
 
     SPI.endTransaction();
     digitalWrite(FT81x_CS1, HIGH);
+}
+
+void FT81x::startCmd(const uint32_t cmd) {
+    cmdWriteAddress = FT81x::read16(FT81x_REG_CMD_WRITE);
+    uint32_t addr = (FT81x_RAM_CMD + cmdWriteAddress) | WRITE;
+
+    digitalWrite(FT81x_CS1, LOW);
+    SPI.beginTransaction(FT81x_SPI_SETTINGS);
+
+    SPI.transfer(addr >> 16);
+    SPI.transfer(addr >> 8);
+    SPI.transfer(addr);
+    SPI.transfer(cmd);
+    SPI.transfer(cmd >> 8);
+    SPI.transfer(cmd >> 16);
+    SPI.transfer(cmd >> 24);
+
+    cmdWriteAddress += 4;
+}
+
+void FT81x::intermediateCmd(const uint32_t cmd) {
+    SPI.transfer(cmd);
+    SPI.transfer(cmd >> 8);
+    SPI.transfer(cmd >> 16);
+    SPI.transfer(cmd >> 24);
+
+    cmdWriteAddress += 4;
+}
+
+void FT81x::endCmd(const uint32_t cmd) {
+    SPI.transfer(cmd);
+    SPI.transfer(cmd >> 8);
+    SPI.transfer(cmd >> 16);
+    SPI.transfer(cmd >> 24);
+    
+    SPI.endTransaction();
+    digitalWrite(FT81x_CS1, HIGH);
+
+    cmdWriteAddress += 4;
+
+    write16(FT81x_REG_CMD_WRITE, cmdWriteAddress % 4096);
 }
 
 void FT81x::sendCommand(const uint32_t cmd) {
