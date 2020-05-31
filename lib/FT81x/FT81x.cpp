@@ -67,8 +67,6 @@
 FT81x::FT81x() {}
 
 void FT81x::begin() {
-    dli = 0;
-
 #ifdef FT81x_USE_DMA
     DmaSpi::Transfer trx(nullptr, 0, nullptr);
     DmaSpi::Transfer trx2(nullptr, 0, nullptr);
@@ -279,12 +277,6 @@ void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, 
     cmd(SPINNER());
     cmd(x | (y << 16));
     cmd(style | (scale << 16));
-}
-
-void FT81x::dl(const uint32_t cmd) {
-    uint32_t addr = FT81x_RAM_DL + dli;
-    write32(addr, cmd);
-    dli += 4;
 }
 
 void FT81x::cmd(const uint32_t cmd) {

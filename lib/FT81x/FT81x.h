@@ -235,8 +235,6 @@ class FT81x {
     void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
 
    protected:
-    uint32_t dli;
-
 #ifdef FT81x_USE_DMA
     uint8_t dmaBuffer[8] = {0};
     volatile uint8_t dmaBufferOut[8] = {0};
@@ -251,7 +249,6 @@ class FT81x {
     void sendCommandToDisplay(const uint8_t cmd, const unsigned int numParams, const uint8_t *params);
     uint8_t queryDisplay(const uint8_t cmd);
 
-    void dl(const uint32_t cmd);
     void cmd(const uint32_t cmd);
 
 #ifdef FT81x_USE_DMA
