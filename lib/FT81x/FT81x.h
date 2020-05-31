@@ -256,7 +256,11 @@ class FT81x {
     void intermediateCmd(const uint32_t cmd);
     void endCmd(const uint32_t cmd);
 
+    void increaseCmdWriteAddress(uint16_t delta);
+    void updateCmdWriteAddress();
+
 #ifdef FT81x_USE_DMA
+    void waitForDMAReady();
     void transferDMABuffer(const uint8_t size);
 #endif
 
