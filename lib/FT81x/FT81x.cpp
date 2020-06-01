@@ -333,14 +333,16 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
         trx = DmaSpi::Transfer(data, size, nullptr, 0, &csEnd);
         DMASPI0.registerTransfer(trx);
     } else if (size < 0x10000) {
-        trx = DmaSpi::Transfer(data, 0x7FFF, nullptr, 0, &noCs);
+        uint32_t smallerPart = size - 0x7FFF;
+        
+        trx = DmaSpi::Transfer(data, smallerPart, nullptr, 0, &noCs);
         DMASPI0.registerTransfer(trx);
 
         while (trx2.busy()) {
             __asm__ volatile("nop");
         }
 
-        trx2 = DmaSpi::Transfer(data + 0x7FFF, size - 0x7FFF, nullptr, 0, &csEnd);
+        trx2 = DmaSpi::Transfer(data + smallerPart, 0x7FFF, nullptr, 0, &csEnd);
         DMASPI0.registerTransfer(trx2);
     }
 }
