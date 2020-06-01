@@ -219,10 +219,10 @@ void FT81x::drawRect(const int16_t x, const int16_t y, const uint16_t width, con
     endCmd(END());
 }
 
-void FT81x::drawLetter(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint8_t letter) {
+void FT81x::drawLetter(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint8_t letter) {
     startCmd(COLOR(color));
     intermediateCmd(BEGIN(BITMAPS));
-    intermediateCmd(VERTEX2II(x, y, size, letter));
+    intermediateCmd(VERTEX2II(x, y, font, letter));
     endCmd(END());
 }
 
@@ -240,11 +240,11 @@ void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y
     endCmd(VERTEX2II(x, y, 0, 0));
 }
 
-void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t size, const uint32_t color, const uint16_t options, const char text[]) {
+void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]) {
     startCmd(COLOR(color));
     intermediateCmd(TEXT());
     intermediateCmd(x | (y << 16));
-    intermediateCmd(size | (options << 16));
+    intermediateCmd(font | (options << 16));
     uint32_t data = 0xFFFFFFFF;
     for (uint8_t i = 0; (data >> 24) != 0; i += 4) {
         data = 0;
