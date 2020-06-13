@@ -104,7 +104,7 @@ void dumpChipID() {
 
     Serial.print("0x0C0001: ");
     Serial.print(SPI.transfer(0x00), HEX);
-    Serial.println(" (supposed to be 0x12)");
+    Serial.println(" (supposed to be 0x12 or 0x13)");
 
     Serial.print("0x0C0002: ");
     Serial.print(SPI.transfer(0x00), HEX);
