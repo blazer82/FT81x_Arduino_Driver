@@ -19,7 +19,7 @@
 #include <Arduino.h>
 #include <FT81x.h>
 #include <SPI.h>
-#include <candy.h>
+// #include <candy.h>
 
 void waitForKeyPress();
 void dumpChipID();
@@ -42,13 +42,20 @@ void setup() {
 
     delay(100);
 
-    Serial.printf("REG_ID %x\n", ft81x.read8(FT81x_REG_ID));
+    Serial.print("REG_ID ");
+    Serial.println(ft81x.read8(FT81x_REG_ID), HEX);
 
-    Serial.printf("REG_HCYCLE %i\n", ft81x.read16(FT81x_REG_HCYCLE));
-    Serial.printf("REG_HSIZE %i\n", ft81x.read16(FT81x_REG_HSIZE));
+    Serial.print("REG_HCYCLE ");
+    Serial.println(ft81x.read16(FT81x_REG_HCYCLE));
 
-    Serial.printf("REG_VCYCLE %i\n", ft81x.read16(FT81x_REG_VCYCLE));
-    Serial.printf("REG_VSIZE %i\n", ft81x.read16(FT81x_REG_VSIZE));
+    Serial.print("REG_HSIZE ");
+    Serial.println(ft81x.read16(FT81x_REG_HSIZE));
+
+    Serial.print("REG_VCYCLE ");
+    Serial.println(ft81x.read16(FT81x_REG_VCYCLE));
+
+    Serial.print("REG_VSIZE ");
+    Serial.println(ft81x.read16(FT81x_REG_VSIZE));
 
     ft81x.setRotation(FT81x_ROTATE_LANDSCAPE);
 
@@ -56,15 +63,15 @@ void setup() {
 }
 
 void loop() {
-    ft81x.writeGRAM(0, 8192, candy_map);
+    // ft81x.writeGRAM(0, 8192, candy_map);
 
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
     ft81x.drawText(160, (x + 28) % 480, 31, FT81x_COLOR_RGB(255, 255, 255), 0, "Hello World\0");
     ft81x.drawText((x + 28) % 480, 200, 31, FT81x_COLOR_RGB(255, 255, 255), 0, "FT81x\0");
     ft81x.drawCircle(x, 223, 20, FT81x_COLOR_RGB(255, 0, 0));
-    ft81x.drawBitmap(0, 16, 16, 64, 64, 2);
-    ft81x.drawSpinner(240, 240, 0, 0);
+    // ft81x.drawBitmap(0, 16, 16, 64, 64, 2);
+    ft81x.drawSpinner(240, 240, 0, 0, FT81x_COLOR_RGB(255, 255, 255));
     ft81x.swapScreen();
 
     x = (x + 1) % 480;
@@ -90,10 +97,23 @@ void dumpChipID() {
     SPI.transfer(0x00);
     SPI.transfer(0x00);  // dummy byte
     Serial.println("Chip ID:");
-    Serial.printf("0x0C0000: %x (supposed to be 0x8)\n", SPI.transfer(0x00));
-    Serial.printf("0x0C0001: %x (supposed to be 0x12)\n", SPI.transfer(0x00));
-    Serial.printf("0x0C0002: %x (supposed to be 0x1)\n", SPI.transfer(0x00));
-    Serial.printf("0x0C0003: %x (supposed to be 0x0)\n", SPI.transfer(0x00));
+
+    Serial.print("0x0C0000: ");
+    Serial.print(SPI.transfer(0x00), HEX);
+    Serial.println(" (supposed to be 0x8)");
+
+    Serial.print("0x0C0001: ");
+    Serial.print(SPI.transfer(0x00), HEX);
+    Serial.println(" (supposed to be 0x12)");
+
+    Serial.print("0x0C0002: ");
+    Serial.print(SPI.transfer(0x00), HEX);
+    Serial.println(" (supposed to be 0x1)");
+
+    Serial.print("0x0C0003: ");
+    Serial.print(SPI.transfer(0x00), HEX);
+    Serial.println(" (supposed to be 0x0)");
+
     Serial.println("");
     SPI.endTransaction();
     digitalWrite(SS, HIGH);

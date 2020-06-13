@@ -28,9 +28,7 @@
 #include <Arduino.h>
 #include <util/atomic.h>
 
-#if (!defined(__arm__) && defined(TEENSYDUINO))
-#error This library is for teensyduino 1.21 on Teensy 3.0, 3.1, 4.0 and Teensy LC only.
-#endif
+#if (defined(__arm__) && defined(TEENSYDUINO))
 
 #include <SPI.h>
 
@@ -786,5 +784,7 @@ extern DmaSpi1 DMASPI1;
 #error Unknown chip
 
 #endif  // KINETISK else KINETISL else IMXRT
+
+#endif  // TEENSYDUINO
 
 #endif  // DMASPI_H

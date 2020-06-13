@@ -38,7 +38,7 @@
 #define FT81x_ROTATE_PORTRAIT_INVERTED_MIRRORED  7
 
 #ifndef FT81x_SPI_SETTINGS
-#define FT81x_SPI_SETTINGS SPISettings(15000000, MSBFIRST, SPI_MODE0)
+#define FT81x_SPI_SETTINGS SPISettings(12000000, MSBFIRST, SPI_MODE0)
 #endif
 
 #ifndef FT81x_CS1
@@ -46,11 +46,11 @@
 #endif
 
 #ifndef FT81x_CS2
-#define FT81x_CS2 6
+#define FT81x_CS2 8
 #endif
 
 #ifndef FT81x_DC
-#define FT81x_DC 8
+#define FT81x_DC 7
 #endif
 
 #define FT81x_CMD_ACTIVE    0x000000
@@ -225,7 +225,7 @@ class FT81x {
     void drawLetter(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint8_t letter);
     void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale);
     void drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]);
-    void drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale);
+    void drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale, const uint32_t color);
 
     void beginDisplayList();
     void swapScreen();

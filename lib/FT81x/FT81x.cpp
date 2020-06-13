@@ -101,7 +101,7 @@ void FT81x::initFT81x() {
     delay(300);
 
     // select clock
-    FT81x::sendCommand(FT81x_CMD_CLKINT);
+    FT81x::sendCommand(FT81x_CMD_CLKEXT);
     delay(300);
 
     // activate
@@ -129,7 +129,7 @@ void FT81x::initFT81x() {
     FT81x::write16(FT81x_REG_VSYNC1, 8 + 8);
     FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
 
-    FT81x::write8(FT81x_REG_SWIZZLE, 0);
+    FT81x::write8(FT81x_REG_SWIZZLE, 2);
     FT81x::write8(FT81x_REG_PCLK_POL, 0);
     FT81x::write8(FT81x_REG_CSPREAD, 1);
     FT81x::write8(FT81x_REG_DITHER, 0);
@@ -277,8 +277,9 @@ void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const
     }
 }
 
-void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale) {
-    startCmd(SPINNER());
+void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale, const uint32_t color) {
+    startCmd(COLOR(color));
+    intermediateCmd(SPINNER());
     intermediateCmd(x | (y << 16));
     endCmd(style | (scale << 16));
 }
