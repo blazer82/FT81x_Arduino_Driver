@@ -335,7 +335,7 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
         DMASPI0.registerTransfer(trx);
     } else if (size < 0x10000) {
         uint32_t smallerPart = size - 0x7FFF;
-        
+
         trx = DmaSpi::Transfer(data, smallerPart, nullptr, 0, &noCs);
         DMASPI0.registerTransfer(trx);
 
@@ -659,12 +659,14 @@ void FT81x::sendCommandToDisplay(const uint8_t cmd, const uint8_t numParams, con
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
     SPI.transfer(cmd);
-    digitalWrite(FT81x_DC, HIGH);
-    for (uint8_t i = 0; i < numParams; i++) {
-        SPI.transfer(params[i]);
+    if (numParams > 0) {
+        digitalWrite(FT81x_DC, HIGH);
+        for (uint8_t i = 0; i < numParams; i++) {
+            SPI.transfer(params[i]);
+        }
+        digitalWrite(FT81x_DC, LOW);
     }
     digitalWrite(FT81x_CS2, HIGH);
-    digitalWrite(FT81x_DC, LOW);
     SPI.endTransaction();
 }
 
