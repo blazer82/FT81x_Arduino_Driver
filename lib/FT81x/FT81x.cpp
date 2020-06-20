@@ -674,7 +674,8 @@ uint8_t FT81x::queryDisplay(const uint8_t cmd) {
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
     digitalWrite(FT81x_DC, LOW);
     digitalWrite(FT81x_CS2, LOW);
-    uint8_t result = SPI.transfer16(cmd << 8) & 0xFF;
+    SPI.transfer(cmd);
+    uint8_t result = SPI.transfer(0x00);
     digitalWrite(FT81x_CS2, HIGH);
     SPI.endTransaction();
     return result;
