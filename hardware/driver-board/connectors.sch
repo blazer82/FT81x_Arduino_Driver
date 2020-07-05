@@ -14,76 +14,61 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Connector:Conn_01x11_Male J1
-U 1 1 5EFE0C5D
-P 5400 3850
-F 0 "J1" H 5400 4450 50  0000 C CNN
-F 1 "Conn_01x11_Male" H 5508 4440 50  0001 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_1x11_P2.54mm_Vertical" H 5400 3850 50  0001 C CNN
-F 3 "~" H 5400 3850 50  0001 C CNN
-	1    5400 3850
+L Connector:Conn_01x10_Male J1
+U 1 1 5F0472A1
+P 5450 3800
+F 0 "J1" H 5558 4289 50  0000 C CNN
+F 1 "Conn_01x10_Male" H 5558 4290 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical" H 5450 3800 50  0001 C CNN
+F 3 "~" H 5450 3800 50  0001 C CNN
+	1    5450 3800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5600 3350 5850 3350
-Wire Wire Line
-	5600 3450 5850 3450
-Wire Wire Line
-	5600 3550 5850 3550
-Wire Wire Line
-	5600 3650 5850 3650
-Wire Wire Line
-	5600 3750 5850 3750
-Wire Wire Line
-	5600 3850 5850 3850
-Wire Wire Line
-	5600 3950 5850 3950
-Wire Wire Line
-	5600 4050 5850 4050
-Wire Wire Line
-	5600 4150 5850 4150
-Wire Wire Line
-	5600 4250 5850 4250
-Wire Wire Line
-	5600 4350 5850 4350
-Text GLabel 5850 4350 2    50   Input ~ 0
-AUDIO
-Text GLabel 5850 4250 2    50   Output ~ 0
-DC
-Text GLabel 5850 4150 2    50   Output ~ 0
-CS2
-Text GLabel 5850 4050 2    50   Output ~ 0
-CS1
-Text GLabel 5850 3950 2    50   Output ~ 0
-MOSI
-Text GLabel 5850 3850 2    50   Input ~ 0
-MISO
-Text GLabel 5850 3750 2    50   Output ~ 0
-CLK
 $Comp
-L power:GND #PWR015
-U 1 1 5EFF5A7A
-P 5850 3650
-F 0 "#PWR015" H 5850 3400 50  0001 C CNN
-F 1 "GND" V 5850 3550 50  0000 R CNN
-F 2 "" H 5850 3650 50  0001 C CNN
-F 3 "" H 5850 3650 50  0001 C CNN
-	1    5850 3650
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:+5V #PWR014
-U 1 1 5EFF5C1B
-P 5850 3550
-F 0 "#PWR014" H 5850 3400 50  0001 C CNN
-F 1 "+5V" V 5850 3650 50  0000 L CNN
-F 2 "" H 5850 3550 50  0001 C CNN
-F 3 "" H 5850 3550 50  0001 C CNN
-	1    5850 3550
+L power:+5V #PWR026
+U 1 1 5F04918A
+P 5650 3400
+F 0 "#PWR026" H 5650 3250 50  0001 C CNN
+F 1 "+5V" V 5650 3500 50  0000 L CNN
+F 2 "" H 5650 3400 50  0001 C CNN
+F 3 "" H 5650 3400 50  0001 C CNN
+	1    5650 3400
 	0    1    1    0   
 $EndComp
-Text GLabel 5850 3450 2    50   Output ~ 0
-GND12V
-Text GLabel 5850 3350 2    50   Output ~ 0
-12V
+$Comp
+L power:VCC #PWR027
+U 1 1 5F0493A4
+P 5650 3500
+F 0 "#PWR027" H 5650 3350 50  0001 C CNN
+F 1 "VCC" V 5650 3600 50  0000 L CNN
+F 2 "" H 5650 3500 50  0001 C CNN
+F 3 "" H 5650 3500 50  0001 C CNN
+	1    5650 3500
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR028
+U 1 1 5F04A2D5
+P 5650 3600
+F 0 "#PWR028" H 5650 3350 50  0001 C CNN
+F 1 "GND" V 5650 3500 50  0000 R CNN
+F 2 "" H 5650 3600 50  0001 C CNN
+F 3 "" H 5650 3600 50  0001 C CNN
+	1    5650 3600
+	0    -1   -1   0   
+$EndComp
+Text GLabel 5650 3700 2    50   Output ~ 0
+CLK
+Text GLabel 5650 3800 2    50   Input ~ 0
+MISO
+Text GLabel 5650 3900 2    50   Output ~ 0
+MOSI
+Text GLabel 5650 4000 2    50   Output ~ 0
+CS1
+Text GLabel 5650 4100 2    50   Output ~ 0
+CS2
+Text GLabel 5650 4200 2    50   Output ~ 0
+DC
+Text GLabel 5650 4300 2    50   Input ~ 0
+AUDIO
 $EndSCHEMATC
