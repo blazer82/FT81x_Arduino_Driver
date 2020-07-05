@@ -3,9 +3,9 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 6
+Sheet 2 7
 Title "FT81x TFT040 Driver Board"
-Date "2020-07-03"
+Date "2020-07-05"
 Rev "2007D"
 Comp ""
 Comment1 ""
@@ -13,18 +13,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L driver-board:TXS0108E U1
-U 1 1 5EFFB6A5
-P 6100 4150
-F 0 "U1" H 6100 4915 50  0000 C CNN
-F 1 "TXS0108E" H 6100 4824 50  0000 C CNN
-F 2 "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" H 6100 4150 50  0001 C CNN
-F 3 "" H 6100 4150 50  0001 C CNN
-F 4 "C17206" H 6100 4733 50  0000 C CNN "JLCPCB"
-	1    6100 4150
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6500 4000 6750 4000
 Wire Wire Line
@@ -183,4 +171,20 @@ F 3 "" H 6450 5150 50  0001 C CNN
 	1    6450 5150
 	1    0    0    -1  
 $EndComp
+$Comp
+L driver-board:TXS0108E U1
+U 1 1 5EFFB6A5
+P 6100 4150
+F 0 "U1" H 6100 4915 50  0000 C CNN
+F 1 "TXS0108E" H 6100 4824 50  0000 C CNN
+F 2 "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm" H 6100 4150 50  0001 C CNN
+F 3 "" H 6100 4150 50  0001 C CNN
+F 4 "C17206" H 6100 4733 50  0000 C CNN "JLCPCB"
+	1    6100 4150
+	1    0    0    -1  
+$EndComp
+NoConn ~ 6500 3700
+NoConn ~ 6500 3900
+NoConn ~ 5700 3900
+NoConn ~ 5700 3700
 $EndSCHEMATC
