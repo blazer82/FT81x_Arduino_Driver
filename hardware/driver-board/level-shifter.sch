@@ -3,9 +3,9 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 7
+Sheet 2 8
 Title "FT81x TFT040 Driver Board"
-Date "2020-07-05"
+Date "2020-07-06"
 Rev "2007D"
 Comp ""
 Comment1 ""

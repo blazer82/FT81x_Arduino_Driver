@@ -3,9 +3,9 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 7
+Sheet 1 8
 Title "FT81x TFT040 Driver Board"
-Date "2020-07-05"
+Date "2020-07-06"
 Rev "2007D"
 Comp ""
 Comment1 ""
@@ -48,5 +48,11 @@ S 3300 4250 500  150
 U 5F096907
 F0 "Display" 50
 F1 "display.sch" 50
+$EndSheet
+$Sheet
+S 3300 4700 500  150 
+U 5F0302AD
+F0 "Testpoints" 50
+F1 "testpoints.sch" 50
 $EndSheet
 $EndSCHEMATC
