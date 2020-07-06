@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /Users/raphael/Documents/PlatformIO/Projects/FT81x_Driver/hardware/driver-board/driver-board.sch)
-    (date "Monday, 06 July 2020 at 10:56:04")
+    (date "Monday, 06 July 2020 at 18:37:50")
     (tool "Eeschema (5.1.6-0-10_14)")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -277,7 +277,7 @@
       (tstamp 5F0CB172))
     (comp (ref U7)
       (value ER-TFT040-2)
-      (footprint Connector_FFC-FPC:TE_5-1734839-0_1x60-1MP_P0.5mm_Horizontal)
+      (footprint Connector_FFC-FPC:TE_5-1734839-0_1x60-1MP_P0.5mm_Horizontal_HandSolder)
       (libsource (lib driver-board) (part ER-TFT040-2) (description ""))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F09E273))
