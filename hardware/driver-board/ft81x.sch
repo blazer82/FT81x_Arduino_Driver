@@ -245,7 +245,6 @@ NoConn ~ 6400 3100
 NoConn ~ 6600 3100
 NoConn ~ 7100 2600
 NoConn ~ 5300 3100
-NoConn ~ 4750 2800
 NoConn ~ 4750 2700
 NoConn ~ 4750 2500
 NoConn ~ 4750 2400
@@ -376,4 +375,6 @@ F 3 "" H 7000 4900 50  0001 C CNN
 $EndComp
 Text GLabel 4150 2900 1    50   Input ~ 0
 FTRES
+Text GLabel 4750 2800 0    50   Output ~ 0
+IRQ
 $EndSCHEMATC

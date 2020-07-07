@@ -357,4 +357,30 @@ F 3 "~" H 6500 4350 50  0001 C CNN
 $EndComp
 Text GLabel 6300 4350 2    50   UnSpc ~ 0
 AUDIO
+$Comp
+L Connector:TestPoint TP24
+U 1 1 5F0486C1
+P 6300 4500
+F 0 "TP24" V 6300 4850 50  0000 C CNN
+F 1 "TestPoint" V 6404 4572 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D0.5mm" H 6500 4500 50  0001 C CNN
+F 3 "~" H 6500 4500 50  0001 C CNN
+	1    6300 4500
+	0    -1   -1   0   
+$EndComp
+Text GLabel 6300 4500 2    50   UnSpc ~ 0
+FTRES
+$Comp
+L Connector:TestPoint TP25
+U 1 1 5F048FDB
+P 6300 4650
+F 0 "TP25" V 6300 5000 50  0000 C CNN
+F 1 "TestPoint" V 6404 4722 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D0.5mm" H 6500 4650 50  0001 C CNN
+F 3 "~" H 6500 4650 50  0001 C CNN
+	1    6300 4650
+	0    -1   -1   0   
+$EndComp
+Text GLabel 6300 4650 2    50   UnSpc ~ 0
+IRQ
 $EndSCHEMATC
