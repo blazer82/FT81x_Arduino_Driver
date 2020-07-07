@@ -13,17 +13,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L Connector:Conn_01x10_Male J1
-U 1 1 5F0472A1
-P 5450 3800
-F 0 "J1" H 5350 3800 50  0000 C CNN
-F 1 "Conn_01x10_Male" H 5558 4290 50  0001 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical" H 5450 3800 50  0001 C CNN
-F 3 "~" H 5450 3800 50  0001 C CNN
-	1    5450 3800
-	1    0    0    -1  
-$EndComp
 Text GLabel 5650 3700 2    50   Output ~ 0
 CLK
 Text GLabel 5650 3800 2    50   Input ~ 0
@@ -98,7 +87,6 @@ F 3 "" H 5650 3400 50  0001 C CNN
 	1    5650 3400
 	0    1    1    0   
 $EndComp
-Connection ~ 5650 3400
 $Comp
 L power:GND #PWR028
 U 1 1 5F091C1E
@@ -111,4 +99,22 @@ F 3 "" H 6350 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 6350 3600
+$Comp
+L Connector:Conn_01x13_Male J1
+U 1 1 5F05D8EE
+P 5450 4000
+F 0 "J1" H 5350 4000 50  0000 C CNN
+F 1 "Conn_01x13_Male" H 5558 4690 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x13_P2.54mm_Vertical" H 5450 4000 50  0001 C CNN
+F 3 "~" H 5450 4000 50  0001 C CNN
+	1    5450 4000
+	1    0    0    -1  
+$EndComp
+Connection ~ 5650 3400
+Text GLabel 5650 4400 2    50   Input ~ 0
+IRQ
+Text GLabel 5650 4500 2    50   Output ~ 0
+FTRES
+Text GLabel 5650 4600 2    50   Output ~ 0
+DISPRES
 $EndSCHEMATC
