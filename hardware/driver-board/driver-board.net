@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /Users/raphael/Documents/PlatformIO/Projects/FT81x_Driver/hardware/driver-board/driver-board.sch)
-    (date "Wednesday, 08 July 2020 at 16:47:40")
+    (date "Wednesday, 08 July 2020 at 17:31:35")
     (tool "Eeschema (5.1.6-0-10_14)")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -96,6 +96,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names "/Level Shifter/") (tstamps /5EFF30F6/))
       (tstamp 5F00A49A))
@@ -103,6 +105,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names "/Level Shifter/") (tstamps /5EFF30F6/))
       (tstamp 5F00BB54))
@@ -110,7 +114,7 @@
       (value TXS0108E)
       (footprint Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm)
       (fields
-        (field (name JLCPCB) C17206))
+        (field (name LCSC) C17206))
       (libsource (lib driver-board) (part TXS0108E) (description ""))
       (sheetpath (names "/Level Shifter/") (tstamps /5EFF30F6/))
       (tstamp 5EFFB6A5))
@@ -118,7 +122,7 @@
       (value ME6210)
       (footprint Package_TO_SOT_SMD:SOT-23)
       (fields
-        (field (name JLCPCB) C236680))
+        (field (name LCSC) C236680))
       (libsource (lib driver-board) (part ME6210) (description ""))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F050907))
@@ -126,7 +130,7 @@
       (value ME6210)
       (footprint Package_TO_SOT_SMD:SOT-23)
       (fields
-        (field (name JLCPCB) C116985))
+        (field (name LCSC) C116985))
       (libsource (lib driver-board) (part ME6210) (description ""))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F051BDD))
@@ -134,6 +138,8 @@
       (value 10µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19702))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F05254D))
@@ -141,6 +147,8 @@
       (value 10µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19702))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F052D97))
@@ -148,6 +156,8 @@
       (value 10µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19702))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F057FFE))
@@ -155,6 +165,8 @@
       (value 10µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19702))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F058C7E))
@@ -163,7 +175,7 @@
       (footprint Package_TO_SOT_SMD:SOT-23-6)
       (datasheet http://www.ti.com/lit/ds/symlink/tlv61046a.pdf)
       (fields
-        (field (name JLCPCB) C464815))
+        (field (name LCSC) C464815))
       (libsource (lib Regulator_Switching) (part TLV61046ADB) (description "28-V Output Voltage Boost Converter with Power Diode and Isolation Switch, SOT-23-6"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F069EE9))
@@ -171,6 +183,8 @@
       (value 1µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C15849))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F06AE11))
@@ -178,6 +192,8 @@
       (value 71.5k)
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C23103))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F07151B))
@@ -185,6 +201,8 @@
       (value 4.7µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19666))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F07504E))
@@ -193,7 +211,7 @@
       (footprint Inductor_SMD:L_0603_1608Metric)
       (datasheet ~)
       (fields
-        (field (name JLCPCB) C1035))
+        (field (name LCSC) C1035))
       (libsource (lib Device) (part L) (description Inductor))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F0779DE))
@@ -201,6 +219,8 @@
       (value 1M)
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C22935))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /Power/) (tstamps /5F00E6AA/))
       (tstamp 5F0697E7))
@@ -215,7 +235,7 @@
       (value NC7SZ125)
       (footprint Package_TO_SOT_SMD:SOT-353_SC-70-5)
       (fields
-        (field (name JLCPCB) C112084))
+        (field (name LCSC) C112084))
       (libsource (lib driver-board) (part NC7SZ125) (description ""))
       (sheetpath (names "/MISO Buffer/") (tstamps /5F014BB8/))
       (tstamp 5F016D73))
@@ -223,6 +243,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names "/MISO Buffer/") (tstamps /5F014BB8/))
       (tstamp 5F01887A))
@@ -236,6 +258,8 @@
       (value 47k)
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C23178))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F02D8F9))
@@ -243,6 +267,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F02E8F5))
@@ -250,6 +276,8 @@
       (value 4.7µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19666))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F032943))
@@ -257,7 +285,7 @@
       (value YSX321SL)
       (footprint Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm)
       (fields
-        (field (name JLCPCB) C9002))
+        (field (name LCSC) C9002))
       (libsource (lib driver-board) (part YSX321SL) (description ""))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F0375EF))
@@ -265,6 +293,8 @@
       (value 10µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C19702))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F0BABCA))
@@ -272,6 +302,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F0CB172))
@@ -285,6 +317,8 @@
       (value 100)
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C22775))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F0A5117))
@@ -292,6 +326,8 @@
       (value 47k)
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C23178))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F0ACFFA))
@@ -299,6 +335,8 @@
       (value 1µF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C15849))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F0AE8D8))
@@ -306,6 +344,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F0D003B))
@@ -313,6 +353,8 @@
       (value 100nF)
       (footprint Capacitor_SMD:C_0603_1608Metric)
       (datasheet ~)
+      (fields
+        (field (name LCSC) C14663))
       (libsource (lib Device) (part C) (description "Unpolarized capacitor"))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F0D6490))
