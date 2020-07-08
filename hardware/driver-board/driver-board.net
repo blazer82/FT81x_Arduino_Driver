@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /Users/raphael/Documents/PlatformIO/Projects/FT81x_Driver/hardware/driver-board/driver-board.sch)
-    (date "Wednesday, 08 July 2020 at 17:31:35")
+    (date "Wednesday, 08 July 2020 at 18:09:08")
     (tool "Eeschema (5.1.6-0-10_14)")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -233,9 +233,9 @@
       (tstamp 5F05D8EE))
     (comp (ref U5)
       (value NC7SZ125)
-      (footprint Package_TO_SOT_SMD:SOT-353_SC-70-5)
+      (footprint Package_TO_SOT_SMD:SOT-23-5)
       (fields
-        (field (name LCSC) C112084))
+        (field (name LCSC) C7420))
       (libsource (lib driver-board) (part NC7SZ125) (description ""))
       (sheetpath (names "/MISO Buffer/") (tstamps /5F014BB8/))
       (tstamp 5F016D73))
@@ -259,7 +259,7 @@
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
       (fields
-        (field (name LCSC) C23178))
+        (field (name LCSC) "C25819 "))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /FT81x/) (tstamps /5F022188/))
       (tstamp 5F02D8F9))
@@ -327,7 +327,7 @@
       (footprint Resistor_SMD:R_0603_1608Metric)
       (datasheet ~)
       (fields
-        (field (name LCSC) C23178))
+        (field (name LCSC) "C25819 "))
       (libsource (lib Device) (part R) (description Resistor))
       (sheetpath (names /Display/) (tstamps /5F096907/))
       (tstamp 5F0ACFFA))
