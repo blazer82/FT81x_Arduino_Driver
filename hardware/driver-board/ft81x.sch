@@ -14,9 +14,11 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L driver-board:FT813 U6
+L driver-board-rescue:FT813-driver-board-driver-board-rescue U6
 U 1 1 5F0268C1
 P 5900 2250
+AR Path="/5F0268C1" Ref="U6"  Part="1" 
+AR Path="/5F022188/5F0268C1" Ref="U6"  Part="1" 
 F 0 "U6" H 5850 2400 50  0000 L CNN
 F 1 "FT813" H 5800 2250 50  0000 L CNN
 F 2 "Package_DFN_QFN:QFN-56-1EP_8x8mm_P0.5mm_EP5.6x5.6mm_HandSolder" H 5900 2250 50  0001 C CNN
@@ -27,11 +29,11 @@ $EndComp
 Text GLabel 4750 1800 0    50   Output ~ 0
 AUDIO
 Text GLabel 4750 2000 0    50   Input ~ 0
-CLK_3V
+SCK_3V
 Text GLabel 4750 2100 0    50   Output ~ 0
-MISO_BUFFER
+SDI_BUFFER
 Text GLabel 4750 2200 0    50   Input ~ 0
-MOSI_3V
+SDO_3V
 Text GLabel 4750 2300 0    50   Input ~ 0
 CS1_3V
 $Comp

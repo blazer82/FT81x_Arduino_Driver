@@ -73,21 +73,21 @@ $EndComp
 Text GLabel 6750 4000 2    50   Input ~ 0
 DC
 Text GLabel 6750 4500 2    50   Input ~ 0
-CLK
+SCK
 Text GLabel 6750 4400 2    50   Output ~ 0
-MISO
+SDI
 Text GLabel 6750 4300 2    50   Input ~ 0
-MOSI
+SDO
 Text GLabel 6750 4200 2    50   Input ~ 0
 CS1
 Text GLabel 6750 4100 2    50   Input ~ 0
 CS2
 Text GLabel 5450 4500 0    50   Output ~ 0
-CLK_3V
+SCK_3V
 Text GLabel 5450 4400 0    50   Input ~ 0
-MISO_3V
+SDI_3V
 Text GLabel 5450 4300 0    50   Output ~ 0
-MOSI_3V
+SDO_3V
 Text GLabel 5450 4200 0    50   Output ~ 0
 CS1_3V
 Text GLabel 5450 4100 0    50   Output ~ 0

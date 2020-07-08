@@ -37,7 +37,7 @@ F 3 "" H 5550 4050 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Text GLabel 6350 4050 2    50   Output ~ 0
-MISO_3V
+SDI_3V
 Wire Wire Line
 	6250 4050 6350 4050
 Wire Wire Line
@@ -47,7 +47,7 @@ Wire Wire Line
 Text GLabel 5450 3850 0    50   Input ~ 0
 CS1_3V
 Text GLabel 5450 3950 0    50   Input ~ 0
-MISO_BUFFER
+SDI_BUFFER
 $Comp
 L Device:C C9
 U 1 1 5F01887A

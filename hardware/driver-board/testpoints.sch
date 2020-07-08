@@ -135,7 +135,7 @@ F 3 "~" H 5450 3200 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Text GLabel 5250 3200 2    50   UnSpc ~ 0
-CLK
+SCK
 $Comp
 L Connector:TestPoint TP8
 U 1 1 5F037409
@@ -187,7 +187,7 @@ F 3 "~" H 5450 3800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Text GLabel 5250 3800 2    50   UnSpc ~ 0
-MISO
+SDI
 $Comp
 L Connector:TestPoint TP16
 U 1 1 5F03819B
@@ -200,7 +200,7 @@ F 3 "~" H 5450 3950 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Text GLabel 5250 3950 2    50   UnSpc ~ 0
-MOSI
+SDO
 $Comp
 L Connector:TestPoint TP7
 U 1 1 5F042349
@@ -213,7 +213,7 @@ F 3 "~" H 6500 3200 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Text GLabel 6300 3200 2    50   UnSpc ~ 0
-CLK_3V
+SCK_3V
 $Comp
 L Connector:TestPoint TP9
 U 1 1 5F042350
@@ -265,7 +265,7 @@ F 3 "~" H 6500 3800 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Text GLabel 6300 3800 2    50   UnSpc ~ 0
-MISO_3V
+SDI_3V
 $Comp
 L Connector:TestPoint TP17
 U 1 1 5F04236C
@@ -278,7 +278,7 @@ F 3 "~" H 6500 3950 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Text GLabel 6300 3950 2    50   UnSpc ~ 0
-MOSI_3V
+SDO_3V
 $Comp
 L Connector:TestPoint TP18
 U 1 1 5F04BDAF

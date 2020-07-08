@@ -14,11 +14,11 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 Text GLabel 5650 3700 2    50   Output ~ 0
-CLK
+SCK
 Text GLabel 5650 3800 2    50   Input ~ 0
-MISO
+SDI
 Text GLabel 5650 3900 2    50   Output ~ 0
-MOSI
+SDO
 Text GLabel 5650 4000 2    50   Output ~ 0
 CS1
 Text GLabel 5650 4100 2    50   Output ~ 0

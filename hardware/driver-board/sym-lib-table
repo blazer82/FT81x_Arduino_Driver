@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name driver-board)(type Legacy)(uri ${KIPRJMOD}/driver-board.lib)(options "")(descr ""))
+  (lib (name driver-board-rescue)(type Legacy)(uri ${KIPRJMOD}/driver-board-rescue.lib)(options "")(descr ""))
 )

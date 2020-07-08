@@ -150,11 +150,11 @@ X VI 6 -300 200 100 R 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# driver-board_ER-TFT040-2
+# driver-board-rescue_ER-TFT040-2-driver-board-driver-board-rescue
 #
-DEF driver-board_ER-TFT040-2 U 0 40 Y Y 1 F N
+DEF driver-board-rescue_ER-TFT040-2-driver-board-driver-board-rescue U 0 40 Y Y 1 F N
 F0 "U" 0 3100 50 H V C CNN
-F1 "driver-board_ER-TFT040-2" 0 -3000 50 H V C CNN
+F1 "driver-board-rescue_ER-TFT040-2-driver-board-driver-board-rescue" 0 -3000 50 H V C CNN
 F2 "" -100 2000 50 H I C CNN
 F3 "" -100 2000 50 H I C CNN
 DRAW
@@ -217,16 +217,16 @@ X LED_K2 59 -250 2900 100 R 50 50 1 1 W
 X IM0 6 -250 -2400 100 R 50 50 1 1 I
 X LED_A 60 -250 3000 100 R 50 50 1 1 W
 X NC 7 -250 -2300 100 R 50 50 1 1 N
-X MISO 8 -250 -2200 100 R 50 50 1 1 O
-X MOSI 9 -250 -2100 100 R 50 50 1 1 I
+X SDO 8 -250 -2200 100 R 50 50 1 1 O
+X SDI 9 -250 -2100 100 R 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# driver-board_FT813
+# driver-board-rescue_FT813-driver-board-driver-board-rescue
 #
-DEF driver-board_FT813 U 0 40 Y Y 1 F N
+DEF driver-board-rescue_FT813-driver-board-driver-board-rescue U 0 40 Y Y 1 F N
 F0 "U" 0 100 50 H V C CNN
-F1 "driver-board_FT813" 0 -100 50 H V C CNN
+F1 "driver-board-rescue_FT813-driver-board-driver-board-rescue" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -284,8 +284,8 @@ X R4 54 -400 850 100 D 50 50 1 1 O
 X R3 55 -500 850 100 D 50 50 1 1 O
 X R2 56 -600 850 100 D 50 50 1 1 O
 X GND 57 0 300 100 R 50 50 1 1 W N
-X MISO 6 -1150 150 100 R 50 50 1 1 O
-X MOSI 7 -1150 50 100 R 50 50 1 1 I
+X SDO 6 -1150 150 100 R 50 50 1 1 O
+X SDI 7 -1150 50 100 R 50 50 1 1 I
 X ~CS_N 8 -1150 -50 100 R 50 50 1 1 I
 X GPIO0 9 -1150 -150 100 R 50 50 1 1 B
 ENDDRAW

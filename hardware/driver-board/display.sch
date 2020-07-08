@@ -14,9 +14,11 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L driver-board:ER-TFT040-2 U7
+L driver-board-rescue:ER-TFT040-2-driver-board-driver-board-rescue U7
 U 1 1 5F09E273
 P 5850 4100
+AR Path="/5F09E273" Ref="U7"  Part="1" 
+AR Path="/5F096907/5F09E273" Ref="U7"  Part="1" 
 F 0 "U7" H 6078 4201 50  0000 L CNN
 F 1 "ER-TFT040-2" H 6078 4110 50  0000 L CNN
 F 2 "Connector_FFC-FPC:TE_5-1734839-0_1x60-1MP_P0.5mm_Horizontal_HandSolder" H 5750 6100 50  0001 C CNN
@@ -124,13 +126,13 @@ $EndComp
 Text GLabel 5600 5900 0    50   Input ~ 0
 CS2_3V
 Text GLabel 5600 6000 0    50   Input ~ 0
-CLK_3V
+SCK_3V
 Text GLabel 5600 6100 0    50   Input ~ 0
 DC_3V
 Text GLabel 5600 6200 0    50   Input ~ 0
-MOSI_3V
+SDO_3V
 Text GLabel 5600 6300 0    50   Output ~ 0
-MISO_3V
+SDI_3V
 $Comp
 L power:GND #PWR052
 U 1 1 5F0AA3B1
