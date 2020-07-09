@@ -603,7 +603,7 @@ uint32_t FT81x::read32(const uint32_t address) {
     SPI.transfer(cmd >> 8);
     SPI.transfer(cmd);
     SPI.transfer(0x00);  // dummy byte
-    uint16_t result = SPI.transfer(0x00);
+    uint32_t result = SPI.transfer(0x00);
     result |= (SPI.transfer(0x00) << 8);
     result |= (SPI.transfer(0x00) << 16);
     result |= (SPI.transfer(0x00) << 24);
