@@ -26,7 +26,7 @@
 #include <DmaSpi.h>
 #endif
 
-#define FT81x_COLOR_RGB(r, g, b) (((r) << 16) | ((g) << 8) | (b))
+#define FT81x_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((g) << 8) | (b))
 
 #define FT81x_ROTATE_LANDSCAPE                   0
 #define FT81x_ROTATE_LANDSCAPE_INVERTED          1

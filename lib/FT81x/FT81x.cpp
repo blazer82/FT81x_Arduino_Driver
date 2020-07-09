@@ -27,21 +27,21 @@
 #define DLSTART()                    0xFFFFFF00
 #define SWAP()                       0xFFFFFF01
 #define MEMWRITE()                   0xFFFFFF1A
-#define CLEAR(c, s, t)               ((0x26 << 24) | ((c) << 2) | ((s) << 1) | (t))
-#define BEGIN(p)                     ((0x1F << 24) | (p))
-#define END()                        (0x21 << 24)
+#define CLEAR(c, s, t)               ((0x26L << 24) | ((c) << 2) | ((s) << 1) | (t))
+#define BEGIN(p)                     ((0x1FL << 24) | (p))
+#define END()                        (0x21L << 24)
 #define END_DL()                     0x00
-#define CLEAR_COLOR_RGB(r, g, b)     ((0x02 << 24) | ((r) << 16) | ((g) << 8) | (b))
-#define CLEAR_COLOR(rgb)             ((0x02 << 24) | ((rgb)&0xFFFFFF))
-#define COLOR_RGB(r, g, b)           ((0x04 << 24) | ((r) << 16) | ((g) << 8) | (b))
-#define COLOR(rgb)                   ((0x04 << 24) | ((rgb)&0xFFFFFF))
-#define POINT_SIZE(s)                ((0x0D << 24) | ((s)&0xFFF))
-#define LINE_WIDTH(w)                ((0x0E << 24) | ((w)&0xFFF))
-#define VERTEX2II(x, y, h, c)        ((1 << 31) | (((x)&0xFFF) << 21) | (((y)&0xFFF) << 12) | ((h) << 7) | (c))
-#define VERTEX2F(x, y)               ((1 << 30) | (((x)&0xFFFF) << 15) | ((y)&0xFFFF))
-#define BITMAP_SOURCE(a)             ((1 << 24) | (a))
-#define BITMAP_LAYOUT(f, s, h)       ((7 << 24) | ((f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))
-#define BITMAP_SIZE(f, wx, wy, w, h) ((8 << 24) | (((f)&1) << 20) | (((wx)&1) << 19) | (((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))
+#define CLEAR_COLOR_RGB(r, g, b)     ((0x02L << 24) | ((r) << 16) | ((g) << 8) | (b))
+#define CLEAR_COLOR(rgb)             ((0x02L << 24) | ((rgb)&0xFFFFFF))
+#define COLOR_RGB(r, g, b)           ((0x04L << 24) | ((uint32_t)(r) << 16) | ((g) << 8) | (b))
+#define COLOR(rgb)                   ((0x04L << 24) | ((rgb)&0xFFFFFF))
+#define POINT_SIZE(s)                ((0x0DL << 24) | ((s)&0xFFF))
+#define LINE_WIDTH(w)                ((0x0EL << 24) | ((w)&0xFFF))
+#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((y)&0xFFF) << 12) | ((h) << 7) | (c))
+#define VERTEX2F(x, y)               ((1L << 30) | (((uint32_t)(x)&0xFFFF) << 15) | ((y)&0xFFFF))
+#define BITMAP_SOURCE(a)             ((1L << 24) | (a))
+#define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))
+#define BITMAP_SIZE(f, wx, wy, w, h) ((8L << 24) | ((uint32_t)((f)&1) << 20) | ((uint32_t)((wx)&1) << 19) | ((uint32_t)((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))
 #define LOADIDENTITY()               0xFFFFFF26
 #define SETMATRIX()                  0xFFFFFF2A
 #define SCALE()                      0xFFFFFF28
@@ -243,8 +243,8 @@ void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y
 void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]) {
     startCmd(COLOR(color));
     intermediateCmd(TEXT());
-    intermediateCmd(x | (y << 16));
-    intermediateCmd(font | (options << 16));
+    intermediateCmd(x | ((uint32_t)y << 16));
+    intermediateCmd(font | ((uint32_t)options << 16));
     uint32_t data = 0xFFFFFFFF;
     for (uint8_t i = 0; (data >> 24) != 0; i += 4) {
         data = 0;
@@ -256,10 +256,10 @@ void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const
                 data |= text[i + 1] << 8;
 
                 if (text[i + 2] != 0) {
-                    data |= text[i + 2] << 16;
+                    data |= (uint32_t)text[i + 2] << 16;
 
                     if (text[i + 3] != 0) {
-                        data |= text[i + 3] << 24;
+                        data |= (uint32_t)text[i + 3] << 24;
                     }
                 }
             }
@@ -280,8 +280,8 @@ void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const
 void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale, const uint32_t color) {
     startCmd(COLOR(color));
     intermediateCmd(SPINNER());
-    intermediateCmd(x | (y << 16));
-    endCmd(style | (scale << 16));
+    intermediateCmd(x | ((uint32_t)y << 16));
+    endCmd(style | ((uint32_t)scale << 16));
 }
 
 void FT81x::cmd(const uint32_t cmd) {
@@ -605,8 +605,8 @@ uint32_t FT81x::read32(const uint32_t address) {
     SPI.transfer(0x00);  // dummy byte
     uint32_t result = SPI.transfer(0x00);
     result |= (SPI.transfer(0x00) << 8);
-    result |= (SPI.transfer(0x00) << 16);
-    result |= (SPI.transfer(0x00) << 24);
+    result |= ((uint32_t)SPI.transfer(0x00) << 16);
+    result |= ((uint32_t)SPI.transfer(0x00) << 24);
     digitalWrite(FT81x_CS1, HIGH);
     SPI.endTransaction();
     return result;
