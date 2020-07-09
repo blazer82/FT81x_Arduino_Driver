@@ -159,25 +159,28 @@
 #define FT81x_OPT_NOSECS    0x8000
 #define FT81x_OPT_NOHANDS   0xC000
 
-#define ST7701_SWRESET 0x01
-#define ST7701_RDDPM   0x0A
-#define ST7701_RDDSDR  0x0F
-#define ST7701_SLPIN   0x10
-#define ST7701_SLPOUT  0x11
-#define ST7701_PTLON   0x12
-#define ST7701_NORON   0x13
-#define ST7701_INVOFF  0x20
-#define ST7701_INVON   0x21
-#define ST7701_DISPOFF 0x28
-#define ST7701_DISPON  0x29
-#define ST7701_TEON    0x35
-#define ST7701_MADCTL  0x36
-#define ST7701_COLMOD  0x3A
-#define ST7701_WRDISBV 0x51
-#define ST7701_SDIR    0xC7
-#define ST7701_RDID1   0xDA
-#define ST7701_RDID2   0xDB
-#define ST7701_RDID3   0xDC
+#define ST7701_SWRESET   0x01
+#define ST7701_RDDPM     0x0A
+#define ST7701_RDDCOLMOD 0x0C
+#define ST7701_RDDIM     0x0D
+#define ST7701_RDDSM     0x0E
+#define ST7701_RDDSDR    0x0F
+#define ST7701_SLPIN     0x10
+#define ST7701_SLPOUT    0x11
+#define ST7701_PTLON     0x12
+#define ST7701_NORON     0x13
+#define ST7701_INVOFF    0x20
+#define ST7701_INVON     0x21
+#define ST7701_DISPOFF   0x28
+#define ST7701_DISPON    0x29
+#define ST7701_TEON      0x35
+#define ST7701_MADCTL    0x36
+#define ST7701_COLMOD    0x3A
+#define ST7701_WRDISBV   0x51
+#define ST7701_SDIR      0xC7
+#define ST7701_RDID1     0xDA
+#define ST7701_RDID2     0xDB
+#define ST7701_RDID3     0xDC
 
 #define ST7701_CND2BKxSEL 0xFF
 
