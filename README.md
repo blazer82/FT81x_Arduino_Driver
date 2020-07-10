@@ -2,4 +2,4 @@
 
 FT81x on ST7701S Arduino Driver
 
-_work in progess_
+[API documentation on github.io](https://blazer82.github.io/FT81x_Arduino_Driver)
