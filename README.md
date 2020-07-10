@@ -2,4 +2,17 @@
 
 FT81x on ST7701S Arduino Driver
 
-[API documentation on github.io](https://blazer82.github.io/FT81x_Arduino_Driver)
+## Hardware
+
+![Board](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/board.png)
+
+Schematics, KiCad files and Gerber files can be found inside the **hardware folder** in this repository.
+
+## API Documentation
+
+An automatically generated API documentation is available on [github.io](https://blazer82.github.io/FT81x_Arduino_Driver).
+
+
+
+
+
