@@ -18,7 +18,6 @@ addons:
     packages:
       - python3-pip
       - python3-wheel
-      - clang-format
 env:
   global:
 #    - ARDUINO_IDE_VERSION="1.8.10"
@@ -28,13 +27,10 @@ env:
 
 before_install:
    - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
-   - curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/run-clang-format.py > run-clang-format.py
 
 script:
-   - python run-clang-format.py -r .
    - build_main_platforms
 
 # Generate and deploy documentation
 after_success:
-  - source <(curl -SLs  https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/library_check.sh)
   - source <(curl -SLs  https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/doxy_gen_and_deploy.sh)
