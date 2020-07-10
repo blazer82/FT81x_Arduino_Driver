@@ -2,6 +2,6 @@ BasedOnStyle: Google
 
 Language: Cpp
 
-ColumnLimit: 160
+ColumnLimit: 0
 IndentWidth: 4
 AlignConsecutiveMacros: true

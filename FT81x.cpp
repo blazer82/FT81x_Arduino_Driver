@@ -1,6 +1,20 @@
-/**
- * FT81x on ST7701S Arduino Driver
+/*!
+ * @file FT81x.cpp
+ *
+ * @mainpage FT81x on ST7701S Arduino Driver
+ *
+ * @section intro_sec Introduction
+ *
+ * This is the documentation for the FT81x on ST7701S Driver for the
+ * Arduino platform.  It is designed specifically to work with this
+ * open source driver board:
+ * https://github.com/blazer82/FT81x_Arduino_Driver/tree/master/hardware
+ *
+ * @section author Author
+ *
  * Copyright (C) 2020  Raphael Stäbler
+ *
+ * @section license License
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,55 +28,56 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **/
+ *
+ */
 
 #include "FT81x.h"
 
-#define DISPLAY_WIDTH  480
-#define DISPLAY_HEIGHT 480
+#define DISPLAY_WIDTH  480  ///< Width of the display in pixels
+#define DISPLAY_HEIGHT 480  ///< Height of the display in pixels
 
-#define READ  0x000000
-#define WRITE 0x800000
+#define READ  0x000000  ///< Bitmask address reading
+#define WRITE 0x800000  ///< Bitmask for address writing
 
-#define DLSTART()                    0xFFFFFF00
-#define SWAP()                       0xFFFFFF01
-#define MEMWRITE()                   0xFFFFFF1A
-#define CLEAR(c, s, t)               ((0x26L << 24) | ((c) << 2) | ((s) << 1) | (t))
-#define BEGIN(p)                     ((0x1FL << 24) | (p))
-#define END()                        (0x21L << 24)
-#define END_DL()                     0x00
-#define CLEAR_COLOR_RGB(r, g, b)     ((0x02L << 24) | ((r) << 16) | ((g) << 8) | (b))
-#define CLEAR_COLOR(rgb)             ((0x02L << 24) | ((rgb)&0xFFFFFF))
-#define COLOR_RGB(r, g, b)           ((0x04L << 24) | ((uint32_t)(r) << 16) | ((g) << 8) | (b))
-#define COLOR(rgb)                   ((0x04L << 24) | ((rgb)&0xFFFFFF))
-#define POINT_SIZE(s)                ((0x0DL << 24) | ((s)&0xFFF))
-#define LINE_WIDTH(w)                ((0x0EL << 24) | ((w)&0xFFF))
-#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((y)&0xFFF) << 12) | ((h) << 7) | (c))
-#define VERTEX2F(x, y)               ((1L << 30) | (((uint32_t)(x)&0xFFFF) << 15) | ((y)&0xFFFF))
-#define BITMAP_SOURCE(a)             ((1L << 24) | (a))
-#define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))
-#define BITMAP_SIZE(f, wx, wy, w, h) ((8L << 24) | ((uint32_t)((f)&1) << 20) | ((uint32_t)((wx)&1) << 19) | ((uint32_t)((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))
-#define LOADIDENTITY()               0xFFFFFF26
-#define SETMATRIX()                  0xFFFFFF2A
-#define SCALE()                      0xFFFFFF28
-#define TEXT()                       0xFFFFFF0C
-#define SPINNER()                    0xFFFFFF16
+#define DLSTART()                    0xFFFFFF00                                                                                                                             ///< Start display list
+#define SWAP()                       0xFFFFFF01                                                                                                                             ///< Swap the current display list
+#define MEMWRITE()                   0xFFFFFF1A                                                                                                                             ///< Write bytes into memory
+#define CLEAR(c, s, t)               ((0x26L << 24) | ((c) << 2) | ((s) << 1) | (t))                                                                                        ///< Clear command
+#define BEGIN(p)                     ((0x1FL << 24) | (p))                                                                                                                  ///< Begin primitive drawing
+#define END()                        (0x21L << 24)                                                                                                                          ///< End primitive drawing
+#define END_DL()                     0x00                                                                                                                                   ///< End current display list
+#define CLEAR_COLOR_RGB(r, g, b)     ((0x02L << 24) | ((r) << 16) | ((g) << 8) | (b))                                                                                       ///< Clear with RGB color
+#define CLEAR_COLOR(rgb)             ((0x02L << 24) | ((rgb)&0xFFFFFF))                                                                                                     ///< Clear with color
+#define COLOR_RGB(r, g, b)           ((0x04L << 24) | ((uint32_t)(r) << 16) | ((g) << 8) | (b))                                                                             ///< Create color from RGB values
+#define COLOR(rgb)                   ((0x04L << 24) | ((rgb)&0xFFFFFF))                                                                                                     ///< Create color
+#define POINT_SIZE(s)                ((0x0DL << 24) | ((s)&0xFFF))                                                                                                          ///< Point size
+#define LINE_WIDTH(w)                ((0x0EL << 24) | ((w)&0xFFF))                                                                                                          ///< Line width
+#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((y)&0xFFF) << 12) | ((h) << 7) | (c))                                                  ///< Start the operation of graphics primitive at the specified coordinates in pixel precision.
+#define VERTEX2F(x, y)               ((1L << 30) | (((uint32_t)(x)&0xFFFF) << 15) | ((y)&0xFFFF))                                                                           ///< Start the operation of graphics primitives at the specified screen coordinate, in the pixel precision defined by VERTEX_FORMAT.
+#define BITMAP_SOURCE(a)             ((1L << 24) | (a))                                                                                                                     ///< Specify the source address of bitmap data in FT81X graphics memory RAM_G.
+#define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))                                                                ///< Specify the source bitmap memory format and layout for the current handle.
+#define BITMAP_SIZE(f, wx, wy, w, h) ((8L << 24) | ((uint32_t)((f)&1) << 20) | ((uint32_t)((wx)&1) << 19) | ((uint32_t)((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))  ///< Specify the screen drawing of bitmaps for the current handle
+#define LOADIDENTITY()               0xFFFFFF26                                                                                                                             ///< Set the current matrix to identity
+#define SETMATRIX()                  0xFFFFFF2A                                                                                                                             ///< Write the current matrix as a bitmap transform
+#define SCALE()                      0xFFFFFF28                                                                                                                             ///< Apply a scale to the current matrix
+#define TEXT()                       0xFFFFFF0C                                                                                                                             ///< Draw text
+#define SPINNER()                    0xFFFFFF16                                                                                                                             ///< Draw spinner
 
-#define BITMAPS      1
-#define POINTS       2
-#define LINES        3
-#define LINE_STRIP   4
-#define EDGE_STRIP_R 5
-#define EDGE_STRIP_L 6
-#define EDGE_STRIP_A 7
-#define EDGE_STRIP_B 8
-#define RECTS        9
+#define BITMAPS      1  ///< Bitmap drawing primitive
+#define POINTS       2  ///< Point drawing primitive
+#define LINES        3  ///< Line drawing primitive
+#define LINE_STRIP   4  ///< Line strip drawing primitive
+#define EDGE_STRIP_R 5  ///< Edge strip right side drawing primitive
+#define EDGE_STRIP_L 6  ///< Edge strip left side drawing primitive
+#define EDGE_STRIP_A 7  ///< Edge strip above drawing primitive
+#define EDGE_STRIP_B 8  ///< Edge strip below side drawing primitive
+#define RECTS        9  ///< Rectangle drawing primitive
 
 #define DISPLAY_CMD(cmd, params...)                                \
     {                                                              \
         const uint8_t d[] = {params};                              \
         sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d); \
-    }
+    }  ///< Macro to automatically call sendCommandToDisplay
 
 FT81x::FT81x() {}
 
