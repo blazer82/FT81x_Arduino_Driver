@@ -18,7 +18,7 @@ addons:
     packages:
       - python3-pip
       - python3-wheel
-      - clang-format-5.0
+      - clang-format
 env:
   global:
 #    - ARDUINO_IDE_VERSION="1.8.10"
