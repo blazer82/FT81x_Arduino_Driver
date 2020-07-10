@@ -4,28 +4,28 @@
 
 ### Connectors
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/connectors-Connectors.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/connectors-Connectors.svg)
 
 ### Power
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/power-Power.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/power-Power.svg)
 
 ### Level Shifter
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/level-shifter-Level%20Shifter.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/level-shifter-Level%20Shifter.svg)
 
 ### SDI Buffer
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/miso-buffer-MISO%20Buffer.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/miso-buffer-MISO%20Buffer.svg)
 
 ### FT81x
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/ft81x-FT81x.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/ft81x-FT81x.svg)
 
 ### Display
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/display-Display.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/display-Display.svg)
 
 ### Testpoints
 
-![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/testpoints-Testpoints.svg)
+![Demo GIF](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/hardware/assets/schematics/testpoints-Testpoints.svg)
