@@ -38,6 +38,13 @@ cd $GITHUB_WORKSPACE
 # Create documentation
 $GITHUB_WORKSPACE/doxygen Doxyfile
 
+#Check if master branch
+if [ "${GITHUB_REF}" != "refs/heads/master" ]; then
+    echo "Not on master branch, not going to commit to gh-pages!"
+    exit 0
+fi
+
+# Commit documentation
 cd doxygen_workdir/${REPO_NAME}
 
 if [ -d "html" ] && [ -f "html/index.html" ]; then
@@ -54,5 +61,6 @@ if [ -d "html" ] && [ -f "html/index.html" ]; then
 
     git push --force "https://${GITHUB_ACTOR}:${GH_REPO_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" > /dev/null 2>&1
 else
+    echo 'Error: No documentation (html) files have been found!' >&2
     exit 1
 fi
