@@ -4,8 +4,8 @@
 set -e
 
 # Define cores and platforms
-CORES=(arduino:avr arduino:samd)
-PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native)
+CORES=(arduino:avr arduino:samd esp8266:esp8266)
+PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native esp8266:esp8266:nodemcu)
 
 # Define colors
 RED='\033[0;31m'
@@ -23,7 +23,7 @@ echo "########################################################################";
 export PATH=$PATH:$GITHUB_WORKSPACE/bin
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 arduino-cli config init
-arduino-cli core update-index
+arduino-cli core update-index --additional-urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
 
 # Install arduino cores
 for c in ${CORES[*]} ; do
