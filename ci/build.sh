@@ -3,6 +3,10 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+# Define cores and platforms
+CORES=(arduino:avr arduino:samd)
+PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native)
+
 # Define colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -22,23 +26,24 @@ arduino-cli config init
 arduino-cli core update-index
 
 # Install arduino cores
-echo -e "\n########################################################################";
-echo -e "${YELLOW}INSTALLING ARDUINO AVR CORE"
-echo "########################################################################";
-arduino-cli core install arduino:avr
-if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
+for c in ${CORES[*]} ; do
+    echo -e "\n########################################################################";
+    echo -e "${YELLOW}INSTALLING ARDUINO CORE: ${c}"
+    echo "########################################################################";
+    arduino-cli core install arduino:avr
+    if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
+done
 
 # Link arduino library
 ln -s $GITHUB_WORKSPACE $HOME/Arduino/libraries/CI_Test_Library
 
 # Build example sketches
-echo -e "\n########################################################################";
-echo -e "${YELLOW}BUILDING EXAMPLE SKETCHES"
-echo "########################################################################";
-for d in examples/* ; do
-    echo -e "\n########################################################################";
-    echo -e "${YELLOW}BUILD ${d}"
-    echo "########################################################################";
-    arduino-cli compile -b arduino:avr:uno $d
-    if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
+for p in ${PLATFORMS[*]} ; do
+    for d in examples/* ; do
+        echo -e "\n########################################################################";
+        echo -e "${YELLOW}BUILD ${d} FOR ${p}"
+        echo "########################################################################";
+        arduino-cli compile -b arduino:avr:uno $d
+        if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
+    done
 done
