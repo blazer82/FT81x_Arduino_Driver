@@ -1,4 +1,4 @@
-# FT81x Arduino Driver [![Build Status](https://travis-ci.org/blazer82/FT81x_Arduino_Driver.svg?branch=master)](https://travis-ci.org/blazer82/FT81x_Arduino_Driver)
+# FT81x Arduino Driver ![Build Status](https://github.com/blazer82/FT81x_Arduino_Driver/workflows/FT81x%20Arduino%20Driver%20CI/badge.svg)
 
 FT81x on ST7701S Arduino Driver
 
