@@ -7,6 +7,9 @@ set -e
 CORES=(arduino:avr arduino:samd esp8266:esp8266)
 PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native esp8266:esp8266:nodemcu)
 
+# Define additional URLs for arduino-cli
+ADDITIONAL_URLS=http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
 # Define colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -23,14 +26,14 @@ echo "########################################################################";
 export PATH=$PATH:$GITHUB_WORKSPACE/bin
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 arduino-cli config init
-arduino-cli core update-index --additional-urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
+arduino-cli core update-index --additional-urls "${ADDITIONAL_URLS}"
 
 # Install arduino cores
 for c in ${CORES[*]} ; do
     echo -e "\n########################################################################";
     echo -e "${YELLOW}INSTALLING ARDUINO CORE: ${c}"
     echo "########################################################################";
-    arduino-cli core install arduino:avr
+    arduino-cli core install $c --additional-urls "${ADDITIONAL_URLS}"
     if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
 done
 
@@ -43,7 +46,7 @@ for p in ${PLATFORMS[*]} ; do
         echo -e "\n########################################################################";
         echo -e "${YELLOW}BUILD ${d} FOR ${p}"
         echo "########################################################################";
-        arduino-cli compile -b arduino:avr:uno $d
+        arduino-cli compile -b $p $d
         if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
     done
 done
