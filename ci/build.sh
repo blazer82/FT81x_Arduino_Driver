@@ -4,11 +4,11 @@
 set -e
 
 # Define cores and platforms
-CORES=(arduino:avr arduino:samd esp8266:esp8266)
-PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native esp8266:esp8266:nodemcu)
+CORES=(arduino:avr arduino:samd esp8266:esp8266 esp32:esp32)
+PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native esp8266:esp8266:nodemcu esp32:esp32:nodemcu-32s)
 
 # Define additional URLs for arduino-cli
-ADDITIONAL_URLS=http://arduino.esp8266.com/stable/package_esp8266com_index.json
+ADDITIONAL_URLS=http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://dl.espressif.com/dl/package_esp32_index.json
 
 # Define colors
 RED='\033[0;31m'
@@ -18,6 +18,13 @@ YELLOW='\033[1;33m'
 # Create directories
 mkdir $HOME/Arduino
 mkdir $HOME/Arduino/libraries
+
+# Install dependencies
+echo -e "\n########################################################################";
+echo -e "${YELLOW}INSTALLING DEPENDENCIES"
+echo "########################################################################";
+# Install ESP32 dependencies
+pip install pyserial
 
 # Install arduino IDE
 echo -e "\n########################################################################";
