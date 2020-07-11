@@ -1,4 +1,7 @@
-# FT81x Arduino Driver ![Build Status](https://github.com/blazer82/FT81x_Arduino_Driver/workflows/build/badge.svg) ![Docs Status](https://github.com/blazer82/FT81x_Arduino_Driver/workflows/docs/badge.svg)
+# FT81x Arduino Driver
+
+[![build-badge]](https://github.com/blazer82/FT81x_Arduino_Driver/actions?workflow=build)
+[![docs-badge]](https://github.com/blazer82/FT81x_Arduino_Driver/actions?workflow=docs)
 
 FT81x on ST7701S Arduino Driver
 
@@ -21,3 +24,6 @@ This program is free software: you can redistribute it and/or modify it under th
 ### Hardware
 
 The hardware is licensed under [CERN-OHL-S v2](https://cern.ch/cern-ohl).
+
+[build-badge]: https://github.com/blazer82/FT81x_Arduino_Driver/workflows/build/badge.svg
+[docs-badge]: https://github.com/blazer82/FT81x_Arduino_Driver/workflows/docs/badge.svg
