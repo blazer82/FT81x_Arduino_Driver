@@ -8,16 +8,22 @@ mkdir $HOME/Arduino
 mkdir $HOME/Arduino/libraries
 
 # Install arduino IDE
+echo "### INSTALL arduino-cli..."
 export PATH=$PATH:$GITHUB_WORKSPACE/bin
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 arduino-cli config init
 arduino-cli core update-index
 
 # Install arduino cores
+echo "### INSTALL arduino:avr CORE..."
 arduino-cli core install arduino:avr
 
 # Link arduino library
 ln -s $GITHUB_WORKSPACE $HOME/Arduino/libraries/CI_Test_Library
 
 # Build example sketches
-arduino-cli compile -b arduino:avr:uno examples/HelloWorld 
+echo "### BUILD EXAMPLE SKETCHES..."
+for d in examples/* ; do
+    echo "### BUILD $d"
+    arduino-cli compile -b arduino:avr:uno $d
+done
