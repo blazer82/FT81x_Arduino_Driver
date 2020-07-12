@@ -25,10 +25,10 @@
 #ifndef DMASPI_H
 #define DMASPI_H
 
+#if (defined(__arm__) && defined(TEENSYDUINO))
+
 #include <Arduino.h>
 #include <util/atomic.h>
-
-#if (defined(__arm__) && defined(TEENSYDUINO))
 
 #include <SPI.h>
 
