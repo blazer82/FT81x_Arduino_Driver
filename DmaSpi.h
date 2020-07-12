@@ -28,9 +28,8 @@
 #if (defined(__arm__) && defined(TEENSYDUINO))
 
 #include <Arduino.h>
-#include <util/atomic.h>
-
 #include <SPI.h>
+#include <util/atomic.h>
 
 #include "ChipSelect.h"
 #include "DMAChannel.h"
@@ -301,7 +300,10 @@ class AbstractDmaSpi {
     static uint8_t devNull() { return m_devNull; }
 
    protected:
-    enum EState { eStopped, eRunning, eStopping, eError };
+    enum EState { eStopped,
+                  eRunning,
+                  eStopping,
+                  eError };
 
     static void addTransferToQueue(Transfer& transfer) {
         transfer.m_state = Transfer::State::pending;
