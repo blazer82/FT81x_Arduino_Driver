@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Check clang-format conformity
+        run: bash ci/clang-lint.sh
+
       - name: Build on Arduino CLI
         run: bash ci/build-arduino.sh
 
