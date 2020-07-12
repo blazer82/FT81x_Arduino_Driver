@@ -16,5 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build example sketches
-        run: bash ci/build.sh
+      - name: Build on Arduino CLI
+        run: bash ci/build-arduino.sh
+
+      - name: Build on PlatformIO
+        run: bash ci/build-platformio.sh

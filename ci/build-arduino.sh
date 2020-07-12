@@ -15,6 +15,9 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 
+# Make sure we are inside the github workspace
+cd $GITHUB_WORKSPACE
+
 # Create directories
 mkdir $HOME/Arduino
 mkdir $HOME/Arduino/libraries
@@ -26,7 +29,7 @@ echo "########################################################################";
 # Install ESP32 dependencies
 pip install pyserial
 
-# Install arduino IDE
+# Install Arduino IDE
 echo -e "\n########################################################################";
 echo -e "${YELLOW}INSTALLING ARDUINO CLI"
 echo "########################################################################";
@@ -35,7 +38,7 @@ curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.
 arduino-cli config init
 arduino-cli core update-index --additional-urls "${ADDITIONAL_URLS}"
 
-# Install arduino cores
+# Install Arduino cores
 for c in ${CORES[*]} ; do
     echo -e "\n########################################################################";
     echo -e "${YELLOW}INSTALLING ARDUINO CORE: ${c}"
@@ -44,7 +47,7 @@ for c in ${CORES[*]} ; do
     if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
 done
 
-# Link arduino library
+# Link Arduino library
 ln -s $GITHUB_WORKSPACE $HOME/Arduino/libraries/CI_Test_Library
 
 # Build example sketches
