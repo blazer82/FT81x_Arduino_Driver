@@ -36,7 +36,7 @@
 
 #if (defined(__arm__) && defined(TEENSYDUINO))
 #define FT81x_USE_DMA 1
-#include <DmaSpi.h>
+#include <platforms/teensy/DmaSpi.h>
 #endif
 
 #define FT81x_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((g) << 8) | (b))  ///< Color from RGB values
