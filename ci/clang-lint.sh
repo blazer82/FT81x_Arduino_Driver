@@ -18,7 +18,7 @@ cd $GITHUB_WORKSPACE
 sudo apt-get -y install clang-format-10
 
 # Check clang-format output
-for f in {,**/}*.{h,c,hpp,cpp,ino} ; do
+for f in **/*.{h,c,hpp,cpp,ino} ; do
     if [ -f "$f" ]; then
         echo -e "\n########################################################################";
         echo -e "${YELLOW}CHECK FORMATTING OF ${f}"
