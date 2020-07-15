@@ -114,6 +114,5 @@ var searchData=
   ['ft81x_5frotate_5fportrait_5finverted_5fmirrored_123',['FT81x_ROTATE_PORTRAIT_INVERTED_MIRRORED',['../_f_t81x_8h.html#a12a982c3f725b7922f77fd88fca419e9',1,'FT81x.h']]],
   ['ft81x_5frotate_5fportrait_5fmirrored_124',['FT81x_ROTATE_PORTRAIT_MIRRORED',['../_f_t81x_8h.html#a4c47ef1a74e570dca9f917cd604ffac4',1,'FT81x.h']]],
   ['ft81x_5fspi_5fsettings_125',['FT81x_SPI_SETTINGS',['../_f_t81x_8h.html#af439d90b57483e07330fb0f4a60dfdf3',1,'FT81x.h']]],
-  ['ft81x_20on_20st7701s_20arduino_20driver_126',['FT81x on ST7701S Arduino Driver',['../index.html',1,'']]],
-  ['ft81x_20arduino_20driver_127',['FT81x Arduino Driver',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['ft81x_20on_20st7701s_20arduino_20driver_126',['FT81x on ST7701S Arduino Driver',['../index.html',1,'']]]
 ];
