@@ -1,0 +1,17 @@
+{
+    "name": "FT81x_Arduino_Driver",
+    "version": "0.0.1",
+    "keywords": "display, tft, graphics, spi",
+    "description": "Graphics library for the open source FT81x display driver board.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/blazer82/FT81x_Arduino_Driver"
+    },
+    "exclude": "_utility",
+    "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "atmelsam",
+        "teensy"
+    ]
+}
