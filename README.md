@@ -9,7 +9,37 @@ FT81x on ST7701S Arduino Driver
 
 ![Board](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/board.png)
 
-Schematics, KiCad files and Gerber files can be found inside the **hardware folder** in this repository.
+Schematics, KiCad files and Gerber files can be found inside the [hardware folder](hardware) in this repository.
+
+The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices).
+
+## Supported Boards
+
+- :heavy_check_mark: NodeMCU-32S (ESP32)
+- :heavy_check_mark: Teensy 4.0 (ARM Cortex M7)
+- :x: Arduino Uno (ATmega328P)
+
+## Features
+
+- [x] Circle
+- [x] Rectangle
+- [x] Text
+- [x] Bitmap images
+- [x] Animated spinner
+- [ ] Buttons
+- [ ] Analog clock
+- [ ] Gauge
+- [ ] Keys
+- [ ] Progress bar
+- [ ] Scrollbar
+- [ ] Slider
+- [ ] Dial
+- [ ] Toggle
+- [ ] Custom fonts
+- [ ] JPEG support
+- [ ] PNG support
+- [ ] Video support
+- [ ] Audio
 
 ## API Documentation
 

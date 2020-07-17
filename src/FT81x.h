@@ -215,10 +215,10 @@ class FT81x {
    public:
     /*!
         @brief  Initialize FT81x with hardware SPI
-        @param  cs1 Pin connected to the board's CS1 pin
-        @param  cs2 Pin connected to the board's CS2 pin
-        @param  dc Pin connected to the board's DC pin
-        @param  res_d Pin connected to the board's RES_D pin
+        @param  cs1 Number of the pin connected to the board's CS1 pin
+        @param  cs2 Number of the pin connected to the board's CS2 pin
+        @param  dc Number of the pin connected to the board's DC pin
+        @param  res_d Number of the pin connected to the board's RES_D pin
    */
     FT81x(int8_t cs1, int8_t cs2, int8_t dc, int8_t res_d) : cs1(cs1), cs2(cs2), dc(dc), res_d(res_d) {}
 
