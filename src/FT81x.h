@@ -54,18 +54,6 @@
 #define FT81x_SPI_SETTINGS SPISettings(12000000, MSBFIRST, SPI_MODE0)  ///< Default SPI settings, can be overwritten
 #endif
 
-#ifndef FT81x_CS1
-#define FT81x_CS1 SS  ///< Default chip select pin for FT81x, can be overwritten
-#endif
-
-#ifndef FT81x_CS2
-#define FT81x_CS2 8  ///< Default chip select pin for display, can be overwritten
-#endif
-
-#ifndef FT81x_DC
-#define FT81x_DC 7  ///< Default data/command pin for display, can be overwritten
-#endif
-
 #define FT81x_CMD_ACTIVE    0x000000  ///< Switch from Standby/Sleep/PWRDOWN modes to active mode.
 #define FT81x_CMD_STANDBY   0x410000  ///< Put FT81x core to standby mode. Clock gate STANDBY off, PLL and Oscillator remain on (default). ACTIVE command to wake up.
 #define FT81x_CMD_SLEEP     0x420000  ///< Put FT81x core to sleep mode. Clock gate SLEEP off, PLL and Oscillator off. ACTIVE command to wake up.
@@ -225,7 +213,14 @@
 */
 class FT81x {
    public:
-    FT81x();
+    /*!
+        @brief  Initialize FT81x with hardware SPI
+        @param  cs1 Pin connected to the board's CS1 pin
+        @param  cs2 Pin connected to the board's CS2 pin
+        @param  dc Pin connected to the board's DC pin
+        @param  res_d Pin connected to the board's RES_D pin
+   */
+    FT81x(int8_t cs1, int8_t cs2, int8_t dc, int8_t res_d) : cs1(cs1), cs2(cs2), dc(dc), res_d(res_d) {}
 
     /*!
         @brief  Initialize FT81x instance
@@ -373,6 +368,10 @@ class FT81x {
     void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
 
    protected:
+    int8_t cs1;                    ///< CS pin for FT81x
+    int8_t cs2;                    ///< CS pin for display
+    int8_t dc;                     ///< Data/Command pin for display
+    int8_t res_d;                  ///< Reset pin for display
     uint16_t cmdWriteAddress = 0;  ///< Internal pointer to the command buffer of the FT81x chip
 
 #ifdef FT81x_USE_DMA
