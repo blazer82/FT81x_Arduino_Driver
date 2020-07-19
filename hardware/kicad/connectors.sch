@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 4 8
 Title "FT81x TFT040 Driver Board"
-Date "2020-07-06"
-Rev "2007D"
+Date "2020-07-19"
+Rev "2007E"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -113,8 +113,26 @@ $EndComp
 Connection ~ 5650 3400
 Text GLabel 5650 4400 2    50   Input ~ 0
 IRQ
-Text GLabel 5650 4500 2    50   Output ~ 0
-FTRES
-Text GLabel 5650 4600 2    50   Output ~ 0
-DISPRES
+$Comp
+L power:GND #PWR029
+U 1 1 5F146BD0
+P 5650 4500
+F 0 "#PWR029" H 5650 4250 50  0001 C CNN
+F 1 "GND" V 5650 4400 50  0000 R CNN
+F 2 "" H 5650 4500 50  0001 C CNN
+F 3 "" H 5650 4500 50  0001 C CNN
+	1    5650 4500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR030
+U 1 1 5F146D3C
+P 5650 4600
+F 0 "#PWR030" H 5650 4350 50  0001 C CNN
+F 1 "GND" V 5650 4500 50  0000 R CNN
+F 2 "" H 5650 4600 50  0001 C CNN
+F 3 "" H 5650 4600 50  0001 C CNN
+	1    5650 4600
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
