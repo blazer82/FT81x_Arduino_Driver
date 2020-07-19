@@ -368,7 +368,7 @@ class FT81x {
         @param  color Color for the letter
         @param  letter Letter to draw
     */
-    void drawLetter(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint8_t letter);
+    void drawLetter(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter);
 
     /*!
         @brief  Draw a single line of text in current display list
@@ -379,7 +379,7 @@ class FT81x {
         @param  options Option to use (e.g. FT81x_OPT_CENTER)
         @param  text Text to draw, must be terminated by null character (e.g. "Hello World\0")
     */
-    void drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]);
+    void drawText(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint16_t options, const char text[]);
 
     /*!
         @brief  Draw bitmap data in current display list
@@ -401,6 +401,19 @@ class FT81x {
         @param  color Color for the spinner
     */
     void drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale, const uint32_t color);
+
+    /*!
+        @brief  Draw a button
+        @param  x x-coordinate for the top-left of the button
+        @param  y y-coordinate for the top-left of the button
+        @param  width Width of the button
+        @param  height Height of the button
+        @param  font Font handle (16-34 are built-in fonts)
+        @param  color Color for the button
+        @param  options Option to use (e.g. FT81x_OPT_CENTER)
+        @param  text Text to draw, must be terminated by null character (e.g. "Hello World\0")
+    */
+    void drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t color, const uint16_t options, const char text[]);
 
     /*!
         @brief  Begin a new display list
@@ -529,6 +542,12 @@ class FT81x {
         @brief  Write the internal pointer to the command buffer to the FT81x chip
     */
     void updateCmdWriteAddress();
+
+    /*!
+        @brief  Send text as the end of a command sequence
+        @param  text Text to send, must be terminated by null character (e.g. "Hello World\0")
+    */
+    void sendText(const char text[]);
 
 #ifdef FT81x_USE_DMA
     void waitForDMAReady();

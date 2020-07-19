@@ -65,10 +65,12 @@
 #define BITMAP_SOURCE(a)             ((1L << 24) | (a))                                                                                                                     ///< Specify the source address of bitmap data in FT81X graphics memory RAM_G.
 #define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))                                                                ///< Specify the source bitmap memory format and layout for the current handle.
 #define BITMAP_SIZE(f, wx, wy, w, h) ((8L << 24) | ((uint32_t)((f)&1) << 20) | ((uint32_t)((wx)&1) << 19) | ((uint32_t)((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))  ///< Specify the screen drawing of bitmaps for the current handle
+#define FGCOLOR()                    0xFFFFFF0A                                                                                                                             ///< Set foreground color
 #define LOADIDENTITY()               0xFFFFFF26                                                                                                                             ///< Set the current matrix to identity
 #define SETMATRIX()                  0xFFFFFF2A                                                                                                                             ///< Write the current matrix as a bitmap transform
 #define SCALE()                      0xFFFFFF28                                                                                                                             ///< Apply a scale to the current matrix
 #define TEXT()                       0xFFFFFF0C                                                                                                                             ///< Draw text
+#define BUTTON()                     0xFFFFFF0D                                                                                                                             ///< Draw button
 #define SPINNER()                    0xFFFFFF16                                                                                                                             ///< Draw spinner
 
 #define BITMAPS      1  ///< Bitmap drawing primitive
@@ -242,7 +244,7 @@ void FT81x::drawRect(const int16_t x, const int16_t y, const uint16_t width, con
     endCmd(END());
 }
 
-void FT81x::drawLetter(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint8_t letter) {
+void FT81x::drawLetter(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter) {
     startCmd(COLOR(color));
     intermediateCmd(BEGIN(BITMAPS));
     intermediateCmd(VERTEX2II(x, y, font, letter));
@@ -263,41 +265,12 @@ void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y
     endCmd(VERTEX2II(x, y, 0, 0));
 }
 
-void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]) {
+void FT81x::drawText(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint16_t options, const char text[]) {
     startCmd(COLOR(color));
     intermediateCmd(TEXT());
     intermediateCmd(x | ((uint32_t)y << 16));
     intermediateCmd(font | ((uint32_t)options << 16));
-    uint32_t data = 0xFFFFFFFF;
-    for (uint8_t i = 0; (data >> 24) != 0; i += 4) {
-        data = 0;
-
-        if (text[i] != 0) {
-            data |= text[i];
-
-            if (text[i + 1] != 0) {
-                data |= text[i + 1] << 8;
-
-                if (text[i + 2] != 0) {
-                    data |= (uint32_t)text[i + 2] << 16;
-
-                    if (text[i + 3] != 0) {
-                        data |= (uint32_t)text[i + 3] << 24;
-                    }
-                }
-            }
-        }
-
-        if ((data >> 24) != 0) {
-            intermediateCmd(data);
-        } else {
-            endCmd(data);
-        }
-    }
-
-    if ((data >> 24) != 0) {
-        endCmd(0);
-    }
+    sendText(text);
 }
 
 void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale, const uint32_t color) {
@@ -305,6 +278,16 @@ void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, 
     intermediateCmd(SPINNER());
     intermediateCmd(x | ((uint32_t)y << 16));
     endCmd(style | ((uint32_t)scale << 16));
+}
+
+void FT81x::drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t color, const uint16_t options, const char text[]) {
+    startCmd(FGCOLOR());
+    intermediateCmd(color);
+    intermediateCmd(BUTTON());
+    intermediateCmd(x | ((uint32_t)y << 16));
+    intermediateCmd(width | ((uint32_t)height << 16));
+    intermediateCmd(font | ((uint32_t)options << 16));
+    sendText(text);
 }
 
 void FT81x::cmd(const uint32_t cmd) {
@@ -354,6 +337,39 @@ void FT81x::stopSound() {
 inline void FT81x::increaseCmdWriteAddress(uint16_t delta) { cmdWriteAddress = (cmdWriteAddress + delta) % 4096; }
 
 inline void FT81x::updateCmdWriteAddress() { write16(FT81x_REG_CMD_WRITE, cmdWriteAddress); }
+
+void FT81x::sendText(const char text[]) {
+    uint32_t data = 0xFFFFFFFF;
+    for (uint8_t i = 0; (data >> 24) != 0; i += 4) {
+        data = 0;
+
+        if (text[i] != 0) {
+            data |= text[i];
+
+            if (text[i + 1] != 0) {
+                data |= text[i + 1] << 8;
+
+                if (text[i + 2] != 0) {
+                    data |= (uint32_t)text[i + 2] << 16;
+
+                    if (text[i + 3] != 0) {
+                        data |= (uint32_t)text[i + 3] << 24;
+                    }
+                }
+            }
+        }
+
+        if ((data >> 24) != 0) {
+            intermediateCmd(data);
+        } else {
+            endCmd(data);
+        }
+    }
+
+    if ((data >> 24) != 0) {
+        endCmd(0);
+    }
+}
 
 #ifdef FT81x_USE_DMA
 
