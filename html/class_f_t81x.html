@@ -141,6 +141,23 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:ac5df005d4315b68b678cf247d0c686cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc">writeGRAM</a> (const uint32_t offset, const uint32_t size, const uint8_t data[])</td></tr>
 <tr class="memdesc:ac5df005d4315b68b678cf247d0c686cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to general purpose graphics RAM.  <a href="class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc">More...</a><br /></td></tr>
 <tr class="separator:ac5df005d4315b68b678cf247d0c686cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cdffebd19b4313d221e57a40daa6928"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a4cdffebd19b4313d221e57a40daa6928">isSoundPlaying</a> ()</td></tr>
+<tr class="memdesc:a4cdffebd19b4313d221e57a40daa6928"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether sound is currently playing.  <a href="class_f_t81x.html#a4cdffebd19b4313d221e57a40daa6928">More...</a><br /></td></tr>
+<tr class="separator:a4cdffebd19b4313d221e57a40daa6928"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56be65a2c6934c4a7ae7746be1a7828a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a56be65a2c6934c4a7ae7746be1a7828a">setAudioVolume</a> (uint8_t volume)</td></tr>
+<tr class="memdesc:a56be65a2c6934c4a7ae7746be1a7828a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume of the audio output.  <a href="class_f_t81x.html#a56be65a2c6934c4a7ae7746be1a7828a">More...</a><br /></td></tr>
+<tr class="separator:a56be65a2c6934c4a7ae7746be1a7828a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc616b0b3a40ba4d505531f8faa5c7a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#abc616b0b3a40ba4d505531f8faa5c7a8">setSound</a> (uint8_t effect, uint8_t pitch)</td></tr>
+<tr class="memdesc:abc616b0b3a40ba4d505531f8faa5c7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a sound effect and its pitch.  <a href="class_f_t81x.html#abc616b0b3a40ba4d505531f8faa5c7a8">More...</a><br /></td></tr>
+<tr class="separator:abc616b0b3a40ba4d505531f8faa5c7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c0480370ee1cd9880b796f92f393d2"><td class="memItemLeft" align="right" valign="top"><a id="a80c0480370ee1cd9880b796f92f393d2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a80c0480370ee1cd9880b796f92f393d2">playSound</a> ()</td></tr>
+<tr class="memdesc:a80c0480370ee1cd9880b796f92f393d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play the sound defined by <a class="el" href="class_f_t81x.html#abc616b0b3a40ba4d505531f8faa5c7a8" title="Set a sound effect and its pitch.">setSound()</a> <br /></td></tr>
+<tr class="separator:a80c0480370ee1cd9880b796f92f393d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33e592a320ad7187112d04fb5f0285e5"><td class="memItemLeft" align="right" valign="top"><a id="a33e592a320ad7187112d04fb5f0285e5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a33e592a320ad7187112d04fb5f0285e5">stopSound</a> ()</td></tr>
+<tr class="memdesc:a33e592a320ad7187112d04fb5f0285e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop audio output by playing silence. <br /></td></tr>
+<tr class="separator:a33e592a320ad7187112d04fb5f0285e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -788,6 +805,26 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
+<a id="a4cdffebd19b4313d221e57a40daa6928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cdffebd19b4313d221e57a40daa6928">&#9670;&nbsp;</a></span>isSoundPlaying()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FT81x::isSoundPlaying </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Query whether sound is currently playing. </p>
+<dl class="section return"><dt>Returns</dt><dd>true when sound is playing and false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="af30c682436dbda49eddd2280c7511cd7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af30c682436dbda49eddd2280c7511cd7">&#9670;&nbsp;</a></span>queryDisplay()</h2>
 
@@ -982,6 +1019,32 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
+<a id="a56be65a2c6934c4a7ae7746be1a7828a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56be65a2c6934c4a7ae7746be1a7828a">&#9670;&nbsp;</a></span>setAudioVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::setAudioVolume </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>volume</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the volume of the audio output. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">volume</td><td>Number from 0 to 255 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a94b9d52eaac56fe520b441b602d751a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a94b9d52eaac56fe520b441b602d751a1">&#9670;&nbsp;</a></span>setRotation()</h2>
 
@@ -1001,7 +1064,44 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Set screen rotation. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rotation</td><td>Use one of the pre-defined contants to set the rotation. </td></tr>
+    <tr><td class="paramname">rotation</td><td>Use one of the pre-defined contants to set the rotation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abc616b0b3a40ba4d505531f8faa5c7a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc616b0b3a40ba4d505531f8faa5c7a8">&#9670;&nbsp;</a></span>setSound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::setSound </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>effect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pitch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set a sound effect and its pitch. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">effect</td><td>Sound effect </td></tr>
+    <tr><td class="paramname">pitch</td><td>Pitch of the sound (MIDI note ranging from 21 to 82) if supported by the selected effect </td></tr>
   </table>
   </dd>
 </dl>
