@@ -416,7 +416,7 @@ class FT81x {
         @brief  Set screen rotation
         @param  rotation Use one of the pre-defined contants to set the rotation
     */
-    void setRotation(uint8_t rotation);
+    void setRotation(const uint8_t rotation);
 
     /*!
         @brief  Write data to general purpose graphics RAM
@@ -436,14 +436,14 @@ class FT81x {
         @brief  Set the volume of the audio output
         @param volume Number from 0 to 255
     */
-    void setAudioVolume(uint8_t volume);
+    void setAudioVolume(const uint8_t volume);
 
     /*!
         @brief  Set a sound effect and its pitch
         @param effect Sound effect
         @param pitch Pitch of the sound (MIDI note ranging from 21 to 82) if supported by the selected effect
     */
-    void setSound(uint8_t effect, uint8_t pitch);
+    void setSound(const uint8_t effect, const uint8_t pitch);
 
     /*!
         @brief  Play the sound defined by setSound()

@@ -328,17 +328,17 @@ void FT81x::swapScreen() {
     endCmd(SWAP());
 }
 
-void FT81x::setRotation(uint8_t rotation) { write8(FT81x_REG_ROTATE, rotation & 0x7); }
+void FT81x::setRotation(const uint8_t rotation) { write8(FT81x_REG_ROTATE, rotation & 0x7); }
 
 bool FT81x::isSoundPlaying() {
     return read8(FT81x_REG_PLAY) != 0;
 }
 
-void FT81x::setAudioVolume(uint8_t volume) {
+void FT81x::setAudioVolume(const uint8_t volume) {
     write8(FT81x_REG_VOL_SOUND, volume);
 }
 
-void FT81x::setSound(uint8_t effect, uint8_t pitch) {
+void FT81x::setSound(const uint8_t effect, const uint8_t pitch) {
     write16(FT81x_REG_SOUND, (pitch << 8) | effect);
 }
 
