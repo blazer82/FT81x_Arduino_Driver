@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 4 8
 Title "FT81x TFT040 Driver Board"
-Date "2020-07-06"
-Rev "2007D"
+Date "2020-07-19"
+Rev "2007E"
 Comp ""
 Comment1 ""
 Comment2 ""
