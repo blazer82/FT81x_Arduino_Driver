@@ -189,7 +189,13 @@ F 5 "TXS0108EPWR" H 6100 4150 50  0001 C CNN "DigiKey"
 	1    0    0    -1  
 $EndComp
 NoConn ~ 6500 3700
-NoConn ~ 6500 3900
-NoConn ~ 5700 3900
 NoConn ~ 5700 3700
+Wire Wire Line
+	6500 3900 6750 3900
+Text GLabel 6750 3900 2    50   Output ~ 0
+IRQ
+Wire Wire Line
+	5700 3900 5450 3900
+Text GLabel 5450 3900 0    50   Input ~ 0
+IRQ_3V
 $EndSCHEMATC
