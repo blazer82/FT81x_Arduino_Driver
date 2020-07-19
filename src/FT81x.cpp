@@ -330,6 +330,27 @@ void FT81x::swapScreen() {
 
 void FT81x::setRotation(uint8_t rotation) { write8(FT81x_REG_ROTATE, rotation & 0x7); }
 
+bool FT81x::isSoundPlaying() {
+    return read8(FT81x_REG_PLAY) != 0;
+}
+
+void FT81x::setAudioVolume(uint8_t volume) {
+    write8(FT81x_REG_VOL_SOUND, volume);
+}
+
+void FT81x::setSound(uint8_t effect, uint8_t pitch) {
+    write16(FT81x_REG_SOUND, (pitch << 8) | effect);
+}
+
+void FT81x::playSound() {
+    write8(FT81x_REG_PLAY, 1);
+}
+
+void FT81x::stopSound() {
+    setSound(0, 0);
+    playSound();
+}
+
 inline void FT81x::increaseCmdWriteAddress(uint16_t delta) { cmdWriteAddress = (cmdWriteAddress + delta) % 4096; }
 
 inline void FT81x::updateCmdWriteAddress() { write16(FT81x_REG_CMD_WRITE, cmdWriteAddress); }

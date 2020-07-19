@@ -26,6 +26,7 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 - [x] Text
 - [x] Bitmap images
 - [x] Animated spinner
+- [x] Sound effects
 - [ ] Buttons
 - [ ] Analog clock
 - [ ] Gauge
@@ -38,8 +39,8 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 - [ ] Custom fonts
 - [ ] JPEG support
 - [ ] PNG support
-- [ ] Video support
-- [ ] Audio
+- [ ] Video playback
+- [ ] Audio playback
 
 ## API Documentation
 

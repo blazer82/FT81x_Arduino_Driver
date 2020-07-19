@@ -160,6 +160,65 @@
 #define FT81x_OPT_NOSECS    0x8000  ///< No second hands (CMD_CLOCK)
 #define FT81x_OPT_NOHANDS   0xC000  ///< Nohands (CMD_CLOCK)
 
+#define FT81x_SOUND_SILENCE       0x00  ///< No sound
+#define FT81x_SOUND_SQUARE_WAVE   0x01  ///< Square wave
+#define FT81x_SOUND_SINE_WAVE     0x02  ///< Sine wave
+#define FT81x_SOUND_SAWTOOTH_WAVE 0x03  ///< Sawtooth wave
+#define FT81x_SOUND_TRIANGLE_WAVE 0x04  ///< Triangle wave
+#define FT81x_SOUND_BEEPINH       0x05  ///< Beeping
+#define FT81x_SOUND_ALARM         0x06  ///< Alarm
+#define FT81x_SOUND_WARBLE        0x07  ///< Warble
+#define FT81x_SOUND_CAROUSEL      0x08  ///< Carousel
+#define FT81x_SOUND_1_SHORT_PIP   0x10  ///< 1 short pip
+#define FT81x_SOUND_2_SHORT_PIPS  0x11  ///< 2 short pip
+#define FT81x_SOUND_3_SHORT_PIPS  0x12  ///< 3 short pip
+#define FT81x_SOUND_4_SHORT_PIPS  0x13  ///< 4 short pip
+#define FT81x_SOUND_5_SHORT_PIPS  0x14  ///< 5 short pip
+#define FT81x_SOUND_6_SHORT_PIPS  0x15  ///< 6 short pip
+#define FT81x_SOUND_7_SHORT_PIPS  0x16  ///< 7 short pip
+#define FT81x_SOUND_8_SHORT_PIPS  0x17  ///< 8 short pip
+#define FT81x_SOUND_9_SHORT_PIPS  0x18  ///< 9 short pip
+#define FT81x_SOUND_10_SHORT_PIPS 0x19  ///< 10 short pip
+#define FT81x_SOUND_11_SHORT_PIPS 0x1A  ///< 11 short pip
+#define FT81x_SOUND_12_SHORT_PIPS 0x1B  ///< 12 short pip
+#define FT81x_SOUND_13_SHORT_PIPS 0x1C  ///< 13 short pip
+#define FT81x_SOUND_14_SHORT_PIPS 0x1D  ///< 14 short pip
+#define FT81x_SOUND_15_SHORT_PIPS 0x1E  ///< 15 short pip
+#define FT81x_SOUND_16_SHORT_PIPS 0x1F  ///< 16 short pip
+#define FT81x_SOUND_DTMF_HASH     0x23  ///< DTMF #
+#define FT81x_SOUND_DTMF_STAR     0x2C  ///< DTMF *
+#define FT81x_SOUND_DTMF_0        0x30  ///< DTMF 0
+#define FT81x_SOUND_DTMF_1        0x31  ///< DTMF 1
+#define FT81x_SOUND_DTMF_2        0x32  ///< DTMF 2
+#define FT81x_SOUND_DTMF_3        0x33  ///< DTMF 3
+#define FT81x_SOUND_DTMF_4        0x34  ///< DTMF 4
+#define FT81x_SOUND_DTMF_5        0x35  ///< DTMF 5
+#define FT81x_SOUND_DTMF_6        0x36  ///< DTMF 6
+#define FT81x_SOUND_DTMF_7        0x37  ///< DTMF 7
+#define FT81x_SOUND_DTMF_8        0x38  ///< DTMF 8
+#define FT81x_SOUND_DTMF_9        0x39  ///< DTMF 9
+#define FT81x_SOUND_HARP          0x40  ///< Harp
+#define FT81x_SOUND_XYLOPHONE     0x41  ///< Xylophone
+#define FT81x_SOUND_TUBA          0x42  ///< Tuba
+#define FT81x_SOUND_GLOCKENSPIEL  0x43  ///< Glockenspiel
+#define FT81x_SOUND_ORGAN         0x44  ///< Organ
+#define FT81x_SOUND_TRUMPET       0x45  ///< Trumpet
+#define FT81x_SOUND_PIANO         0x46  ///< Piano
+#define FT81x_SOUND_CHIMES        0x47  ///< Chimes
+#define FT81x_SOUND_MUSIC_BOX     0x48  ///< Music box
+#define FT81x_SOUND_BELL          0x49  ///< Bell
+#define FT81x_SOUND_CLICK         0x50  ///< Click
+#define FT81x_SOUND_SWITCH        0x51  ///< Switch
+#define FT81x_SOUND_COWBELL       0x52  ///< Cowbell
+#define FT81x_SOUND_NOTCH         0x53  ///< Notch
+#define FT81x_SOUND_HIHAT         0x54  ///< Hihat
+#define FT81x_SOUND_KICKDRUM      0x55  ///< Kickdrum
+#define FT81x_SOUND_POP           0x56  ///< Pop
+#define FT81x_SOUND_CLACK         0x57  ///< Clack
+#define FT81x_SOUND_CHACK         0x58  ///< Chack
+#define FT81x_SOUND_MUTE          0x60  ///< Mute
+#define FT81x_SOUND_UNMUTE        0x61  ///< Unmute
+
 #define ST7701_SWRESET   0x01  ///< Software reset
 #define ST7701_RDDPM     0x0A  ///< Read Display Power Mode
 #define ST7701_RDDCOLMOD 0x0C  ///< Read Display Pixel Format
@@ -355,7 +414,7 @@ class FT81x {
 
     /*!
         @brief  Set screen rotation
-        @param  rotation Use one of the pre-defined contants to set the rotation.
+        @param  rotation Use one of the pre-defined contants to set the rotation
     */
     void setRotation(uint8_t rotation);
 
@@ -366,6 +425,35 @@ class FT81x {
         @param  data Pointer to the data
     */
     void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
+
+    /*!
+        @brief  Query whether sound is currently playing
+        @return true when sound is playing and false otherwise
+    */
+    bool isSoundPlaying();
+
+    /*!
+        @brief  Set the volume of the audio output
+        @param volume Number from 0 to 255
+    */
+    void setAudioVolume(uint8_t volume);
+
+    /*!
+        @brief  Set a sound effect and its pitch
+        @param effect Sound effect
+        @param pitch Pitch of the sound (MIDI note ranging from 21 to 82) if supported by the selected effect
+    */
+    void setSound(uint8_t effect, uint8_t pitch);
+
+    /*!
+        @brief  Play the sound defined by setSound()
+    */
+    void playSound();
+
+    /*!
+        @brief  Stop audio output by playing silence
+    */
+    void stopSound();
 
    protected:
     int8_t cs1;                    ///< CS pin for FT81x
