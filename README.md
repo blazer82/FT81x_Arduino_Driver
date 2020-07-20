@@ -42,6 +42,21 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 - [ ] Video playback
 - [ ] Audio playback
 
+## Usage
+
+```c++
+#include "FT81x.h"
+
+FT81x ft81x = FT81x(SS, 9, 8, 7);
+
+ft81x.begin();
+
+ft81x.beginDisplayList();
+ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
+ft81x.drawText(240, 200, 31, FT81x_COLOR_RGB(255, 255, 255), FT81x_OPT_CENTER, "Hello World\0");
+ft81x.swapScreen();
+```
+
 ## API Documentation
 
 An automatically generated API documentation is available on [github.io](https://blazer82.github.io/FT81x_Arduino_Driver).
