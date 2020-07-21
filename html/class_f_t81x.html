@@ -127,9 +127,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a1bb9f7000c59109e8a7fb8e835b1b298"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a1bb9f7000c59109e8a7fb8e835b1b298">drawSpinner</a> (const int16_t x, const int16_t y, const uint16_t style, const uint16_t scale, const uint32_t color)</td></tr>
 <tr class="memdesc:a1bb9f7000c59109e8a7fb8e835b1b298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a spinner in current display list.  <a href="class_f_t81x.html#a1bb9f7000c59109e8a7fb8e835b1b298">More...</a><br /></td></tr>
 <tr class="separator:a1bb9f7000c59109e8a7fb8e835b1b298"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4669cfc97fc71445caaaee7f80b76a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#aa4669cfc97fc71445caaaee7f80b76a6">drawButton</a> (const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t color, const uint16_t options, const char text[])</td></tr>
-<tr class="memdesc:aa4669cfc97fc71445caaaee7f80b76a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a button.  <a href="class_f_t81x.html#aa4669cfc97fc71445caaaee7f80b76a6">More...</a><br /></td></tr>
-<tr class="separator:aa4669cfc97fc71445caaaee7f80b76a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afed92f894f32077970922df950c8ef85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#afed92f894f32077970922df950c8ef85">drawButton</a> (const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t textColor, const uint32_t buttonColor, const uint16_t options, const char text[])</td></tr>
+<tr class="memdesc:afed92f894f32077970922df950c8ef85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a button.  <a href="class_f_t81x.html#afed92f894f32077970922df950c8ef85">More...</a><br /></td></tr>
+<tr class="separator:afed92f894f32077970922df950c8ef85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2583575695e0ceffe2452e2c7247d96e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a2583575695e0ceffe2452e2c7247d96e">drawClock</a> (const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t hours, const uint16_t minutes, const uint16_t seconds)</td></tr>
+<tr class="memdesc:a2583575695e0ceffe2452e2c7247d96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw an analog clock.  <a href="class_f_t81x.html#a2583575695e0ceffe2452e2c7247d96e">More...</a><br /></td></tr>
+<tr class="separator:a2583575695e0ceffe2452e2c7247d96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8926dedeafeb49b226845ac45c5769"><td class="memItemLeft" align="right" valign="top"><a id="a5f8926dedeafeb49b226845ac45c5769"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a5f8926dedeafeb49b226845ac45c5769">beginDisplayList</a> ()</td></tr>
 <tr class="memdesc:a5f8926dedeafeb49b226845ac45c5769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin a new display list. <br /></td></tr>
@@ -412,8 +415,8 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
-<a id="aa4669cfc97fc71445caaaee7f80b76a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4669cfc97fc71445caaaee7f80b76a6">&#9670;&nbsp;</a></span>drawButton()</h2>
+<a id="afed92f894f32077970922df950c8ef85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afed92f894f32077970922df950c8ef85">&#9670;&nbsp;</a></span>drawButton()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -452,7 +455,13 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const uint32_t&#160;</td>
-          <td class="paramname"><em>color</em>, </td>
+          <td class="paramname"><em>textColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>buttonColor</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -482,8 +491,9 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">width</td><td>Width of the button </td></tr>
     <tr><td class="paramname">height</td><td>Height of the button </td></tr>
     <tr><td class="paramname">font</td><td>Font handle (16-34 are built-in fonts) </td></tr>
-    <tr><td class="paramname">color</td><td>Color for the button </td></tr>
-    <tr><td class="paramname">options</td><td>Option to use (e.g. FT81x_OPT_CENTER) </td></tr>
+    <tr><td class="paramname">textColor</td><td>Color for the text </td></tr>
+    <tr><td class="paramname">buttonColor</td><td>Color for the button </td></tr>
+    <tr><td class="paramname">options</td><td>Option to use (e.g. FT81x_OPT_FLAT) </td></tr>
     <tr><td class="paramname">text</td><td>Text to draw, must be terminated by null character (e.g. "Hello World\0") </td></tr>
   </table>
   </dd>
@@ -536,6 +546,92 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">y</td><td>y-coordinate for the center of the circle </td></tr>
     <tr><td class="paramname">size</td><td>Radius of the circle </td></tr>
     <tr><td class="paramname">color</td><td>Color of the circle </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2583575695e0ceffe2452e2c7247d96e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2583575695e0ceffe2452e2c7247d96e">&#9670;&nbsp;</a></span>drawClock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::drawClock </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>handsColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>backgroundColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>hours</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>minutes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>seconds</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draw an analog clock. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x-coordinate for the center of the clock </td></tr>
+    <tr><td class="paramname">y</td><td>y-coordinate for the center of the clock </td></tr>
+    <tr><td class="paramname">radius</td><td>Radius of the clock </td></tr>
+    <tr><td class="paramname">handsColor</td><td>Color for the clock hands </td></tr>
+    <tr><td class="paramname">backgroundColor</td><td>Color for the clock background </td></tr>
+    <tr><td class="paramname">options</td><td>Option to use (e.g. FT81x_OPT_FLAT | FT81x_OPT_NOSECS) </td></tr>
+    <tr><td class="paramname">hours</td><td>Hours clock hand </td></tr>
+    <tr><td class="paramname">minutes</td><td>Minutes clock hand </td></tr>
+    <tr><td class="paramname">seconds</td><td>Seconds clock hand </td></tr>
   </table>
   </dd>
 </dl>
