@@ -409,11 +409,26 @@ class FT81x {
         @param  width Width of the button
         @param  height Height of the button
         @param  font Font handle (16-34 are built-in fonts)
-        @param  color Color for the button
-        @param  options Option to use (e.g. FT81x_OPT_CENTER)
+        @param  textColor Color for the text
+        @param  buttonColor Color for the button
+        @param  options Option to use (e.g. FT81x_OPT_FLAT)
         @param  text Text to draw, must be terminated by null character (e.g. "Hello World\0")
     */
-    void drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t color, const uint16_t options, const char text[]);
+    void drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t textColor, const uint32_t buttonColor, const uint16_t options, const char text[]);
+
+    /*!
+        @brief  Draw an analog clock
+        @param  x x-coordinate for the center of the clock
+        @param  y y-coordinate for the center of the clock
+        @param  radius Radius of the clock
+        @param  handsColor Color for the clock hands
+        @param  backgroundColor Color for the clock background
+        @param  options Option to use (e.g. FT81x_OPT_FLAT | FT81x_OPT_NOSECS)
+        @param  hours Hours clock hand
+        @param  minutes Minutes clock hand
+        @param  seconds Seconds clock hand
+    */
+    void drawClock(const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t hours, const uint16_t minutes, const uint16_t seconds);
 
     /*!
         @brief  Begin a new display list

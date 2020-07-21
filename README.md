@@ -31,7 +31,7 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 - [x] Animated spinner
 - [x] Sound effects
 - [x] Buttons
-- [ ] Analog clock
+- [x] Analog clock
 - [ ] Gauge
 - [ ] Keys
 - [ ] Progress bar
