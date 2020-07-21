@@ -4,8 +4,8 @@
 set -e
 
 # Define cores and platforms
-CORES=(arduino:avr arduino:samd esp8266:esp8266 esp32:esp32)
-PLATFORMS=(arduino:avr:uno arduino:samd:arduino_zero_native esp8266:esp8266:nodemcu esp32:esp32:nodemcu-32s)
+CORES=(arduino:avr arduino:sam esp8266:esp8266 esp32:esp32)
+PLATFORMS=(arduino:avr:uno arduino:sam:arduino_due_x_dbg esp8266:esp8266:nodemcu esp32:esp32:nodemcu-32s)
 
 # Define additional URLs for arduino-cli
 ADDITIONAL_URLS=http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://dl.espressif.com/dl/package_esp32_index.json
