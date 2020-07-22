@@ -166,7 +166,7 @@ void FT81x::initFT81x() {
     FT81x::swapScreen();
 
     // enable pixel clock
-    FT81x::write8(FT81x_REG_PCLK, 10);
+    FT81x::write8(FT81x_REG_PCLK, 3);
 }
 
 void FT81x::initDisplay() {
