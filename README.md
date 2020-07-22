@@ -50,7 +50,7 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 ```c++
 #include "FT81x.h"
 
-FT81x ft81x = FT81x(SS, 9, 8, 7);
+FT81x ft81x = FT81x(10, 9, 8, 7);
 
 void setup() {
     SPI.begin();

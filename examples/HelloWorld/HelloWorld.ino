@@ -26,7 +26,7 @@
 
 #include "FT81x.h"
 
-FT81x ft81x = FT81x(SS, 8, 7, 5);
+FT81x ft81x = FT81x(10, 9, 8, 7);
 
 void setup() {
     SPI.begin();
