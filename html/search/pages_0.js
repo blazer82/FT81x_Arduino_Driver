@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ft81x_20on_20st7701s_20arduino_20driver_510',['FT81x on ST7701S Arduino Driver',['../index.html',1,'']]]
+  ['ft81x_20on_20st7701s_20arduino_20driver_512',['FT81x on ST7701S Arduino Driver',['../index.html',1,'']]]
 ];

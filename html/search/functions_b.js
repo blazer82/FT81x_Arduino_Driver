@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['write16_291',['write16',['../class_f_t81x.html#a98fa649d460f757142d8a5ba5ece1465',1,'FT81x']]],
-  ['write32_292',['write32',['../class_f_t81x.html#a6ad4124ad6837fccdff1822c5577c9a6',1,'FT81x']]],
-  ['write8_293',['write8',['../class_f_t81x.html#a8611331069a924c5816a87989769051b',1,'FT81x']]],
-  ['writegram_294',['writeGRAM',['../class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc',1,'FT81x']]]
+  ['write16_292',['write16',['../class_f_t81x.html#a98fa649d460f757142d8a5ba5ece1465',1,'FT81x']]],
+  ['write32_293',['write32',['../class_f_t81x.html#a6ad4124ad6837fccdff1822c5577c9a6',1,'FT81x']]],
+  ['write8_294',['write8',['../class_f_t81x.html#a8611331069a924c5816a87989769051b',1,'FT81x']]],
+  ['writegram_295',['writeGRAM',['../class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc',1,'FT81x']]]
 ];
