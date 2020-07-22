@@ -50,8 +50,20 @@
 #define FT81x_ROTATE_PORTRAIT_MIRRORED           6  ///< Use with setRotation() to mirror and rotate screen to portrait
 #define FT81x_ROTATE_PORTRAIT_INVERTED_MIRRORED  7  ///< Use with setRotation() to invert, mirror and rotate screen to portrait
 
+#if defined(ARDUINO_ARCH_ARC32)
+#define SPI_CLOCK_SPEED 16000000  ///< Default SPI clock speed for Arduino 101
+#elif defined(ARDUINO_ARCH_SAM)
+#define SPI_CLOCK_SPEED 40000000  ///< Default SPI clock speed for Arduino Due
+#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__IMXRT1062__)
+#define SPI_CLOCK_SPEED 40000000  ///< Default SPI clock speed for Teensy 3.0, 3.1/3.2, 3.5, 3.6, 4.0
+#elif defined(ESP8266) || defined(ESP32)
+#define SPI_CLOCK_SPEED 40000000  ///< Default SPI clock speed for ESP8266, ESP32
+#else
+#define SPI_CLOCK_SPEED 8000000  ///< Default SPI clock speed for unspecified architectures
+#endif
+
 #ifndef FT81x_SPI_SETTINGS
-#define FT81x_SPI_SETTINGS SPISettings(12000000, MSBFIRST, SPI_MODE0)  ///< Default SPI settings, can be overwritten
+#define FT81x_SPI_SETTINGS SPISettings(SPI_CLOCK_SPEED, MSBFIRST, SPI_MODE0)  ///< Default SPI settings, can be overwritten
 #endif
 
 #define FT81x_CMD_ACTIVE    0x000000  ///< Switch from Standby/Sleep/PWRDOWN modes to active mode.
