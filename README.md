@@ -52,12 +52,15 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 
 FT81x ft81x = FT81x(SS, 9, 8, 7);
 
-ft81x.begin();
+void setup() {
+    SPI.begin();
+    ft81x.begin();
 
-ft81x.beginDisplayList();
-ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
-ft81x.drawText(240, 200, 31, FT81x_COLOR_RGB(255, 255, 255), FT81x_OPT_CENTER, "Hello World\0");
-ft81x.swapScreen();
+    ft81x.beginDisplayList();
+    ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
+    ft81x.drawText(240, 200, 31, FT81x_COLOR_RGB(255, 255, 255), FT81x_OPT_CENTER, "Hello World\0");
+    ft81x.swapScreen();
+}
 ```
 
 ## API Documentation

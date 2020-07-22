@@ -29,6 +29,7 @@
 FT81x ft81x = FT81x(SS, 8, 7, 5);
 
 void setup() {
+    SPI.begin();
     ft81x.begin();
 
     ft81x.setRotation(FT81x_ROTATE_LANDSCAPE);
