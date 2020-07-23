@@ -15,12 +15,12 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 
 ## Tested Boards
 
+- :heavy_check_mark: Arduino Uno (ATmega328P)
+- :heavy_check_mark: Arduino Nano (ATmega328)
+- :heavy_check_mark: Arduino Nano Every (ATMega4809)
+- :heavy_check_mark: Arduino Due (AT91SAM3X8E)
 - :heavy_check_mark: NodeMCU-32S (ESP32)
 - :heavy_check_mark: Teensy 4.0 (ARM Cortex M7)
-- :heavy_check_mark: Arduino Due (AT91SAM3X8E)
-- :x: Arduino Uno (ATmega328P)
-- :x: Arduino Nano (ATmega328)
-- :x: Arduino Nano Every (ATMega4809)
 
 ## Features
 
