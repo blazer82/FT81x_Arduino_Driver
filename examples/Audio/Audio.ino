@@ -35,10 +35,11 @@ void setup() {
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
     ft81x.swapScreen();
+
+    ft81x.setAudioVolume(64);
 }
 
 void loop() {
-    ft81x.setAudioVolume(64);
     for (uint8_t pitch = 36; pitch <= 44; pitch++) {
         ft81x.setSound(FT81x_SOUND_GLOCKENSPIEL, pitch);
         ft81x.playSound();
