@@ -40,4 +40,5 @@ for d in examples/* ; do
     echo "board = teensy40" >> platformio.ini
     pio run
     if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
+    cd -
 done
