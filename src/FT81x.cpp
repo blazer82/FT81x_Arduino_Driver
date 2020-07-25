@@ -70,6 +70,7 @@
 #define LOADIDENTITY()               0xFFFFFF26                                                                                                                             ///< Set the current matrix to identity
 #define SETMATRIX()                  0xFFFFFF2A                                                                                                                             ///< Write the current matrix as a bitmap transform
 #define SCALE()                      0xFFFFFF28                                                                                                                             ///< Apply a scale to the current matrix
+#define GRADIENT()                   0xFFFFFF0B                                                                                                                             ///< Draw gradient
 #define TEXT()                       0xFFFFFF0C                                                                                                                             ///< Draw text
 #define BUTTON()                     0xFFFFFF0D                                                                                                                             ///< Draw button
 #define GAUGE()                      0xFFFFFF13                                                                                                                             ///< Draw gauge
@@ -314,6 +315,14 @@ void FT81x::drawGauge(const int16_t x, const int16_t y, const int16_t radius, co
     intermediateCmd(radius | ((uint32_t)options << 16));
     intermediateCmd(major | ((uint32_t)minor << 16));
     endCmd(value | ((uint32_t)range << 16));
+}
+
+void FT81x::drawGradient(const int16_t x1, const int16_t y1, const uint32_t color1, const int16_t x2, const int16_t y2, const uint32_t color2) {
+    startCmd(GRADIENT());
+    intermediateCmd(x1 | ((uint32_t)y1 << 16));
+    intermediateCmd(color1);
+    intermediateCmd(x2 | ((uint32_t)y2 << 16));
+    endCmd(color2);
 }
 
 void FT81x::cmd(const uint32_t cmd) {

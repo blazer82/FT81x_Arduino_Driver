@@ -458,6 +458,17 @@ class FT81x {
     void drawGauge(const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint8_t major, const uint8_t minor, const uint16_t value, const uint16_t range);
 
     /*!
+        @brief  Draw a gradient
+        @param  x1 x-coordinate for the starting point of the gradient
+        @param  y1 y-coordinate for the starting point of the gradient
+        @param  color1 Color for the starting point of the gradient
+        @param  x2 x-coordinate for the ending point of the gradient
+        @param  y2 y-coordinate for the ending point of the gradient
+        @param  color2 Color for the ending point of the gradient
+    */
+    void drawGradient(const int16_t x1, const int16_t y1, const uint32_t color1, const int16_t x2, const int16_t y2, const uint32_t color2);
+
+    /*!
         @brief  Begin a new display list
     */
     void beginDisplayList();
