@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['spi_5fclock_5fspeed_468',['SPI_CLOCK_SPEED',['../_f_t81x_8h.html#a5a40a6f539e04983f4e8fd25f10730db',1,'FT81x.h']]],
   ['st7701_5fbk0_5finvsel_469',['ST7701_BK0_INVSEL',['../_f_t81x_8h.html#a2ee0f6b2fc4df4137cfa66990329f492',1,'FT81x.h']]],
   ['st7701_5fbk0_5flneset_470',['ST7701_BK0_LNESET',['../_f_t81x_8h.html#a668a05b3639282a9cd9615b04305c9e5',1,'FT81x.h']]],
   ['st7701_5fbk0_5fnvgamctrl_471',['ST7701_BK0_NVGAMCTRL',['../_f_t81x_8h.html#ad5d547064b87a6eacb419af6730182df',1,'FT81x.h']]],

@@ -168,6 +168,7 @@ var searchData=
   ['ft81x_5fsound_5funmute_182',['FT81x_SOUND_UNMUTE',['../_f_t81x_8h.html#abfb1b6a534ec34a8e49d942a4534ee8e',1,'FT81x.h']]],
   ['ft81x_5fsound_5fwarble_183',['FT81x_SOUND_WARBLE',['../_f_t81x_8h.html#acc945b906f2f906816ec4de9d57cf4b2',1,'FT81x.h']]],
   ['ft81x_5fsound_5fxylophone_184',['FT81x_SOUND_XYLOPHONE',['../_f_t81x_8h.html#a2ef7fa2bffdf18112736e369585e30ad',1,'FT81x.h']]],
-  ['ft81x_5fspi_5fsettings_185',['FT81x_SPI_SETTINGS',['../_f_t81x_8h.html#af439d90b57483e07330fb0f4a60dfdf3',1,'FT81x.h']]],
-  ['ft81x_20on_20st7701s_20arduino_20driver_186',['FT81x on ST7701S Arduino Driver',['../index.html',1,'']]]
+  ['ft81x_5fspi_5fclock_5fspeed_185',['FT81x_SPI_CLOCK_SPEED',['../_f_t81x_8h.html#a4ee6964b55e5e05b3f2ac1d8a8017c25',1,'FT81x.h']]],
+  ['ft81x_5fspi_5fsettings_186',['FT81x_SPI_SETTINGS',['../_f_t81x_8h.html#af439d90b57483e07330fb0f4a60dfdf3',1,'FT81x.h']]],
+  ['ft81x_20on_20st7701s_20arduino_20driver_187',['FT81x on ST7701S Arduino Driver',['../index.html',1,'']]]
 ];

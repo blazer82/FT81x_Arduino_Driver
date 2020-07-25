@@ -164,6 +164,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a33e592a320ad7187112d04fb5f0285e5">stopSound</a> ()</td></tr>
 <tr class="memdesc:a33e592a320ad7187112d04fb5f0285e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop audio output by playing silence. <br /></td></tr>
 <tr class="separator:a33e592a320ad7187112d04fb5f0285e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af30c682436dbda49eddd2280c7511cd7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#af30c682436dbda49eddd2280c7511cd7">queryDisplay</a> (const uint8_t <a class="el" href="class_f_t81x.html#aa4e1a058dd7ba36850fc66170646cc1a">cmd</a>)</td></tr>
+<tr class="memdesc:af30c682436dbda49eddd2280c7511cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the display for data.  <a href="class_f_t81x.html#af30c682436dbda49eddd2280c7511cd7">More...</a><br /></td></tr>
+<tr class="separator:af30c682436dbda49eddd2280c7511cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -178,9 +181,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a1ccb0c23cade7d3498ea0c3a538b7b9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a1ccb0c23cade7d3498ea0c3a538b7b9e">sendCommandToDisplay</a> (const uint8_t <a class="el" href="class_f_t81x.html#aa4e1a058dd7ba36850fc66170646cc1a">cmd</a>, const uint8_t numParams, const uint8_t *params)</td></tr>
 <tr class="memdesc:a1ccb0c23cade7d3498ea0c3a538b7b9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send command to display.  <a href="class_f_t81x.html#a1ccb0c23cade7d3498ea0c3a538b7b9e">More...</a><br /></td></tr>
 <tr class="separator:a1ccb0c23cade7d3498ea0c3a538b7b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30c682436dbda49eddd2280c7511cd7"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#af30c682436dbda49eddd2280c7511cd7">queryDisplay</a> (const uint8_t <a class="el" href="class_f_t81x.html#aa4e1a058dd7ba36850fc66170646cc1a">cmd</a>)</td></tr>
-<tr class="memdesc:af30c682436dbda49eddd2280c7511cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the display for data.  <a href="class_f_t81x.html#af30c682436dbda49eddd2280c7511cd7">More...</a><br /></td></tr>
-<tr class="separator:af30c682436dbda49eddd2280c7511cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4e1a058dd7ba36850fc66170646cc1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#aa4e1a058dd7ba36850fc66170646cc1a">cmd</a> (const uint32_t cmd)</td></tr>
 <tr class="memdesc:aa4e1a058dd7ba36850fc66170646cc1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write single command to the command buffer of the <a class="el" href="class_f_t81x.html" title="Instatiate an FT81x context.">FT81x</a> chip.  <a href="class_f_t81x.html#aa4e1a058dd7ba36850fc66170646cc1a">More...</a><br /></td></tr>
 <tr class="separator:aa4e1a058dd7ba36850fc66170646cc1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1011,9 +1011,6 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">uint8_t FT81x::queryDisplay </td>
@@ -1023,11 +1020,6 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Query the display for data. </p>
