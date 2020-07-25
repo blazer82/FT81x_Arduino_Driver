@@ -72,6 +72,7 @@
 #define SCALE()                      0xFFFFFF28                                                                                                                             ///< Apply a scale to the current matrix
 #define TEXT()                       0xFFFFFF0C                                                                                                                             ///< Draw text
 #define BUTTON()                     0xFFFFFF0D                                                                                                                             ///< Draw button
+#define GAUGE()                      0xFFFFFF13                                                                                                                             ///< Draw gauge
 #define CLOCK()                      0xFFFFFF14                                                                                                                             ///< Draw clock
 #define SPINNER()                    0xFFFFFF16                                                                                                                             ///< Draw spinner
 
@@ -302,6 +303,17 @@ void FT81x::drawClock(const int16_t x, const int16_t y, const int16_t radius, co
     intermediateCmd(radius | ((uint32_t)options << 16));
     intermediateCmd(hours | ((uint32_t)minutes << 16));
     endCmd(seconds);
+}
+
+void FT81x::drawGauge(const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint8_t major, const uint8_t minor, const uint16_t value, const uint16_t range) {
+    startCmd(COLOR(handsColor));
+    intermediateCmd(BGCOLOR());
+    intermediateCmd(backgroundColor);
+    intermediateCmd(GAUGE());
+    intermediateCmd(x | ((uint32_t)y << 16));
+    intermediateCmd(radius | ((uint32_t)options << 16));
+    intermediateCmd(major | ((uint32_t)minor << 16));
+    endCmd(value | ((uint32_t)range << 16));
 }
 
 void FT81x::cmd(const uint32_t cmd) {

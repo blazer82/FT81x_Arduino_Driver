@@ -443,6 +443,21 @@ class FT81x {
     void drawClock(const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t hours, const uint16_t minutes, const uint16_t seconds);
 
     /*!
+        @brief  Draw a gauge
+        @param  x x-coordinate for the center of the clock
+        @param  y y-coordinate for the center of the clock
+        @param  radius Radius of the clock
+        @param  handsColor Color for the clock hands
+        @param  backgroundColor Color for the clock background
+        @param  options Option to use (e.g. FT81x_OPT_FLAT | FT81x_OPT_NOTICKS)
+        @param  major Number of major subdivisions on the dial, 1-10
+        @param  minor Number of minor subdivisions on the dial, 1-10
+        @param  value Gauge indicated value between 0 and range
+        @param  range Maximum value
+    */
+    void drawGauge(const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint8_t major, const uint8_t minor, const uint16_t value, const uint16_t range);
+
+    /*!
         @brief  Begin a new display list
     */
     void beginDisplayList();
