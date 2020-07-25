@@ -39,7 +39,7 @@
 #include <platforms/teensy/DmaSpi.h>
 #endif
 
-#define FT81x_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((g) << 8) | (b))  ///< Color from RGB values
+#define FT81x_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((uint32_t)(g) << 8) | (uint32_t)(b))  ///< Color from RGB values
 
 #define FT81x_ROTATE_LANDSCAPE                   0  ///< Use with setRotation() to rotate screen to landscape
 #define FT81x_ROTATE_LANDSCAPE_INVERTED          1  ///< Use with setRotation() to invert and rotate screen to landscape
