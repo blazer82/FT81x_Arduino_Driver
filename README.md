@@ -63,9 +63,7 @@ void setup() {
 }
 ```
 
-## API Documentation
-
-An automatically generated API documentation is available on [github.io](https://blazer82.github.io/FT81x_Arduino_Driver).
+For more information see the [example sketches](examples) as well as the [API Documentation](https://blazer82.github.io/FT81x_Arduino_Driver/html/class_f_t81x.html).
 
 ## License Summary
 
