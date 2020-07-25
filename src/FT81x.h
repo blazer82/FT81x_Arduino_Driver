@@ -495,6 +495,13 @@ class FT81x {
     */
     void stopSound();
 
+    /*!
+        @brief  Query the display for data
+        @param  cmd 8-bit command to send to the display
+        @return 8-bit value
+    */
+    uint8_t queryDisplay(const uint8_t cmd);
+
    protected:
     int8_t cs1;                    ///< CS pin for FT81x
     int8_t cs2;                    ///< CS pin for display
@@ -527,13 +534,6 @@ class FT81x {
         @param  params Pointer to the 8-bit data used as parameters
     */
     void sendCommandToDisplay(const uint8_t cmd, const uint8_t numParams, const uint8_t *params);
-
-    /*!
-        @brief  Query the display for data
-        @param  cmd 8-bit command to send to the display
-        @return 8-bit value
-    */
-    uint8_t queryDisplay(const uint8_t cmd);
 
     /*!
         @brief  Write single command to the command buffer of the FT81x chip
