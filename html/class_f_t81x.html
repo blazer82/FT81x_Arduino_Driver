@@ -133,6 +133,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a2583575695e0ceffe2452e2c7247d96e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a2583575695e0ceffe2452e2c7247d96e">drawClock</a> (const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t hours, const uint16_t minutes, const uint16_t seconds)</td></tr>
 <tr class="memdesc:a2583575695e0ceffe2452e2c7247d96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw an analog clock.  <a href="class_f_t81x.html#a2583575695e0ceffe2452e2c7247d96e">More...</a><br /></td></tr>
 <tr class="separator:a2583575695e0ceffe2452e2c7247d96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefbbb0cc60e70285f7821a2561bf9453"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#aefbbb0cc60e70285f7821a2561bf9453">drawGauge</a> (const int16_t x, const int16_t y, const int16_t radius, const uint32_t handsColor, const uint32_t backgroundColor, const uint16_t options, const uint8_t major, const uint8_t minor, const uint16_t value, const uint16_t range)</td></tr>
+<tr class="memdesc:aefbbb0cc60e70285f7821a2561bf9453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw an analog clock.  <a href="class_f_t81x.html#aefbbb0cc60e70285f7821a2561bf9453">More...</a><br /></td></tr>
+<tr class="separator:aefbbb0cc60e70285f7821a2561bf9453"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8926dedeafeb49b226845ac45c5769"><td class="memItemLeft" align="right" valign="top"><a id="a5f8926dedeafeb49b226845ac45c5769"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a5f8926dedeafeb49b226845ac45c5769">beginDisplayList</a> ()</td></tr>
 <tr class="memdesc:a5f8926dedeafeb49b226845ac45c5769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin a new display list. <br /></td></tr>
@@ -632,6 +635,99 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">hours</td><td>Hours clock hand </td></tr>
     <tr><td class="paramname">minutes</td><td>Minutes clock hand </td></tr>
     <tr><td class="paramname">seconds</td><td>Seconds clock hand </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aefbbb0cc60e70285f7821a2561bf9453"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefbbb0cc60e70285f7821a2561bf9453">&#9670;&nbsp;</a></span>drawGauge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::drawGauge </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>handsColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>backgroundColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>major</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>minor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint16_t&#160;</td>
+          <td class="paramname"><em>range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draw an analog clock. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x-coordinate for the center of the clock </td></tr>
+    <tr><td class="paramname">y</td><td>y-coordinate for the center of the clock </td></tr>
+    <tr><td class="paramname">radius</td><td>Radius of the clock </td></tr>
+    <tr><td class="paramname">handsColor</td><td>Color for the clock hands </td></tr>
+    <tr><td class="paramname">backgroundColor</td><td>Color for the clock background </td></tr>
+    <tr><td class="paramname">options</td><td>Option to use (e.g. FT81x_OPT_FLAT | FT81x_OPT_NOTICKS) </td></tr>
+    <tr><td class="paramname">major</td><td>Number of major subdivisions on the dial, 1-10 </td></tr>
+    <tr><td class="paramname">minor</td><td>Number of minor subdivisions on the dial, 1-10 </td></tr>
+    <tr><td class="paramname">value</td><td>Gauge indicated value between 0 and range </td></tr>
+    <tr><td class="paramname">range</td><td>Maximum value </td></tr>
   </table>
   </dd>
 </dl>
