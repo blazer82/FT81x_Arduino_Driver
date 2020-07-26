@@ -94,7 +94,7 @@
     }  ///< Macro to automatically call sendCommandToDisplay
 
 void FT81x::begin() {
-#ifdef FT81x_USE_DMA
+#ifdef FT81x_USE_TEENSY_DMA
     DmaSpi::Transfer trx(nullptr, 0, nullptr);
     DmaSpi::Transfer trx2(nullptr, 0, nullptr);
 #endif
@@ -108,7 +108,7 @@ void FT81x::begin() {
     pinMode(dc, OUTPUT);
     digitalWrite(dc, LOW);
 
-#ifdef FT81x_USE_DMA
+#ifdef FT81x_USE_TEENSY_DMA
     SPI.setCS(cs1);
 
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -406,7 +406,7 @@ void FT81x::sendText(const char text[]) {
     }
 }
 
-#ifdef FT81x_USE_DMA
+#ifdef FT81x_USE_TEENSY_DMA
 
 void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data) {
     static ActiveLowChipSelectStart csStart(cs1, FT81x_SPI_SETTINGS);
@@ -512,6 +512,7 @@ uint8_t FT81x::read8(const uint32_t address) {
     dmaBuffer[3] = 0x00;  // dummy byte
     dmaBuffer[4] = 0x00;  // read byte
     transferDMABuffer(5);
+    waitForDMAReady();
     return dmaBufferOut[4];
 }
 
@@ -525,6 +526,7 @@ uint16_t FT81x::read16(const uint32_t address) {
     dmaBuffer[4] = 0x00;  // read byte
     dmaBuffer[5] = 0x00;  // read byte
     transferDMABuffer(6);
+    waitForDMAReady();
     uint16_t result = dmaBufferOut[4] | (dmaBufferOut[5] << 8);
     return result;
 }
@@ -541,6 +543,7 @@ uint32_t FT81x::read32(const uint32_t address) {
     dmaBuffer[6] = 0x00;  // read byte
     dmaBuffer[7] = 0x00;  // read byte
     transferDMABuffer(8);
+    waitForDMAReady();
     uint32_t result = dmaBufferOut[4] | (dmaBufferOut[5] << 8) | (dmaBufferOut[6] << 16) | (dmaBufferOut[7] << 24);
     return result;
 }

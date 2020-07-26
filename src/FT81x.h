@@ -35,8 +35,8 @@
 #include <SPI.h>
 
 #if (defined(__arm__) && defined(TEENSYDUINO))
-#define FT81x_USE_DMA 1
-#include <platforms/teensy/DmaSpi.h>
+#define FT81x_USE_TEENSY_DMA 1
+#include "platforms/teensy/DmaSpi.h"
 #endif
 
 #define FT81x_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((uint32_t)(g) << 8) | (uint32_t)(b))  ///< Color from RGB values
@@ -53,11 +53,11 @@
 #if defined(ARDUINO_ARCH_ARC32)
 #define FT81x_SPI_CLOCK_SPEED 16000000  ///< Default SPI clock speed for Arduino 101
 #elif defined(ARDUINO_ARCH_SAM)
-#define FT81x_SPI_CLOCK_SPEED 40000000  ///< Default SPI clock speed for Arduino Due
+#define FT81x_SPI_CLOCK_SPEED 24000000  ///< Default SPI clock speed for Arduino Due
 #elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__) || defined(__IMXRT1062__)
-#define FT81x_SPI_CLOCK_SPEED 40000000  ///< Default SPI clock speed for Teensy 3.0, 3.1/3.2, 3.5, 3.6, 4.0
+#define FT81x_SPI_CLOCK_SPEED 24000000  ///< Default SPI clock speed for Teensy 3.0, 3.1/3.2, 3.5, 3.6, 4.0
 #elif defined(ESP8266) || defined(ESP32)
-#define FT81x_SPI_CLOCK_SPEED 40000000  ///< Default SPI clock speed for ESP8266, ESP32
+#define FT81x_SPI_CLOCK_SPEED 24000000  ///< Default SPI clock speed for ESP8266, ESP32
 #else
 #define FT81x_SPI_CLOCK_SPEED 8000000  ///< Default SPI clock speed for unspecified architectures
 #endif
@@ -535,7 +535,7 @@ class FT81x {
     int8_t res_d;                  ///< Reset pin for display
     uint16_t cmdWriteAddress = 0;  ///< Internal pointer to the command buffer of the FT81x chip
 
-#ifdef FT81x_USE_DMA
+#ifdef FT81x_USE_TEENSY_DMA
     uint8_t dmaBuffer[8] = {0};
     volatile uint8_t dmaBufferOut[8] = {0};
 
@@ -602,7 +602,7 @@ class FT81x {
     */
     void sendText(const char text[]);
 
-#ifdef FT81x_USE_DMA
+#ifdef FT81x_USE_TEENSY_DMA
     void waitForDMAReady();
     void transferDMABuffer(const uint8_t size);
 #endif
