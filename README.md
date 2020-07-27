@@ -26,6 +26,7 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 
 - [x] Circle
 - [x] Rectangle
+- [x] Gradient
 - [x] Text
 - [x] Bitmap images
 - [x] Animated spinner
