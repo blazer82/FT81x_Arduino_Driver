@@ -248,6 +248,15 @@ void FT81x::drawRect(const int16_t x, const int16_t y, const uint16_t width, con
     endCmd(END());
 }
 
+void FT81x::drawLine(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint8_t width, const uint32_t color) {
+    startCmd(COLOR(color));
+    intermediateCmd(LINE_WIDTH(width * 16));
+    intermediateCmd(BEGIN(LINES));
+    intermediateCmd(VERTEX2F(x1 * 16, y1 * 16));
+    intermediateCmd(VERTEX2F(x2 * 16, y2 * 16));
+    endCmd(END());
+}
+
 void FT81x::drawLetter(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter) {
     startCmd(COLOR(color));
     intermediateCmd(BEGIN(BITMAPS));

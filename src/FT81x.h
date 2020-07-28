@@ -373,6 +373,17 @@ class FT81x {
     void drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color);
 
     /*!
+        @brief  Draw line in current display list
+        @param  x1 x-coordinate for the start of the line
+        @param  y1 y-coordinate for the start of the line
+        @param  x2 x-coordinate for the end of the line
+        @param  y2 y-coordinate for the end of the line
+        @param  width Width of the line (1-6)
+        @param  color Color of the line
+    */
+    void drawLine(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint8_t width, const uint32_t color);
+
+    /*!
         @brief  Draw a single letter in current display list
         @param  x x-coordinate for the letter
         @param  y y-coordinate for the letter
