@@ -8,7 +8,8 @@ var searchData=
   ['drawgauge_12',['drawGauge',['../class_f_t81x.html#aefbbb0cc60e70285f7821a2561bf9453',1,'FT81x']]],
   ['drawgradient_13',['drawGradient',['../class_f_t81x.html#a86a68d63949c9219ea9d0d5a34429f07',1,'FT81x']]],
   ['drawletter_14',['drawLetter',['../class_f_t81x.html#a92e667fd8bee8bf4df821c156cc694e4',1,'FT81x']]],
-  ['drawrect_15',['drawRect',['../class_f_t81x.html#a9e9b9c617db4bc54f9c7b5a8c56b52ad',1,'FT81x']]],
-  ['drawspinner_16',['drawSpinner',['../class_f_t81x.html#a1bb9f7000c59109e8a7fb8e835b1b298',1,'FT81x']]],
-  ['drawtext_17',['drawText',['../class_f_t81x.html#a3e8b9eddba974392d69ea4df8fbdc6d5',1,'FT81x']]]
+  ['drawline_15',['drawLine',['../class_f_t81x.html#a4ad1d499fb35756e6258002b75e9a841',1,'FT81x']]],
+  ['drawrect_16',['drawRect',['../class_f_t81x.html#a9e9b9c617db4bc54f9c7b5a8c56b52ad',1,'FT81x']]],
+  ['drawspinner_17',['drawSpinner',['../class_f_t81x.html#a1bb9f7000c59109e8a7fb8e835b1b298',1,'FT81x']]],
+  ['drawtext_18',['drawText',['../class_f_t81x.html#a3e8b9eddba974392d69ea4df8fbdc6d5',1,'FT81x']]]
 ];

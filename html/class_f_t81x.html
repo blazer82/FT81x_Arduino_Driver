@@ -115,6 +115,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a9e9b9c617db4bc54f9c7b5a8c56b52ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a9e9b9c617db4bc54f9c7b5a8c56b52ad">drawRect</a> (const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color)</td></tr>
 <tr class="memdesc:a9e9b9c617db4bc54f9c7b5a8c56b52ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw rectangle in current display list.  <a href="class_f_t81x.html#a9e9b9c617db4bc54f9c7b5a8c56b52ad">More...</a><br /></td></tr>
 <tr class="separator:a9e9b9c617db4bc54f9c7b5a8c56b52ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad1d499fb35756e6258002b75e9a841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a4ad1d499fb35756e6258002b75e9a841">drawLine</a> (const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint8_t width, const uint32_t color)</td></tr>
+<tr class="memdesc:a4ad1d499fb35756e6258002b75e9a841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw line in current display list.  <a href="class_f_t81x.html#a4ad1d499fb35756e6258002b75e9a841">More...</a><br /></td></tr>
+<tr class="separator:a4ad1d499fb35756e6258002b75e9a841"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92e667fd8bee8bf4df821c156cc694e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a92e667fd8bee8bf4df821c156cc694e4">drawLetter</a> (const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter)</td></tr>
 <tr class="memdesc:a92e667fd8bee8bf4df821c156cc694e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a single letter in current display list.  <a href="class_f_t81x.html#a92e667fd8bee8bf4df821c156cc694e4">More...</a><br /></td></tr>
 <tr class="separator:a92e667fd8bee8bf4df821c156cc694e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -854,6 +857,71 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
     <tr><td class="paramname">font</td><td>Font handle (16-34 are built-in fonts) </td></tr>
     <tr><td class="paramname">color</td><td>Color for the letter </td></tr>
     <tr><td class="paramname">letter</td><td>Letter to draw </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4ad1d499fb35756e6258002b75e9a841"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ad1d499fb35756e6258002b75e9a841">&#9670;&nbsp;</a></span>drawLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::drawLine </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>x1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>y1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>x2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>y2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draw line in current display list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x1</td><td>x-coordinate for the start of the line </td></tr>
+    <tr><td class="paramname">y1</td><td>y-coordinate for the start of the line </td></tr>
+    <tr><td class="paramname">x2</td><td>x-coordinate for the end of the line </td></tr>
+    <tr><td class="paramname">y2</td><td>y-coordinate for the end of the line </td></tr>
+    <tr><td class="paramname">width</td><td>Width of the line (1-6) </td></tr>
+    <tr><td class="paramname">color</td><td>Color of the line </td></tr>
   </table>
   </dd>
 </dl>
