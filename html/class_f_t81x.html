@@ -118,6 +118,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a4ad1d499fb35756e6258002b75e9a841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a4ad1d499fb35756e6258002b75e9a841">drawLine</a> (const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint8_t width, const uint32_t color)</td></tr>
 <tr class="memdesc:a4ad1d499fb35756e6258002b75e9a841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw line in current display list.  <a href="class_f_t81x.html#a4ad1d499fb35756e6258002b75e9a841">More...</a><br /></td></tr>
 <tr class="separator:a4ad1d499fb35756e6258002b75e9a841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e3449fa3ff426197c8edfdbab443d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a34e3449fa3ff426197c8edfdbab443d2">beginLineStrip</a> (const uint8_t width, const uint32_t color)</td></tr>
+<tr class="memdesc:a34e3449fa3ff426197c8edfdbab443d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start drawing a line strip.  <a href="class_f_t81x.html#a34e3449fa3ff426197c8edfdbab443d2">More...</a><br /></td></tr>
+<tr class="separator:a34e3449fa3ff426197c8edfdbab443d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e77dd75072e76698eacfef0759a7fe4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a2e77dd75072e76698eacfef0759a7fe4">addVertex</a> (const int16_t x, const int16_t y)</td></tr>
+<tr class="memdesc:a2e77dd75072e76698eacfef0759a7fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add vertex to line strip.  <a href="class_f_t81x.html#a2e77dd75072e76698eacfef0759a7fe4">More...</a><br /></td></tr>
+<tr class="separator:a2e77dd75072e76698eacfef0759a7fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd5a9af04e3ef1dded01475ce9a1ed63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#acd5a9af04e3ef1dded01475ce9a1ed63">endLineStrip</a> ()</td></tr>
+<tr class="memdesc:acd5a9af04e3ef1dded01475ce9a1ed63"><td class="mdescLeft">&#160;</td><td class="mdescRight">End line strio.  <a href="class_f_t81x.html#acd5a9af04e3ef1dded01475ce9a1ed63">More...</a><br /></td></tr>
+<tr class="separator:acd5a9af04e3ef1dded01475ce9a1ed63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92e667fd8bee8bf4df821c156cc694e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a92e667fd8bee8bf4df821c156cc694e4">drawLetter</a> (const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter)</td></tr>
 <tr class="memdesc:a92e667fd8bee8bf4df821c156cc694e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a single letter in current display list.  <a href="class_f_t81x.html#a92e667fd8bee8bf4df821c156cc694e4">More...</a><br /></td></tr>
 <tr class="separator:a92e667fd8bee8bf4df821c156cc694e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,6 +159,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#ae235c88a639903b58d4121e77c682446">swapScreen</a> ()</td></tr>
 <tr class="memdesc:ae235c88a639903b58d4121e77c682446"><td class="mdescLeft">&#160;</td><td class="mdescRight">End the current display list and swap the screen. <br /></td></tr>
 <tr class="separator:ae235c88a639903b58d4121e77c682446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04f6a77b075e3801d657a5edc776eada"><td class="memItemLeft" align="right" valign="top"><a id="a04f6a77b075e3801d657a5edc776eada"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a04f6a77b075e3801d657a5edc776eada">waitForCommandBuffer</a> ()</td></tr>
+<tr class="memdesc:a04f6a77b075e3801d657a5edc776eada"><td class="mdescLeft">&#160;</td><td class="mdescRight">The command buffer can take 4 kBytes of data while display lists can hold 8 kBytes. For display lists &gt; 4k and &lt; 8k you may need to wait for the buffer to catch up. <br /></td></tr>
+<tr class="separator:a04f6a77b075e3801d657a5edc776eada"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa06522b3fa096dc33b4bf0c72350f10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#aaa06522b3fa096dc33b4bf0c72350f10">setRotation</a> (const uint8_t rotation)</td></tr>
 <tr class="memdesc:aaa06522b3fa096dc33b4bf0c72350f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set screen rotation.  <a href="class_f_t81x.html#aaa06522b3fa096dc33b4bf0c72350f10">More...</a><br /></td></tr>
 <tr class="separator:aaa06522b3fa096dc33b4bf0c72350f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -299,6 +312,80 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2e77dd75072e76698eacfef0759a7fe4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e77dd75072e76698eacfef0759a7fe4">&#9670;&nbsp;</a></span>addVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::addVertex </td>
+          <td>(</td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int16_t&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add vertex to line strip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x-coordinate of the vertex </td></tr>
+    <tr><td class="paramname">y</td><td>y-coordinate of the vertex </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a34e3449fa3ff426197c8edfdbab443d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34e3449fa3ff426197c8edfdbab443d2">&#9670;&nbsp;</a></span>beginLineStrip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::beginLineStrip </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start drawing a line strip. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td>Width of the line (1-6) </td></tr>
+    <tr><td class="paramname">color</td><td>Color of the line </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a929544b9fc2986902fce609e827adee7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a929544b9fc2986902fce609e827adee7">&#9670;&nbsp;</a></span>clear()</h2>
 
@@ -1144,6 +1231,32 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cmd</td><td>8-bit command to send to the chip </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acd5a9af04e3ef1dded01475ce9a1ed63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd5a9af04e3ef1dded01475ce9a1ed63">&#9670;&nbsp;</a></span>endLineStrip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::endLineStrip </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>End line strio. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x-coordinate of the vertex </td></tr>
+    <tr><td class="paramname">y</td><td>y-coordinate of the vertex </td></tr>
   </table>
   </dd>
 </dl>

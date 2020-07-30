@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ft81x_277',['FT81x',['../class_f_t81x.html#a686cbbeb644d07c6e7fc8528b31fd852',1,'FT81x']]]
+  ['endcmd_282',['endCmd',['../class_f_t81x.html#a907747ab1f27369c53ebd92ae005556f',1,'FT81x']]],
+  ['endlinestrip_283',['endLineStrip',['../class_f_t81x.html#acd5a9af04e3ef1dded01475ce9a1ed63',1,'FT81x']]]
 ];

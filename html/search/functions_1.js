@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['clear_263',['clear',['../class_f_t81x.html#a929544b9fc2986902fce609e827adee7',1,'FT81x']]],
-  ['cmd_264',['cmd',['../class_f_t81x.html#aa4e1a058dd7ba36850fc66170646cc1a',1,'FT81x']]]
+  ['begin_266',['begin',['../class_f_t81x.html#a639355a0b35f688863949a0d06feda91',1,'FT81x']]],
+  ['begindisplaylist_267',['beginDisplayList',['../class_f_t81x.html#a5f8926dedeafeb49b226845ac45c5769',1,'FT81x']]],
+  ['beginlinestrip_268',['beginLineStrip',['../class_f_t81x.html#a34e3449fa3ff426197c8edfdbab443d2',1,'FT81x']]]
 ];
