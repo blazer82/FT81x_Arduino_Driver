@@ -35,6 +35,12 @@ typedef struct {
 #define FOV        150
 #define HALF_FRAME 240
 
+#if defined(ESP32)
+FT81x ft81x = FT81x(5, 17, 16, 4);  // NodeMCU-32 pin configuration
+#else
+FT81x ft81x = FT81x(10, 9, 8, 7);  // Arduino default pin configuration
+#endif
+
 #if defined(__AVR__)
 vertex fetchVertexFromProgmem(uint16_t i);
 #define VERTEX(i) (fetchVertexFromProgmem(i))
@@ -50,8 +56,6 @@ const int16_t lut[] = {16384, 16381, 16374, 16361, 16344, 16321, 16294, 16261, 1
 int16_t sin_lut(uint16_t angle);
 int16_t cos_lut(uint16_t angle);
 vertex rotate(vertex v, uint16_t degrees);
-
-FT81x ft81x = FT81x(10, 9, 8, 7);
 
 void setup() {
     SPI.begin();
@@ -71,7 +75,7 @@ void loop() {
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
     ft81x.beginLineStrip(4, FT81x_COLOR_RGB(0, 255, 150));
 
-    ffor(uint16_t i = 0; i < NUM_VERTICES; i++) {
+    for (uint16_t i = 0; i < NUM_VERTICES; i++) {
         const vertex v = rotate(VERTEX(i), rotation);
         const int16_t x = (FOV * v.x) / (FOV + v.z + 160) + HALF_FRAME;
         const int16_t y = (FOV * v.y) / (FOV + v.z + 160) + HALF_FRAME;

@@ -26,7 +26,11 @@
 
 #include "FT81x.h"
 
-FT81x ft81x = FT81x(10, 9, 8, 7);
+#if defined(ESP32)
+FT81x ft81x = FT81x(5, 17, 16, 4);  // NodeMCU-32 pin configuration
+#else
+FT81x ft81x = FT81x(10, 9, 8, 7);  // Arduino default pin configuration
+#endif
 
 const char *menuItems[] = {
     "Dashboard\0",

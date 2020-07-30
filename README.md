@@ -13,7 +13,9 @@ Schematics, KiCad files and Gerber files can be found inside the [hardware folde
 
 The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices).
 
-## Tested Boards
+## Supported Boards
+
+The hardware and software has been tested with the following boards:
 
 - :heavy_check_mark: Arduino Uno (ATmega328P)
 - :heavy_check_mark: Arduino Nano (ATmega328)
@@ -21,6 +23,10 @@ The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](h
 - :heavy_check_mark: Arduino Due (AT91SAM3X8E)
 - :heavy_check_mark: NodeMCU-32S (ESP32)
 - :heavy_check_mark: Teensy 4.0 (ARM Cortex M7)
+
+If your board is missing and has full Arduino support chances are that it's fully supported by this library, too.
+
+If you have tested additional boards (successfully or unsuccessfully) feel free to contact me or open an issue.
 
 ## Features
 
