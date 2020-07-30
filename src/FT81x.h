@@ -59,7 +59,7 @@
 #elif defined(ESP8266) || defined(ESP32)
 #define FT81x_SPI_CLOCK_SPEED 24000000  ///< Default SPI clock speed for ESP8266, ESP32
 #else
-#define FT81x_SPI_CLOCK_SPEED 8000000  ///< Default SPI clock speed for unspecified architectures
+#define FT81x_SPI_CLOCK_SPEED 16000000  ///< Default SPI clock speed for unspecified architectures
 #endif
 
 #ifndef FT81x_SPI_SETTINGS
@@ -384,6 +384,27 @@ class FT81x {
     void drawLine(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint8_t width, const uint32_t color);
 
     /*!
+        @brief  Start drawing a line strip
+        @param  width Width of the line (1-6)
+        @param  color Color of the line
+    */
+    void beginLineStrip(const uint8_t width, const uint32_t color);
+
+    /*!
+        @brief  Add vertex to line strip
+        @param  x x-coordinate of the vertex
+        @param  y y-coordinate of the vertex
+    */
+    void addVertex(const int16_t x, const int16_t y);
+
+    /*!
+        @brief  End line strio
+        @param  x x-coordinate of the vertex
+        @param  y y-coordinate of the vertex
+    */
+    void endLineStrip();
+
+    /*!
         @brief  Draw a single letter in current display list
         @param  x x-coordinate for the letter
         @param  y y-coordinate for the letter
@@ -488,6 +509,11 @@ class FT81x {
         @brief  End the current display list and swap the screen
     */
     void swapScreen();
+
+    /*!
+        @brief  The command buffer can take 4 kBytes of data while display lists can hold 8 kBytes. For display lists > 4k and < 8k you may need to wait for the buffer to catch up.
+    */
+    void waitForCommandBuffer();
 
     /*!
         @brief  Set screen rotation

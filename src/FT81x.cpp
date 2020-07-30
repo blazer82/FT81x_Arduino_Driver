@@ -257,6 +257,20 @@ void FT81x::drawLine(const int16_t x1, const int16_t y1, const int16_t x2, const
     endCmd(END());
 }
 
+void FT81x::beginLineStrip(const uint8_t width, const uint32_t color) {
+    startCmd(COLOR(color));
+    intermediateCmd(LINE_WIDTH(width * 16));
+    intermediateCmd(BEGIN(LINE_STRIP));
+}
+
+void FT81x::addVertex(const int16_t x, const int16_t y) {
+    intermediateCmd(VERTEX2F(x * 16, y * 16));
+}
+
+void FT81x::endLineStrip() {
+    endCmd(END());
+}
+
 void FT81x::drawLetter(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter) {
     startCmd(COLOR(color));
     intermediateCmd(BEGIN(BITMAPS));
@@ -342,10 +356,7 @@ void FT81x::cmd(const uint32_t cmd) {
 }
 
 void FT81x::beginDisplayList() {
-    // Wait for circular buffer to catch up
-    while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
-        __asm__ volatile("nop");
-    }
+    waitForCommandBuffer();
     startCmd(DLSTART());
     endCmd(CLEAR(1, 1, 1));
 }
@@ -353,6 +364,13 @@ void FT81x::beginDisplayList() {
 void FT81x::swapScreen() {
     startCmd(END_DL());
     endCmd(SWAP());
+}
+
+void FT81x::waitForCommandBuffer() {
+    // Wait for circular buffer to catch up
+    while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
+        __asm__ volatile("nop");
+    }
 }
 
 void FT81x::setRotation(const uint8_t rotation) { write8(FT81x_REG_ROTATE, rotation & 0x7); }
