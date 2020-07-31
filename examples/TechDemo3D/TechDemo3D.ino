@@ -56,7 +56,7 @@ const int16_t lut[] = {16384, 16381, 16374, 16361, 16344, 16321, 16294, 16261, 1
 
 int16_t sin_lut(uint16_t angle);
 int16_t cos_lut(uint16_t angle);
-vertex rotate(vertex v, uint16_t degrees);
+vertex rotate(const vertex v, const uint16_t degrees);
 
 static char vertice_text_buffer[16];
 static char fps_text_buffer[8];
@@ -110,7 +110,7 @@ void loop() {
     time = uptime;
 }
 
-vertex rotate(vertex v, uint16_t angle) {
+vertex rotate(const vertex v, const uint16_t angle) {
     return {(int16_t)(((int64_t)v.x * (int64_t)cos_lut(angle) + (int64_t)v.z * (int64_t)sin_lut(angle)) >> 14), v.y, (int16_t)(((int64_t)v.z * (int64_t)cos_lut(angle) - (int64_t)v.x * (int64_t)sin_lut(angle)) >> 14)};
 }
 
