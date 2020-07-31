@@ -59,7 +59,7 @@
 #elif defined(ESP8266) || defined(ESP32)
 #define FT81x_SPI_CLOCK_SPEED 24000000  ///< Default SPI clock speed for ESP8266, ESP32
 #else
-#define FT81x_SPI_CLOCK_SPEED 16000000  ///< Default SPI clock speed for unspecified architectures
+#define FT81x_SPI_CLOCK_SPEED 8000000  ///< Default SPI clock speed for unspecified architectures
 #endif
 
 #ifndef FT81x_SPI_SETTINGS

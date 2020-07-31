@@ -34,6 +34,7 @@ typedef struct {
 
 #define FOV        150
 #define HALF_FRAME 240
+#define ZOOM       2
 
 #if defined(ESP32)
 FT81x ft81x = FT81x(5, 17, 16, 4);  // NodeMCU-32 pin configuration
@@ -57,6 +58,9 @@ int16_t sin_lut(uint16_t angle);
 int16_t cos_lut(uint16_t angle);
 vertex rotate(vertex v, uint16_t degrees);
 
+static char vertice_text_buffer[16];
+static char fps_text_buffer[8];
+
 void setup() {
     SPI.begin();
     ft81x.begin();
@@ -66,19 +70,22 @@ void setup() {
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
     ft81x.swapScreen();
+
+    sprintf(vertice_text_buffer, "%d vertices", NUM_VERTICES);
 }
 
 void loop() {
     static uint16_t rotation = 0;
+    static uint64_t time = 0;
 
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
-    ft81x.beginLineStrip(4, FT81x_COLOR_RGB(0, 255, 150));
+    ft81x.beginLineStrip(1, FT81x_COLOR_RGB(0, 255, 150));
 
     for (uint16_t i = 0; i < NUM_VERTICES; i++) {
         const vertex v = rotate(VERTEX(i), rotation);
-        const int16_t x = (FOV * v.x) / (FOV + v.z + 160) + HALF_FRAME;
-        const int16_t y = (FOV * v.y) / (FOV + v.z + 160) + HALF_FRAME;
+        const int16_t x = ZOOM * ((FOV * v.x) / (FOV + v.z + 200) + HALF_FRAME / ZOOM);
+        const int16_t y = ZOOM * ((FOV * v.y) / (FOV + v.z + 200) + HALF_FRAME / ZOOM);
 
         ft81x.addVertex(x, y);
 
@@ -91,8 +98,16 @@ void loop() {
     }
 
     ft81x.endLineStrip();
+
+    const uint64_t uptime = millis();
+    sprintf(fps_text_buffer, "%d fps", (uint8_t)(1000 / (uptime - time)));
+
+    ft81x.drawText(10, 460, 16, FT81x_COLOR_RGB(255, 0, 255), 0, vertice_text_buffer);
+    ft81x.drawText(470, 460, 16, FT81x_COLOR_RGB(255, 0, 255), FT81x_OPT_RIGHTX, fps_text_buffer);
+
     ft81x.swapScreen();
-    rotation = (millis() / 10) % 360;
+    rotation = (uptime / 10) % 360;
+    time = uptime;
 }
 
 vertex rotate(vertex v, uint16_t angle) {
