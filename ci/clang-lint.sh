@@ -15,6 +15,7 @@ YELLOW='\033[1;33m'
 cd $GITHUB_WORKSPACE
 
 # Install clang-format
+sudo apt-get update
 sudo apt-get -y install clang-format-10
 
 # Check clang-format output
