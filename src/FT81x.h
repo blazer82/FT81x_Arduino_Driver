@@ -140,6 +140,8 @@
 #define FT81x_REG_DATESTAMP        0x302564  ///< Stamp date code
 #define FT81x_REG_CMDB_SPACE       0x302574  ///< Command DL (bulk) space available
 #define FT81x_REG_CMDB_WRITE       0x302578  ///< Command DL (bulk) write
+#define FT81x_REG_MEDIAFIFO_READ   0x309014  ///< Read pointer for media FIFO in general purpose graphics RAM
+#define FT81x_REG_MEDIAFIFO_WRITE  0x309018  ///< Write pointer for media FIFO in general purpose graphics RAM
 
 #define FT81x_RAM_G         0x000000  ///< General purpose graphics RAM
 #define FT81x_ROM_FONT      0x1E0000  ///< Font table and bitmap
@@ -522,12 +524,20 @@ class FT81x {
     void setRotation(const uint8_t rotation);
 
     /*!
-        @brief  Write data to general purpose graphics RAM
+        @brief  Write data to general purpose graphics RAM (must be aligned to 4 bytes)
         @param  offset Offset in general purpose graphics RAM
         @param  size Size of the data in bytes
         @param  data Pointer to the data
     */
     void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
+
+    /*!
+        @brief  Load image data (JPEG, PNG) as bitmap into general purpose graphics RAM (must be aligned to 4 bytes)
+        @param  offset Offset in general purpose graphics RAM
+        @param  size Size of the data in bytes
+        @param  data Pointer to the data
+    */
+    void loadImage(const uint32_t offset, const uint32_t size, const uint8_t data[]);
 
     /*!
         @brief  Query whether sound is currently playing
@@ -638,6 +648,15 @@ class FT81x {
         @param  text Text to send, must be terminated by null character (e.g. "Hello World\0")
     */
     void sendText(const char text[]);
+
+#if defined(__AVR__)
+    /*!
+        @brief  This function will only be used for AVR architecures where it is assumed that large byte arrays are stored in PROGMEM
+        @param  data Pointer to the data in PROGMEM
+        @param  i Index of the byte to fetch
+    */
+    uint8_t fetchFromProgmem(const uint8_t data[], const uint32_t i);
+#endif
 
 #ifdef FT81x_USE_TEENSY_DMA
     void waitForDMAReady();

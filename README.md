@@ -42,6 +42,8 @@ If you have tested additional boards (successfully or unsuccessfully) feel free 
 - [x] Analog clock
 - [x] Gauge
 - [x] Line strip
+- [x] JPEG support
+- [x] PNG support
 - [ ] Keys
 - [ ] Progress bar
 - [ ] Scrollbar
@@ -49,8 +51,6 @@ If you have tested additional boards (successfully or unsuccessfully) feel free 
 - [ ] Dial
 - [ ] Toggle
 - [ ] Custom fonts
-- [ ] JPEG support
-- [ ] PNG support
 - [ ] Video playback
 - [ ] Audio playback
 

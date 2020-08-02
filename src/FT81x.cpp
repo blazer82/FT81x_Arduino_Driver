@@ -56,14 +56,13 @@
 #define END_DL()                     0x00                                                                                                                                   ///< End current display list
 #define CLEAR_COLOR_RGB(r, g, b)     ((0x02L << 24) | ((r) << 16) | ((g) << 8) | (b))                                                                                       ///< Clear with RGB color
 #define CLEAR_COLOR(rgb)             ((0x02L << 24) | ((rgb)&0xFFFFFF))                                                                                                     ///< Clear with color
-#define COLOR_RGB(r, g, b)           ((0x04L << 24) | ((uint32_t)(r) << 16) | ((g) << 8) | (b))                                                                             ///< Create color from RGB values
 #define COLOR(rgb)                   ((0x04L << 24) | ((rgb)&0xFFFFFF))                                                                                                     ///< Create color
 #define POINT_SIZE(s)                ((0x0DL << 24) | ((s)&0xFFF))                                                                                                          ///< Point size
 #define LINE_WIDTH(w)                ((0x0EL << 24) | ((w)&0xFFF))                                                                                                          ///< Line width
-#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((y)&0xFFF) << 12) | ((h) << 7) | (c))                                                  ///< Start the operation of graphics primitive at the specified coordinates in pixel precision.
-#define VERTEX2F(x, y)               ((1L << 30) | (((uint32_t)(x)&0xFFFF) << 15) | ((y)&0xFFFF))                                                                           ///< Start the operation of graphics primitives at the specified screen coordinate, in the pixel precision defined by VERTEX_FORMAT.
+#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((uint32_t)(y)&0xFFF) << 12) | ((h) << 7) | (c))                                        ///< Start the operation of graphics primitive at the specified coordinates in pixel precision.
+#define VERTEX2F(x, y)               ((1L << 30) | (((uint32_t)(x)&0xFFFF) << 15) | ((uint32_t)(y)&0xFFFF))                                                                 ///< Start the operation of graphics primitives at the specified screen coordinate, in the pixel precision defined by VERTEX_FORMAT.
 #define BITMAP_SOURCE(a)             ((1L << 24) | (a))                                                                                                                     ///< Specify the source address of bitmap data in FT81X graphics memory RAM_G.
-#define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((s)&0x1FF) << 9) | ((h)&0x1FF))                                                                ///< Specify the source bitmap memory format and layout for the current handle.
+#define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((uint32_t)(s)&0x1FF) << 9) | ((uint32_t)(h)&0x1FF))                                            ///< Specify the source bitmap memory format and layout for the current handle.
 #define BITMAP_SIZE(f, wx, wy, w, h) ((8L << 24) | ((uint32_t)((f)&1) << 20) | ((uint32_t)((wx)&1) << 19) | ((uint32_t)((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))  ///< Specify the screen drawing of bitmaps for the current handle
 #define BGCOLOR()                    0xFFFFFF09                                                                                                                             ///< Set background color
 #define FGCOLOR()                    0xFFFFFF0A                                                                                                                             ///< Set foreground color
@@ -76,6 +75,8 @@
 #define GAUGE()                      0xFFFFFF13                                                                                                                             ///< Draw gauge
 #define CLOCK()                      0xFFFFFF14                                                                                                                             ///< Draw clock
 #define SPINNER()                    0xFFFFFF16                                                                                                                             ///< Draw spinner
+#define LOADIMAGE()                  0xFFFFFF24                                                                                                                             ///< Load image data
+#define MEDIAFIFO()                  0xFFFFFF39                                                                                                                             ///< Set up media FIFO in general purpose graphics RAM
 
 #define BITMAPS      1  ///< Bitmap drawing primitive
 #define POINTS       2  ///< Point drawing primitive
@@ -92,6 +93,12 @@
         const uint8_t d[] = {params};                              \
         sendCommandToDisplay(cmd, sizeof(d) / sizeof(uint8_t), d); \
     }  ///< Macro to automatically call sendCommandToDisplay
+
+#if defined(__AVR__)
+#define DATA(d, i) (fetchFromProgmem(d, i))  ///< Macro to fetch data from PROGMEM
+#else
+#define DATA(d, i) (d[i])  ///< Macro to access data in byte array
+#endif
 
 void FT81x::begin() {
 #ifdef FT81x_USE_TEENSY_DMA
@@ -279,21 +286,26 @@ void FT81x::drawLetter(const int16_t x, const int16_t y, const int16_t font, con
 }
 
 void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale) {
-    startCmd(COLOR_RGB(255, 255, 255));
+    startCmd(COLOR(FT81x_COLOR_RGB(255, 255, 255)));
     intermediateCmd(BITMAP_SOURCE(FT81x_RAM_G + offset));
-    intermediateCmd(BITMAP_LAYOUT(FT81x_BITMAP_LAYOUT_RGB565, width * 2, height));  // only supporting one format for now
-    intermediateCmd(BITMAP_SIZE(FT81x_BITMAP_SIZE_NEAREST, 0, 0, width * scale, height * scale));
+    intermediateCmd(BITMAP_LAYOUT(FT81x_BITMAP_LAYOUT_RGB565, (uint32_t)width * 2, (uint32_t)height));  // only supporting one format for now
+    intermediateCmd(BITMAP_SIZE(FT81x_BITMAP_SIZE_NEAREST, 0, 0, (uint32_t)width * (uint32_t)scale, (uint32_t)height * (uint32_t)scale));
     intermediateCmd(BEGIN(BITMAPS));
     intermediateCmd(LOADIDENTITY());
     intermediateCmd(SCALE());
-    intermediateCmd(scale * 65536);
-    intermediateCmd(scale * 65536);
+    intermediateCmd((uint32_t)scale * 65536);
+    intermediateCmd((uint32_t)scale * 65536);
     intermediateCmd(SETMATRIX());
     endCmd(VERTEX2II(x, y, 0, 0));
 }
 
 void FT81x::drawText(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint16_t options, const char text[]) {
     startCmd(COLOR(color));
+    intermediateCmd(LOADIDENTITY());
+    intermediateCmd(SCALE());
+    intermediateCmd(1 * 65536);
+    intermediateCmd(1 * 65536);
+    intermediateCmd(SETMATRIX());
     intermediateCmd(TEXT());
     intermediateCmd(x | ((uint32_t)y << 16));
     intermediateCmd(font | ((uint32_t)options << 16));
@@ -348,6 +360,24 @@ void FT81x::drawGradient(const int16_t x1, const int16_t y1, const uint32_t colo
     endCmd(color2);
 }
 
+void FT81x::loadImage(const uint32_t offset, const uint32_t size, const uint8_t *data) {
+    waitForCommandBuffer();
+
+    startCmd(MEDIAFIFO());
+    intermediateCmd(FT81x_RAM_G + 0x100000 - size);
+    endCmd(size);
+
+    waitForCommandBuffer();
+
+    writeGRAM(0x100000 - size, size, data);
+
+    write32(FT81x_REG_MEDIAFIFO_WRITE, size - 1);
+
+    startCmd(LOADIMAGE());
+    intermediateCmd(FT81x_RAM_G + offset);
+    endCmd(16 | 2);  // OPT_MEDIAFIFO | OPT_NODL
+}
+
 void FT81x::cmd(const uint32_t cmd) {
     uint16_t cmdWrite = FT81x::read16(FT81x_REG_CMD_WRITE);
     uint32_t addr = FT81x_RAM_CMD + cmdWrite;
@@ -368,7 +398,7 @@ void FT81x::swapScreen() {
 
 void FT81x::waitForCommandBuffer() {
     // Wait for circular buffer to catch up
-    while (FT81x::read16(FT81x_REG_CMD_WRITE) != FT81x::read16(FT81x_REG_CMD_READ)) {
+    while (read16(FT81x_REG_CMD_WRITE) != read16(FT81x_REG_CMD_READ)) {
         __asm__ volatile("nop");
     }
 }
@@ -634,7 +664,7 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
     SPI.transfer(cmd & 0xFF);
 
     for (uint32_t i = 0; i < size; i++) {
-        SPI.transfer(data[i]);
+        SPI.transfer(DATA(data, i));
     }
 
     digitalWrite(cs1, HIGH);
@@ -805,3 +835,11 @@ uint8_t FT81x::queryDisplay(const uint8_t cmd) {
     SPI.endTransaction();
     return result;
 }
+
+#if defined(__AVR__)
+uint8_t FT81x::fetchFromProgmem(const uint8_t data[], const uint32_t i) {
+    uint8_t v;
+    memcpy_P(&v, &data[i], sizeof(uint8_t));
+    return v;
+}
+#endif
