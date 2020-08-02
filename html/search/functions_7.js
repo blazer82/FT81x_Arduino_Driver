@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['playsound_290',['playSound',['../class_f_t81x.html#a80c0480370ee1cd9880b796f92f393d2',1,'FT81x']]]
+  ['loadimage_293',['loadImage',['../class_f_t81x.html#ae0459c734d5ee06ce2f4c8eba1fed0ee',1,'FT81x']]]
 ];

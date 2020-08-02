@@ -167,8 +167,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:aaa06522b3fa096dc33b4bf0c72350f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set screen rotation.  <a href="class_f_t81x.html#aaa06522b3fa096dc33b4bf0c72350f10">More...</a><br /></td></tr>
 <tr class="separator:aaa06522b3fa096dc33b4bf0c72350f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5df005d4315b68b678cf247d0c686cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc">writeGRAM</a> (const uint32_t offset, const uint32_t size, const uint8_t data[])</td></tr>
-<tr class="memdesc:ac5df005d4315b68b678cf247d0c686cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to general purpose graphics RAM.  <a href="class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc">More...</a><br /></td></tr>
+<tr class="memdesc:ac5df005d4315b68b678cf247d0c686cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data to general purpose graphics RAM (must be aligned to 4 bytes)  <a href="class_f_t81x.html#ac5df005d4315b68b678cf247d0c686cc">More...</a><br /></td></tr>
 <tr class="separator:ac5df005d4315b68b678cf247d0c686cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0459c734d5ee06ce2f4c8eba1fed0ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#ae0459c734d5ee06ce2f4c8eba1fed0ee">loadImage</a> (const uint32_t offset, const uint32_t size, const uint8_t data[])</td></tr>
+<tr class="memdesc:ae0459c734d5ee06ce2f4c8eba1fed0ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load image data (JPEG, PNG) as bitmap into general purpose graphics RAM (must be aligned to 4 bytes)  <a href="class_f_t81x.html#ae0459c734d5ee06ce2f4c8eba1fed0ee">More...</a><br /></td></tr>
+<tr class="separator:ae0459c734d5ee06ce2f4c8eba1fed0ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cdffebd19b4313d221e57a40daa6928"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_f_t81x.html#a4cdffebd19b4313d221e57a40daa6928">isSoundPlaying</a> ()</td></tr>
 <tr class="memdesc:a4cdffebd19b4313d221e57a40daa6928"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether sound is currently playing.  <a href="class_f_t81x.html#a4cdffebd19b4313d221e57a40daa6928">More...</a><br /></td></tr>
 <tr class="separator:a4cdffebd19b4313d221e57a40daa6928"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1351,6 +1354,50 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 
 </div>
 </div>
+<a id="ae0459c734d5ee06ce2f4c8eba1fed0ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0459c734d5ee06ce2f4c8eba1fed0ee">&#9670;&nbsp;</a></span>loadImage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FT81x::loadImage </td>
+          <td>(</td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t&#160;</td>
+          <td class="paramname"><em>data</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load image data (JPEG, PNG) as bitmap into general purpose graphics RAM (must be aligned to 4 bytes) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">offset</td><td>Offset in general purpose graphics RAM </td></tr>
+    <tr><td class="paramname">size</td><td>Size of the data in bytes </td></tr>
+    <tr><td class="paramname">data</td><td>Pointer to the data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af30c682436dbda49eddd2280c7511cd7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af30c682436dbda49eddd2280c7511cd7">&#9670;&nbsp;</a></span>queryDisplay()</h2>
 
@@ -1837,7 +1884,7 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>Write data to general purpose graphics RAM. </p>
+<p>Write data to general purpose graphics RAM (must be aligned to 4 bytes) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">offset</td><td>Offset in general purpose graphics RAM </td></tr>
