@@ -151,14 +151,14 @@ void FT81x::initFT81x() {
     }
 
     // configure rgb interface
-    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 8 + 8 + 50 + 2);
-    FT81x::write16(FT81x_REG_HOFFSET, 8 + 8 + 50);
+    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 8 + 8 + 20 + 2);
+    FT81x::write16(FT81x_REG_HOFFSET, 8 + 8 + 20);
     FT81x::write16(FT81x_REG_HSYNC0, 8);
     FT81x::write16(FT81x_REG_HSYNC1, 8 + 8);
     FT81x::write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
 
-    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 8 + 8 + 20 + 2);
-    FT81x::write16(FT81x_REG_VOFFSET, 8 + 8 + 20);
+    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 8 + 8 + 2 + 2);
+    FT81x::write16(FT81x_REG_VOFFSET, 8 + 8 + 2);
     FT81x::write16(FT81x_REG_VSYNC0, 8);
     FT81x::write16(FT81x_REG_VSYNC1, 8 + 8);
     FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
