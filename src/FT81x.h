@@ -414,7 +414,7 @@ class FT81x {
         @param  color Color for the letter
         @param  letter Letter to draw
     */
-    void drawLetter(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter);
+    void drawLetter(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint8_t letter);
 
     /*!
         @brief  Draw a single line of text in current display list
@@ -425,7 +425,7 @@ class FT81x {
         @param  options Option to use (e.g. FT81x_OPT_CENTER)
         @param  text Text to draw, must be terminated by null character (e.g. "Hello World\0")
     */
-    void drawText(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint16_t options, const char text[]);
+    void drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]);
 
     /*!
         @brief  Draw bitmap data in current display list
@@ -460,7 +460,7 @@ class FT81x {
         @param  options Option to use (e.g. FT81x_OPT_FLAT)
         @param  text Text to draw, must be terminated by null character (e.g. "Hello World\0")
     */
-    void drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t textColor, const uint32_t buttonColor, const uint16_t options, const char text[]);
+    void drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const uint8_t font, const uint32_t textColor, const uint32_t buttonColor, const uint16_t options, const char text[]);
 
     /*!
         @brief  Draw an analog clock
@@ -648,6 +648,12 @@ class FT81x {
         @param  text Text to send, must be terminated by null character (e.g. "Hello World\0")
     */
     void sendText(const char text[]);
+
+    /*!
+        @brief  Load and return the correct bitmap handle for fonts 16-34
+        @return  Bitmap handle
+    */
+    uint8_t initBitmapHandleForFont(uint8_t font);
 
 #if defined(__AVR__)
     /*!

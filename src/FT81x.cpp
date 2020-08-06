@@ -59,7 +59,7 @@
 #define COLOR(rgb)                   ((0x04L << 24) | ((rgb)&0xFFFFFF))                                                                                                     ///< Create color
 #define POINT_SIZE(s)                ((0x0DL << 24) | ((s)&0xFFF))                                                                                                          ///< Point size
 #define LINE_WIDTH(w)                ((0x0EL << 24) | ((w)&0xFFF))                                                                                                          ///< Line width
-#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((uint32_t)(y)&0xFFF) << 12) | ((h) << 7) | (c))                                        ///< Start the operation of graphics primitive at the specified coordinates in pixel precision.
+#define VERTEX2II(x, y, h, c)        ((1L << 31) | (((uint32_t)(x)&0xFFF) << 21) | (((uint32_t)(y)&0xFFF) << 12) | ((uint32_t)(h) << 7) | (c))                              ///< Start the operation of graphics primitive at the specified coordinates in pixel precision.
 #define VERTEX2F(x, y)               ((1L << 30) | (((uint32_t)(x)&0xFFFF) << 15) | ((uint32_t)(y)&0xFFFF))                                                                 ///< Start the operation of graphics primitives at the specified screen coordinate, in the pixel precision defined by VERTEX_FORMAT.
 #define BITMAP_SOURCE(a)             ((1L << 24) | (a))                                                                                                                     ///< Specify the source address of bitmap data in FT81X graphics memory RAM_G.
 #define BITMAP_LAYOUT(f, s, h)       ((7L << 24) | ((uint32_t)(f) << 19) | (((uint32_t)(s)&0x1FF) << 9) | ((uint32_t)(h)&0x1FF))                                            ///< Specify the source bitmap memory format and layout for the current handle.
@@ -77,6 +77,7 @@
 #define SPINNER()                    0xFFFFFF16                                                                                                                             ///< Draw spinner
 #define LOADIMAGE()                  0xFFFFFF24                                                                                                                             ///< Load image data
 #define MEDIAFIFO()                  0xFFFFFF39                                                                                                                             ///< Set up media FIFO in general purpose graphics RAM
+#define ROMFONT()                    0xFFFFFF3F                                                                                                                             ///< Load a ROM font into bitmap handle
 
 #define BITMAPS      1  ///< Bitmap drawing primitive
 #define POINTS       2  ///< Point drawing primitive
@@ -125,57 +126,57 @@ void FT81x::begin() {
     DMASPI0.start();
 #endif
 
-    FT81x::initFT81x();
-    FT81x::initDisplay();
+    initFT81x();
+    initDisplay();
 }
 
 void FT81x::initFT81x() {
     // reset
-    FT81x::sendCommand(FT81x_CMD_RST_PULSE);
+    sendCommand(FT81x_CMD_RST_PULSE);
     delay(300);
 
     // select clock
-    FT81x::sendCommand(FT81x_CMD_CLKEXT);
+    sendCommand(FT81x_CMD_CLKEXT);
     delay(300);
 
     // activate
-    FT81x::sendCommand(FT81x_CMD_ACTIVE);
+    sendCommand(FT81x_CMD_ACTIVE);
 
     // wait for boot-up to complete
     delay(100);
-    while (FT81x::read8(FT81x_REG_ID) != 0x7C) {
+    while (read8(FT81x_REG_ID) != 0x7C) {
         __asm__ volatile("nop");
     }
-    while (FT81x::read8(FT81x_REG_CPURESET) != 0x00) {
+    while (read8(FT81x_REG_CPURESET) != 0x00) {
         __asm__ volatile("nop");
     }
 
     // configure rgb interface
-    FT81x::write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 8 + 8 + 20 + 2);
-    FT81x::write16(FT81x_REG_HOFFSET, 8 + 8 + 20);
-    FT81x::write16(FT81x_REG_HSYNC0, 8);
-    FT81x::write16(FT81x_REG_HSYNC1, 8 + 8);
-    FT81x::write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
+    write16(FT81x_REG_HCYCLE, DISPLAY_WIDTH + 8 + 8 + 20 + 2);
+    write16(FT81x_REG_HOFFSET, 8 + 8 + 20);
+    write16(FT81x_REG_HSYNC0, 8);
+    write16(FT81x_REG_HSYNC1, 8 + 8);
+    write16(FT81x_REG_HSIZE, DISPLAY_WIDTH);
 
-    FT81x::write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 8 + 8 + 2 + 2);
-    FT81x::write16(FT81x_REG_VOFFSET, 8 + 8 + 2);
-    FT81x::write16(FT81x_REG_VSYNC0, 8);
-    FT81x::write16(FT81x_REG_VSYNC1, 8 + 8);
-    FT81x::write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
+    write16(FT81x_REG_VCYCLE, DISPLAY_HEIGHT + 8 + 8 + 2 + 2);
+    write16(FT81x_REG_VOFFSET, 8 + 8 + 2);
+    write16(FT81x_REG_VSYNC0, 8);
+    write16(FT81x_REG_VSYNC1, 8 + 8);
+    write16(FT81x_REG_VSIZE, DISPLAY_HEIGHT);
 
-    FT81x::write8(FT81x_REG_SWIZZLE, 2);
-    FT81x::write8(FT81x_REG_PCLK_POL, 0);
-    FT81x::write8(FT81x_REG_CSPREAD, 1);
-    FT81x::write8(FT81x_REG_DITHER, 0);
-    FT81x::write8(FT81x_REG_ROTATE, 0);
+    write8(FT81x_REG_SWIZZLE, 2);
+    write8(FT81x_REG_PCLK_POL, 0);
+    write8(FT81x_REG_CSPREAD, 1);
+    write8(FT81x_REG_DITHER, 0);
+    write8(FT81x_REG_ROTATE, 0);
 
     // write first display list
-    FT81x::beginDisplayList();
-    FT81x::clear(0);
-    FT81x::swapScreen();
+    beginDisplayList();
+    clear(0);
+    swapScreen();
 
     // enable pixel clock
-    FT81x::write8(FT81x_REG_PCLK, 3);
+    write8(FT81x_REG_PCLK, 3);
 }
 
 void FT81x::initDisplay() {
@@ -278,10 +279,11 @@ void FT81x::endLineStrip() {
     endCmd(END());
 }
 
-void FT81x::drawLetter(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint8_t letter) {
+void FT81x::drawLetter(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint8_t letter) {
+    uint8_t fontHandle = initBitmapHandleForFont(font);
     startCmd(COLOR(color));
     intermediateCmd(BEGIN(BITMAPS));
-    intermediateCmd(VERTEX2II(x, y, font, letter));
+    intermediateCmd(VERTEX2II(x, y, fontHandle, letter));
     endCmd(END());
 }
 
@@ -299,7 +301,8 @@ void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y
     endCmd(VERTEX2II(x, y, 0, 0));
 }
 
-void FT81x::drawText(const int16_t x, const int16_t y, const int16_t font, const uint32_t color, const uint16_t options, const char text[]) {
+void FT81x::drawText(const int16_t x, const int16_t y, const uint8_t font, const uint32_t color, const uint16_t options, const char text[]) {
+    uint8_t fontHandle = initBitmapHandleForFont(font);
     startCmd(COLOR(color));
     intermediateCmd(LOADIDENTITY());
     intermediateCmd(SCALE());
@@ -308,7 +311,7 @@ void FT81x::drawText(const int16_t x, const int16_t y, const int16_t font, const
     intermediateCmd(SETMATRIX());
     intermediateCmd(TEXT());
     intermediateCmd(x | ((uint32_t)y << 16));
-    intermediateCmd(font | ((uint32_t)options << 16));
+    intermediateCmd(fontHandle | ((uint32_t)options << 16));
     sendText(text);
 }
 
@@ -319,14 +322,15 @@ void FT81x::drawSpinner(const int16_t x, const int16_t y, const uint16_t style, 
     endCmd(style | ((uint32_t)scale << 16));
 }
 
-void FT81x::drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const int16_t font, const uint32_t textColor, const uint32_t buttonColor, const uint16_t options, const char text[]) {
+void FT81x::drawButton(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const uint8_t font, const uint32_t textColor, const uint32_t buttonColor, const uint16_t options, const char text[]) {
+    uint8_t fontHandle = initBitmapHandleForFont(font);
     startCmd(COLOR(textColor));
     intermediateCmd(FGCOLOR());
     intermediateCmd(buttonColor);
     intermediateCmd(BUTTON());
     intermediateCmd(x | ((uint32_t)y << 16));
     intermediateCmd(width | ((uint32_t)height << 16));
-    intermediateCmd(font | ((uint32_t)options << 16));
+    intermediateCmd(fontHandle | ((uint32_t)options << 16));
     sendText(text);
 }
 
@@ -461,6 +465,16 @@ void FT81x::sendText(const char text[]) {
     if ((data >> 24) != 0) {
         endCmd(0);
     }
+}
+
+uint8_t FT81x::initBitmapHandleForFont(uint8_t font) {
+    if (font > 31) {
+        startCmd(ROMFONT());
+        intermediateCmd(14);
+        endCmd(font);
+        return 14;
+    }
+    return font;
 }
 
 #ifdef FT81x_USE_TEENSY_DMA
