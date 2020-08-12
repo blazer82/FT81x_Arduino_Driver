@@ -72,8 +72,6 @@ void setup() {
 
     Serial.println("Read FT81x configuration...");
 
-    Serial.println("Read FT81x configuration...");
-
     Serial.print("REG_ID ");
     Serial.print(ft81x.read8(FT81x_REG_ID), HEX);
     Serial.println(" (supposed to be 0x7C)");
