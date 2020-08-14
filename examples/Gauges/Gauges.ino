@@ -41,11 +41,11 @@ void setup() {
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
 
-    ft81x.drawGauge(240, 160, 100, FT81x_COLOR_RGB(255, 255, 255), FT81x_COLOR_RGB(0, 100, 100), FT81x_OPT_NOPOINTER, 10, 5, 75, 100);
-    ft81x.drawGauge(240, 160, 100, FT81x_COLOR_RGB(255, 100, 100), FT81x_COLOR_RGB(0, 0, 0), FT81x_OPT_NOBACK | FT81x_OPT_NOTICKS, 10, 5, 75, 100);
+    ft81x.drawGauge(240, 150, 140, FT81x_COLOR_RGB(255, 255, 255), FT81x_COLOR_RGB(0, 100, 100), FT81x_OPT_NOPOINTER, 10, 5, 75, 100);
+    ft81x.drawGauge(240, 150, 140, FT81x_COLOR_RGB(255, 100, 100), FT81x_COLOR_RGB(0, 0, 0), FT81x_OPT_NOBACK | FT81x_OPT_NOTICKS, 10, 5, 75, 100);
 
-    ft81x.drawGauge(160, 320, 60, FT81x_COLOR_RGB(255, 255, 255), FT81x_COLOR_RGB(0, 150, 50), 0, 6, 5, 37, 100);
-    ft81x.drawGauge(320, 320, 60, FT81x_COLOR_RGB(255, 255, 255), FT81x_COLOR_RGB(0, 50, 150), 0, 6, 5, 69, 100);
+    ft81x.drawGauge(140, 370, 90, FT81x_COLOR_RGB(255, 255, 255), FT81x_COLOR_RGB(0, 150, 50), 0, 6, 5, 37, 100);
+    ft81x.drawGauge(340, 370, 90, FT81x_COLOR_RGB(255, 255, 255), FT81x_COLOR_RGB(0, 50, 150), 0, 6, 5, 69, 100);
 
     ft81x.swapScreen();
 }

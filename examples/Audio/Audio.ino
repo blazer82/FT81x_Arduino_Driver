@@ -38,6 +38,7 @@ void setup() {
 
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
+    ft81x.drawText(240, 240, 22, FT81x_COLOR_RGB(255, 255, 255), FT81x_OPT_CENTER, "Sound effects playing...\0");
     ft81x.swapScreen();
 
     ft81x.setAudioVolume(64);

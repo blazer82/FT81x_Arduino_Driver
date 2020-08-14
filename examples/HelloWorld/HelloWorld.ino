@@ -39,8 +39,12 @@ void setup() {
     ft81x.setRotation(FT81x_ROTATE_LANDSCAPE);
 
     ft81x.beginDisplayList();
-    ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
-    ft81x.drawText(240, 240, 31, FT81x_COLOR_RGB(255, 255, 255), FT81x_OPT_CENTER, "Hello World\0");
+    ft81x.clear(FT81x_COLOR_RGB(255, 255, 255));
+    ft81x.drawText(240, 150, 31, FT81x_COLOR_RGB(0, 0, 0), FT81x_OPT_CENTER, "Hello World\0");
+    ft81x.drawText(240, 210, 22, FT81x_COLOR_RGB(0, 0, 0), FT81x_OPT_CENTER, "https://github.com/blazer82/FT81x_Arduino_Driver\0");
+    ft81x.drawCircle(120, 350, 40, FT81x_COLOR_RGB(255, 0, 0));
+    ft81x.drawCircle(240, 350, 40, FT81x_COLOR_RGB(0, 255, 0));
+    ft81x.drawCircle(360, 350, 40, FT81x_COLOR_RGB(0, 0, 255));
     ft81x.swapScreen();
 }
 
