@@ -72,7 +72,43 @@ void setup() {
 }
 ```
 
-For more information see the [example sketches](examples) as well as the [API Documentation](https://blazer82.github.io/FT81x_Arduino_Driver/html/class_f_t81x.html).
+For more information see the numerous [example sketches](examples) as well as the [API Documentation](https://blazer82.github.io/FT81x_Arduino_Driver/html/class_f_t81x.html).
+
+## Pin Description and Hookup Guide
+
+### Board PINs
+
+| PIN # | PIN Name | Description                                      |
+| -----:| -------- | ------------------------------------------------ | 
+| **1** | **5V**   | Power input (5V, 100mA)                          | 
+| **2** | **VCC**  | Reference voltage for logic signals (3.3V to 5V) | 
+| **3** | **GND**  | Common ground                                    | 
+| **4** | **SCK**  | SPI clock                                        | 
+| **5** | **SDO**  | SPI data out (aka MISO)                          | 
+| **6** | **SDI**  | SPI data in (aka MOSI)                           | 
+| **7** | **CS1**  | SPI chip select 1                                | 
+| **8** | **CS2**  | SPI chip select 2                                | 
+| **9** | **DC**   | Data/command signal                              | 
+| 10    | AUDIO    | Audio output                                     | 
+| 11    | IRQ      | Interrupt signal                                 | 
+| 12    | GND      | Common ground                                    | 
+| 13    | GND      | Common ground                                    | 
+
+***bold** connections are required.*
+
+### Hookup to Common Boards
+
+| PIN Name | Arduino Uno | Arduino Nano | NodeMCU-32S |
+| -------- |:-----------:|:------------:|:-----------:|
+| **5V**   | 5V          | 5V           | 5V / VIN    |
+| **VCC**  | 5V          | 5V           | 3V3         |
+| **GND**  | GND         | GND          | GND         |
+| **SCK**  | 13          | D13          | GPIO18      |
+| **SDO**  | 12          | D12          | GPIO19      |
+| **SDI**  | 11          | D11          | GPIO23      |
+| **CS1**  | 10          | D10          | GPIO5       |
+| **CS2**  | 9           | D9           | GPIO17      |
+| **DC**   | 8           | D8           | GPIO16      |
 
 ## License Summary
 
