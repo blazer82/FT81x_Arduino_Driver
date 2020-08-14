@@ -59,7 +59,7 @@ If you have tested additional boards (successfully or unsuccessfully) feel free 
 ```c++
 #include "FT81x.h"
 
-FT81x ft81x = FT81x(10, 9, 8, 7);
+FT81x ft81x = FT81x(10, 9, 8);
 
 void setup() {
     SPI.begin();

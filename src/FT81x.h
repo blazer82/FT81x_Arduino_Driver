@@ -291,9 +291,8 @@ class FT81x {
         @param  cs1 Number of the pin connected to the board's CS1 pin
         @param  cs2 Number of the pin connected to the board's CS2 pin
         @param  dc Number of the pin connected to the board's DC pin
-        @param  res_d Number of the pin connected to the board's RES_D pin
    */
-    FT81x(int8_t cs1, int8_t cs2, int8_t dc, int8_t res_d) : cs1(cs1), cs2(cs2), dc(dc), res_d(res_d) {}
+    FT81x(int8_t cs1, int8_t cs2, int8_t dc) : cs1(cs1), cs2(cs2), dc(dc) {}
 
     /*!
         @brief  Initialize FT81x instance
@@ -579,7 +578,6 @@ class FT81x {
     int8_t cs1;                    ///< CS pin for FT81x
     int8_t cs2;                    ///< CS pin for display
     int8_t dc;                     ///< Data/Command pin for display
-    int8_t res_d;                  ///< Reset pin for display
     uint16_t cmdWriteAddress = 0;  ///< Internal pointer to the command buffer of the FT81x chip
 
 #ifdef FT81x_USE_TEENSY_DMA

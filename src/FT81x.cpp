@@ -177,15 +177,14 @@ void FT81x::initFT81x() {
 
     // enable pixel clock
     write8(FT81x_REG_PCLK, 3);
+
+    // reset display on GPIO3
+    FT81x::write16(FT81x_REG_GPIOX_DIR, 0x8 | FT81x::read16(FT81x_REG_GPIOX_DIR));
+    FT81x::write16(FT81x_REG_GPIOX, 0x8 | FT81x::read16(FT81x_REG_GPIOX));
+    delay(300);
 }
 
 void FT81x::initDisplay() {
-    pinMode(res_d, OUTPUT);
-    digitalWrite(res_d, HIGH);
-    digitalWrite(res_d, LOW);
-    digitalWrite(res_d, HIGH);
-    delay(300);
-
     // sleep mode off
     DISPLAY_CMD(ST7701_SLPOUT);
     delay(300);
