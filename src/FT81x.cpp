@@ -102,9 +102,18 @@
 #endif
 
 void FT81x::begin() {
-#ifdef FT81x_USE_TEENSY_DMA
+#if defined(FT81x_USE_TEENSY_DMA)
     DmaSpi::Transfer trx(nullptr, 0, nullptr);
     DmaSpi::Transfer trx2(nullptr, 0, nullptr);
+#endif
+#if defined(FT81x_USE_ESP32_DMA)
+    dmaBuffer = esp32dma.allocDMABuffer(8);
+    dmaBufferOut = esp32dma.allocDMABuffer(8);
+    esp32dma.setDataMode(SPI_MODE3);
+    esp32dma.setFrequency(FT81x_SPI_CLOCK_SPEED);
+    esp32dma.setDMAChannel(1);
+    esp32dma.setQueueSize(1);
+    esp32dma.begin(VSPI);
 #endif
 
     pinMode(cs1, OUTPUT);
@@ -116,7 +125,7 @@ void FT81x::begin() {
     pinMode(dc, OUTPUT);
     digitalWrite(dc, LOW);
 
-#ifdef FT81x_USE_TEENSY_DMA
+#if defined(FT81x_USE_TEENSY_DMA)
     SPI.setCS(cs1);
 
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -476,7 +485,7 @@ uint8_t FT81x::initBitmapHandleForFont(uint8_t font) {
     return font;
 }
 
-#ifdef FT81x_USE_TEENSY_DMA
+#if defined(FT81x_USE_TEENSY_DMA)
 
 void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data) {
     static ActiveLowChipSelectStart csStart(cs1, FT81x_SPI_SETTINGS);

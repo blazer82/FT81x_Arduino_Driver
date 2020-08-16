@@ -39,6 +39,11 @@
 #include "platforms/teensy/DmaSpi.h"
 #endif
 
+#if defined(ESP32)
+#define FT81x_USE_ESP32_DMA 1
+#include "platforms/esp32/ESP32DMASPI.h"
+#endif
+
 #define FT81x_COLOR_RGB(r, g, b) (((uint32_t)(r) << 16) | ((uint32_t)(g) << 8) | (uint32_t)(b))  ///< Color from RGB values
 
 #define FT81x_ROTATE_LANDSCAPE                   0  ///< Use with setRotation() to rotate screen to landscape
@@ -580,12 +585,16 @@ class FT81x {
     int8_t dc;                     ///< Data/Command pin for display
     uint16_t cmdWriteAddress = 0;  ///< Internal pointer to the command buffer of the FT81x chip
 
-#ifdef FT81x_USE_TEENSY_DMA
+#if defined(FT81x_USE_TEENSY_DMA)
     uint8_t dmaBuffer[8] = {0};
     volatile uint8_t dmaBufferOut[8] = {0};
-
     DmaSpi::Transfer trx;
     DmaSpi::Transfer trx2;
+#endif
+#if defined(FT81x_USE_ESP32_DMA)
+    ESP32DMASPI::ESP32DMASPI esp32dma;
+    uint8_t *dmaBuffer;
+    volatile uint8_t *dmaBufferOut;
 #endif
 
     /*!
@@ -662,7 +671,7 @@ class FT81x {
     uint8_t fetchFromProgmem(const uint8_t data[], const uint32_t i);
 #endif
 
-#ifdef FT81x_USE_TEENSY_DMA
+#if (defined(FT81x_USE_TEENSY_DMA) || defined(FT81x_USE_ESP32_DMA))
     void waitForDMAReady();
     void transferDMABuffer(const uint8_t size);
 #endif
