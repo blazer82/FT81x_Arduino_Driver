@@ -7,7 +7,7 @@ FT81x on ST7701S Arduino Driver
 
 ## Hardware
 
-![Board](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/board.png)
+![Hardware](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/hardware.jpg)
 
 Schematics, KiCad files and Gerber files can be found inside the [hardware folder](hardware) in this repository.
 
