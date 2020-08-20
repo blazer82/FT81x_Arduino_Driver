@@ -3,7 +3,7 @@
 [![build-badge]](https://github.com/blazer82/FT81x_Arduino_Driver/actions?workflow=build)
 [![docs-badge]](https://github.com/blazer82/FT81x_Arduino_Driver/actions?workflow=docs)
 
-FT81x on ST7701S Arduino Driver
+High quality display module for many Arduino project ideas!
 
 ## Hardware
 
@@ -11,7 +11,20 @@ FT81x on ST7701S Arduino Driver
 
 Schematics, KiCad files and Gerber files can be found inside the [hardware folder](hardware) in this repository.
 
-The board is compatible with this [4 inch TFT LCD display with 480x480 pixels](https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices).
+The board is compatible with this [display](https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices).
+
+The complete hardware is [available for sale on Tindie](https://www.tindie.com/products/prodbld/40-inch-ft81x-tft-lcd-display-module-for-arduino/).
+
+## Highlights
+
+- 4 inch 480x480 pixel TFT display
+- up to 24 bit color support
+- built-in fonts and widgets (e.g. buttons, gauges, clock)
+- hardware support for JPEG and PNG
+- built-in sound effects (audio circuitry required)
+- bitmap support with 1 MByte graphics RAM
+- open source Arduino library with many example sketches
+- compatible with 3.3V and 5V logic levels
 
 ## Supported Boards
 
