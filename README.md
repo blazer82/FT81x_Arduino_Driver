@@ -85,7 +85,7 @@ void setup() {
 }
 ```
 
-For more information see the numerous [example sketches](examples) as well as the [API Documentation](https://blazer82.github.io/FT81x_Arduino_Driver/html/class_f_t81x.html).
+For more information see the numerous [example sketches](examples) as well as the [API Documentation](https://blazer82.github.io/FT81x_Arduino_Driver/api/class_f_t81x.html).
 
 ## Pin Description and Hookup Guide
 

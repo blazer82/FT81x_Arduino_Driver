@@ -28,11 +28,11 @@ git config user.name "Doxygen CI"
 git config user.email "doxygen@github.com"
 
 # Delete current docs
-rm -rf html || true
+rm -rf api || true
 
 # Overwrite output directory
 cp Doxyfile ${GITHUB_WORKSPACE}/Doxyfile
-sed -i "s;^HTML_OUTPUT .*;HTML_OUTPUT = doxygen_workdir/${REPO_NAME}/html;" ${GITHUB_WORKSPACE}/Doxyfile
+sed -i "s;^HTML_OUTPUT .*;HTML_OUTPUT = doxygen_workdir/${REPO_NAME}/api;" ${GITHUB_WORKSPACE}/Doxyfile
 cd $GITHUB_WORKSPACE
 
 # Create documentation
@@ -47,7 +47,7 @@ fi
 # Commit documentation
 cd doxygen_workdir/${REPO_NAME}
 
-if [ -d "html" ] && [ -f "html/index.html" ]; then
+if [ -d "api" ] && [ -f "api/index.html" ]; then
     git add --all
 
     if [ -n "$(git status --porcelain)" ]; then
