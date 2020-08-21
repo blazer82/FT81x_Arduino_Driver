@@ -111,7 +111,7 @@ void loop() {
 }
 
 vertex rotate(const vertex v, const uint16_t angle) {
-    return {(int16_t)(((int64_t)v.x * (int64_t)cos_lut(angle) + (int64_t)v.z * (int64_t)sin_lut(angle)) >> 14), v.y, (int16_t)(((int64_t)v.z * (int64_t)cos_lut(angle) - (int64_t)v.x * (int64_t)sin_lut(angle)) >> 14)};
+    return {(int16_t)(((int32_t)v.x * cos_lut(angle) + (int32_t)v.z * sin_lut(angle)) >> 14), v.y, (int16_t)(((int32_t)v.z * (int32_t)cos_lut(angle) - (int32_t)v.x * (int32_t)sin_lut(angle)) >> 14)};
 }
 
 int16_t sin_lut(uint16_t angle) {
