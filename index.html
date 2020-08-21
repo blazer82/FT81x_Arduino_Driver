@@ -61,7 +61,7 @@
                     <div class="doc-content col-md-9 col-12 order-1">
                         <div class="content-inner">
                             <section id="hardware-section" class="doc-section">
-                                <h2 class="section-title">Get The Hardware</h2>
+                                <h2 class="section-title">Get the Hardware</h2>
                                 <div class="section-block">
                                     <p>The hardware is open source which allows you to download the
                                         <a href="https://github.com/blazer82/FT81x_Arduino_Driver/tree/master/hardware/Gerber"
@@ -89,7 +89,7 @@
                                     <h3 class="block-title">Arduino IDE</h3>
                                     <p>In order to install the <em>FT81x Arduino Driver</em> using the official Arduino
                                         IDE, you first need to download a .zip file of the library.</p>
-                                    <p>Follow then the official <a
+                                    <p>After that, follow this <a
                                             href="https://www.arduino.cc/en/Guide/Libraries#importing-a-zip-library"
                                             target="_blank">guide for installing .zip libraries</a>.</p>
                                     <a href="https://github.com/blazer82/FT81x_Arduino_Driver/archive/master.zip"
@@ -98,14 +98,14 @@
                                 </div>
                                 <div id="installation-platformio" class="section-block">
                                     <h3 class="block-title">PlatformIO</h3>
-                                    <p>In order to install the <em>FT81x Arduino Driver</em> using the official Arduino
-                                        IDE, you first need to download a .zip file of the library.</p>
-                                    <p>Follow then the official <a
-                                            href="https://www.arduino.cc/en/Guide/Libraries#importing-a-zip-library"
-                                            target="_blank">guide for installing .zip libraries</a>.</p>
-                                    <a href="https://github.com/blazer82/FT81x_Arduino_Driver/archive/master.zip"
-                                        class="btn btn-green" target="_blank"><i class="fas fa-download"></i> Download
-                                        .zip Library</a>
+                                    <p>The library is available on the official <a
+                                            href="https://platformio.org/lib/show/11036/FT81x_Arduino_Driver/"
+                                            target="_blank">PlatformIO registry</a>. To install it, just type into your
+                                        shell:</p>
+                                    <div class="code-block">
+                                        <p><code>pio lib install FT81x_Arduino_Driver</code></p>
+                                    </div>
+                                    <!--//code-block-->
                                 </div>
                             </section>
                             <!--//doc-section-->
@@ -579,11 +579,18 @@ echo $y;
                         <div id="doc-nav" class="doc-nav">
 
                             <nav id="doc-menu" class="nav doc-menu flex-column sticky">
-                                <a class="nav-link scrollto" href="#hardware-section">Get The Hardware</a>
+                                <a class="nav-link scrollto" href="#hardware-section">Get the Hardware</a>
                                 <a class="nav-link scrollto" href="#installation-section">Install Arduino Library</a>
                                 <nav class="doc-sub-menu nav flex-column">
                                     <a class="nav-link scrollto" href="#installation-arduino-ide">Arduino IDE</a>
                                     <a class="nav-link scrollto" href="#installation-platformio">PlatformIO</a>
+                                </nav>
+                                <!--//nav-->
+                                <a class="nav-link scrollto" href="#hook-up-section">Hook-up</a>
+                                <nav class="doc-sub-menu nav flex-column">
+                                    <a class="nav-link scrollto" href="#hook-up-general">General</a>
+                                    <a class="nav-link scrollto" href="#hook-up-arduino">Arduino</a>
+                                    <a class="nav-link scrollto" href="#hook-up-esp32">ESP32</a>
                                 </nav>
                                 <!--//nav-->
                                 <a class="nav-link scrollto" href="#code-section">Code</a>
