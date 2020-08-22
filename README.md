@@ -19,7 +19,8 @@ The complete hardware is [available for sale on Tindie](https://www.tindie.com/p
 
 - 4 inch 480x480 pixel TFT display
 - up to 24 bit color support
-- built-in fonts and widgets (e.g. buttons, gauges, clock)
+- 19 built-in fonts
+- built-in widgets (e.g. buttons, gauges, clock)
 - hardware support for JPEG and PNG
 - built-in sound effects (audio circuitry required)
 - bitmap support with 1 MByte graphics RAM
@@ -43,29 +44,16 @@ If you have tested additional boards (successfully or unsuccessfully) feel free 
 
 ## Features
 
-- [x] Line
-- [x] Circle
-- [x] Rectangle
-- [x] Gradient
-- [x] Text
-- [x] Bitmap images
-- [x] Animated spinner
-- [x] Sound effects
-- [x] Buttons
-- [x] Analog clock
-- [x] Gauge
-- [x] Line strip
-- [x] JPEG support
-- [x] PNG support
-- [ ] Keys
-- [ ] Progress bar
-- [ ] Scrollbar
-- [ ] Slider
-- [ ] Dial
-- [ ] Toggle
-- [ ] Custom fonts
-- [ ] Video playback
-- [ ] Audio playback
+| | | |
+|-|-|-|
+|[x] Line|[x] Circle|[x] Rectangle|
+|[x] Gradient|[x] Text|[x] Bitmap images|
+|[x] Animated spinner|[x] Sound effects|[x] Buttons|
+|[x] Analog clock|[x] Gauge|[x] Line strip|
+|[x] JPEG support|[x] PNG support|[ ] Custom fonts|
+|[ ] Keys|[ ] Progress bar|[ ] Scrollbar|
+|[ ] Dial|[ ] Toggle|[ ] Video playback|
+|[ ] Audio playback|||
 
 ## Usage
 
@@ -87,41 +75,9 @@ void setup() {
 
 For more information see the numerous [example sketches](examples) as well as the [API Documentation](https://blazer82.github.io/FT81x_Arduino_Driver/api/class_f_t81x.html).
 
-## Pin Description and Hookup Guide
+## Getting Started
 
-### Board PINs
-
-| PIN # | PIN Name | Description                                      |
-| -----:| -------- | ------------------------------------------------ | 
-| **1** | **5V**   | Power input (5V, 100mA)                          | 
-| **2** | **VCC**  | Reference voltage for logic signals (3.3V to 5V) | 
-| **3** | **GND**  | Common ground                                    | 
-| **4** | **SCK**  | SPI clock                                        | 
-| **5** | **SDO**  | SPI data out (aka MISO)                          | 
-| **6** | **SDI**  | SPI data in (aka MOSI)                           | 
-| **7** | **CS1**  | SPI chip select 1                                | 
-| **8** | **CS2**  | SPI chip select 2                                | 
-| **9** | **DC**   | Data/command signal                              | 
-| 10    | AUDIO    | Audio output                                     | 
-| 11    | IRQ      | Interrupt signal                                 | 
-| 12    | GND      | Common ground                                    | 
-| 13    | GND      | Common ground                                    | 
-
-***bold** connections are required.*
-
-### Hookup to Common Boards
-
-| PIN Name | Arduino Uno | Arduino Nano | NodeMCU-32S |
-| -------- |:-----------:|:------------:|:-----------:|
-| **5V**   | 5V          | 5V           | 5V / VIN    |
-| **VCC**  | 5V          | 5V           | 3V3         |
-| **GND**  | GND         | GND          | GND         |
-| **SCK**  | 13          | D13          | GPIO18      |
-| **SDO**  | 12          | D12          | GPIO19      |
-| **SDI**  | 11          | D11          | GPIO23      |
-| **CS1**  | 10          | D10          | GPIO5       |
-| **CS2**  | 9           | D9           | GPIO17      |
-| **DC**   | 8           | D8           | GPIO16      |
+For more information on how to get started with the display driver board, please refer to the [Getting Started Guide](https://blazer82.github.io/FT81x_Arduino_Driver).
 
 ## License Summary
 
