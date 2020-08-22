@@ -43,7 +43,7 @@
 
                 <ol class="breadcrumb">
                     <!-- <li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-                    <li class="breadcrumb-item active">Quick Start</li>
+                    <li class="breadcrumb-item active">Getting Started</li>
                 </ol>
 
             </div>
@@ -53,8 +53,8 @@
         <div class="doc-wrapper">
             <div class="container">
                 <div id="doc-header" class="doc-header text-center">
-                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Quick Start</h1>
-                    <div class="meta"><i class="far fa-clock"></i> Last updated: August 21st, 2020</div>
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Getting Started</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Last updated: August 22st, 2020</div>
                 </div>
                 <!--//doc-header-->
                 <div class="doc-body row">
@@ -109,466 +109,283 @@
                                 </div>
                             </section>
                             <!--//doc-section-->
-
-                            <section id="code-section" class="doc-section">
-                                <h2 class="section-title">Code</h2>
-                                <div class="section-block">
+                            <section id="hookup-section" class="doc-section">
+                                <h2 class="section-title">Hookup</h2>
+                                <div id="hookup-general" class="section-block">
+                                    <h3 class="block-title">Pin Description</h3>
                                     <p>
-                                        <a href="https://prismjs.com/" target="_blank">PrismJS</a> is used as the syntax
-                                        highlighter here. You can <a href="https://prismjs.com/download.html"
-                                            target="_blank">build your own version</a> via their website should you need
-                                        to.
+                                        Please refer to the following pin description when hooking up
+                                        the board to your microcontroller:<br><br>
                                     </p>
-
-                                </div>
-                                <!--//section-block-->
-                                <div id="html" class="section-block">
-
-                                    <div class="callout-block callout-success">
-                                        <div class="icon-holder">
-                                            <i class="fas fa-thumbs-up"></i>
-                                        </div>
-                                        <!--//icon-holder-->
-                                        <div class="content">
-                                            <h4 class="callout-title">Useful Tip:</h4>
-                                            <p>You can use this online <a href="https://mothereff.in/html-entities"
-                                                    target="_blank">HTML entity encoder/decoder</a> to generate your
-                                                code examples.</p>
-                                        </div>
-                                        <!--//content-->
-                                    </div>
-                                    <div class="code-block">
-                                        <h6>HTML Code Example</h6>
-                                        <pre><code class="language-markup">&lt;!DOCTYPE html&gt; 
-&lt;html lang=&quot;en&quot;&gt; 
-    ...
-    &lt;div class=&quot;jumbotron&quot;&gt; 
-        &lt;h1&gt;Hello, world!&lt;/h1&gt; 
-        &lt;p&gt;...&lt;/p&gt; 
-        &lt;p&gt;&lt;a class=&quot;btn btn-primary btn-lg&quot; href=&quot;#&quot; role=&quot;button&quot;&gt;Learn more&lt;/a&gt;&lt;/p&gt; 
-    &lt;/div&gt;
-    &lt;div class=&quot;jumbotron&quot;&gt; 
-        &lt;h1&gt;Hello, world!&lt;/h1&gt; 
-        &lt;p&gt;...&lt;/p&gt; 
-        &lt;p&gt;&lt;a class=&quot;btn btn-primary btn-lg&quot; href=&quot;#&quot; role=&quot;button&quot;&gt;Learn more&lt;/a&gt;&lt;/p&gt; 
-    &lt;/div&gt;
-    ...
-&lt;/html&gt;</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="css" class="section-block">
-                                    <div class="code-block">
-                                        <h6>CSS Code Example</h6>
-                                        <pre><code class="language-css">/* ======= Base Styling ======= */
-body {
-    font-family: 'Open Sans', arial, sans-serif; 
-    color: #333; 
-    font-size: 16px; 
-    -webkit-font-smoothing: antialiased; 
-    -moz-osx-font-smoothing: grayscale; 
-}</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="sass" class="section-block">
-                                    <div class="code-block">
-                                        <h6>SCSS Code Example</h6>
-                                        <pre><code class="language-css">@mixin transform($property) {
-  -webkit-transform: $property;
-      -ms-transform: $property;
-          transform: $property;
-}
-
-.box { @include transform(rotate(30deg)); }</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="less" class="section-block">
-                                    <div class="code-block">
-                                        <h6>LESS Code Example</h6>
-                                        <pre><code class="language-css">@base: #f04615;
-@width: 0.5;
-
-.class {
-  width: percentage(@width); // returns &#x60;50%&#x60;
-  color: saturate(@base, 5%);
-  background-color: spin(lighten(@base, 25%), 8);
-}</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="javascript" class="section-block">
-                                    <div class="code-block">
-                                        <h6>JavaScript Code Example</h6>
-                                        <pre><code class="language-javascript">&lt;script&gt; 
-    function myFunction(a, b) { 
-        return a * b; 
-    } 
-    
-    document.getElementById(&quot;demo&quot;).innerHTML = myFunction(4, 3); 
-&lt;/script&gt;</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="python" class="section-block">
-                                    <div class="code-block">
-                                        <h6>Python Code Example</h6>
-                                        <pre><code class="language-python">&gt;&gt;&gt; x = int(input(&quot;
-Please enter an integer: &quot;)) Please enter an integer: 42 
-&gt;&gt;&gt; if x &lt; 0: 
-... x = 0 
-... print('Negative changed to zero') 
-... elif x == 0: 
-... print('Zero') 
-... elif x == 1: 
-... print('Single') 
-... else: 
-... print('More') 
-... More</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="php" class="section-block">
-                                    <div class="code-block">
-                                        <h6>PHP Code Example</h6>
-                                        <pre><code class="language-php">&lt;?php 
-$txt = &quot;Hello world!&quot;; 
-$x = 5; 
-$y = 10.5; 
-
-echo $txt; 
-echo &quot;&lt;br&gt;&quot;; 
-echo $x; 
-echo &quot;&lt;br&gt;&quot;; 
-echo $y; 
-?&gt;</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                                <div id="handlebars" class="section-block">
-                                    <div class="code-block">
-                                        <h6>Handlebars Code Example</h6>
-                                        <pre><code class="language-handlebars">Handlebars.registerHelper('list', function(items, options) { 
-  var out = &quot;&lt;ul&gt;&quot;; 
-  
-  for(var i=0, l=items.length; i&lt;l; i++) { 
-    out = out + &quot;&lt;li&gt;&quot; + options.fn(items[i]) + &quot;&lt;/li&gt;&quot;; 
-  } 
-  
-  return out + &quot;&lt;/ul&gt;&quot;; 
-});</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                    <div class="code-block">
-                                        <h6>Git Code Example</h6>
-                                        <pre><code class="language-git">$ git add Documentation.txt</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                                <!--//section-block-->
-                            </section>
-                            <!--//doc-section-->
-                            <section id="callouts-section" class="doc-section">
-                                <h2 class="section-title">Callouts</h2>
-                                <div class="section-block">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                                        eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-                                        montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                                        eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-                                        fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-                                        imperdiet a, venenatis vitae, justo.
+                                    <p>
+                                        <img src="assets/images/pin-description.png" alt="pin Description"
+                                            style="max-width: 100%;">
                                     </p>
-                                </div>
-
-                                <div class="section-block">
-                                    <div class="callout-block callout-info">
-                                        <div class="icon-holder">
-                                            <i class="fas fa-info-circle"></i>
-                                        </div>
-                                        <!--//icon-holder-->
-                                        <div class="content">
-                                            <h4 class="callout-title">Aenean imperdiet</h4>
-                                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                accusantium <code>&lt;code&gt;</code> , Nemo enim ipsam voluptatem quia
-                                                voluptas <a href="#">link example</a> sit aspernatur aut odit aut fugit.
-                                            </p>
-                                        </div>
-                                        <!--//content-->
-                                    </div>
-                                    <!--//callout-block-->
-
-                                    <div class="callout-block callout-warning">
-                                        <div class="icon-holder">
-                                            <i class="fas fa-bug"></i>
-                                        </div>
-                                        <!--//icon-holder-->
-                                        <div class="content">
-                                            <h4 class="callout-title">Morbi posuere</h4>
-                                            <p>Nunc hendrerit odio quis dignissim efficitur. Proin ut finibus libero.
-                                                Morbi posuere fringilla felis eget sagittis. Fusce sem orci, cursus in
-                                                tortor <a href="#">link example</a> tellus vel diam viverra elementum.
-                                            </p>
-                                        </div>
-                                        <!--//content-->
-                                    </div>
-                                    <!--//callout-block-->
-
-                                    <div class="callout-block callout-success">
-                                        <div class="icon-holder">
-                                            <i class="fas fa-thumbs-up"></i>
-                                        </div>
-                                        <!--//icon-holder-->
-                                        <div class="content">
-                                            <h4 class="callout-title">Lorem ipsum dolor sit amet</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a
-                                                    href="#">Link example</a> aenean commodo ligula eget dolor.</p>
-                                        </div>
-                                        <!--//content-->
-                                    </div>
-                                    <!--//callout-block-->
-
-                                    <div class="callout-block callout-danger">
-                                        <div class="icon-holder">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                        </div>
-                                        <!--//icon-holder-->
-                                        <div class="content">
-                                            <h4 class="callout-title">Interdum et malesuada</h4>
-                                            <p>Morbi eget interdum sapien. Donec sed turpis sed nulla lacinia accumsan
-                                                vitae ut tellus. Aenean vestibulum <a href="#">Link example</a> maximus
-                                                ipsum vel dignissim. Morbi ornare elit sit amet massa feugiat, viverra
-                                                dictum ipsum pellentesque. </p>
-                                        </div>
-                                        <!--//content-->
-                                    </div>
-                                    <!--//callout-block-->
-                                </div>
-                            </section>
-                            <!--//doc-section-->
-                            <section id="tables-section" class="doc-section">
-                                <h2 class="section-title">Tables</h2>
-                                <div class="section-block">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                                        eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-                                        montes, nascetur ridiculus mus. Donec quam felis.
+                                    <p>
+                                        <br>The table below prodives a more detailed description for each pin.
                                     </p>
-                                </div>
-                                <div class="section-block">
-                                    <h6>Basic Table</h6>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--//table-responsive-->
-                                    <h6>Striped Table</h6>
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Required</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
+                                                    <td>5V</td>
+                                                    <td>5V power input for powering the the board, the display and
+                                                        the backlight LED. Hook this up to the 5V power outlet of your
+                                                        Arduino board. Requires at least 100mA of current.</td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
+                                                    <td>VCC</td>
+                                                    <td>Reference voltage for all digital signal lines. For 3.3V
+                                                        microcontrollers, hook this up to the 3.3V power outlet of the
+                                                        Arduino board. For 5V
+                                                        microcontrollers, hook this up to the 5V power outlet.</td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
+                                                    <td>GND</td>
+                                                    <td>Needs to be connected to a common ground with the Arduino board.
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">4</th>
+                                                    <td>SCK</td>
+                                                    <td>Clock signal for the SPI bus. Hook this up to the SPI clock of
+                                                        your Arduino board.
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">5</th>
+                                                    <td>SDO</td>
+                                                    <td>Serial data out of the board. Hook this up to the serial data in
+                                                        signal of your Arduino board (aka MISO).
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">6</th>
+                                                    <td>SDI</td>
+                                                    <td>Serial data in of the board. Hook this up to the serial data out
+                                                        signal of your Arduino board (aka MOSI).
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">7</th>
+                                                    <td>CS1</td>
+                                                    <td>Chip select signal for communication with the FT81x
+                                                        IC on the board. It's recommended to hook this up to the default
+                                                        CS pin of your Arduino board. However, any GPIO pin can be
+                                                        configured as CS1 signal.
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">8</th>
+                                                    <td>CS2</td>
+                                                    <td>Chip select signal for communication with the integrated
+                                                        controller IC of the display. Any GPIO pin can be
+                                                        configured as CS2 signal.
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">9</th>
+                                                    <td>DC</td>
+                                                    <td>Data/command signal for communication with the integrated
+                                                        controller IC of the display. Any GPIO pin can be
+                                                        configured as DC signal.
+                                                    </td>
+                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">10</th>
+                                                    <td>AUDIO</td>
+                                                    <td>The FT81x is capable of sound synthesis and mono audio playback.
+                                                        This pin is directly connected to the raw audio output of the
+                                                        IC. It's recommended to use additional filter and amplification
+                                                        circuitry for proper audio applications.
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11</th>
+                                                    <td>IRQ</td>
+                                                    <td>Interrupt signal for different applications (e.g. audio
+                                                        playback). As of now, this signal line isn't used by the Arduino
+                                                        library.
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">12</th>
+                                                    <td>GND</td>
+                                                    <td>An additional common ground. It's only required that one of the
+                                                        GND signals is connected.
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">13</th>
+                                                    <td>GND</td>
+                                                    <td>An additional common ground. It's only required that one of the
+                                                        GND signals is connected.
+                                                    </td>
+                                                    <td>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!--//table-responsive-->
-                                    <h6>Bordered Table</h6>
+                                </div>
+                                <div id="hookup-boards" class="section-block">
+                                    <h3 class="block-title">Common Boards</h3>
+                                    <p>Please refer to the table below for specific information on how to hook up the
+                                        display driver board to common Arduino boards.</p>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Name</th>
+                                                    <th>Arduino Uno</th>
+                                                    <th>Arduino Nano</th>
+                                                    <th>NodeMCU-32S</th>
+                                                    <th>Teensy 4.0</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
+                                                    <th scope="row">5V</th>
+                                                    <td>5V</td>
+                                                    <td>5V</td>
+                                                    <td>5V / VIN</td>
+                                                    <td>VIN (5V)</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
+                                                    <th scope="row">VCC</th>
+                                                    <td>5V</td>
+                                                    <td>5V</td>
+                                                    <td>3V3</td>
+                                                    <td>3V</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
+                                                    <th scope="row">GND</th>
+                                                    <td>GND</td>
+                                                    <td>GND</td>
+                                                    <td>GND</td>
+                                                    <td>GND</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">SCK</th>
+                                                    <td>13</td>
+                                                    <td>D13</td>
+                                                    <td>GPIO18</td>
+                                                    <td>13</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">SDO</th>
+                                                    <td>12</td>
+                                                    <td>D12</td>
+                                                    <td>GPIO19</td>
+                                                    <td>12</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">SDI</th>
+                                                    <td>11</td>
+                                                    <td>D11</td>
+                                                    <td>GPIO23</td>
+                                                    <td>11</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">CS1</th>
+                                                    <td>10<sup>*</sup></td>
+                                                    <td>D10<sup>*</sup></td>
+                                                    <td>GPIO5<sup>*</sup></td>
+                                                    <td>10<sup>*</sup></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">CS2</th>
+                                                    <td>9<sup>*</sup></td>
+                                                    <td>D9<sup>*</sup></td>
+                                                    <td>GPIO17<sup>*</sup></td>
+                                                    <td>9<sup>*</sup></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">DC</th>
+                                                    <td>8<sup>*</sup></td>
+                                                    <td>D8<sup>*</sup></td>
+                                                    <td>GPIO16<sup>*</sup></td>
+                                                    <td>8<sup>*</sup></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!--//table-responsive-->
-                                </div>
-                                <!--//section-block-->
-                            </section>
-                            <!--//doc-section-->
-                            <section id="buttons-section" class="doc-section">
-                                <h2 class="section-title">Buttons</h2>
-                                <div class="section-block">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet
-                                        turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin
-                                        ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus leo,
-                                        faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod,
-                                        imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit eu gravida
-                                        id, dignissim ut ante. Nam consequat porttitor libero euismod congue.
+                                    <p style="text-align: right;">
+                                        <sup>*</sup><em> configurable</em>
                                     </p>
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <h6>Basic Buttons</h6>
-                                            <ul class="list list-unstyled">
-                                                <li><a href="#" class="btn btn-primary">Primary Button</a></li>
-                                                <li><a href="#" class="btn btn-green">Green Button</a></li>
-                                                <li><a href="#" class="btn btn-blue">Blue Button</a></li>
-                                                <li><a href="#" class="btn btn-orange">Orange Button</a></li>
-                                                <li><a href="#" class="btn btn-red">Red Button</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <h6>CTA Buttons</h6>
-                                            <ul class="list list-unstyled">
-                                                <li><a href="#" class="btn btn-primary btn-cta"><i
-                                                            class="fas fa-download"></i> Download Now</a></li>
-                                                <li><a href="#" class="btn btn-green btn-cta"><i
-                                                            class="fas fa-code-branch"></i> Fork Now</a></li>
-                                                <li><a href="#" class="btn btn-blue btn-cta"><i
-                                                            class="fas fa-play-circle"></i> Find Out Now</a></li>
-                                                <li><a href="#" class="btn btn-orange btn-cta"><i
-                                                            class="fas fa-bug"></i> Report Bugs</a></li>
-                                                <li><a href="#" class="btn btn-red btn-cta"><i
-                                                            class="fas fa-exclamation-circle"></i> Submit Issues</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!--//row-->
                                 </div>
-                                <!--//section-block-->
                             </section>
                             <!--//doc-section-->
-                            <section id="video-section" class="doc-section">
-                                <h2 class="section-title">Video</h2>
+                            <section id="hello-world-section" class="doc-section">
+                                <h2 class="section-title">Hello World</h2>
                                 <div class="section-block">
-                                    <div class="row">
-                                        <div class="col-md-6 col-12">
-                                            <h6>Responsive Video 16:9</h6>
-                                            <!-- 16:9 aspect ratio -->
-                                            <div class="embed-responsive embed-responsive-16by9">
-                                                <iframe class="embed-responsive-item"
-                                                    src="https://www.youtube.com/embed/ejBkOjEG6F0?rel=0&amp;controls=0&amp;showinfo=0"
-                                                    frameborder="0" allowfullscreen></iframe>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <h6>Responsive Video 4:3</h6>
-                                            <!-- 4:3 aspect ratio -->
-                                            <div class="embed-responsive embed-responsive-4by3">
-                                                <iframe class="embed-responsive-item"
-                                                    src="https://www.youtube.com/embed/ejBkOjEG6F0?rel=0&amp;controls=0&amp;showinfo=0"
-                                                    frameborder="0" allowfullscreen></iframe>
-                                            </div>
-                                        </div>
+                                    <p>After you successfully installed the Arduino library and hooked up your board,
+                                        create a new Arduino Sketch and enter the following source code. Be sure to use
+                                        the correct pin numbers for the CS1, CS2 and DC pins on line 3.</p>
+                                    <div class="code-block">
+                                        <h6>HelloWorld.ino</h6>
+                                        <pre><code class="language-clike">#include &#x22;FT81x.h&#x22;
+
+FT81x ft81x = FT81x(10, 9, 8);
+
+void setup() {
+    SPI.begin();
+    ft81x.begin();
+
+    ft81x.beginDisplayList();
+    ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
+    ft81x.drawText(240, 200, 31, FT81x_COLOR_RGB(255, 255, 255), FT81x_OPT_CENTER, &#x22;Hello World\0&#x22;);
+    ft81x.swapScreen();
+}</code></pre>
                                     </div>
-                                    <!--//row-->
+                                    <!--//code-block-->
+                                    <p>After compiling and uploading to the mictocontroller, you should see the text
+                                        <em>Hello World</em> at the center of your display.</p>
+                                    <p>Refer to the various <a
+                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/blob/master/examples"
+                                            target="_blank">example sketches</a> as well as the <a
+                                            href="https://blazer82.github.io/FT81x_Arduino_Driver/api/class_f_t81x.html"
+                                            target="_blank">API documentation</a> for more information.</p>
+                                    <p>If you have any issues and you already double checked all the connections and
+                                        the code contact the seller or <a
+                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/issues"
+                                            target="_blank">open an issue on GitHub</a>.</p>
                                 </div>
-                                <!--//section-block-->
-                                <section id="icons-section" class="doc-section">
-                                    <h2 class="section-title">Icons</h2>
-                                    <div class="section-block">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet
-                                            turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin
-                                            ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus
-                                            leo, faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod,
-                                            imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit eu
-                                            gravida id, dignissim ut ante. Nam consequat porttitor libero euismod
-                                            congue.
-                                        </p>
-                                    </div>
-                                    <!--//section-block-->
-                                    <div class="section-block">
-                                        <h6>Elegant Icon Font</h6>
-                                        <a href="https://www.elegantthemes.com/blog/resources/elegant-icon-font"
-                                            target="_blank"><img class="img-fluid"
-                                                src="assets/images/demo/elegant-icon-font.jpg"
-                                                alt="elegant icons" /></a>
-                                    </div>
-                                    <!--//section-block-->
-                                    <div class="section-block">
-                                        <h6>FontAwesome Icon Font</h6>
-                                        <a href="https://fortawesome.github.io/Font-Awesome/" target="_blank"><img
-                                                class="img-fluid" src="assets/images/demo/fontawesome-icons.png"
-                                                alt="fontawesome" /></a>
-                                    </div>
-                                    <!--//section-block-->
-
-                                </section>
-                                <!--//doc-section-->
-
                             </section>
                             <!--//doc-section-->
                         </div>
@@ -586,34 +403,16 @@ echo $y;
                                     <a class="nav-link scrollto" href="#installation-platformio">PlatformIO</a>
                                 </nav>
                                 <!--//nav-->
-                                <a class="nav-link scrollto" href="#hook-up-section">Hook-up</a>
+                                <a class="nav-link scrollto" href="#hookup-section">Hookup</a>
                                 <nav class="doc-sub-menu nav flex-column">
-                                    <a class="nav-link scrollto" href="#hook-up-general">General</a>
-                                    <a class="nav-link scrollto" href="#hook-up-arduino">Arduino</a>
-                                    <a class="nav-link scrollto" href="#hook-up-esp32">ESP32</a>
+                                    <a class="nav-link scrollto" href="#hookup-general">Pin Description</a>
+                                    <a class="nav-link scrollto" href="#hookup-boards">Common Boards</a>
                                 </nav>
                                 <!--//nav-->
-                                <a class="nav-link scrollto" href="#code-section">Code</a>
-                                <nav class="doc-sub-menu nav flex-column">
-                                    <a class="nav-link scrollto" href="#html">HTML</a>
-                                    <a class="nav-link scrollto" href="#css">CSS</a>
-                                    <a class="nav-link scrollto" href="#sass">Sass</a>
-                                    <a class="nav-link scrollto" href="#less">LESS</a>
-                                    <a class="nav-link scrollto" href="#javascript">JavaScript</a>
-                                    <a class="nav-link scrollto" href="#python">Python</a>
-                                    <a class="nav-link scrollto" href="#php">PHP</a>
-                                    <a class="nav-link scrollto" href="#handlebars">Handlebars</a>
-                                </nav>
-                                <!--//nav-->
-                                <a class="nav-link scrollto" href="#callouts-section">Callouts</a>
-                                <a class="nav-link scrollto" href="#tables-section">Tables</a>
-                                <a class="nav-link scrollto" href="#buttons-section">Buttons</a>
-                                <a class="nav-link scrollto" href="#video-section">Video</a>
-                                <a class="nav-link scrollto" href="#icons-section">Icons</a>
+                                <a class="nav-link scrollto" href="#hello-world-section">Hello World</a>
                                 <a class="nav-link" href="api">API Documentation</a>
                             </nav>
                             <!--//doc-menu-->
-
                         </div>
                     </div>
                     <!--//doc-sidebar-->
@@ -627,54 +426,9 @@ echo $y;
         <div id="promo-block" class="promo-block">
             <div class="container">
                 <div class="promo-block-inner">
-                    <h3 class="promo-title text-center"><i class="fas fa-heart"></i> <a
+                    <h3 class="promo-title text-center"><i class="fas fa-arrow-circle-right"></i> <a
                             href="https://themes.3rdwavemedia.com/bootstrap-templates/portfolio/instance-bootstrap-portfolio-theme-for-developers/"
-                            target="_blank">Are you an ambitious and entrepreneurial developer?</a></h3>
-                    <div class="row">
-                        <div class="figure-holder col-lg-5 col-md-6 col-12">
-                            <div class="figure-holder-inner">
-                                <a href="https://themes.3rdwavemedia.com/bootstrap-templates/portfolio/instance-bootstrap-portfolio-theme-for-developers/"
-                                    target="_blank"><img class="img-fluid" src="assets/images/demo/instance-promo.jpg"
-                                        alt="Instance Theme" /></a>
-                                <a class="mask"
-                                    href="https://themes.3rdwavemedia.com/bootstrap-templates/portfolio/instance-bootstrap-portfolio-theme-for-developers/"><i
-                                        class="icon fa fa-heart pink"></i></a>
-
-                            </div>
-                        </div>
-                        <!--//figure-holder-->
-                        <div class="content-holder col-lg-7 col-md-6 col-12">
-                            <div class="content-holder-inner">
-                                <div class="desc">
-                                    <h4 class="content-title"><strong> Instance - Bootstrap 4 Portfolio Theme for
-                                            Aspiring Developers</strong></h4>
-                                    <p>Check out <a
-                                            href="https://themes.3rdwavemedia.com/bootstrap-templates/portfolio/instance-bootstrap-portfolio-theme-for-developers/"
-                                            target="_blank">Instance</a> - a Bootstrap personal portfolio theme I
-                                        created for developers. The UX design is focused on selling a developer’s skills
-                                        and experience to potential employers or clients, and has <strong
-                                            class="highlight">all the winning ingredients to get you hired</strong>.
-                                        It’s not only a HTML site template but also a marketing framework for you to
-                                        <strong class="highlight">build an impressive online presence with a high
-                                            conversion rate</strong>. </p>
-                                    <p><strong class="highlight">[Tip for developers]:</strong> If your project is Open
-                                        Source, you can use this area to promote your other projects or hold third party
-                                        adverts like Bootstrap and FontAwesome do!</p>
-                                    <a class="btn btn-cta"
-                                        href="https://themes.3rdwavemedia.com/bootstrap-templates/portfolio/instance-bootstrap-portfolio-theme-for-developers/"
-                                        target="_blank"><i class="fas fa-external-link-alt"></i> View Demo</a>
-
-                                </div>
-                                <!--//desc-->
-
-
-                                <div class="author"><a href="https://themes.3rdwavemedia.com">Xiaoying Riley</a></div>
-                            </div>
-                            <!--//content-holder-inner-->
-                        </div>
-                        <!--//content-holder-->
-                    </div>
-                    <!--//row-->
+                            target="_blank">For more information and support visit the project on GitHub</a></h3>
                 </div>
                 <!--//promo-block-inner-->
             </div>
