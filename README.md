@@ -89,5 +89,8 @@ MIT License
 
 The hardware is licensed under [CERN-OHL-S v2](https://cern.ch/cern-ohl).
 
+[![oshwa-mark]](https://certification.oshwa.org/de000089.html)
+
 [build-badge]: https://github.com/blazer82/FT81x_Arduino_Driver/workflows/build/badge.svg
 [docs-badge]: https://github.com/blazer82/FT81x_Arduino_Driver/workflows/docs/badge.svg
+[oshwa-mark]: https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/OSHW_mark_DE000089_150.png
