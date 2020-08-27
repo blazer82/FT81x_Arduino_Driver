@@ -14,7 +14,7 @@ cd $GITHUB_WORKSPACE
 echo -e "\n########################################################################";
 echo -e "${YELLOW}INSTALL DOXYGEN"
 echo "########################################################################";
-wget -q http://doxygen.nl/files/doxygen-1.8.18.linux.bin.tar.gz
+wget -q https://downloads.sourceforge.net/project/doxygen/rel-1.8.18/doxygen-1.8.18.linux.bin.tar.gz
 tar -xf doxygen-1.8.18.linux.bin.tar.gz
 mv doxygen-1.8.18/bin/doxygen .
 chmod +x doxygen
