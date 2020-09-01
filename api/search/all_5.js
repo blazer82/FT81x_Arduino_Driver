@@ -129,7 +129,7 @@ var searchData=
   ['ft81x_5fsound_5f8_5fshort_5fpips_149',['FT81x_SOUND_8_SHORT_PIPS',['../_f_t81x_8h.html#a7c16cae6378f88acdda2b50f392003e0',1,'FT81x.h']]],
   ['ft81x_5fsound_5f9_5fshort_5fpips_150',['FT81x_SOUND_9_SHORT_PIPS',['../_f_t81x_8h.html#a241b2ecbb822736183ba88473dad7071',1,'FT81x.h']]],
   ['ft81x_5fsound_5falarm_151',['FT81x_SOUND_ALARM',['../_f_t81x_8h.html#a52463929e874e1f4925857f9fc8414bf',1,'FT81x.h']]],
-  ['ft81x_5fsound_5fbeepinh_152',['FT81x_SOUND_BEEPINH',['../_f_t81x_8h.html#a1ab37c25efbf16174feebaa7f349e897',1,'FT81x.h']]],
+  ['ft81x_5fsound_5fbeeping_152',['FT81x_SOUND_BEEPING',['../_f_t81x_8h.html#a06d633824f1092f3dfb0840c6fc2ae03',1,'FT81x.h']]],
   ['ft81x_5fsound_5fbell_153',['FT81x_SOUND_BELL',['../_f_t81x_8h.html#a9baf9829cdc0f2c9ebb320803c97b333',1,'FT81x.h']]],
   ['ft81x_5fsound_5fcarousel_154',['FT81x_SOUND_CAROUSEL',['../_f_t81x_8h.html#aaee0e43ee8321bbb510a7f5990ceccf1',1,'FT81x.h']]],
   ['ft81x_5fsound_5fchack_155',['FT81x_SOUND_CHACK',['../_f_t81x_8h.html#acd85bb6c1ca86b36104ef9c606872643',1,'FT81x.h']]],
