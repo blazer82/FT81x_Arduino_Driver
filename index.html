@@ -392,6 +392,53 @@ void loop() {
                                 </div>
                             </section>
                             <!--//doc-section-->
+                            <section id="audio-setup-section" class="doc-section">
+                                <h2 class="section-title">Audio Setup</h2>
+                                <div class="section-block">
+                                    <p>The FT81x Arduino Driver has support for mono audio output with its integrated
+                                        sound effects as well as audio playback capabilites. To make proper use of this,
+                                        an audio filter and amplifier circuit is required.</p>
+                                    <p>For prototyping purposes you can create a simple circuit using the LM386 audio
+                                        amplifier IC:</p>
+                                    <p>
+                                        <img src="assets/images/audio-schematics.png" alt="Audio Schematics"
+                                            style="max-width: 100%;">
+                                    </p>
+                                    <p>The circuit above consists of the following parts:</p>
+                                    <ol>
+                                        <li>The audio input signal coming from the FT81x Arduino Driver board.</li>
+                                        <li>A low pass filter for filtering all the high frequency switching noise.
+                                        </li>
+                                        <li>A 10k&ohm; potentiometer to act as a volume control.</li>
+                                        <li>The LM386 audio amplifier with a 9V power supply.</li>
+                                        <li>A Zobel Network for impedence control of the speaker.</li>
+                                        <li>A polarized capacitor to block DC current.</li>
+                                        <li>A load speaker for the final audio output.</li>
+                                    </ol>
+                                    <p><em>Some additional notes:<br>The values for the resistors and capacitors have
+                                            been
+                                            chosen for convenience rather than performance. The LM386's datasheet
+                                            recommends a 0.05&micro;F capacitor for the Zobel Network in (5). Also, the
+                                            cut off frequency for the low pass filter in (2) is rather low with 15kHz
+                                            and should be doubled for serious applications.<br>The power input of the
+                                            LM386 may be increased up to 12V for less distorted output.<br>The value of
+                                            the polarized capacitor in (6) can be anything from 220&micro;F to
+                                            1000&micro;F.</em></p>
+                                    <p>The above schematic laid out on a breadboard may look like this:</p>
+                                    <p>
+                                        <img src="assets/images/audio-breadboard.png" alt="Audio Breadboard"
+                                            style="max-width: 100%;">
+                                    </p>
+                                    <p>Be sure to connect all GND lines together and connect the audio output of the
+                                        FT81x Arduino Driver board to the audio input of the amplifier circuit. Also,
+                                        beware of connecting the 9V power supply to anything other than the LM386 as it
+                                        may permanently damage the FT81x Arduino Driver board!</p>
+                                    <p>In order to test this setup, check out the <a
+                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/blob/master/examples/Audio/Audio.ino"
+                                            target="_blank">Audio Example Sketch</a> of the Arduino library.</p>
+                                </div>
+                            </section>
+                            <!--//doc-section-->
                         </div>
                         <!--//content-inner-->
                     </div>
@@ -414,6 +461,7 @@ void loop() {
                                 </nav>
                                 <!--//nav-->
                                 <a class="nav-link scrollto" href="#hello-world-section">Hello World</a>
+                                <a class="nav-link scrollto" href="#audio-setup-section">Audio Setup</a>
                                 <a class="nav-link" href="api">API Documentation</a>
                             </nav>
                             <!--//doc-menu-->
