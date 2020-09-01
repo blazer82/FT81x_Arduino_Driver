@@ -179,7 +179,7 @@
 #define FT81x_SOUND_SINE_WAVE     0x02  ///< Sine wave
 #define FT81x_SOUND_SAWTOOTH_WAVE 0x03  ///< Sawtooth wave
 #define FT81x_SOUND_TRIANGLE_WAVE 0x04  ///< Triangle wave
-#define FT81x_SOUND_BEEPINH       0x05  ///< Beeping
+#define FT81x_SOUND_BEEPING       0x05  ///< Beeping
 #define FT81x_SOUND_ALARM         0x06  ///< Alarm
 #define FT81x_SOUND_WARBLE        0x07  ///< Warble
 #define FT81x_SOUND_CAROUSEL      0x08  ///< Carousel

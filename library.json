@@ -1,6 +1,6 @@
 {
     "name": "FT81x_Arduino_Driver",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "keywords": "display, tft, graphics, spi",
     "description": "Graphics library for the open source FT81x display driver board.",
     "repository": {
