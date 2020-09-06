@@ -7,9 +7,9 @@ High quality display module for many Arduino project ideas!
 
 ## Hardware
 
-![Hardware](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/hardware.jpg)
+![Hardware](https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/extras/assets/hardware.jpg)
 
-Schematics, KiCad files and Gerber files can be found inside the [hardware folder](hardware) in this repository.
+Schematics, KiCad files and Gerber files can be found inside the [hardware folder](extras/hardware) in this repository.
 
 The board is compatible with this [display](https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices).
 
@@ -93,4 +93,4 @@ The hardware is licensed under [CERN-OHL-S v2](https://cern.ch/cern-ohl).
 
 [build-badge]: https://github.com/blazer82/FT81x_Arduino_Driver/workflows/build/badge.svg
 [docs-badge]: https://github.com/blazer82/FT81x_Arduino_Driver/workflows/docs/badge.svg
-[oshwa-mark]: https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/assets/OSHW_mark_DE000089_150.png
+[oshwa-mark]: https://raw.githubusercontent.com/blazer82/FT81x_Arduino_Driver/master/extras/assets/OSHW_mark_DE000089_150.png
