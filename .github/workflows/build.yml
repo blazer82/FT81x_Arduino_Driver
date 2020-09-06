@@ -3,10 +3,12 @@ name: build
 on:
   pull_request:
     paths-ignore:
-      - "hardware/**"
+      - "extras/assets/**"
+      - "extras/hardware/**"
   push:
     paths-ignore:
-      - "hardware/**"
+      - "extras/assets/**"
+      - "extras/hardware/**"
 
 jobs:
   build:
@@ -17,10 +19,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Check clang-format conformity
-        run: bash ci/clang-lint.sh
+        run: bash extras/ci/clang-lint.sh
 
       - name: Build on Arduino CLI
-        run: bash ci/build-arduino.sh
+        run: bash extras/ci/build-arduino.sh
 
       - name: Build on PlatformIO
-        run: bash ci/build-platformio.sh
+        run: bash extras/ci/build-platformio.sh

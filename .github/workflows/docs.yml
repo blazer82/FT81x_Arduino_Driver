@@ -3,10 +3,12 @@ name: docs
 on:
   pull_request:
     paths-ignore:
-      - "hardware/**"
+      - "extras/assets/**"
+      - "extras/hardware/**"
   push:
     paths-ignore:
-      - "hardware/**"
+      - "extras/assets/**"
+      - "extras/hardware/**"
 
 jobs:
   build:
@@ -19,4 +21,4 @@ jobs:
       - name: Doxygen
         env:
           GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
-        run: bash ci/doxygen.sh
+        run: bash extras/ci/doxygen.sh
