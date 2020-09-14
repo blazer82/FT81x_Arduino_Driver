@@ -87,21 +87,26 @@
                                 <h2 class="section-title">Install Arduino Library</h2>
                                 <div id="installation-arduino-ide" class="section-block">
                                     <h3 class="block-title">Arduino IDE</h3>
-                                    <p>In order to install the <em>FT81x Arduino Driver</em> using the official Arduino
-                                        IDE, you first need to download a .zip file of the library.</p>
-                                    <p>After that, follow this <a
-                                            href="https://www.arduino.cc/en/Guide/Libraries#importing-a-zip-library"
-                                            target="_blank">guide for installing .zip libraries</a>.</p>
-                                    <a href="https://github.com/blazer82/FT81x_Arduino_Driver/archive/master.zip"
-                                        class="btn btn-green" target="_blank"><i class="fas fa-download"></i> Download
-                                        .zip Library</a>
+                                    <p>In order to install the FT81x Arduino Driver using the official Arduino
+                                        IDE, navigate to <strong>Tools &#8594; Manage Libraries...</strong> and search
+                                        for
+                                        the <strong>FT81x Arduino Driver</strong>:</p>
+                                    <p>
+                                        <img src="assets/images/arduino-ide.png" alt="Audio IDE Libraries"
+                                            style="max-width: 100%;">
+                                    </p>
+                                    <p>After you installed the latest version, you can use the library either by
+                                        navigating to <strong>Sketch &#8594; Include Library</strong> or go to
+                                        <strong>File
+                                            &#8594; Examples &#8594; FT81x Arduino Library</strong> to load one of the
+                                        example sketches.</p>
                                 </div>
                                 <div id="installation-platformio" class="section-block">
                                     <h3 class="block-title">PlatformIO</h3>
                                     <p>The library is available on the official <a
                                             href="https://platformio.org/lib/show/11036/FT81x_Arduino_Driver/"
-                                            target="_blank">PlatformIO registry</a>. To install it, just type into your
-                                        shell:</p>
+                                            target="_blank">PlatformIO registry</a>. To install it, just run the
+                                        following command in your project folder:</p>
                                     <div class="code-block">
                                         <p><code>pio lib install FT81x_Arduino_Driver</code></p>
                                     </div>
