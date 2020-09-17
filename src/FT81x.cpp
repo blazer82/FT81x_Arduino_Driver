@@ -66,6 +66,7 @@
 #define BITMAP_SIZE(f, wx, wy, w, h) ((8L << 24) | ((uint32_t)((f)&1) << 20) | ((uint32_t)((wx)&1) << 19) | ((uint32_t)((wy)&1) << 18) | (((w)&0x1FF) << 9) | ((h)&0x1FF))  ///< Specify the screen drawing of bitmaps for the current handle
 #define BGCOLOR()                    0xFFFFFF09                                                                                                                             ///< Set background color
 #define FGCOLOR()                    0xFFFFFF0A                                                                                                                             ///< Set foreground color
+#define SCROLLBAR()                  0xFFFFFF11                                                                                                                             ///< Draw scroll bar
 #define LOADIDENTITY()               0xFFFFFF26                                                                                                                             ///< Set the current matrix to identity
 #define SETMATRIX()                  0xFFFFFF2A                                                                                                                             ///< Write the current matrix as a bitmap transform
 #define SCALE()                      0xFFFFFF28                                                                                                                             ///< Apply a scale to the current matrix
@@ -361,6 +362,17 @@ void FT81x::drawGradient(const int16_t x1, const int16_t y1, const uint32_t colo
     intermediateCmd(color1);
     intermediateCmd(x2 | ((uint32_t)y2 << 16));
     endCmd(color2);
+}
+
+void FT81x::drawScrollbar(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const uint32_t foregroundColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t value, const uint16_t size, const uint16_t range) {
+    startCmd(COLOR(foregroundColor));
+    intermediateCmd(BGCOLOR());
+    intermediateCmd(backgroundColor);
+    intermediateCmd(SCROLLBAR());
+    intermediateCmd(x | ((uint32_t)y << 16));
+    intermediateCmd(width | ((uint32_t)height << 16));
+    intermediateCmd(options | ((uint32_t)value << 16));
+    endCmd(size | ((uint32_t)range << 16));
 }
 
 void FT81x::loadImage(const uint32_t offset, const uint32_t size, const uint8_t *data) {
