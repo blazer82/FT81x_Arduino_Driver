@@ -50,8 +50,8 @@ If you have tested additional boards (successfully or unsuccessfully) feel free 
 |[x] Gradient|[x] Text|[x] Bitmap images|
 |[x] Animated spinner|[x] Sound effects|[x] Buttons|
 |[x] Analog clock|[x] Gauge|[x] Line strip|
-|[x] JPEG support|[x] PNG support|[ ] Custom fonts|
-|[ ] Keys|[ ] Progress bar|[ ] Scrollbar|
+|[x] JPEG support|[x] PNG support|[x] Scrollbar|
+|[ ] Keys|[ ] Progress bar|[ ] Custom fonts|
 |[ ] Dial|[ ] Toggle|[ ] Video playback|
 |[ ] Audio playback|||
 

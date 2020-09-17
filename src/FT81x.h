@@ -502,6 +502,21 @@ class FT81x {
     void drawGradient(const int16_t x1, const int16_t y1, const uint32_t color1, const int16_t x2, const int16_t y2, const uint32_t color2);
 
     /*!
+        @brief  Draw a scrollbar
+        @param  x x-coordinate of scroll bar top-left
+        @param  y y-coordinate of scroll bar top-left
+        @param  width Width of scroll bar, if width is greater than height the scroll bar is drawn horizontally
+        @param  height Height of scroll bar, if height is greater than width the scroll bar is drawn vertically
+        @param  foregroundColor Color for the scroll bar foreground
+        @param  backgroundColor Color for the scroll bar background
+        @param  options Option to use (e.g. FT81x_OPT_FLAT)
+        @param  value Displayed value of the scroll bar, between 0 and range (inclusive)
+        @param  size Size of scroll bar handle
+        @param  range Maximum value
+    */
+    void drawScrollbar(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const uint32_t foregroundColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t value, const uint16_t size, const uint16_t range);
+
+    /*!
         @brief  Begin a new display list
     */
     void beginDisplayList();
