@@ -434,6 +434,7 @@ bool FT81x::isSoundPlaying() {
 }
 
 void FT81x::setAudioVolume(const uint8_t volume) {
+    write8(FT81x_REG_VOL_PB, volume);
     write8(FT81x_REG_VOL_SOUND, volume);
 }
 
