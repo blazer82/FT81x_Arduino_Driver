@@ -174,6 +174,10 @@
 #define FT81x_OPT_NOSECS    0x8000  ///< No second hands (CMD_CLOCK)
 #define FT81x_OPT_NOHANDS   0xC000  ///< Nohands (CMD_CLOCK)
 
+#define FT81x_AUDIO_FORMAT_LINEAR 0x0  ///< Linear Sample format
+#define FT81x_AUDIO_FORMAT_ULAW   0x1  ///< uLaw Sample format
+#define FT81x_AUDIO_FORMAT_ADPCM  0x2  ///< 4 bit IMA ADPCM Sample format
+
 #define FT81x_SOUND_SILENCE       0x00  ///< No sound
 #define FT81x_SOUND_SQUARE_WAVE   0x01  ///< Square wave
 #define FT81x_SOUND_SINE_WAVE     0x02  ///< Sine wave
@@ -542,16 +546,28 @@ class FT81x {
         @param  offset Offset in general purpose graphics RAM
         @param  size Size of the data in bytes
         @param  data Pointer to the data
+        @param  useProgmem Load data from PROGMEM (only affects AVR architectures like the Arduino Uno)
     */
-    void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[]);
+    void writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t data[], const bool useProgmem = true);
 
     /*!
         @brief  Load image data (JPEG, PNG) as bitmap into general purpose graphics RAM (must be aligned to 4 bytes)
         @param  offset Offset in general purpose graphics RAM
         @param  size Size of the data in bytes
         @param  data Pointer to the data
+        @param  useProgmem Load data from PROGMEM (only affects AVR architectures like the Arduino Uno)
     */
-    void loadImage(const uint32_t offset, const uint32_t size, const uint8_t data[]);
+    void loadImage(const uint32_t offset, const uint32_t size, const uint8_t data[], const bool useProgmem = true);
+
+    /*!
+        @brief  Play audio data located in general purpose graphics RAM (must be aligned to 8 bytes)
+        @param  offset Offset in general purpose graphics RAM
+        @param  size Size of the data in bytes
+        @param  sampleRate Sample rate for the audio data (e.g. 44100)
+        @param  format Audio data format (e.g. FT81x_AUDIO_FORMAT_LINEAR)
+        @param  loop Whether to loop the audio or stop at the end
+    */
+    void playAudio(const uint32_t offset, const uint32_t size, const uint16_t sampleRate, const uint8_t format, const bool loop);
 
     /*!
         @brief  Query whether sound is currently playing

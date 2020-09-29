@@ -375,7 +375,7 @@ void FT81x::drawScrollbar(const int16_t x, const int16_t y, const int16_t width,
     endCmd(size | ((uint32_t)range << 16));
 }
 
-void FT81x::loadImage(const uint32_t offset, const uint32_t size, const uint8_t *data) {
+void FT81x::loadImage(const uint32_t offset, const uint32_t size, const uint8_t *data, const bool useProgmem) {
     waitForCommandBuffer();
 
     startCmd(MEDIAFIFO());
@@ -384,13 +384,22 @@ void FT81x::loadImage(const uint32_t offset, const uint32_t size, const uint8_t 
 
     waitForCommandBuffer();
 
-    writeGRAM(0x100000 - size, size, data);
+    writeGRAM(0x100000 - size, size, data, useProgmem);
 
     write32(FT81x_REG_MEDIAFIFO_WRITE, size - 1);
 
     startCmd(LOADIMAGE());
     intermediateCmd(FT81x_RAM_G + offset);
     endCmd(16 | 2);  // OPT_MEDIAFIFO | OPT_NODL
+}
+
+void FT81x::playAudio(const uint32_t offset, const uint32_t size, const uint16_t sampleRate, const uint8_t format, const bool loop) {
+    write32(FT81x_REG_PLAYBACK_START, offset);
+    write32(FT81x_REG_PLAYBACK_LENGTH, size);
+    write16(FT81x_REG_PLAYBACK_FREQ, sampleRate);
+    write8(FT81x_REG_PLAYBACK_FORMAT, format);
+    write8(FT81x_REG_PLAYBACK_LOOP, loop);
+    write8(FT81x_REG_PLAYBACK_PLAY, 1);
 }
 
 void FT81x::cmd(const uint32_t cmd) {
@@ -425,6 +434,7 @@ bool FT81x::isSoundPlaying() {
 }
 
 void FT81x::setAudioVolume(const uint8_t volume) {
+    write8(FT81x_REG_VOL_PB, volume);
     write8(FT81x_REG_VOL_SOUND, volume);
 }
 
@@ -490,7 +500,7 @@ uint8_t FT81x::initBitmapHandleForFont(uint8_t font) {
 
 #ifdef FT81x_USE_TEENSY_DMA
 
-void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data) {
+void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data, const bool useProgmem) {
     static ActiveLowChipSelectStart csStart(cs1, FT81x_SPI_SETTINGS);
     static ActiveLowChipSelectEnd csEnd(cs1, FT81x_SPI_SETTINGS);
     static DummyChipSelect noCs;
@@ -678,7 +688,7 @@ void FT81x::transferDMABuffer(const uint8_t size) {
 
 #else
 
-void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data) {
+void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t *data, const bool useProgmem) {
     uint32_t cmd = (FT81x_RAM_G + offset) | WRITE;
 
     SPI.beginTransaction(FT81x_SPI_SETTINGS);
@@ -688,8 +698,14 @@ void FT81x::writeGRAM(const uint32_t offset, const uint32_t size, const uint8_t 
     SPI.transfer((cmd >> 8) & 0xFF);
     SPI.transfer(cmd & 0xFF);
 
-    for (uint32_t i = 0; i < size; i++) {
-        SPI.transfer(DATA(data, i));
+    if (useProgmem) {
+        for (uint32_t i = 0; i < size; i++) {
+            SPI.transfer(DATA(data, i));
+        }
+    } else {
+        for (uint32_t i = 0; i < size; i++) {
+            SPI.transfer(data[i]);
+        }
     }
 
     digitalWrite(cs1, HIGH);
