@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dc_325',['dc',['../class_f_t81x.html#a74679a73fecd9e40fa1854fb79fdb8c8',1,'FT81x']]]
+  ['dc_327',['dc',['../class_f_t81x.html#a74679a73fecd9e40fa1854fb79fdb8c8',1,'FT81x']]]
 ];
