@@ -507,18 +507,32 @@ class FT81x {
 
     /*!
         @brief  Draw a scrollbar
-        @param  x x-coordinate of scroll bar top-left
-        @param  y y-coordinate of scroll bar top-left
-        @param  width Width of scroll bar, if width is greater than height the scroll bar is drawn horizontally
-        @param  height Height of scroll bar, if height is greater than width the scroll bar is drawn vertically
-        @param  foregroundColor Color for the scroll bar foreground
-        @param  backgroundColor Color for the scroll bar background
+        @param  x x-coordinate of scrollbar top-left
+        @param  y y-coordinate of scrollbar top-left
+        @param  width Width of scrollbar, if width is greater than height the scrollbar is drawn horizontally
+        @param  height Height of scrollbar, if height is greater than width the scrollbar is drawn vertically
+        @param  foregroundColor Color for the scrollbar foreground
+        @param  backgroundColor Color for the scrollbar background
         @param  options Option to use (e.g. FT81x_OPT_FLAT)
-        @param  value Displayed value of the scroll bar, between 0 and range (inclusive)
-        @param  size Size of scroll bar handle
+        @param  value Displayed value of the scrollbar, between 0 and range (inclusive)
+        @param  size Size of scrollbar handle
         @param  range Maximum value
     */
     void drawScrollbar(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const uint32_t foregroundColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t value, const uint16_t size, const uint16_t range);
+
+    /*!
+        @brief  Draw a progressbar
+        @param  x x-coordinate of progressbar top-left
+        @param  y y-coordinate of progressbar top-left
+        @param  width Width of progressbar, if width is greater than height the progressbar is drawn horizontally
+        @param  height Height of progressbar, if height is greater than width the progressbar is drawn vertically
+        @param  foregroundColor Color for the progressbar foreground
+        @param  backgroundColor Color for the progressbar background
+        @param  options Option to use (e.g. FT81x_OPT_FLAT)
+        @param  value Displayed value of the progressbar, between 0 and range (inclusive)
+        @param  range Maximum value
+    */
+    void drawProgressbar(const int16_t x, const int16_t y, const int16_t width, const int16_t height, const uint32_t foregroundColor, const uint32_t backgroundColor, const uint16_t options, const uint16_t value, const uint16_t range);
 
     /*!
         @brief  Begin a new display list
