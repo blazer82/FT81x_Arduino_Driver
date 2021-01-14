@@ -1,370 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Getting Started - 4.0 Inch FT81x TFT LCD Display Module for Arduino</title>
+  <head>
+    <title>
+      Getting Started - 4.0 Inch FT81x TFT LCD Display Module for Arduino
+    </title>
     <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <link
-        href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-        rel='stylesheet' type='text/css'>
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- FontAwesome JS -->
     <script defer src="assets/fontawesome/js/all.js"></script>
     <!-- Global CSS -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="assets/plugins/bootstrap/css/bootstrap.min.css"
+    />
     <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
-    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css" />
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css" />
 
     <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css" />
+  </head>
 
-</head>
-
-<body class="body-green">
+  <body class="body-green">
     <div class="page-wrapper">
-        <!-- ******Header****** -->
-        <header id="header" class="header">
-            <div class="container">
-                <div class="branding">
-                    <h1 class="logo">
-                        <a href="index.html">
-                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
-                            <span class="text-highlight">FT81x Arduino Driver</span>
-                        </a>
-                    </h1>
+      <!-- ******Header****** -->
+      <header id="header" class="header">
+        <div class="container">
+          <div class="branding">
+            <h1 class="logo">
+              <a href="index.html">
+                <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                <span class="text-highlight">FT81x Arduino Driver</span>
+              </a>
+            </h1>
+          </div>
+          <!--//branding-->
 
-                </div>
-                <!--//branding-->
-
-                <ol class="breadcrumb">
-                    <!-- <li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
-                    <li class="breadcrumb-item active">Getting Started</li>
-                </ol>
-
+          <ol class="breadcrumb">
+            <!-- <li class="breadcrumb-item"><a href="index.html">Home</a></li> -->
+            <li class="breadcrumb-item active">Getting Started</li>
+          </ol>
+        </div>
+        <!--//container-->
+      </header>
+      <!--//header-->
+      <div class="doc-wrapper">
+        <div class="container">
+          <div id="doc-header" class="doc-header text-center">
+            <h1 class="doc-title">
+              <i class="icon fa fa-paper-plane"></i> Getting Started
+            </h1>
+            <div class="meta">
+              <i class="far fa-clock"></i> Last updated: August 22st, 2020
             </div>
-            <!--//container-->
-        </header>
-        <!--//header-->
-        <div class="doc-wrapper">
-            <div class="container">
-                <div id="doc-header" class="doc-header text-center">
-                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Getting Started</h1>
-                    <div class="meta"><i class="far fa-clock"></i> Last updated: August 22st, 2020</div>
-                </div>
-                <!--//doc-header-->
-                <div class="doc-body row">
-                    <div class="doc-content col-md-9 col-12 order-1">
-                        <div class="content-inner">
-                            <section id="hardware-section" class="doc-section">
-                                <h2 class="section-title">Get the Hardware</h2>
-                                <div class="section-block">
-                                    <p>The hardware is open source which allows you to download the
-                                        <a href="https://github.com/blazer82/FT81x_Arduino_Driver/tree/master/hardware/Gerber"
-                                            target="_blank">Gerber files</a>
-                                        and <a
-                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/tree/master/hardware/kicad"
-                                            target="_blank">KiCad files</a>
-                                        and have the board produced by a manufacturer of your choosing. You'll also need
-                                        this compatible <a
-                                            href="https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices"
-                                            target="_blank">display</a>.
-                                    </p>
-                                    <p>
-                                        Alternatively you can just:
-                                    </p>
-                                    <a href="https://www.tindie.com/products/prodbld/40-inch-ft81x-tft-lcd-display-module-for-arduino/"
-                                        class="btn btn-primary" target="_blank"><i class="fas fa-shopping-cart"></i> Buy
-                                        the Board and Display Here</a>
-                                </div>
-                            </section>
-                            <!--//doc-section-->
-                            <section id="installation-section" class="doc-section">
-                                <h2 class="section-title">Install Arduino Library</h2>
-                                <div id="installation-arduino-ide" class="section-block">
-                                    <h3 class="block-title">Arduino IDE</h3>
-                                    <p>In order to install the FT81x Arduino Driver using the official Arduino
-                                        IDE, navigate to <strong>Tools &#8594; Manage Libraries...</strong> and search
-                                        for
-                                        the <strong>FT81x Arduino Driver</strong>:</p>
-                                    <p>
-                                        <img src="assets/images/arduino-ide.png" alt="Audio IDE Libraries"
-                                            style="max-width: 100%;">
-                                    </p>
-                                    <p>After you installed the latest version, you can use the library either by
-                                        navigating to <strong>Sketch &#8594; Include Library</strong> or go to
-                                        <strong>File
-                                            &#8594; Examples &#8594; FT81x Arduino Library</strong> to load one of the
-                                        example sketches.</p>
-                                </div>
-                                <div id="installation-platformio" class="section-block">
-                                    <h3 class="block-title">PlatformIO</h3>
-                                    <p>The library is available on the official <a
-                                            href="https://platformio.org/lib/show/11036/FT81x_Arduino_Driver/"
-                                            target="_blank">PlatformIO registry</a>. To install it, just run the
-                                        following command in your project folder:</p>
-                                    <div class="code-block">
-                                        <p><code>pio lib install FT81x_Arduino_Driver</code></p>
-                                    </div>
-                                    <!--//code-block-->
-                                </div>
-                            </section>
-                            <!--//doc-section-->
-                            <section id="hookup-section" class="doc-section">
-                                <h2 class="section-title">Hookup</h2>
-                                <div id="hookup-general" class="section-block">
-                                    <h3 class="block-title">Pin Description</h3>
-                                    <p>
-                                        Please refer to the following pin description when hooking up
-                                        the board to your microcontroller:<br><br>
-                                    </p>
-                                    <p>
-                                        <img src="assets/images/pin-description.png" alt="pin Description"
-                                            style="max-width: 100%;">
-                                    </p>
-                                    <p>
-                                        <br>The table below prodives a more detailed description for each pin.
-                                    </p>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Description</th>
-                                                    <th>Required</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>5V</td>
-                                                    <td>5V power input for powering the the board, the display and
-                                                        the backlight LED. Hook this up to the 5V power outlet of your
-                                                        Arduino board. Requires at least 100mA of current.</td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>VCC</td>
-                                                    <td>Reference voltage for all digital signal lines. For 3.3V
-                                                        microcontrollers, hook this up to the 3.3V power outlet of the
-                                                        Arduino board. For 5V
-                                                        microcontrollers, hook this up to the 5V power outlet.</td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>GND</td>
-                                                    <td>Needs to be connected to a common ground with the Arduino board.
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>SCK</td>
-                                                    <td>Clock signal for the SPI bus. Hook this up to the SPI clock of
-                                                        your Arduino board.
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">5</th>
-                                                    <td>SDO</td>
-                                                    <td>Serial data out of the board. Hook this up to the serial data in
-                                                        signal of your Arduino board (aka MISO).
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">6</th>
-                                                    <td>SDI</td>
-                                                    <td>Serial data in of the board. Hook this up to the serial data out
-                                                        signal of your Arduino board (aka MOSI).
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">7</th>
-                                                    <td>CS1</td>
-                                                    <td>Chip select signal for communication with the FT81x
-                                                        IC on the board. It's recommended to hook this up to the default
-                                                        CS pin of your Arduino board. However, any GPIO pin can be
-                                                        configured as CS1 signal.
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">8</th>
-                                                    <td>CS2</td>
-                                                    <td>Chip select signal for communication with the integrated
-                                                        controller IC of the display. Any GPIO pin can be
-                                                        configured as CS2 signal.
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">9</th>
-                                                    <td>DC</td>
-                                                    <td>Data/command signal for communication with the integrated
-                                                        controller IC of the display. Any GPIO pin can be
-                                                        configured as DC signal.
-                                                    </td>
-                                                    <td style="text-align: center;"><i class="fas fa-check-square"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">10</th>
-                                                    <td>AUDIO</td>
-                                                    <td>The FT81x is capable of sound synthesis and mono audio playback.
-                                                        This pin is directly connected to the raw audio output of the
-                                                        IC. It's recommended to use additional filter and amplification
-                                                        circuitry for proper audio applications.
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">11</th>
-                                                    <td>IRQ</td>
-                                                    <td>Interrupt signal for different applications (e.g. audio
-                                                        playback). As of now, this signal line isn't used by the Arduino
-                                                        library.
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">12</th>
-                                                    <td>GND</td>
-                                                    <td>An additional common ground. It's only required that one of the
-                                                        GND signals is connected.
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">13</th>
-                                                    <td>GND</td>
-                                                    <td>An additional common ground. It's only required that one of the
-                                                        GND signals is connected.
-                                                    </td>
-                                                    <td>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div id="hookup-boards" class="section-block">
-                                    <h3 class="block-title">Common Boards</h3>
-                                    <p>Please refer to the table below for specific information on how to hook up the
-                                        display driver board to common Arduino boards.</p>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Arduino Uno</th>
-                                                    <th>Arduino Nano</th>
-                                                    <th>NodeMCU-32S</th>
-                                                    <th>Teensy 4.0</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">5V</th>
-                                                    <td>5V</td>
-                                                    <td>5V</td>
-                                                    <td>5V / VIN</td>
-                                                    <td>VIN (5V)</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">VCC</th>
-                                                    <td>5V</td>
-                                                    <td>5V</td>
-                                                    <td>3V3</td>
-                                                    <td>3V</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">GND</th>
-                                                    <td>GND</td>
-                                                    <td>GND</td>
-                                                    <td>GND</td>
-                                                    <td>GND</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">SCK</th>
-                                                    <td>13</td>
-                                                    <td>D13</td>
-                                                    <td>GPIO18</td>
-                                                    <td>13</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">SDO</th>
-                                                    <td>12</td>
-                                                    <td>D12</td>
-                                                    <td>GPIO19</td>
-                                                    <td>12</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">SDI</th>
-                                                    <td>11</td>
-                                                    <td>D11</td>
-                                                    <td>GPIO23</td>
-                                                    <td>11</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">CS1</th>
-                                                    <td>10<sup>*</sup></td>
-                                                    <td>D10<sup>*</sup></td>
-                                                    <td>GPIO5<sup>*</sup></td>
-                                                    <td>10<sup>*</sup></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">CS2</th>
-                                                    <td>9<sup>*</sup></td>
-                                                    <td>D9<sup>*</sup></td>
-                                                    <td>GPIO17<sup>*</sup></td>
-                                                    <td>9<sup>*</sup></td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">DC</th>
-                                                    <td>8<sup>*</sup></td>
-                                                    <td>D8<sup>*</sup></td>
-                                                    <td>GPIO16<sup>*</sup></td>
-                                                    <td>8<sup>*</sup></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <p style="text-align: right;">
-                                        <sup>*</sup><em> configurable</em>
-                                    </p>
-                                </div>
-                            </section>
-                            <!--//doc-section-->
-                            <section id="hello-world-section" class="doc-section">
-                                <h2 class="section-title">Hello World</h2>
-                                <div class="section-block">
-                                    <p>After you successfully installed the Arduino library and hooked up your board,
-                                        create a new Arduino Sketch and enter the following source code. Be sure to use
-                                        the correct pin numbers for the CS1, CS2 and DC pins on line 3.</p>
-                                    <div class="code-block">
-                                        <h6>HelloWorld.ino</h6>
-                                        <pre><code class="language-clike">#include &#x22;FT81x.h&#x22;
+          </div>
+          <!--//doc-header-->
+          <div class="doc-body row">
+            <div class="doc-content col-md-9 col-12 order-1">
+              <div class="content-inner">
+                <section id="hardware-section" class="doc-section">
+                  <h2 class="section-title">Get the Hardware</h2>
+                  <div class="section-block">
+                    <p>
+                      The hardware is open source which allows you to download
+                      the
+                      <a
+                        href="https://github.com/blazer82/FT81x_Arduino_Driver/tree/master/hardware/Gerber"
+                        target="_blank"
+                        >Gerber files</a
+                      >
+                      and
+                      <a
+                        href="https://github.com/blazer82/FT81x_Arduino_Driver/tree/master/hardware/kicad"
+                        target="_blank"
+                        >KiCad files</a
+                      >
+                      and have the board produced by a manufacturer of your
+                      choosing. You'll also need this compatible
+                      <a
+                        href="https://www.buydisplay.com/4-inch-tft-lcd-display-480x480-pixel-with-mipi-interface-for-iot-devices"
+                        target="_blank"
+                        >display</a
+                      >.
+                    </p>
+                    <p>Alternatively you can just:</p>
+                    <a
+                      href="https://www.tindie.com/products/prodbld/40-inch-ft81x-tft-lcd-display-module-for-arduino/"
+                      class="btn btn-primary"
+                      target="_blank"
+                      ><i class="fas fa-shopping-cart"></i> Buy the Board and
+                      Display Here</a
+                    >
+                  </div>
+                </section>
+                <!--//doc-section-->
+                <section id="installation-section" class="doc-section">
+                  <h2 class="section-title">Install Arduino Library</h2>
+                  <div id="installation-arduino-ide" class="section-block">
+                    <h3 class="block-title">Arduino IDE</h3>
+                    <p>
+                      In order to install the FT81x Arduino Driver using the
+                      official Arduino IDE, navigate to
+                      <strong>Tools &#8594; Manage Libraries...</strong> and
+                      search for the <strong>FT81x Arduino Driver</strong>:
+                    </p>
+                    <p>
+                      <img
+                        src="assets/images/arduino-ide.png"
+                        alt="Audio IDE Libraries"
+                        style="max-width: 100%"
+                      />
+                    </p>
+                    <p>
+                      After you installed the latest version, you can use the
+                      library either by navigating to
+                      <strong>Sketch &#8594; Include Library</strong> or go to
+                      <strong
+                        >File &#8594; Examples &#8594; FT81x Arduino
+                        Library</strong
+                      >
+                      to load one of the example sketches.
+                    </p>
+                  </div>
+                  <div id="installation-platformio" class="section-block">
+                    <h3 class="block-title">PlatformIO</h3>
+                    <p>
+                      The library is available on the official
+                      <a
+                        href="https://platformio.org/lib/show/11036/FT81x_Arduino_Driver/"
+                        target="_blank"
+                        >PlatformIO registry</a
+                      >. To install it, just run the following command in your
+                      project folder:
+                    </p>
+                    <div class="code-block">
+                      <p><code>pio lib install FT81x_Arduino_Driver</code></p>
+                    </div>
+                    <!--//code-block-->
+                  </div>
+                </section>
+                <!--//doc-section-->
+                <section id="hookup-section" class="doc-section">
+                  <h2 class="section-title">Hookup</h2>
+                  <div id="hookup-general" class="section-block">
+                    <h3 class="block-title">Pin Description</h3>
+                    <p>
+                      Please refer to the following pin description when hooking
+                      up the board to your microcontroller:<br /><br />
+                    </p>
+                    <p>
+                      <img
+                        src="assets/images/pin-description.png"
+                        alt="pin Description"
+                        style="max-width: 100%"
+                      />
+                    </p>
+                    <p>
+                      <br />The table below prodives a more detailed description
+                      for each pin.
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>5V</td>
+                            <td>
+                              5V power input for powering the the board, the
+                              display and the backlight LED. Hook this up to the
+                              5V power outlet of your Arduino board. Requires at
+                              least 100mA of current.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>VCC</td>
+                            <td>
+                              Reference voltage for all digital signal lines.
+                              For 3.3V microcontrollers, hook this up to the
+                              3.3V power outlet of the Arduino board. For 5V
+                              microcontrollers, hook this up to the 5V power
+                              outlet.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>GND</td>
+                            <td>
+                              Needs to be connected to a common ground with the
+                              Arduino board.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>SCK</td>
+                            <td>
+                              Clock signal for the SPI bus. Hook this up to the
+                              SPI clock of your Arduino board.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td>SDO</td>
+                            <td>
+                              Serial data out of the board. Hook this up to the
+                              serial data in signal of your Arduino board (aka
+                              MISO).
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">6</th>
+                            <td>SDI</td>
+                            <td>
+                              Serial data in of the board. Hook this up to the
+                              serial data out signal of your Arduino board (aka
+                              MOSI).
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">7</th>
+                            <td>CS1</td>
+                            <td>
+                              Chip select signal for communication with the
+                              FT81x IC on the board. It's recommended to hook
+                              this up to the default CS pin of your Arduino
+                              board. However, any GPIO pin can be configured as
+                              CS1 signal.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">8</th>
+                            <td>CS2</td>
+                            <td>
+                              Chip select signal for communication with the
+                              integrated controller IC of the display. Any GPIO
+                              pin can be configured as CS2 signal.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">9</th>
+                            <td>DC</td>
+                            <td>
+                              Data/command signal for communication with the
+                              integrated controller IC of the display. Any GPIO
+                              pin can be configured as DC signal.
+                            </td>
+                            <td style="text-align: center">
+                              <i class="fas fa-check-square"></i>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">10</th>
+                            <td>AUDIO</td>
+                            <td>
+                              The FT81x is capable of sound synthesis and mono
+                              audio playback. This pin is directly connected to
+                              the raw audio output of the IC. It's recommended
+                              to use additional filter and amplification
+                              circuitry for proper audio applications.
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">11</th>
+                            <td>IRQ</td>
+                            <td>
+                              Interrupt signal for different applications (e.g.
+                              audio playback). As of now, this signal line isn't
+                              used by the Arduino library.
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">12</th>
+                            <td>GND</td>
+                            <td>
+                              An additional common ground. It's only required
+                              that one of the GND signals is connected.
+                            </td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">13</th>
+                            <td>GND</td>
+                            <td>
+                              An additional common ground. It's only required
+                              that one of the GND signals is connected.
+                            </td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div id="hookup-boards" class="section-block">
+                    <h3 class="block-title">Common Boards</h3>
+                    <p>
+                      Please refer to the table below for specific information
+                      on how to hook up the display driver board to common
+                      Arduino boards.
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Arduino Uno</th>
+                            <th>Arduino Nano</th>
+                            <th>NodeMCU-32S</th>
+                            <th>Teensy 4.0</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">5V</th>
+                            <td>5V</td>
+                            <td>5V</td>
+                            <td>5V / VIN</td>
+                            <td>VIN (5V)</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">VCC</th>
+                            <td>5V</td>
+                            <td>5V</td>
+                            <td>3V3</td>
+                            <td>3V</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">GND</th>
+                            <td>GND</td>
+                            <td>GND</td>
+                            <td>GND</td>
+                            <td>GND</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">SCK</th>
+                            <td>13</td>
+                            <td>D13</td>
+                            <td>GPIO18</td>
+                            <td>13</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">SDO</th>
+                            <td>12</td>
+                            <td>D12</td>
+                            <td>GPIO19</td>
+                            <td>12</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">SDI</th>
+                            <td>11</td>
+                            <td>D11</td>
+                            <td>GPIO23</td>
+                            <td>11</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">CS1</th>
+                            <td>10<sup>*</sup></td>
+                            <td>D10<sup>*</sup></td>
+                            <td>GPIO5<sup>*</sup></td>
+                            <td>10<sup>*</sup></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">CS2</th>
+                            <td>9<sup>*</sup></td>
+                            <td>D9<sup>*</sup></td>
+                            <td>GPIO17<sup>*</sup></td>
+                            <td>9<sup>*</sup></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">DC</th>
+                            <td>8<sup>*</sup></td>
+                            <td>D8<sup>*</sup></td>
+                            <td>GPIO16<sup>*</sup></td>
+                            <td>8<sup>*</sup></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p style="text-align: right">
+                      <sup>*</sup><em> configurable</em>
+                    </p>
+                  </div>
+                </section>
+                <!--//doc-section-->
+                <section id="hello-world-section" class="doc-section">
+                  <h2 class="section-title">Hello World</h2>
+                  <div class="section-block">
+                    <p>
+                      After you successfully installed the Arduino library and
+                      hooked up your board, create a new Arduino Sketch and
+                      enter the following source code. Be sure to use the
+                      correct pin numbers for the CS1, CS2 and DC pins on line
+                      3.
+                    </p>
+                    <div class="code-block">
+                      <h6>HelloWorld.ino</h6>
+                      <pre><code class="language-clike">#include &#x22;FT81x.h&#x22;
 
 FT81x ft81x = FT81x(10, 9, 8);
 
@@ -381,137 +454,228 @@ void setup() {
 void loop() {
     // do nothing
 }</code></pre>
-                                    </div>
-                                    <!--//code-block-->
-                                    <p>After compiling and uploading to the mictocontroller, you should see the text
-                                        <em>Hello World</em> at the center of your display.</p>
-                                    <p>Refer to the various <a
-                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/blob/master/examples"
-                                            target="_blank">example sketches</a> as well as the <a
-                                            href="https://blazer82.github.io/FT81x_Arduino_Driver/api/class_f_t81x.html"
-                                            target="_blank">API documentation</a> for more information.</p>
-                                    <p>If you have any issues and you already double checked all the connections and
-                                        the code contact the seller or <a
-                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/issues"
-                                            target="_blank">open an issue on GitHub</a>.</p>
-                                </div>
-                            </section>
-                            <!--//doc-section-->
-                            <section id="audio-setup-section" class="doc-section">
-                                <h2 class="section-title">Audio Setup</h2>
-                                <div class="section-block">
-                                    <p>The FT81x Arduino Driver has support for mono audio output with its integrated
-                                        sound effects as well as audio playback capabilites. To make proper use of this,
-                                        an audio filter and amplifier circuit is required.</p>
-                                    <p>For prototyping purposes you can create a simple circuit using the LM386 audio
-                                        amplifier IC:</p>
-                                    <p>
-                                        <img src="assets/images/audio-schematics.png" alt="Audio Schematics"
-                                            style="max-width: 100%;">
-                                    </p>
-                                    <p>The circuit above consists of the following parts:</p>
-                                    <ol>
-                                        <li>The audio input signal coming from the FT81x Arduino Driver board.</li>
-                                        <li>A low pass filter for filtering all the high frequency switching noise.
-                                        </li>
-                                        <li>A 10k&ohm; potentiometer to act as a volume control.</li>
-                                        <li>The LM386 audio amplifier with a 9V power supply.</li>
-                                        <li>A Zobel Network for impedence control of the speaker.</li>
-                                        <li>A polarized capacitor to block DC current.</li>
-                                        <li>A loudspeaker for the final audio output.</li>
-                                    </ol>
-                                    <p><em>Some additional notes:<br>The power input of the
-                                            LM386 may be increased up to 12V for less distorted output.<br>The value of
-                                            the polarized capacitor in (6) can be anything from 220&micro;F to
-                                            1000&micro;F.</em></p>
-                                    <p>The above schematic laid out on a breadboard may look like this:</p>
-                                    <p>
-                                        <img src="assets/images/audio-breadboard.png" alt="Audio Breadboard"
-                                            style="max-width: 100%;">
-                                    </p>
-                                    <p>Be sure to connect all GND lines together and connect the audio output of the
-                                        FT81x Arduino Driver board to the audio input of the amplifier circuit. Also,
-                                        beware of connecting the 9V power supply to anything other than the LM386 as it
-                                        may permanently damage the FT81x Arduino Driver board!</p>
-                                    <p>In order to test this setup, check out the <a
-                                            href="https://github.com/blazer82/FT81x_Arduino_Driver/blob/master/examples/Audio/Audio.ino"
-                                            target="_blank">Audio Example Sketch</a> of the Arduino library.</p>
-                                </div>
-                            </section>
-                            <!--//doc-section-->
-                        </div>
-                        <!--//content-inner-->
                     </div>
-                    <!--//doc-content-->
-                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
-                        <div id="doc-nav" class="doc-nav">
-
-                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
-                                <a class="nav-link scrollto" href="#hardware-section">Get the Hardware</a>
-                                <a class="nav-link scrollto" href="#installation-section">Install Arduino Library</a>
-                                <nav class="doc-sub-menu nav flex-column">
-                                    <a class="nav-link scrollto" href="#installation-arduino-ide">Arduino IDE</a>
-                                    <a class="nav-link scrollto" href="#installation-platformio">PlatformIO</a>
-                                </nav>
-                                <!--//nav-->
-                                <a class="nav-link scrollto" href="#hookup-section">Hookup</a>
-                                <nav class="doc-sub-menu nav flex-column">
-                                    <a class="nav-link scrollto" href="#hookup-general">Pin Description</a>
-                                    <a class="nav-link scrollto" href="#hookup-boards">Common Boards</a>
-                                </nav>
-                                <!--//nav-->
-                                <a class="nav-link scrollto" href="#hello-world-section">Hello World</a>
-                                <a class="nav-link scrollto" href="#audio-setup-section">Audio Setup</a>
-                                <a class="nav-link" href="api">API Documentation</a>
-                            </nav>
-                            <!--//doc-menu-->
-                        </div>
-                    </div>
-                    <!--//doc-sidebar-->
-                </div>
-                <!--//doc-body-->
+                    <!--//code-block-->
+                    <p>
+                      After compiling and uploading to the mictocontroller, you
+                      should see the text <em>Hello World</em> at the center of
+                      your display.
+                    </p>
+                    <p>
+                      Refer to the various
+                      <a
+                        href="https://github.com/blazer82/FT81x_Arduino_Driver/blob/master/examples"
+                        target="_blank"
+                        >example sketches</a
+                      >
+                      as well as the
+                      <a
+                        href="https://blazer82.github.io/FT81x_Arduino_Driver/api/class_f_t81x.html"
+                        target="_blank"
+                        >API documentation</a
+                      >
+                      for more information.
+                    </p>
+                    <p>
+                      If you have any issues and you already double checked all
+                      the connections and the code contact the seller or
+                      <a
+                        href="https://github.com/blazer82/FT81x_Arduino_Driver/issues"
+                        target="_blank"
+                        >open an issue on GitHub</a
+                      >.
+                    </p>
+                  </div>
+                </section>
+                <!--//doc-section-->
+                <section id="audio-setup-section" class="doc-section">
+                  <h2 class="section-title">Audio Setup</h2>
+                  <div class="section-block">
+                    <p>
+                      The FT81x Arduino Driver has support for mono audio output
+                      with its integrated sound effects as well as audio
+                      playback capabilites. To make proper use of this, an audio
+                      filter and amplifier circuit is required.
+                    </p>
+                    <p>
+                      For prototyping purposes you can create a simple circuit
+                      using the LM386 audio amplifier IC:
+                    </p>
+                    <p>
+                      <img
+                        src="assets/images/audio-schematics.png"
+                        alt="Audio Schematics"
+                        style="max-width: 100%"
+                      />
+                    </p>
+                    <p>The circuit above consists of the following parts:</p>
+                    <ol>
+                      <li>
+                        The audio input signal coming from the FT81x Arduino
+                        Driver board.
+                      </li>
+                      <li>
+                        A low pass filter for filtering all the high frequency
+                        switching noise.
+                      </li>
+                      <li>
+                        A 10k&ohm; potentiometer to act as a volume control.
+                      </li>
+                      <li>The LM386 audio amplifier with a 9V power supply.</li>
+                      <li>
+                        A Zobel Network for impedence control of the speaker.
+                      </li>
+                      <li>A polarized capacitor to block DC current.</li>
+                      <li>A loudspeaker for the final audio output.</li>
+                    </ol>
+                    <p>
+                      <em
+                        >Some additional notes:<br />The power input of the
+                        LM386 may be increased up to 12V for less distorted
+                        output.<br />The value of the polarized capacitor in (6)
+                        can be anything from 220&micro;F to 1000&micro;F.</em
+                      >
+                    </p>
+                    <p>
+                      The above schematic laid out on a breadboard may look like
+                      this:
+                    </p>
+                    <p>
+                      <img
+                        src="assets/images/audio-breadboard.png"
+                        alt="Audio Breadboard"
+                        style="max-width: 100%"
+                      />
+                    </p>
+                    <p>
+                      Be sure to connect all GND lines together and connect the
+                      audio output of the FT81x Arduino Driver board to the
+                      audio input of the amplifier circuit. Also, beware of
+                      connecting the 9V power supply to anything other than the
+                      LM386 as it may permanently damage the FT81x Arduino
+                      Driver board!
+                    </p>
+                    <p>
+                      In order to test this setup, check out the
+                      <a
+                        href="https://github.com/blazer82/FT81x_Arduino_Driver/blob/master/examples/SoundEffects/SoundEffects.ino"
+                        target="_blank"
+                        >Sound Effects Example Sketch</a
+                      >
+                      of the Arduino library.
+                    </p>
+                  </div>
+                </section>
+                <!--//doc-section-->
+              </div>
+              <!--//content-inner-->
             </div>
-            <!--//container-->
-        </div>
-        <!--//doc-wrapper-->
-
-        <div id="promo-block" class="promo-block">
-            <div class="container">
-                <div class="promo-block-inner">
-                    <h3 class="promo-title text-center"><i class="fas fa-arrow-circle-right"></i> <a
-                            href="https://github.com/blazer82/FT81x_Arduino_Driver" target="_blank">For more information
-                            and support visit the project on GitHub</a></h3>
-                </div>
-                <!--//promo-block-inner-->
+            <!--//doc-content-->
+            <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+              <div id="doc-nav" class="doc-nav">
+                <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+                  <a class="nav-link scrollto" href="#hardware-section"
+                    >Get the Hardware</a
+                  >
+                  <a class="nav-link scrollto" href="#installation-section"
+                    >Install Arduino Library</a
+                  >
+                  <nav class="doc-sub-menu nav flex-column">
+                    <a
+                      class="nav-link scrollto"
+                      href="#installation-arduino-ide"
+                      >Arduino IDE</a
+                    >
+                    <a class="nav-link scrollto" href="#installation-platformio"
+                      >PlatformIO</a
+                    >
+                  </nav>
+                  <!--//nav-->
+                  <a class="nav-link scrollto" href="#hookup-section">Hookup</a>
+                  <nav class="doc-sub-menu nav flex-column">
+                    <a class="nav-link scrollto" href="#hookup-general"
+                      >Pin Description</a
+                    >
+                    <a class="nav-link scrollto" href="#hookup-boards"
+                      >Common Boards</a
+                    >
+                  </nav>
+                  <!--//nav-->
+                  <a class="nav-link scrollto" href="#hello-world-section"
+                    >Hello World</a
+                  >
+                  <a class="nav-link scrollto" href="#audio-setup-section"
+                    >Audio Setup</a
+                  >
+                  <a class="nav-link" href="api">API Documentation</a>
+                </nav>
+                <!--//doc-menu-->
+              </div>
             </div>
-            <!--//container-->
+            <!--//doc-sidebar-->
+          </div>
+          <!--//doc-body-->
         </div>
-        <!--//promo-block-->
+        <!--//container-->
+      </div>
+      <!--//doc-wrapper-->
 
+      <div id="promo-block" class="promo-block">
+        <div class="container">
+          <div class="promo-block-inner">
+            <h3 class="promo-title text-center">
+              <i class="fas fa-arrow-circle-right"></i>
+              <a
+                href="https://github.com/blazer82/FT81x_Arduino_Driver"
+                target="_blank"
+                >For more information and support visit the project on GitHub</a
+              >
+            </h3>
+          </div>
+          <!--//promo-block-inner-->
+        </div>
+        <!--//container-->
+      </div>
+      <!--//promo-block-->
     </div>
     <!--//page-wrapper-->
 
     <footer id="footer" class="footer text-center">
-        <div class="container">
-            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">Copyright &copy; <a href="https://github.com/blazer82" target="_blank">Raphael
-                    Stäbler</a>, theme designed with <i class="fas fa-heart"></i>
-                by <a href="https://themes.3rdwavemedia.com/" target="_blank">Xiaoying Riley</a> for developers</small>
-
-        </div>
-        <!--//container-->
+      <div class="container">
+        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+        <small class="copyright"
+          >Copyright &copy;
+          <a href="https://github.com/blazer82" target="_blank"
+            >Raphael Stäbler</a
+          >, theme designed with <i class="fas fa-heart"></i> by
+          <a href="https://themes.3rdwavemedia.com/" target="_blank"
+            >Xiaoying Riley</a
+          >
+          for developers</small
+        >
+      </div>
+      <!--//container-->
     </footer>
     <!--//footer-->
 
-
     <!-- Main Javascript -->
-    <script type="text/javascript" src="assets/plugins/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/plugins/jquery-3.4.1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/plugins/bootstrap/js/bootstrap.min.js"
+    ></script>
     <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>
+    <script
+      type="text/javascript"
+      src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="assets/plugins/stickyfill/dist/stickyfill.min.js"
+    ></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
-
-</body>
-
+  </body>
 </html>
