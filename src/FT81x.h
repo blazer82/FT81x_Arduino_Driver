@@ -377,6 +377,20 @@ class FT81x {
     */
     void drawRect(const int16_t x, const int16_t y, const uint16_t width, const uint16_t height, const uint8_t cornerRadius, const uint32_t color);
 
+    // KTOME function for triangles
+    /*!
+        @brief  Draw triangle in current display list. Points must be defined in clockwise order. Only tested with equilateral tris.
+        @param  x1 x-coordinate for the first triangle point
+        @param  y1 y-coordinate for the first triangle point
+        @param  x2 x-coordinate for the first triangle point
+        @param  y2 y-coordinate for the first triangle point
+        @param  x3 x-coordinate for the first triangle point
+        @param  y3 y-coordinate for the first triangle point
+        @param  color Color of the rectangle
+        @param  bgcolor Color of the background
+    */
+    void drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const int16_t x3, const int16_t y3, const uint32_t color,const uint32_t bgcolor);
+
     /*!
         @brief  Draw line in current display list
         @param  x1 x-coordinate for the start of the line
@@ -438,8 +452,21 @@ class FT81x {
         @param  width Width of the bitmap
         @param  height Height of the bitmap
         @param  scale Scale to resize the bitmap by
+        @param  rot Rotation of the image, in degrees, around the centre of the bitmap (works best with square images)
     */
-    void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale);
+    void drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale, const uint8_t rot);
+
+    /*!
+        @brief  Overlay bitmap data (add pixel values to existing pixels)
+        @param  offset Offset in general purpose graphics RAM
+        @param  x x-coordinate for the top-left of the bitmap
+        @param  y y-coordinate for the top-left of the bitmap
+        @param  width Width of the bitmap
+        @param  height Height of the bitmap
+        @param  scale Scale to resize the bitmap by
+        @param  rot Rotation of the image, in degrees, around the centre of the bitmap (works best with square images)
+    */
+    void overlayBitmap(const uint32_t offset, const uint16_t x, const uint16_t y, const uint16_t width, const uint16_t height, const uint8_t scale, const uint8_t rot);
 
     /*!
         @brief  Draw a spinner in current display list
