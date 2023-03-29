@@ -389,7 +389,7 @@ class FT81x {
         @param  color Color of the rectangle
         @param  bgcolor Color of the background
     */
-    void drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const int16_t x3, const int16_t y3, const uint32_t color,const uint32_t bgcolor);
+    void drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const int16_t x3, const int16_t y3, const uint32_t color, const uint32_t bgcolor);
 
     /*!
         @brief  Draw line in current display list
