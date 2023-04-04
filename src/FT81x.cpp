@@ -81,10 +81,10 @@
 #define MEDIAFIFO()                  0xFFFFFF39                                                                                                                             ///< Set up media FIFO in general purpose graphics RAM
 #define ROMFONT()                    0xFFFFFF3F                                                                                                                             ///< Load a ROM font into bitmap handle
 
-//KTOME addition
-#define BLEND_FUNC(src,dst)                ((0x0BL << 24) | (src << 3) | (dst))
-#define CMD_ROTATE()                       0xffffff29
-#define CMD_TRANSLATE()                    0xffffff27
+// KTOME addition
+#define BLEND_FUNC(src, dst) ((0x0BL << 24) | (src << 3) | (dst))
+#define CMD_ROTATE()         0xffffff29
+#define CMD_TRANSLATE()      0xffffff27
 
 #define BITMAPS      1  ///< Bitmap drawing primitive
 #define POINTS       2  ///< Point drawing primitive
@@ -263,29 +263,28 @@ void FT81x::drawRect(const int16_t x, const int16_t y, const uint16_t width, con
 }
 
 void FT81x::drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const int16_t x3, const int16_t y3, const uint32_t color, const uint32_t bgcolor) {
-
     int16_t x_1;
     int16_t y_1;
-    int16_t x_2; // point 2 is highest (smallest y)
-    int16_t y_2; // point 2 is highest (smallest y)
+    int16_t x_2;  // point 2 is highest (smallest y)
+    int16_t y_2;  // point 2 is highest (smallest y)
     int16_t x_3;
     int16_t y_3;
 
-    if ((y1<=y2)&&(y1<=y3)){ // point 1 is highest on screen
+    if ((y1 <= y2) && (y1 <= y3)) {  // point 1 is highest on screen
         x_1 = x3;
         y_1 = y3;
         x_2 = x1;
         y_2 = y1;
         x_3 = x2;
         y_3 = y2;
-    } else if ((y2<=y3)&&(y2<=y1)){ // point 2 is highest
+    } else if ((y2 <= y3) && (y2 <= y1)) {  // point 2 is highest
         x_1 = x1;
         y_1 = y1;
         x_2 = x2;
         y_2 = y2;
         x_3 = x3;
         y_3 = y3;
-    } else { // point 3 highest
+    } else {  // point 3 highest
         x_1 = x2;
         y_1 = y2;
         x_2 = x3;
@@ -294,7 +293,7 @@ void FT81x::drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const 
         y_3 = y1;
     }
 
-    if (x_2<=x_1){ // one colour wipe (2-3), two bg wipes
+    if (x_2 <= x_1) {  // one colour wipe (2-3), two bg wipes
         startCmd(COLOR(color));
         intermediateCmd(LINE_WIDTH(1 * 16));
         intermediateCmd(BEGIN(EDGE_STRIP_B));
@@ -306,7 +305,7 @@ void FT81x::drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const 
         intermediateCmd(VERTEX2F(x_3 * 16, y_3 * 16));
         intermediateCmd(VERTEX2F(x_1 * 16, y_1 * 16));
         intermediateCmd(VERTEX2F(x_2 * 16, y_2 * 16));
-    } else if (x_2>=x_3){ // one colour wipe (1-2), two bg wipes
+    } else if (x_2 >= x_3) {  // one colour wipe (1-2), two bg wipes
         startCmd(COLOR(color));
         intermediateCmd(LINE_WIDTH(1 * 16));
         intermediateCmd(BEGIN(EDGE_STRIP_B));
@@ -318,7 +317,7 @@ void FT81x::drawTri(const int16_t x1, const int16_t y1, const int16_t x2, const 
         intermediateCmd(VERTEX2F(x_2 * 16, y_2 * 16));
         intermediateCmd(VERTEX2F(x_3 * 16, y_3 * 16));
         intermediateCmd(VERTEX2F(x_1 * 16, y_1 * 16));
-    } else { // two colour wipes, one bg wipe
+    } else {  // two colour wipes, one bg wipe
         startCmd(COLOR(color));
         intermediateCmd(LINE_WIDTH(1 * 16));
         intermediateCmd(BEGIN(EDGE_STRIP_B));
@@ -376,13 +375,13 @@ void FT81x::drawBitmap(const uint32_t offset, const uint16_t x, const uint16_t y
     intermediateCmd((uint32_t)scale * 65536);
     intermediateCmd((uint32_t)scale * 65536);
     intermediateCmd(CMD_TRANSLATE());
-    intermediateCmd((uint32_t)65536 * (width/2));
-    intermediateCmd((uint32_t)65536 * (height/2));
+    intermediateCmd((uint32_t)65536 * (width / 2));
+    intermediateCmd((uint32_t)65536 * (height / 2));
     intermediateCmd(CMD_ROTATE());
     intermediateCmd((uint32_t)rot * 65536 / 360);
     intermediateCmd(CMD_TRANSLATE());
-    intermediateCmd((uint32_t)65536 * -(width/2));
-    intermediateCmd((uint32_t)65536 * -(height/2));
+    intermediateCmd((uint32_t)65536 * -(width / 2));
+    intermediateCmd((uint32_t)65536 * -(height / 2));
     intermediateCmd(SETMATRIX());
 }
 
@@ -397,15 +396,15 @@ void FT81x::overlayBitmap(const uint32_t offset, const uint16_t x, const uint16_
     intermediateCmd((uint32_t)scale * 65536);
     intermediateCmd((uint32_t)scale * 65536);
     intermediateCmd(CMD_TRANSLATE());
-    intermediateCmd((uint32_t)65536 * (width/2));
-    intermediateCmd((uint32_t)65536 * (height/2));
+    intermediateCmd((uint32_t)65536 * (width / 2));
+    intermediateCmd((uint32_t)65536 * (height / 2));
     intermediateCmd(CMD_ROTATE());
     intermediateCmd((uint32_t)rot * 65536 / 360);
     intermediateCmd(CMD_TRANSLATE());
-    intermediateCmd((uint32_t)65536 * -(width/2));
-    intermediateCmd((uint32_t)65536 * -(height/2));
+    intermediateCmd((uint32_t)65536 * -(width / 2));
+    intermediateCmd((uint32_t)65536 * -(height / 2));
     intermediateCmd(SETMATRIX());
-    intermediateCmd(BLEND_FUNC(1,1));
+    intermediateCmd(BLEND_FUNC(1, 1));
     endCmd(VERTEX2II(x, y, 0, 0));
 }
 
