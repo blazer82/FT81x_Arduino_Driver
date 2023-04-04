@@ -21,8 +21,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       - name: Doxygen
         env:
-          GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: bash extras/ci/doxygen.sh

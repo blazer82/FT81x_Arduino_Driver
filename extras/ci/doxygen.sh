@@ -65,6 +65,10 @@ fi
 cd doxygen_workdir/${REPO_NAME}
 
 if [ -d "api" ] && [ -f "api/index.html" ]; then
+    git config --local user.email "action@github.com"
+    git config --local user.name "GitHub Action"
+    git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
     git add --all
 
     if [ -n "$(git status --porcelain)" ]; then
@@ -78,7 +82,7 @@ if [ -d "api" ] && [ -f "api/index.html" ]; then
 
     git commit -m "Deploy code docs to github pages ${GITHUB_RUN_NUMBER}" -m "Commit: ${GITHUB_SHA}"
 
-    git push --force "https://${GITHUB_ACTOR}:${GH_REPO_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+    git push --force
 else
     echo -e "${RED}Error: No documentation files have been found!" >&2
     exit 1
