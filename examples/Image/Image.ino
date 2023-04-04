@@ -49,8 +49,8 @@ void setup() {
     ft81x.beginDisplayList();
     ft81x.clear(FT81x_COLOR_RGB(0, 0, 0));
 
-    ft81x.drawBitmap(0, 120, 40, 240, 118, 1);
-    ft81x.drawBitmap(0, 0, 204, 240, 118, 2);
+    ft81x.drawBitmap(0, 120, 40, 240, 118, 1, 0);
+    ft81x.drawBitmap(0, 0, 204, 240, 118, 2, 0);
 
     ft81x.drawText(240, 460, 16, FT81x_COLOR_RGB(255, 0, 255), FT81x_OPT_CENTERX, "Image test\0");
 
