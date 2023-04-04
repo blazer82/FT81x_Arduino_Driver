@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['querydisplay_210',['queryDisplay',['../class_f_t81x.html#af30c682436dbda49eddd2280c7511cd7',1,'FT81x']]]
+  ['playaudio_210',['playAudio',['../class_f_t81x.html#a15721d2244f60f9a34b3d6b91c4c705f',1,'FT81x']]],
+  ['playsound_211',['playSound',['../class_f_t81x.html#a80c0480370ee1cd9880b796f92f393d2',1,'FT81x']]]
 ];
