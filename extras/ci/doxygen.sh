@@ -78,7 +78,7 @@ if [ -d "api" ] && [ -f "api/index.html" ]; then
 
     git commit -m "Deploy code docs to github pages ${GITHUB_RUN_NUMBER}" -m "Commit: ${GITHUB_SHA}"
 
-    git push --force "https://${GITHUB_ACTOR}:${GH_REPO_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" > /dev/null 2>&1
+    git push --force "https://${GITHUB_ACTOR}:${GH_REPO_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 else
     echo -e "${RED}Error: No documentation files have been found!" >&2
     exit 1
