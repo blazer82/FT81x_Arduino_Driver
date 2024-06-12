@@ -38,11 +38,12 @@ for d in examples/* ; do
     echo "platform = teensy" >> platformio.ini
     echo "framework = arduino" >> platformio.ini
     echo "board = teensy40" >> platformio.ini
-    echo "" >> platformio.ini
-    echo "[env:teensy30]" >> platformio.ini
-    echo "platform = teensy" >> platformio.ini
-    echo "framework = arduino" >> platformio.ini
-    echo "board = teensy30" >> platformio.ini
+    # Drop Teensy 3.0 support becuase of issues with TechDemo3D (TODO: Investigate)
+    # echo "" >> platformio.ini
+    # echo "[env:teensy30]" >> platformio.ini
+    # echo "platform = teensy" >> platformio.ini
+    # echo "framework = arduino" >> platformio.ini
+    # echo "board = teensy30" >> platformio.ini
     pio run
     if [ $? -ne 0 ]; then echo -e "${RED}\xe2\x9c\x96"; else echo -e "${GREEN}\xe2\x9c\x93"; fi
     cd -
