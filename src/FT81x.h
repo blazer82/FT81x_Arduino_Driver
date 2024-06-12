@@ -153,7 +153,7 @@
 #define FT81x_DLSWAP_LINE  0x1  ///< Graphics engine will render the screen immediately after current line is scanned out. It may cause tearing effect.
 #define FT81x_DLSWAP_FRAME 0x2  ///< Graphics engine will render the screen immediately after current frame is scanned out. This is recommended in most of cases.
 
-#define FT81x_BITMAP_LAYOUT_ARGB1555 0x1  ///< Bitmap pixel format ARGB1555
+#define FT81x_BITMAP_LAYOUT_ARGB1555 0x0  ///< Bitmap pixel format ARGB1555
 #define FT81x_BITMAP_LAYOUT_ARGB4    0x6  ///< Bitmap pixel format ARGB4
 #define FT81x_BITMAP_LAYOUT_RGB565   0x7  ///< Bitmap pixel format RGB565
 
